@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_blocks_text_blocks",
+  "info": {
+    "name": "TextBlock",
+    "icon": "text-height"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Text": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
