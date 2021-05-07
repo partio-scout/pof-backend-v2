@@ -41,17 +41,7 @@
         }
       },
       "type": "string",
-      "unique": true,
-      "required": true
-    },
-    "Slug2": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "string",
-      "unique": true,
+      "unique": false,
       "required": true
     },
     "Blocks": {
@@ -76,6 +66,14 @@
       "components": [
         "pages.subpage"
       ]
+    },
+    "categories": {
+      "collection": "category",
+      "via": "pages",
+      "dominant": true
+    },
+    "Number": {
+      "type": "integer"
     }
   }
 }
