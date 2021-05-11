@@ -113,5 +113,3 @@ exports
 build
 .strapi-updater.json
 
-
-app.yaml
