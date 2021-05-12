@@ -5,10 +5,13 @@ let instance;
 
 async function setupStrapi() {
   if (!instance) {
-    console.log('Creating Strapi instance');
-    /** the following code in copied from `./node_modules/strapi/lib/Strapi.js` */
-    await Strapi().load();
-    instance = strapi; // strapi is global now
+    /** 
+     * The following code in copied from `./node_modules/strapi/lib/Strapi.js`.
+     * 
+     * Strapi() call sets strapi as a global variable. 
+     * */
+
+    instance = await Strapi().load();
     await instance.app
       .use(instance.router.routes()) // populate KOA routes
       .use(instance.router.allowedMethods()); // populate KOA methods

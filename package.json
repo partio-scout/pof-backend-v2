@@ -47,7 +47,8 @@
       ".tmp",
       ".cache"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testTimeout": 20000
   },
   "license": "MIT"
 }

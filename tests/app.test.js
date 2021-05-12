@@ -1,10 +1,9 @@
 const fs = require("fs");
 const { setupStrapi } = require("./helpers/strapi");
 
-let strapi;
 /** this code is called once before any test is called */
 beforeAll(async () => {
-  strapi = await setupStrapi(); // singleton so it can be called many times
+  await setupStrapi();
 });
 
 /** this code is called once before all the tested are finished */
