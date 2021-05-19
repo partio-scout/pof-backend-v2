@@ -1,0 +1,20 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+    - uses: c-hive/gha-yarn-cache@v1
+    - run: yarn install --silent
+    - run: yarn test
