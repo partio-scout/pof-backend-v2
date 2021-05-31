@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activity_leader_skills",
+  "info": {
+    "name": "Activity Leader Skill"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

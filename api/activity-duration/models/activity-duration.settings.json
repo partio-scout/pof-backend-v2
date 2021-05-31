@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activity_durations",
+  "info": {
+    "name": "Activity Duration",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "pluginOptions": {},
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

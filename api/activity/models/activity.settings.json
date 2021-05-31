@@ -59,23 +59,6 @@
       ],
       "required": true
     },
-    "Duration": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "vartti",
-        "puoli_tuntia",
-        "tunti",
-        "kaksi_tuntia",
-        "nelja_tuntia",
-        "paiva"
-      ],
-      "required": true
-    },
     "activity_groups": {
       "via": "activities",
       "collection": "activity-group"
@@ -90,6 +73,36 @@
     },
     "skillareas": {
       "collection": "skillarea"
+    },
+    "activity_duration": {
+      "model": "activity-duration"
+    },
+    "activity_locations": {
+      "collection": "activity-location"
+    },
+    "activity_preparation_duration": {
+      "model": "activity-duration"
+    },
+    "activity_group_sizes": {
+      "collection": "activity-group-size"
+    },
+    "activity_level": {
+      "model": "activity-level"
+    },
+    "activity_skill_areas": {
+      "collection": "activity-skill-area"
+    },
+    "activity_equimpents": {
+      "collection": "activity-equipment"
+    },
+    "activity_educational_objectives": {
+      "collection": "activity-educational-objective"
+    },
+    "activity_leader_skills": {
+      "collection": "activity-leader-skill"
+    },
+    "activity_themes": {
+      "collection": "activity-theme"
     }
   }
 }
