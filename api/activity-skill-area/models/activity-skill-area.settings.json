@@ -1,20 +1,18 @@
 {
-  "kind": "collectionType",
   "collectionName": "activity_skill_areas",
   "info": {
-    "name": "Activity Skill Area"
+    "name": "activity-skill-area",
+    "description": ""
   },
   "options": {
+    "draftAndPublish": false,
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": false
+    "comment": ""
   },
-  "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string",
-      "required": true,
-      "unique": true
+    "name": {
+      "type": "string"
     }
   }
 }

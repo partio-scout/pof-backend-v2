@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/skillareas",
-      "handler": "skillarea.find",
+      "path": "/activity-levels",
+      "handler": "activity-level.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/skillareas/count",
-      "handler": "skillarea.count",
+      "path": "/activity-levels/count",
+      "handler": "activity-level.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/skillareas/:id",
-      "handler": "skillarea.findOne",
+      "path": "/activity-levels/:id",
+      "handler": "activity-level.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/skillareas",
-      "handler": "skillarea.create",
+      "path": "/activity-levels",
+      "handler": "activity-level.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/skillareas/:id",
-      "handler": "skillarea.update",
+      "path": "/activity-levels/:id",
+      "handler": "activity-level.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/skillareas/:id",
-      "handler": "skillarea.delete",
+      "path": "/activity-levels/:id",
+      "handler": "activity-level.delete",
       "config": {
         "policies": []
       }

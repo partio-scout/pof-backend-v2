@@ -1,20 +1,18 @@
 {
-  "kind": "collectionType",
   "collectionName": "activity_equipments",
   "info": {
-    "name": "Activity Equipment"
+    "name": "activity-equipment",
+    "description": ""
   },
   "options": {
+    "draftAndPublish": false,
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": false
+    "comment": ""
   },
-  "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string",
-      "required": true,
-      "unique": true
+    "name": {
+      "type": "string"
     }
   }
 }
