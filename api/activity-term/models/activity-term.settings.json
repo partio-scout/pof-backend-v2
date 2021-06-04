@@ -1,13 +1,13 @@
 {
   "kind": "collectionType",
-  "collectionName": "suggestions",
+  "collectionName": "activity_terms",
   "info": {
-    "name": "Suggestion"
+    "name": "Activity_term"
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {
     "i18n": {
@@ -15,7 +15,16 @@
     }
   },
   "attributes": {
-    "Title": {
+    "Name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "Singular": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -24,28 +33,7 @@
       "type": "string",
       "required": true
     },
-    "Content": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "text",
-      "required": true
-    },
-    "activity": {
-      "via": "suggestions",
-      "model": "activity"
-    },
-    "wp_guid": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "string"
-    },
-    "Author": {
+    "Plural": {
       "pluginOptions": {
         "i18n": {
           "localized": true

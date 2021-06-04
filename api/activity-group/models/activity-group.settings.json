@@ -58,36 +58,6 @@
       },
       "type": "string"
     },
-    "Subtaskgroup_term": {
-      "type": "component",
-      "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "terms.task-term"
-    },
-    "Taskgroup_term": {
-      "type": "component",
-      "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "terms.task-term"
-    },
-    "Subtask_term": {
-      "type": "component",
-      "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "terms.task-term"
-    },
     "Mandatory": {
       "pluginOptions": {
         "i18n": {
@@ -95,6 +65,15 @@
         }
       },
       "type": "boolean"
+    },
+    "subactivity_term": {
+      "model": "activity-term"
+    },
+    "subactivitygroup_term": {
+      "model": "activitygroup-term"
+    },
+    "activitygroup_term": {
+      "model": "activitygroup-term"
     }
   }
 }

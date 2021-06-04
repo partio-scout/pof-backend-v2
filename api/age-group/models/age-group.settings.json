@@ -75,16 +75,6 @@
       },
       "type": "string"
     },
-    "Subtaskgroup_term": {
-      "type": "component",
-      "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "terms.task-term"
-    },
     "Links": {
       "type": "component",
       "repeatable": true,
@@ -94,6 +84,9 @@
         }
       },
       "component": "links.links"
+    },
+    "subactivitygroup_term": {
+      "model": "activitygroup-term"
     }
   }
 }
