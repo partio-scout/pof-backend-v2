@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/age-sections",
-      "handler": "age-section.find",
+      "path": "/age-groups",
+      "handler": "age-group.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/age-sections/count",
-      "handler": "age-section.count",
+      "path": "/age-groups/count",
+      "handler": "age-group.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/age-sections/:id",
-      "handler": "age-section.findOne",
+      "path": "/age-groups/:id",
+      "handler": "age-group.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/age-sections",
-      "handler": "age-section.create",
+      "path": "/age-groups",
+      "handler": "age-group.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/age-sections/:id",
-      "handler": "age-section.update",
+      "path": "/age-groups/:id",
+      "handler": "age-group.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/age-sections/:id",
-      "handler": "age-section.delete",
+      "path": "/age-groups/:id",
+      "handler": "age-group.delete",
       "config": {
         "policies": []
       }

@@ -1,4 +1,5 @@
 {
+  "kind": "collectionType",
   "collectionName": "activity_leader_skills",
   "info": {
     "name": "activity-leader-skill",
@@ -10,9 +11,19 @@
     "timestamps": true,
     "comment": ""
   },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

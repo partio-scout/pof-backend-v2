@@ -84,6 +84,36 @@
     },
     "themes": {
       "collection": "activity-theme"
+    },
+    "wp_guid": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "Task_term": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "terms.task-term"
+    },
+    "Leader_tasks": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
+    },
+    "suggestions": {
+      "via": "activity",
+      "collection": "suggestion"
     }
   }
 }

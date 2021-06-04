@@ -49,6 +49,52 @@
     },
     "activity_groups": {
       "collection": "activity-group"
+    },
+    "wp_guid": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "Subtaskgroup_term": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "terms.task-term"
+    },
+    "Taskgroup_term": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "terms.task-term"
+    },
+    "Subtask_term": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "terms.task-term"
+    },
+    "Mandatory": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "boolean"
     }
   }
 }

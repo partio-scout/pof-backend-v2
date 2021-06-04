@@ -1,8 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "age_sections",
+  "collectionName": "age_groups",
   "info": {
-    "name": "Age Section"
+    "name": "Age Group",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -65,6 +66,34 @@
     },
     "activity_groups": {
       "collection": "activity-group"
+    },
+    "wp_guid": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "Subtaskgroup_term": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "terms.task-term"
+    },
+    "Links": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "links.links"
     }
   }
 }
