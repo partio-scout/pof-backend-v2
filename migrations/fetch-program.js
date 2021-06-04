@@ -72,9 +72,9 @@ const parseLanguageCode = (languageCode) => {
 };
 
 const fetchProgram = async (programUrl) => {
-  const programResponse = await axiosInstance.get(programUrl);
+  const data = await getData(programUrl);
 
-  const program = await parseProgram(programResponse.data.program[0]);
+  const program = await parseProgram(data.program[0]);
 
   return program;
 };
@@ -108,10 +108,11 @@ const parseAgeGroup = async (ageGroup) => {
       MinimumAge: parseInt(details.minAge),
       MaximumAge: parseInt(details.maxAge),
       Ingress: details.ingress,
-      Subtaskgroup_term: {
-        Singular: details.subtaskgroup_term?.single,
-        Plural: details.subtaskgroup_term?.plural,
-      },
+      Subtaskgroup_term: parseTerm(
+        details.subtaskgroup_term,
+        "activityGroupTerm",
+        correctLocale
+      ),
       Title: details.title,
       Content: details.content,
       wp_guid: details.guid,
@@ -154,18 +155,21 @@ const parseTaskGroup = async (taskGroup) => {
       Title: details.title,
       Ingress: details.ingress,
       Content: details.content,
-      Subtaskgroup_term: {
-        Singular: details.subtaskgroup_term?.single,
-        Plural: details.subtaskgroup_term?.plural,
-      },
-      Taskgroup_term: {
-        Singular: details.taskgroup_term?.single,
-        Plural: details.taskgroup_term?.plural,
-      },
-      Subtask_term: {
-        Singular: details.subtask_term?.single,
-        Plural: details.subtask_term?.plural,
-      },
+      Subtaskgroup_term: parseTerm(
+        details.subtaskgroup_term,
+        "activityGroupTerm",
+        correctLocale
+      ),
+      Taskgroup_term: parseTerm(
+        details.taskgroup_term,
+        "activityGroupTerm",
+        correctLocale
+      ),
+      Subtask_term: parseTerm(
+        details.subtask_term,
+        "activityTerm",
+        correctLocale
+      ),
       wp_guid: details.guid,
       locale: correctLocale,
       Mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
@@ -202,10 +206,11 @@ const parseTask = async (task) => {
       Title: details.title,
       Ingress: details.ingress,
       Content: details.content,
-      Task_term: {
-        Singular: details.task_term?.single,
-        Plural: details.task_term?.plural,
-      },
+      Task_term: parseTerm(
+        details.task_term,
+        "activityTerm",
+        correctLocale
+      ),
       wp_guid: details.guid,
       locale: correctLocale,
       Mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
@@ -249,13 +254,30 @@ const parseTask = async (task) => {
   return data;
 };
 
+const parseTerm = (term, type, locale) => {
+  if (term) {
+    return {
+      type,
+      name: term.name,
+      locales: {
+        [locale]: {
+          Name: term.name,
+          Singular: term.single,
+          Plural: term.plural,
+        },
+      },
+    };
+  }
+  return undefined;
+};
+
 module.exports = async (config) => {
-  console.log('Fetching data from old api');
+  console.log("Fetching data from old api");
 
   if (config.noCache) {
-    console.log('Response caching disabled');
+    console.log("Response caching disabled");
     cache.disable();
-  } 
+  }
   if (existsSync(cachePath)) {
     const cacheDataString = readFileSync(cachePath);
 

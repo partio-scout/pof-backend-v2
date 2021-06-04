@@ -5,6 +5,8 @@ const contentTypes = {
   activity: "activities",
   activityGroup: "activity-groups",
   ageGroup: "age-groups",
+  activityGroupTerm: "activitygroup-terms",
+  activityTerm: "activity-terms",
 };
 
 const totalResult = {
@@ -48,6 +50,15 @@ const writeAgeGroup = async (ageGroup, limitToOne = false) => {
       createdActivityGroups.push(...result.entries);
     }
 
+    const terms = {};
+
+    for (const [locale, data] of Object.entries(ageGroup.locales)) {
+      terms[locale] = {
+        subactivitygroup_term: (await writeTerm(data.Subtaskgroup_term))
+          .entries[0]?.id,
+      };
+    }
+
     // Then write the age group
     const data = Object.entries(ageGroup.locales).reduce(
       (acc, [locale, data]) => ({
@@ -57,6 +68,7 @@ const writeAgeGroup = async (ageGroup, limitToOne = false) => {
           activity_groups: createdActivityGroups
             .filter((x) => x.locale === locale)
             .map((x) => x.id),
+          subactivitygroup_term: terms[locale].subactivitygroup_term,
         },
       }),
       {}
@@ -73,7 +85,7 @@ const writeAgeGroup = async (ageGroup, limitToOne = false) => {
       data
     );
 
-    updateTotalResults(result);
+    updateTotalResults(result, contentTypes.ageGroup);
 
     return result;
   } catch (error) {
@@ -99,6 +111,18 @@ const writeActivityGroup = async (activityGroup) => {
       createdActivities.push(...result.entries);
     }
 
+    const terms = {};
+
+    for (const [locale, data] of Object.entries(activityGroup.locales)) {
+      terms[locale] = {
+        subactivitygroup_term: (await writeTerm(data.Subtaskgroup_term))
+          .entries[0]?.id,
+        activitygroup_term: (await writeTerm(data.Taskgroup_term)).entries[0]
+          ?.id,
+        subactivity_term: (await writeTerm(data.Subtask_term)).entries[0]?.id,
+      };
+    }
+
     // Then write the activity group
     const data = Object.entries(activityGroup.locales).reduce(
       (acc, [locale, data]) => ({
@@ -111,6 +135,9 @@ const writeActivityGroup = async (activityGroup) => {
           activities: createdActivities
             .filter((x) => x.locale === locale)
             .map((x) => x.id),
+          subactivitygroup_term: terms[locale].subactivitygroup_term,
+          activitygroup_term: terms[locale].activitygroup_term,
+          subactivity_term: terms[locale].subactivity_term,
         },
       }),
       {}
@@ -118,7 +145,7 @@ const writeActivityGroup = async (activityGroup) => {
 
     const existingEntry = await findEntry(contentTypes.activityGroup, {
       wp_guid: activityGroup.wp_guid,
-      _locale: 'all',
+      _locale: "all",
     });
 
     const result = await createOrUpdateEntry(
@@ -127,7 +154,7 @@ const writeActivityGroup = async (activityGroup) => {
       data
     );
 
-    updateTotalResults(result);
+    updateTotalResults(result, contentTypes.activityGroup);
 
     return result;
   } catch (error) {
@@ -137,23 +164,27 @@ const writeActivityGroup = async (activityGroup) => {
 
 const writeActivity = async (activity) => {
   try {
-    // First write the child suggestions
+    // First write the child suggestions and terms
     for (const [locale, data] of Object.entries(activity.locales)) {
       const createdSuggestions = [];
+      const createdTerms = [];
 
       for (const suggestion of data.suggestions || []) {
         const result = await writeSuggestion(suggestion);
         createdSuggestions.push(...result.entries);
-        updateTotalResults(result);
       }
 
       data.suggestions = createdSuggestions.map((s) => s.id);
+
+      const result = await writeTerm(data.Task_term);
+
+      data.activity_term = result.entries[0].id;
     }
 
     // Then write the activity
     const existingEntry = await findEntry(contentTypes.activity, {
       wp_guid: activity.wp_guid,
-      _locale: 'all',
+      _locale: "all",
     });
 
     const result = await createOrUpdateEntry(
@@ -162,7 +193,7 @@ const writeActivity = async (activity) => {
       activity.locales
     );
 
-    updateTotalResults(result);
+    updateTotalResults(result, contentTypes.activity);
 
     return result;
   } catch (error) {
@@ -174,7 +205,7 @@ const writeSuggestion = async (suggestion) => {
   try {
     const existingEntry = await findEntry(contentTypes.suggestion, {
       wp_guid: suggestion.wp_guid,
-      _locale: 'all',
+      _locale: "all",
     });
 
     const data = {
@@ -187,23 +218,51 @@ const writeSuggestion = async (suggestion) => {
       data
     );
 
+    updateTotalResults(result, contentTypes.suggestion)
+
     return result;
   } catch (error) {
     throw error;
   }
 };
 
-const updateTotalResults = (result) => {
+const writeTerm = async (term) => {
+  if (!term)
+    return {
+      entries: [],
+    };
+
+  try {
+    const existingEntry = await findEntry(contentTypes[term.type], {
+      Name: term.name,
+      _locale: "all",
+    });
+
+    const result = await createOrUpdateEntry(
+      contentTypes[term.type],
+      existingEntry?.id,
+      term.locales
+    );
+
+    updateTotalResults(result, contentTypes[term.type]);
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateTotalResults = (result, contentType) => {
   if (result.created?.length) {
     console.log(
-      "Created entries:",
-      result.entries.map((x) => x.Title)
+      `Created ${contentType || 'unknown types'}:`,
+      result.entries.map((x) => x.Title || x.Name)
     );
   }
   if (result.updated?.length) {
     console.log(
-      "Updated entries:",
-      result.entries.map((x) => x.Title)
+      `Updated ${contentType || 'unknown types'}:`,
+      result.entries.map((x) => x.Title || x.Name)
     );
   }
   totalResult.created.push(...(result.created || []));
