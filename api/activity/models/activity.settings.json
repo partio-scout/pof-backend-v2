@@ -55,15 +55,6 @@
       },
       "type": "text"
     },
-    "duration": {
-      "model": "activity-duration"
-    },
-    "locations": {
-      "collection": "activity-location"
-    },
-    "preparation_duration": {
-      "model": "activity-duration"
-    },
     "group_sizes": {
       "collection": "activity-group-size"
     },
@@ -71,19 +62,22 @@
       "model": "activity-level"
     },
     "skill_areas": {
-      "collection": "activity-skill-area"
+      "collection": "activity-skill-area",
+      "via": "activities",
+      "dominant": true
     },
     "equimpent": {
       "collection": "activity-equipment"
     },
     "educational_objectives": {
-      "collection": "activity-educational-objective"
+      "collection": "activity-educational-objective",
+      "via": "activities",
+      "dominant": true
     },
     "leader_skills": {
-      "collection": "activity-leader-skill"
-    },
-    "themes": {
-      "collection": "activity-theme"
+      "collection": "activity-leader-skill",
+      "via": "activities",
+      "dominant": true
     },
     "wp_guid": {
       "pluginOptions": {
@@ -107,6 +101,15 @@
     },
     "activity_term": {
       "model": "activity-term"
+    },
+    "locations": {
+      "collection": "activity-location",
+      "via": "activities",
+      "dominant": true
+    },
+    "duration": {
+      "model": "activity-duration",
+      "via": "activities"
     }
   }
 }

@@ -24,7 +24,20 @@
       },
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
+    },
+    "Slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "activities": {
+      "via": "duration",
+      "collection": "activity"
     }
   }
 }

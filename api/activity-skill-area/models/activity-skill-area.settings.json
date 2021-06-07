@@ -17,13 +17,27 @@
     }
   },
   "attributes": {
-    "name": {
+    "Name": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
+    },
+    "Slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "activities": {
+      "via": "skill_areas",
+      "collection": "activity"
     }
   }
 }
