@@ -16,6 +16,10 @@ and then:
 
 Then you need to create an admin user by going to `http://localhost:1337/admin` (it probably opens automatically).
 
+## Create locales
+
+Strapi keeps the used locales only in the database, so they have to be added manually. Go to `http::localhost:1337/admin/settings/internationalization` and add locales: `fi`, `sv`, `sme` and `smn`. Then make `fi` the default locale from it's `advanced settings`.
+
 ---
 
 ## Migrations

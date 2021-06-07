@@ -217,6 +217,8 @@ const writeActivity = async (activity, forceUpdate = false) => {
 
 const MapPromises = async (promises) => {
   const results = [];
+  if (!promises) return results;
+  
   for (const p of promises) {
     try {
       const result = await p;
