@@ -12,7 +12,7 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/migrations/run.js",
-      "args": ["-wt"]
+      "args": ["-wtu"]
     }
   ]
 }

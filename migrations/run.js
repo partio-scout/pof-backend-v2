@@ -4,10 +4,10 @@ const fetchProgram = require("./fetch-program");
 const writeProgram = require("./write-program");
 
 const argv = yargs
-  .option("url", {
+  .option("dataUrl", {
     description: "The url to the program data",
     default: "https://pof-backend.partio.fi/spn-ohjelma-json-taysi",
-    alias: "u",
+    alias: "d",
     type: "string",
   })
   .option("fetch", {
@@ -18,6 +18,11 @@ const argv = yargs
   .option("write", {
     description: "Write the program data to Strapi. If option -t (test) is given, only one Age Group is written.",
     alias: "w",
+    type: "boolean",
+  })
+  .option("forceUpdate", {
+    description: "Update all entries. By default if an entry is found, it's not updated",
+    alias: "u",
     type: "boolean",
   })
   .option("noCache", {
@@ -36,7 +41,8 @@ const argv = yargs
 
 const config = {
   testing: argv.test,
-  programUrl: argv.url,
+  programUrl: argv.dataUrl,
+  forceUpdate: argv.forceUpdate,
   noCache: argv.noCache,
 };
 

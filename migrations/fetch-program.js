@@ -217,16 +217,15 @@ const parseTask = async (task) => {
       Leader_tasks: details.leader_tasks,
       // TODO Images
       // TODO Group size
-      // TODO Location
-      // TODO Duration
+      Location: details.tags?.paikka?.map((x) => parseTag(x, 'activityLocation', correctLocale)),
+      Duration: parseTag(details.tags?.suoritus_kesto, 'activityDuration', correctLocale),
+      Skill_areas: details.tags?.taitoalueet?.map((x) => parseTag(x, 'activitySkillArea', correctLocale)),
+      Leader_skills: details.tags?.johtamistaito?.map((x) => parseTag(x, 'activityLeaderSkill', correctLocale)),
+      Educational_objectives: details.tags?.kasvatustavoitteet?.map((x) => parseTag(x, 'activityEducationalObjective', correctLocale)),
       // TODO Preparation duration
       // TODO Level
       // TODO Links
-      // TODO Skill areas
       // TODO Equipment
-      // TODO Educational objectives
-      // TODO Leader skills
-      // TODO Theme
     };
 
     const languagesSuggestions = details.suggestions_details?.find(
@@ -270,6 +269,22 @@ const parseTerm = (term, type, locale) => {
   }
   return undefined;
 };
+
+const parseTag = (tag, type, locale) => {
+  if (tag) {
+    return {
+      type,
+      slug: tag.slug,
+      locales: {
+        [locale]: {
+          Name: tag.name,
+          Slug: tag.slug,
+        },
+      },
+    };
+  }
+  return undefined;
+}
 
 module.exports = async (config) => {
   console.log("Fetching data from old api");

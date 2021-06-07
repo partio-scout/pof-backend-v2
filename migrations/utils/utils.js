@@ -1,28 +1,41 @@
 const axiosInstance = require("./axios");
 
-const createOrUpdateEntry = async (contentType, id, data) => {
+const createOrUpdateEntry = async (
+  contentType,
+  id,
+  data,
+  forceUpdate = false
+) => {
   try {
     const existing = id === undefined ? null : await getEntry(contentType, id);
 
     const created = [];
     const updated = [];
+    const skipped = [];
 
     // No existing content
     if (existing === null) {
       const createdLocales = await createEntryWithLocales(contentType, data);
       created.push(...createdLocales);
-      return { created: created.map((x) => x.id), entries: created.concat(updated) };
+      return {
+        created: created.map((x) => x.id),
+        entries: created.concat(updated),
+      };
     }
 
     for (const loc in data) {
       // The locale exists
       if (existing[loc]) {
-        const updatedLocale = await updateEntry(
-          contentType,
-          existing[loc].id,
-          data[loc]
-        );
-        updated.push(updatedLocale);
+        if (forceUpdate) {
+          const updatedLocale = await updateEntry(
+            contentType,
+            existing[loc].id,
+            data[loc]
+          );
+          updated.push(updatedLocale);
+        } else {
+          skipped.push(existing[loc]);
+        }
       } else {
         // The locale doesn't exist
         const createdLocale = await createLocalization(
@@ -39,6 +52,7 @@ const createOrUpdateEntry = async (contentType, id, data) => {
       created: created.map((x) => x.id),
       updated: updated.map((x) => x.id),
       entries: created.concat(updated),
+      skipped: skipped.map((x) => x.id),
     };
   } catch (error) {
     throw error;
