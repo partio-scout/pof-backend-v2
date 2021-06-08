@@ -74,6 +74,7 @@ const writeAgeGroup = async (ageGroup, forceUpdate = false, limitToOne = false) 
         ...acc,
         [locale]: {
           ...data,
+          Content: sanitizeTextContent(data.Content),
           activity_groups: createdActivityGroups
             .filter((x) => x.locale === locale)
             .map((x) => x.id),
@@ -125,6 +126,7 @@ const writeActivityGroup = async (activityGroup, forceUpdate = false) => {
 
     for (const [locale, data] of Object.entries(activityGroup.locales)) {
       terms[locale] = {
+        Content: sanitizeTextContent(data.Content),
         subactivitygroup_term: (await writeTerm(data.Subtaskgroup_term, forceUpdate))
           .entries[0]?.id,
         activitygroup_term: (await writeTerm(data.Taskgroup_term, forceUpdate)).entries[0]
@@ -185,7 +187,7 @@ const writeActivity = async (activity, forceUpdate = false) => {
       }
 
       data.suggestions = createdSuggestions.map((s) => s.id);
-
+      data.Content = sanitizeTextContent(data.Content),
       data.activity_term = (await writeTerm(data.Task_term, forceUpdate)).entries[0]?.id;
       data.duration = (await writeTag(data.Duration, forceUpdate)).entries[0]?.id;
       data.locations = await MapPromises(data.Location?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
@@ -218,7 +220,7 @@ const writeActivity = async (activity, forceUpdate = false) => {
 const MapPromises = async (promises) => {
   const results = [];
   if (!promises) return results;
-  
+
   for (const p of promises) {
     try {
       const result = await p;
@@ -309,6 +311,15 @@ const writeTag = async (tag, forceUpdate = false) => {
     throw error;
   }
 };
+
+/**
+ * Replace line breaks with paragraphs and such
+ * @param {string} text The text to sanitize
+ * @returns Sanitized text
+ */
+const sanitizeTextContent = (text) => {
+  return text?.split(/\r\n\r\n/).map((part) => `<p>${part}</p>`).join('').replace(/\r\n/g, '<br>');
+}
 
 const updateTotalResults = (result, contentType) => {
   if (result.skipped?.length) {
