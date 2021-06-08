@@ -51,7 +51,7 @@ const createOrUpdateEntry = async (
     return {
       created: created.map((x) => x.id),
       updated: updated.map((x) => x.id),
-      entries: created.concat(updated),
+      entries: [...created, ...updated, ...skipped],
       skipped: skipped.map((x) => x.id),
     };
   } catch (error) {
