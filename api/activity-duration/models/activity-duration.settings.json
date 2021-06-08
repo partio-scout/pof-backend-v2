@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "activity_durations",
   "info": {
-    "name": "Activity Duration",
+    "name": "Activity duration",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Name": {
+    "name": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -26,7 +26,7 @@
       "required": true,
       "unique": false
     },
-    "Slug": {
+    "slug": {
       "pluginOptions": {
         "i18n": {
           "localized": false

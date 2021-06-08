@@ -105,19 +105,19 @@ const parseAgeGroup = async (ageGroup) => {
     data.wp_guid = details.guid;
 
     data.locales[correctLocale] = {
-      MinimumAge: parseInt(details.minAge),
-      MaximumAge: parseInt(details.maxAge),
-      Ingress: details.ingress,
-      Subtaskgroup_term: parseTerm(
+      minimum_age: parseInt(details.minAge),
+      maximum_age: parseInt(details.maxAge),
+      ingress: details.ingress,
+      subtaskgroup_term: parseTerm(
         details.subtaskgroup_term,
         "activityGroupTerm",
         correctLocale
       ),
-      Title: details.title,
-      Content: details.content,
+      title: details.title,
+      content: details.content,
       wp_guid: details.guid,
       locale: correctLocale,
-      Links: details.additional_content?.links?.map((link) => ({
+      links: details.additional_content?.links?.map((link) => ({
         Description: link.description,
         Url: link.url,
       })),
@@ -127,7 +127,7 @@ const parseAgeGroup = async (ageGroup) => {
 
   data.activity_groups = await parseTaskGroups(ageGroup.taskgroups);
 
-  console.log("Parsed ageGroup", data.locales["fi"].Title);
+  console.log("Parsed ageGroup", data.locales["fi"].title);
 
   return data;
 };
@@ -152,27 +152,27 @@ const parseTaskGroup = async (taskGroup) => {
     data.wp_guid = details.guid;
 
     data.locales[correctLocale] = {
-      Title: details.title,
-      Ingress: details.ingress,
-      Content: details.content,
-      Subtaskgroup_term: parseTerm(
+      title: details.title,
+      ingress: details.ingress,
+      content: details.content,
+      subtaskgroup_term: parseTerm(
         details.subtaskgroup_term,
         "activityGroupTerm",
         correctLocale
       ),
-      Taskgroup_term: parseTerm(
+      taskgroup_term: parseTerm(
         details.taskgroup_term,
         "activityGroupTerm",
         correctLocale
       ),
-      Subtask_term: parseTerm(
+      subtask_term: parseTerm(
         details.subtask_term,
         "activityTerm",
         correctLocale
       ),
       wp_guid: details.guid,
       locale: correctLocale,
-      Mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
+      mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
       // TODO Images
     };
   }
@@ -180,7 +180,7 @@ const parseTaskGroup = async (taskGroup) => {
   data.activity_groups = await parseTaskGroups(taskGroup.taskgroups);
   data.activities = await parseTasks(taskGroup.tasks);
 
-  console.log("Parsed taskGroup:", data.locales["fi"].Title);
+  console.log("Parsed taskGroup:", data.locales["fi"].title);
   return data;
 };
 
@@ -203,25 +203,25 @@ const parseTask = async (task) => {
     data.wp_guid = details.guid;
 
     data.locales[correctLocale] = {
-      Title: details.title,
-      Ingress: details.ingress,
-      Content: details.content,
-      Task_term: parseTerm(
+      title: details.title,
+      ingress: details.ingress,
+      content: details.content,
+      task_term: parseTerm(
         details.task_term,
         "activityTerm",
         correctLocale
       ),
       wp_guid: details.guid,
       locale: correctLocale,
-      Mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
-      Leader_tasks: details.leader_tasks,
+      mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
+      leader_tasks: details.leader_tasks,
       // TODO Images
       // TODO Group size
-      Location: details.tags?.paikka?.map((x) => parseTag(x, 'activityLocation', correctLocale)),
-      Duration: parseTag(details.tags?.suoritus_kesto, 'activityDuration', correctLocale),
-      Skill_areas: details.tags?.taitoalueet?.map((x) => parseTag(x, 'activitySkillArea', correctLocale)),
-      Leader_skills: details.tags?.johtamistaito?.map((x) => parseTag(x, 'activityLeaderSkill', correctLocale)),
-      Educational_objectives: details.tags?.kasvatustavoitteet?.map((x) => parseTag(x, 'activityEducationalObjective', correctLocale)),
+      location: details.tags?.paikka?.map((x) => parseTag(x, 'activityLocation', correctLocale)),
+      duration: parseTag(details.tags?.suoritus_kesto, 'activityDuration', correctLocale),
+      skill_areas: details.tags?.taitoalueet?.map((x) => parseTag(x, 'activitySkillArea', correctLocale)),
+      leader_skills: details.tags?.johtamistaito?.map((x) => parseTag(x, 'activityLeaderSkill', correctLocale)),
+      educational_objectives: details.tags?.kasvatustavoitteet?.map((x) => parseTag(x, 'activityEducationalObjective', correctLocale)),
       // TODO Preparation duration
       // TODO Level
       // TODO Links
@@ -236,9 +236,9 @@ const parseTask = async (task) => {
         const suggestions = await getData(languagesSuggestions.details);
         data.locales[correctLocale].suggestions = suggestions.items?.map(
           (s) => ({
-            Title: s.title,
-            Content: s.content,
-            Author: s.publisher?.nickname,
+            title: s.title,
+            content: s.content,
+            author: s.publisher?.nickname,
             wp_guid: s.guid,
             locale: correctLocale,
           })
@@ -249,7 +249,7 @@ const parseTask = async (task) => {
     }
   }
 
-  console.log("Parsed task:", data.locales["fi"].Title);
+  console.log("Parsed task:", data.locales["fi"].title);
   return data;
 };
 
@@ -260,9 +260,9 @@ const parseTerm = (term, type, locale) => {
       name: term.name,
       locales: {
         [locale]: {
-          Name: term.name,
-          Singular: term.single,
-          Plural: term.plural,
+          name: term.name,
+          singular: term.single,
+          plural: term.plural,
         },
       },
     };
@@ -277,8 +277,8 @@ const parseTag = (tag, type, locale) => {
       slug: tag.slug,
       locales: {
         [locale]: {
-          Name: tag.name,
-          Slug: tag.slug,
+          name: tag.name,
+          slug: tag.slug,
         },
       },
     };

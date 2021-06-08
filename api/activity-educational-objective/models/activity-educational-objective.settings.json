@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "activity_educational_objectives",
   "info": {
-    "name": "activity-educational-objective",
+    "name": "Activity educational objective",
     "description": ""
   },
   "options": {
@@ -17,7 +17,7 @@
     }
   },
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -25,7 +25,7 @@
         }
       }
     },
-    "Slug": {
+    "slug": {
       "pluginOptions": {
         "i18n": {
           "localized": false

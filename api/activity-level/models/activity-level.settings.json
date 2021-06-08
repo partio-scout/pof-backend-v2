@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "activity_levels",
   "info": {
-    "name": "activity-level",
+    "name": "Activity level",
     "description": ""
   },
   "options": {
@@ -17,7 +17,7 @@
     }
   },
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -26,7 +26,7 @@
       },
       "required": true
     },
-    "Slug": {
+    "slug": {
       "pluginOptions": {
         "i18n": {
           "localized": false

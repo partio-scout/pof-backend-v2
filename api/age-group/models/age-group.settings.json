@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "age_groups",
   "info": {
-    "name": "Age Group",
+    "name": "Age group",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -25,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "Ingress": {
+    "ingress": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -33,7 +33,7 @@
       },
       "type": "text"
     },
-    "Content": {
+    "content": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -42,7 +42,7 @@
       "type": "richtext",
       "required": true
     },
-    "MinimumAge": {
+    "minimum_age": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -53,7 +53,7 @@
       "min": 1,
       "max": 100
     },
-    "MaximumAge": {
+    "maximum_age": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -75,7 +75,7 @@
       },
       "type": "string"
     },
-    "Links": {
+    "links": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {

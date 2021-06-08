@@ -6,11 +6,11 @@
   },
   "options": {},
   "attributes": {
-    "Description": {
+    "description": {
       "type": "string",
       "required": true
     },
-    "Url": {
+    "url": {
       "type": "string",
       "required": true
     }

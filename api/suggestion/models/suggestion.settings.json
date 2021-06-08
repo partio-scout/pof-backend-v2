@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "suggestions",
   "info": {
-    "name": "Suggestion"
+    "name": "Suggestion",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -15,7 +16,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -24,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "Content": {
+    "content": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -45,7 +46,7 @@
       },
       "type": "string"
     },
-    "Author": {
+    "author": {
       "pluginOptions": {
         "i18n": {
           "localized": true

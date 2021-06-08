@@ -63,7 +63,7 @@ const writeAgeGroup = async (ageGroup, forceUpdate = false, limitToOne = false) 
 
     for (const [locale, data] of Object.entries(ageGroup.locales)) {
       terms[locale] = {
-        subactivitygroup_term: (await writeTerm(data.Subtaskgroup_term, forceUpdate))
+        subactivitygroup_term: (await writeTerm(data.subtaskgroup_term, forceUpdate))
           .entries[0]?.id,
       };
     }
@@ -74,7 +74,7 @@ const writeAgeGroup = async (ageGroup, forceUpdate = false, limitToOne = false) 
         ...acc,
         [locale]: {
           ...data,
-          Content: sanitizeTextContent(data.Content),
+          content: sanitizeTextContent(data.content),
           activity_groups: createdActivityGroups
             .filter((x) => x.locale === locale)
             .map((x) => x.id),
@@ -126,12 +126,12 @@ const writeActivityGroup = async (activityGroup, forceUpdate = false) => {
 
     for (const [locale, data] of Object.entries(activityGroup.locales)) {
       terms[locale] = {
-        Content: sanitizeTextContent(data.Content),
-        subactivitygroup_term: (await writeTerm(data.Subtaskgroup_term, forceUpdate))
+        content: sanitizeTextContent(data.content),
+        subactivitygroup_term: (await writeTerm(data.subtaskgroup_term, forceUpdate))
           .entries[0]?.id,
-        activitygroup_term: (await writeTerm(data.Taskgroup_term, forceUpdate)).entries[0]
+        activitygroup_term: (await writeTerm(data.taskgroup_term, forceUpdate)).entries[0]
           ?.id,
-        subactivity_term: (await writeTerm(data.Subtask_term, forceUpdate)).entries[0]?.id,
+        subactivity_term: (await writeTerm(data.subtask_term, forceUpdate)).entries[0]?.id,
       };
     }
 
@@ -186,14 +186,14 @@ const writeActivity = async (activity, forceUpdate = false) => {
         createdSuggestions.push(...result.entries);
       }
 
+      data.content = sanitizeTextContent(data.content),
       data.suggestions = createdSuggestions.map((s) => s.id);
-      data.Content = sanitizeTextContent(data.Content),
-      data.activity_term = (await writeTerm(data.Task_term, forceUpdate)).entries[0]?.id;
-      data.duration = (await writeTag(data.Duration, forceUpdate)).entries[0]?.id;
-      data.locations = await MapPromises(data.Location?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
-      data.skill_areas = await MapPromises(data.Skill_areas?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
-      data.leader_skills = await MapPromises(data.Leader_skills?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
-      data.educational_objectives = await MapPromises(data.Educational_objectives?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
+      data.activity_term = (await writeTerm(data.task_term, forceUpdate)).entries[0]?.id;
+      data.duration = (await writeTag(data.suration, forceUpdate)).entries[0]?.id;
+      data.locations = await MapPromises(data.location?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
+      data.skill_areas = await MapPromises(data.skill_areas?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
+      data.leader_skills = await MapPromises(data.leader_skills?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
+      data.educational_objectives = await MapPromises(data.educational_objectives?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
     }
 
     // Then write the activity
@@ -266,7 +266,7 @@ const writeTerm = async (term, forceUpdate = false) => {
 
   try {
     const existingEntry = await findEntry(contentTypes[term.type], {
-      Name: term.name,
+      name: term.name,
       _locale: "all",
     });
 
@@ -293,7 +293,7 @@ const writeTag = async (tag, forceUpdate = false) => {
 
   try {
     const existingEntry = await findEntry(contentTypes[tag.type], {
-      Slug: tag.slug,
+      slug: tag.slug,
       _locale: "all",
     });
 
@@ -318,7 +318,7 @@ const writeTag = async (tag, forceUpdate = false) => {
  * @returns Sanitized text
  */
 const sanitizeTextContent = (text) => {
-  return text?.split(/\r\n\r\n/).map((part) => `<p>${part}</p>`).join('').replace(/\r\n/g, '<br>');
+  return text?.split(/\r\n\r\n/).map((part) => `<p>${part}</p>`).join('').replace(/\r\n/g, '<br />');
 }
 
 const updateTotalResults = (result, contentType) => {
@@ -331,13 +331,13 @@ const updateTotalResults = (result, contentType) => {
   if (result.created?.length) {
     console.log(
       `Created ${contentType || 'unknown types'}:`,
-      result.entries.map((x) => x.Title || x.Name)
+      result.entries.map((x) => x.title || x.name)
     );
   }
   if (result.updated?.length) {
     console.log(
       `Updated ${contentType || 'unknown types'}:`,
-      result.entries.map((x) => x.Title || x.Name)
+      result.entries.map((x) => x.title || x.name)
     );
   }
   totalResult.created.push(...(result.created || []));

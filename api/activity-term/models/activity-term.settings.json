@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "activity_terms",
   "info": {
-    "name": "Activity_term"
+    "name": "Activity term"
   },
   "options": {
     "increments": true,
@@ -15,7 +15,7 @@
     }
   },
   "attributes": {
-    "Name": {
+    "name": {
       "pluginOptions": {
         "i18n": {
           "localized": false
@@ -24,7 +24,7 @@
       "type": "string",
       "required": true
     },
-    "Singular": {
+    "singular": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -33,7 +33,7 @@
       "type": "string",
       "required": true
     },
-    "Plural": {
+    "plural": {
       "pluginOptions": {
         "i18n": {
           "localized": true

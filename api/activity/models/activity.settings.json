@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -25,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "Content": {
+    "content": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -34,7 +34,7 @@
       "type": "richtext",
       "required": true
     },
-    "Mandatory": {
+    "mandatory": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -47,7 +47,7 @@
       "via": "activities",
       "collection": "activity-group"
     },
-    "Ingress": {
+    "ingress": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -87,7 +87,7 @@
       },
       "type": "string"
     },
-    "Leader_tasks": {
+    "leader_tasks": {
       "pluginOptions": {
         "i18n": {
           "localized": true

@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "activity_groups",
   "info": {
-    "name": "ActivityGroup",
+    "name": "Activity group",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -25,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "Ingress": {
+    "ingress": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -33,7 +33,7 @@
       },
       "type": "text"
     },
-    "Content": {
+    "content": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -58,7 +58,7 @@
       },
       "type": "string"
     },
-    "Mandatory": {
+    "mandatory": {
       "pluginOptions": {
         "i18n": {
           "localized": false
