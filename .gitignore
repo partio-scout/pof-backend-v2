@@ -115,3 +115,4 @@ build
 
 
 migrations/data/*
+!migrations/data/.gitkeep
