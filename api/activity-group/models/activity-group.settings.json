@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "activity_groups",
   "info": {
-    "name": "ActivityGroup",
+    "name": "Activity group",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -25,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "Ingress": {
+    "ingress": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -33,7 +33,7 @@
       },
       "type": "text"
     },
-    "Content": {
+    "content": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -49,6 +49,31 @@
     },
     "activity_groups": {
       "collection": "activity-group"
+    },
+    "wp_guid": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "mandatory": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "boolean"
+    },
+    "subactivity_term": {
+      "model": "activity-term"
+    },
+    "subactivitygroup_term": {
+      "model": "activitygroup-term"
+    },
+    "activitygroup_term": {
+      "model": "activitygroup-term"
     }
   }
 }
