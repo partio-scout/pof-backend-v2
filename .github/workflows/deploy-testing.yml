@@ -68,6 +68,11 @@ jobs:
               "name": "ADMIN_JWT_SECRET",
               "value": "${{ secrets.ADMIN_JWT_SECRET }}",
               "slotSetting": false
+            },
+            {
+              "name": "NODE_ENV",
+              "value": "testing",
+              "slotSetting": false
             }
           ]
         #package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
