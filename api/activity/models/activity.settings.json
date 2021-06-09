@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -25,7 +25,7 @@
       "type": "string",
       "required": true
     },
-    "Content": {
+    "content": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -34,7 +34,7 @@
       "type": "richtext",
       "required": true
     },
-    "Mandatory": {
+    "mandatory": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -43,44 +43,11 @@
       "type": "boolean",
       "default": false
     },
-    "GroupsSize": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "Yksin",
-        "Kaksin",
-        "Muutama",
-        "LaumassaTaiVartiossa",
-        "IsommassaPorukassa"
-      ],
-      "required": true
-    },
-    "Duration": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "vartti",
-        "puoli_tuntia",
-        "tunti",
-        "kaksi_tuntia",
-        "nelja_tuntia",
-        "paiva"
-      ],
-      "required": true
-    },
     "activity_groups": {
       "via": "activities",
       "collection": "activity-group"
     },
-    "Ingress": {
+    "ingress": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -88,8 +55,61 @@
       },
       "type": "text"
     },
-    "skillareas": {
-      "collection": "skillarea"
+    "group_sizes": {
+      "collection": "activity-group-size"
+    },
+    "level": {
+      "model": "activity-level"
+    },
+    "skill_areas": {
+      "collection": "activity-skill-area",
+      "via": "activities",
+      "dominant": true
+    },
+    "equimpent": {
+      "collection": "activity-equipment"
+    },
+    "educational_objectives": {
+      "collection": "activity-educational-objective",
+      "via": "activities",
+      "dominant": true
+    },
+    "leader_skills": {
+      "collection": "activity-leader-skill",
+      "via": "activities",
+      "dominant": true
+    },
+    "wp_guid": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "leader_tasks": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
+    },
+    "suggestions": {
+      "via": "activity",
+      "collection": "suggestion"
+    },
+    "activity_term": {
+      "model": "activity-term"
+    },
+    "locations": {
+      "collection": "activity-location",
+      "via": "activities",
+      "dominant": true
+    },
+    "duration": {
+      "model": "activity-duration",
+      "via": "activities"
     }
   }
 }

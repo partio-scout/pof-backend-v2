@@ -26,6 +26,7 @@ const Editor = ({ onChange, name, value }) => {
             relative_urls : true,
             remove_script_host : true,
             toolbar_mode: 'wrap',
+            entity_encoding: 'raw',
             plugins: [
               'advlist autolink lists link image charmap print preview anchor',
               'searchreplace visualblocks code fullscreen',
@@ -34,11 +35,11 @@ const Editor = ({ onChange, name, value }) => {
               'hr visualchars imagetools emoticons'
             ],
             toolbar:
-              'undo redo | formatselect forecolor backcolor | \
+              'undo redo | formatselect | \
               bold italic underline strikethrough removeformat | \
               alignleft aligncenter alignright alignjustify | \
               outdent indent | numlist bullist | \
-              table link anchor | image media codesample charmap emoticons | \
+              link anchor | codesample charmap emoticons | \
               fullscreen code'
           }}
           onEditorChange={(content, editor) => {
