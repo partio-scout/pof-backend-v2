@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/educational-objectives",
+      "handler": "educational-objective.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/educational-objectives/count",
+      "handler": "educational-objective.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/educational-objectives/:id",
+      "handler": "educational-objective.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/educational-objectives",
+      "handler": "educational-objective.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/educational-objectives/:id",
+      "handler": "educational-objective.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/educational-objectives/:id",
+      "handler": "educational-objective.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

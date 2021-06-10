@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/skill-areas",
+      "handler": "skill-area.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/skill-areas/count",
+      "handler": "skill-area.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/skill-areas/:id",
+      "handler": "skill-area.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/skill-areas",
+      "handler": "skill-area.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/skill-areas/:id",
+      "handler": "skill-area.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/skill-areas/:id",
+      "handler": "skill-area.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

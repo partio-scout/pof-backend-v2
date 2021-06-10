@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/leader-skills",
+      "handler": "leader-skill.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/leader-skills/count",
+      "handler": "leader-skill.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/leader-skills/:id",
+      "handler": "leader-skill.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/leader-skills",
+      "handler": "leader-skill.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/leader-skills/:id",
+      "handler": "leader-skill.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/leader-skills/:id",
+      "handler": "leader-skill.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

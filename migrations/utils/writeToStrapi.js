@@ -7,11 +7,11 @@ const contentTypes = {
   ageGroup: "age-groups",
   activityGroupTerm: "activitygroup-terms",
   activityTerm: "activity-terms",
-  activityLocation: "activity-locations",
-  activitySkillArea: "activity-skill-areas",
-  activityEducationalObjective: "activity-educational-objectives",
-  activityDuration: "activity-durations",
-  activityLeaderSkill: "activity-leader-skills",
+  activityLocation: "locations",
+  activitySkillArea: "skill-areas",
+  activityEducationalObjective: "educational-objectives",
+  activityDuration: "durations",
+  activityLeaderSkill: "leader-skills",
 };
 
 const totalResult = {

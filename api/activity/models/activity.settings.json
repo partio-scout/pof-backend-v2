@@ -56,26 +56,26 @@
       "type": "text"
     },
     "group_sizes": {
-      "collection": "activity-group-size"
+      "collection": "group-size"
     },
     "level": {
       "model": "activity-level"
     },
     "skill_areas": {
-      "collection": "activity-skill-area",
+      "collection": "skill-area",
       "via": "activities",
       "dominant": true
     },
     "equimpent": {
-      "collection": "activity-equipment"
+      "collection": "equipment"
     },
     "educational_objectives": {
-      "collection": "activity-educational-objective",
+      "collection": "educational-objective",
       "via": "activities",
       "dominant": true
     },
     "leader_skills": {
-      "collection": "activity-leader-skill",
+      "collection": "leader-skill",
       "via": "activities",
       "dominant": true
     },
@@ -103,12 +103,12 @@
       "model": "activity-term"
     },
     "locations": {
-      "collection": "activity-location",
+      "collection": "location",
       "via": "activities",
       "dominant": true
     },
     "duration": {
-      "model": "activity-duration",
+      "model": "duration",
       "via": "activities"
     }
   }
