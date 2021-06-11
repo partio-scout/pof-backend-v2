@@ -72,7 +72,8 @@
     "educational_objectives": {
       "collection": "educational-objective",
       "via": "activities",
-      "dominant": true
+      "dominant": true,
+      "collectionName": "activities__educational-objectives"
     },
     "leader_skills": {
       "collection": "leader-skill",
