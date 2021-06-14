@@ -1,4 +1,4 @@
-const { createOrUpdateEntry, findEntry } = require("./utils");
+const { createOrUpdateEntry, findEntry, getExistingFiles, createFile } = require("./utils");
 
 const contentTypes = {
   suggestion: "suggestions",
@@ -12,6 +12,7 @@ const contentTypes = {
   activityEducationalObjective: "educational-objectives",
   activityDuration: "durations",
   activityLeaderSkill: "leader-skills",
+  file: 'file',
 };
 
 const totalResult = {
@@ -21,6 +22,8 @@ const totalResult = {
   skipped: [],
 };
 
+let existingFiles = [];
+
 const writeProgramToStrapi = async (programData, forceUpdate = false, limitToOne = false) => {
   console.log("Writing program data to Strapi");
   if (limitToOne) {
@@ -29,6 +32,9 @@ const writeProgramToStrapi = async (programData, forceUpdate = false, limitToOne
   if (forceUpdate) {
     console.log("Updating every entry");
   }
+
+  existingFiles = await getExistingFiles();
+
   try {
     const ageGroups = limitToOne
       ? programData.ageGroups.slice(0, 1)
@@ -54,10 +60,10 @@ const writeAgeGroup = async (ageGroup, forceUpdate = false, limitToOne = false) 
       ? ageGroup.activity_groups.slice(0, 1)
       : ageGroup.activity_groups;
 
-    for (const activityGroup of activityGroups) {
-      const result = await writeActivityGroup(activityGroup, forceUpdate);
-      createdActivityGroups.push(...result.entries);
-    }
+    // for (const activityGroup of activityGroups) {
+    //   const result = await writeActivityGroup(activityGroup, forceUpdate);
+    //   createdActivityGroups.push(...result.entries);
+    // }
 
     const terms = {};
 
@@ -67,6 +73,10 @@ const writeAgeGroup = async (ageGroup, forceUpdate = false, limitToOne = false) 
           .entries[0]?.id,
       };
     }
+
+    // Then write the images and files
+    const main_image = await writeFile(ageGroup.main_image);
+    const logo = await writeFile(ageGroup.logo);
 
     // Then write the age group
     const data = Object.entries(ageGroup.locales).reduce(
@@ -79,6 +89,8 @@ const writeAgeGroup = async (ageGroup, forceUpdate = false, limitToOne = false) 
             .filter((x) => x.locale === locale)
             .map((x) => x.id),
           subactivitygroup_term: terms[locale].subactivitygroup_term,
+          main_image,
+          logo,
         },
       }),
       {}
@@ -135,6 +147,10 @@ const writeActivityGroup = async (activityGroup, forceUpdate = false) => {
       };
     }
 
+    // Then write the images and files
+    const main_image = await writeFile(activityGroup.main_image);
+    const logo = await writeFile(activityGroup.logo);
+
     // Then write the activity group
     const data = Object.entries(activityGroup.locales).reduce(
       (acc, [locale, data]) => ({
@@ -150,6 +166,8 @@ const writeActivityGroup = async (activityGroup, forceUpdate = false) => {
           subactivitygroup_term: terms[locale].subactivitygroup_term,
           activitygroup_term: terms[locale].activitygroup_term,
           subactivity_term: terms[locale].subactivity_term,
+          main_image,
+          logo,
         },
       }),
       {}
@@ -177,7 +195,11 @@ const writeActivityGroup = async (activityGroup, forceUpdate = false) => {
 
 const writeActivity = async (activity, forceUpdate = false) => {
   try {
-    // First write the child suggestions and terms
+    // Write the images and files
+    const main_image = await writeFile(activity.main_image);
+    const logo = await writeFile(activity.logo);
+
+    // Write the child suggestions and terms
     for (const [locale, data] of Object.entries(activity.locales)) {
       const createdSuggestions = [];
 
@@ -194,6 +216,8 @@ const writeActivity = async (activity, forceUpdate = false) => {
       data.skill_areas = await MapPromises(data.skill_areas?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
       data.leader_skills = await MapPromises(data.leader_skills?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
       data.educational_objectives = await MapPromises(data.educational_objectives?.map(async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id));
+      data.main_image = main_image;
+      data.logo = logo;
     }
 
     // Then write the activity
@@ -232,6 +256,25 @@ const MapPromises = async (promises) => {
   return results;
 }
 
+const writeFile = async (imageData) => {
+  let returnValue = undefined;
+  if (imageData) {
+
+    const existingMainImage = existingFiles.find((file) => file?.name === imageData?.name);
+    
+    if (existingMainImage) {
+      returnValue = existingMainImage.id;
+      updateTotalResults({ skipped: [returnValue], entries: [existingMainImage] }, contentTypes.file);
+
+    } else {
+      const newImage = await createFile(imageData.path);
+      returnValue = newImage?.id;
+      updateTotalResults({ created: [returnValue], entries: [ newImage ] }, contentTypes.file);
+    }
+  }
+  return returnValue;
+}
+
 const writeSuggestion = async (suggestion, forceUpdate = false) => {
   try {
     const existingEntry = await findEntry(contentTypes.suggestion, {
@@ -250,7 +293,7 @@ const writeSuggestion = async (suggestion, forceUpdate = false) => {
       forceUpdate
     );
 
-    updateTotalResults(result, contentTypes.suggestion)
+    updateTotalResults(result, contentTypes.suggestion);
 
     return result;
   } catch (error) {

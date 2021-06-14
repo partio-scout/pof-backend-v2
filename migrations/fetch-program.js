@@ -1,5 +1,4 @@
-const axiosInstance = require("./utils/axios");
-const axios = require("axios");
+const { rateLimited: axiosInstance } = require("./utils/axios");
 const {
   writeFileSync,
   readFileSync,
@@ -315,16 +314,14 @@ const parseTag = (tag, type, locale) => {
 const parseImage = async (image) => {
   if (!image?.url) return undefined;
 
-  return await downloadImage(image.url, image.title, image.mime_type);
+  return await downloadImage(image.url, image.mime_type);
 };
 
-const downloadImage = async (url, name, mime_type) => {
+const downloadImage = async (url, mime_type) => {
   const cachedData = cache.get(url);
   if (cachedData) {
     return cachedData;
   }
-
-
 
   const directoryPath = resolvePath(__dirname, "./data/images");
 
@@ -353,7 +350,7 @@ const downloadImage = async (url, name, mime_type) => {
   }
 
   const data = {
-    name,
+    name: fileName,
     mime_type,
     path: filePath,
   };

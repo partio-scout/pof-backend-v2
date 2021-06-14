@@ -27,15 +27,19 @@ const createInstance = () => {
     (error) => {
       if (error.response) {
         throw new Error(
-          JSON.stringify({
-            status: error.response?.status,
-            statusText: error.response?.statustext,
-            url: error.response?.config.baseURL + error.response?.config.url,
-            method: error.response?.config.method,
-            inputData: error.response?.config.data,
-            outputMessage: error.response?.data.message,
-            outputData: error.response?.data.data,
-          }, undefined, 4)
+          JSON.stringify(
+            {
+              status: error.response?.status,
+              statusText: error.response?.statustext,
+              url: error.response?.config.baseURL + error.response?.config.url,
+              method: error.response?.config.method,
+              inputData: error.response?.config.data,
+              outputMessage: error.response?.data.message,
+              outputData: error.response?.data.data,
+            },
+            undefined,
+            4
+          )
         );
       }
       throw error;
@@ -44,6 +48,11 @@ const createInstance = () => {
   return axiosInstance;
 };
 
-const rateLimitedInstance = rateLimit(createInstance(), { maxRPS: 5 });
+const fastInstance = createInstance();
 
-module.exports = rateLimitedInstance;
+const rateLimitedInstance = rateLimit(fastInstance, { maxRPS: 5 });
+
+module.exports = {
+  rateLimited: rateLimitedInstance,
+  fast: fastInstance,
+};

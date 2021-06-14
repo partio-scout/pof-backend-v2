@@ -1,4 +1,6 @@
-const axiosInstance = require("./axios");
+const FormData = require("form-data");
+const  { createReadStream } = require('fs');
+const { fast: axiosInstance } = require("./axios");
 
 const createOrUpdateEntry = async (
   contentType,
@@ -193,7 +195,39 @@ const findEntry = async (contentType, params) => {
   }
 };
 
+const getExistingFiles = async () => {
+  try {
+    const { data } = await axiosInstance.get("/upload/files");
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+const createFile = async (filePath) => {
+  try {
+    const formData = new FormData();
+
+    formData.append(`files`, createReadStream(filePath));
+
+    const { data } = await axiosInstance.post("/upload", formData, {
+      // You need to use `getHeaders()` in Node.js because Axios doesn't
+      // automatically set the multipart form boundary in Node.
+      headers: formData.getHeaders(),
+    });
+
+    return data[0];
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
 module.exports = {
   createOrUpdateEntry,
   findEntry,
+  getExistingFiles,
+  createFile,
 };
