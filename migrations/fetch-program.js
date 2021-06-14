@@ -113,6 +113,10 @@ const parseAgeGroup = async (ageGroup) => {
 
     data.wp_guid = details.guid;
 
+    // TODO Images
+    data.main_image = await parseImage(details.images?.main_image);
+    data.logo = await parseImage(details.images?.logo);
+
     data.locales[correctLocale] = {
       minimum_age: parseInt(details.minAge),
       maximum_age: parseInt(details.maxAge),
@@ -130,9 +134,6 @@ const parseAgeGroup = async (ageGroup) => {
         Description: link.description,
         Url: link.url,
       })),
-      main_image: await parseImage(details.images?.main_image),
-      logo: await parseImage(details.images?.logo),
-      // TODO Images
     };
   }
 
@@ -162,6 +163,10 @@ const parseTaskGroup = async (taskGroup) => {
 
     data.wp_guid = details.guid;
 
+    // TODO Images
+    data.main_image = await parseImage(details.images?.main_image);
+    data.logo = await parseImage(details.images?.logo);
+
     data.locales[correctLocale] = {
       title: details.title,
       ingress: details.ingress,
@@ -184,9 +189,6 @@ const parseTaskGroup = async (taskGroup) => {
       wp_guid: details.guid,
       locale: correctLocale,
       mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
-      main_image: await parseImage(details.images?.main_image),
-      logo: await parseImage(details.images?.logo),
-      // TODO Images
     };
   }
 
@@ -215,6 +217,10 @@ const parseTask = async (task) => {
 
     data.wp_guid = details.guid;
 
+    // TODO Images
+    data.main_image = await parseImage(details.images?.main_image);
+    data.logo = await parseImage(details.images?.logo);
+
     data.locales[correctLocale] = {
       title: details.title,
       ingress: details.ingress,
@@ -224,9 +230,6 @@ const parseTask = async (task) => {
       locale: correctLocale,
       mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
       leader_tasks: details.leader_tasks,
-      // TODO Images
-      main_image: await parseImage(details.images?.main_image),
-      logo: await parseImage(details.images?.logo),
       // TODO Group size
       location: details.tags?.paikka?.map((x) =>
         parseTag(x, "activityLocation", correctLocale)
