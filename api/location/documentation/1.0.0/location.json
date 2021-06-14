@@ -617,6 +617,24 @@
                 "duration": {
                   "type": "string"
                 },
+                "main_image": {
+                  "type": "string"
+                },
+                "logo": {
+                  "type": "string"
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
