@@ -1,5 +1,14 @@
 const axiosInstance = require("./utils/axios");
-const { writeFileSync, readFileSync, existsSync } = require("fs");
+const axios = require("axios");
+const {
+  writeFileSync,
+  readFileSync,
+  existsSync,
+  mkdirSync,
+  createWriteStream,
+} = require("fs");
+const { resolve: resolvePath } = require("path");
+const needle = require("needle");
 
 const cachePath = "./migrations/data/data_cache.json";
 const dataPath = "./migrations/data/program_data.json";
@@ -121,6 +130,8 @@ const parseAgeGroup = async (ageGroup) => {
         Description: link.description,
         Url: link.url,
       })),
+      main_image: await parseImage(details.images?.main_image),
+      logo: await parseImage(details.images?.logo),
       // TODO Images
     };
   }
@@ -173,6 +184,8 @@ const parseTaskGroup = async (taskGroup) => {
       wp_guid: details.guid,
       locale: correctLocale,
       mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
+      main_image: await parseImage(details.images?.main_image),
+      logo: await parseImage(details.images?.logo),
       // TODO Images
     };
   }
@@ -206,22 +219,32 @@ const parseTask = async (task) => {
       title: details.title,
       ingress: details.ingress,
       content: details.content,
-      task_term: parseTerm(
-        details.task_term,
-        "activityTerm",
-        correctLocale
-      ),
+      task_term: parseTerm(details.task_term, "activityTerm", correctLocale),
       wp_guid: details.guid,
       locale: correctLocale,
       mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
       leader_tasks: details.leader_tasks,
       // TODO Images
+      main_image: await parseImage(details.images?.main_image),
+      logo: await parseImage(details.images?.logo),
       // TODO Group size
-      location: details.tags?.paikka?.map((x) => parseTag(x, 'activityLocation', correctLocale)),
-      duration: parseTag(details.tags?.suoritus_kesto, 'activityDuration', correctLocale),
-      skill_areas: details.tags?.taitoalueet?.map((x) => parseTag(x, 'activitySkillArea', correctLocale)),
-      leader_skills: details.tags?.johtamistaito?.map((x) => parseTag(x, 'activityLeaderSkill', correctLocale)),
-      educational_objectives: details.tags?.kasvatustavoitteet?.map((x) => parseTag(x, 'activityEducationalObjective', correctLocale)),
+      location: details.tags?.paikka?.map((x) =>
+        parseTag(x, "activityLocation", correctLocale)
+      ),
+      duration: parseTag(
+        details.tags?.suoritus_kesto,
+        "activityDuration",
+        correctLocale
+      ),
+      skill_areas: details.tags?.taitoalueet?.map((x) =>
+        parseTag(x, "activitySkillArea", correctLocale)
+      ),
+      leader_skills: details.tags?.johtamistaito?.map((x) =>
+        parseTag(x, "activityLeaderSkill", correctLocale)
+      ),
+      educational_objectives: details.tags?.kasvatustavoitteet?.map((x) =>
+        parseTag(x, "activityEducationalObjective", correctLocale)
+      ),
       // TODO Preparation duration
       // TODO Level
       // TODO Links
@@ -284,7 +307,58 @@ const parseTag = (tag, type, locale) => {
     };
   }
   return undefined;
-}
+};
+
+const parseImage = async (image) => {
+  if (!image?.url) return undefined;
+
+  return await downloadImage(image.url, image.title, image.mime_type);
+};
+
+const downloadImage = async (url, name, mime_type) => {
+  const cachedData = cache.get(url);
+  if (cachedData) {
+    return cachedData;
+  }
+
+
+
+  const directoryPath = resolvePath(__dirname, "./data/images");
+
+  if (!existsSync(directoryPath)) {
+    mkdirSync(directoryPath, { recursive: true });
+  }
+
+  const fileName = url.split("/").pop();
+
+  const filePath = resolvePath(directoryPath, fileName);
+
+  const writer = createWriteStream(filePath);
+
+  try {
+    await new Promise((resolve, reject) => {
+      needle.get(encodeURI(url)).pipe(writer).on("ready", (data) => {
+        resolve(data) 
+      }).on("error", (error) => {
+        reject(error)
+      });
+    });
+  } catch (err) {
+    console.error(err);
+    throw error;
+
+  }
+
+  const data = {
+    name,
+    mime_type,
+    path: filePath,
+  };
+
+  cache.set(url, data);
+
+  return data;
+};
 
 module.exports = async (config) => {
   console.log("Fetching data from old api");
