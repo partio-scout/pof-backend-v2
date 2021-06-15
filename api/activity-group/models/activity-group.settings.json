@@ -131,6 +131,16 @@
           "localized": false
         }
       }
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "links.links"
     }
   }
 }

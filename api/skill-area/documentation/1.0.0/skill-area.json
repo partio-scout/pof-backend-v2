@@ -648,6 +648,9 @@
                     "type": "string"
                   }
                 },
+                "links": {
+                  "type": "component"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {

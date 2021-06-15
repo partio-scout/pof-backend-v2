@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/14/2021 10:43:35 AM"
+    "x-generation-date": "06/15/2021 10:54:14 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -13337,6 +13337,9 @@
                     "type": "string"
                   }
                 },
+                "links": {
+                  "type": "component"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -13423,6 +13426,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -13836,6 +13842,28 @@
               }
             }
           },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -13901,6 +13929,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -13973,6 +14004,28 @@
           },
           "activitygroup_term": {
             "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "localizations": {
             "type": "array",
@@ -14265,6 +14318,9 @@
                     "type": "string"
                   }
                 },
+                "links": {
+                  "type": "component"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -14552,6 +14608,15 @@
                 },
                 "author": {
                   "type": "string"
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -14966,6 +15031,28 @@
               }
             }
           },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -15070,6 +15157,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -15182,6 +15272,28 @@
           },
           "duration": {
             "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "localizations": {
             "type": "array",
@@ -15394,6 +15506,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -16249,6 +16364,9 @@
                     "type": "string"
                   }
                 },
+                "links": {
+                  "type": "component"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -16674,6 +16792,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -17447,6 +17568,9 @@
                     "type": "string"
                   }
                 },
+                "links": {
+                  "type": "component"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -17876,6 +18000,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -18307,6 +18434,9 @@
                     "type": "string"
                   }
                 },
+                "links": {
+                  "type": "component"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -18530,6 +18660,9 @@
                   "type": "string"
                 }
               },
+              "links": {
+                "type": "component"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
@@ -18555,6 +18688,98 @@
           },
           "author": {
             "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "alternativeText": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "localizations": {
             "type": "array",
@@ -18583,6 +18808,15 @@
                 },
                 "author": {
                   "type": "string"
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -18635,6 +18869,28 @@
           },
           "author": {
             "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "localizations": {
             "type": "array",

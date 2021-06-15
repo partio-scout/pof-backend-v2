@@ -651,6 +651,9 @@
                     "type": "string"
                   }
                 },
+                "links": {
+                  "type": "component"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -737,6 +740,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -1150,6 +1156,28 @@
               }
             }
           },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -1215,6 +1243,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "links": {
+                  "type": "component"
                 },
                 "localizations": {
                   "type": "array",
@@ -1287,6 +1318,28 @@
           },
           "activitygroup_term": {
             "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "localizations": {
             "type": "array",
