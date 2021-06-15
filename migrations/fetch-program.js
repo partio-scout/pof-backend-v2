@@ -112,10 +112,6 @@ const parseAgeGroup = async (ageGroup) => {
 
     data.wp_guid = details.guid;
 
-    // TODO Images
-    data.main_image = await parseImage(details.images?.main_image);
-    data.logo = await parseImage(details.images?.logo);
-
     data.locales[correctLocale] = {
       minimum_age: parseInt(details.minAge),
       maximum_age: parseInt(details.maxAge),
@@ -129,10 +125,10 @@ const parseAgeGroup = async (ageGroup) => {
       content: details.content,
       wp_guid: details.guid,
       locale: correctLocale,
-      links: details.additional_content?.links?.map((link) => ({
-        Description: link.description,
-        Url: link.url,
-      })),
+      links: parseLinks(details.additional_content?.links),
+      main_image: await parseFile(details.images?.main_image),
+      logo: await parseFile(details.images?.logo),
+      files: await parseFiles(details.additional_content?.files),
     };
   }
 
@@ -142,6 +138,11 @@ const parseAgeGroup = async (ageGroup) => {
 
   return data;
 };
+
+const parseLinks = (links) => links?.map((link) => ({
+    description: link.description,
+    url: link.url,
+  }));
 
 const parseTaskGroups = async (taskGroups) =>
   await parseList(taskGroups, parseTaskGroup);
@@ -162,10 +163,6 @@ const parseTaskGroup = async (taskGroup) => {
 
     data.wp_guid = details.guid;
 
-    // TODO Images
-    data.main_image = await parseImage(details.images?.main_image);
-    data.logo = await parseImage(details.images?.logo);
-
     data.locales[correctLocale] = {
       title: details.title,
       ingress: details.ingress,
@@ -185,9 +182,13 @@ const parseTaskGroup = async (taskGroup) => {
         "activityTerm",
         correctLocale
       ),
+      links: parseLinks(details.additional_content?.links),
       wp_guid: details.guid,
       locale: correctLocale,
       mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
+      main_image: await parseFile(details.images?.main_image),
+      logo: await parseFile(details.images?.logo),
+      files: await parseFiles(details.additional_content?.files),
     };
   }
 
@@ -216,10 +217,6 @@ const parseTask = async (task) => {
 
     data.wp_guid = details.guid;
 
-    // TODO Images
-    data.main_image = await parseImage(details.images?.main_image);
-    data.logo = await parseImage(details.images?.logo);
-
     data.locales[correctLocale] = {
       title: details.title,
       ingress: details.ingress,
@@ -238,6 +235,7 @@ const parseTask = async (task) => {
         "activityDuration",
         correctLocale
       ),
+      links: parseLinks(details.additional_content?.links),
       skill_areas: details.tags?.taitoalueet?.map((x) =>
         parseTag(x, "activitySkillArea", correctLocale)
       ),
@@ -247,9 +245,11 @@ const parseTask = async (task) => {
       educational_objectives: details.tags?.kasvatustavoitteet?.map((x) =>
         parseTag(x, "activityEducationalObjective", correctLocale)
       ),
+      main_image: await parseFile(details.images?.main_image),
+      logo: await parseFile(details.images?.logo),
+      files: await parseFiles(details.additional_content?.files),
       // TODO Preparation duration
       // TODO Level
-      // TODO Links
       // TODO Equipment
     };
 
@@ -259,14 +259,16 @@ const parseTask = async (task) => {
     if (languagesSuggestions) {
       try {
         const suggestions = await getData(languagesSuggestions.details);
-        data.locales[correctLocale].suggestions = suggestions.items?.map(
-          (s) => ({
+        data.locales[correctLocale].suggestions = await Promise.all(
+          suggestions.items?.map(async (s) => ({
             title: s.title,
             content: s.content,
             author: s.publisher?.nickname,
             wp_guid: s.guid,
             locale: correctLocale,
-          })
+            files: await parseFiles(s.additional_content?.files),
+            links: parseLinks(s.additional_content?.links),
+          }))
         );
       } catch (error) {
         console.error(error);
@@ -311,13 +313,30 @@ const parseTag = (tag, type, locale) => {
   return undefined;
 };
 
-const parseImage = async (image) => {
-  if (!image?.url) return undefined;
+const parseFiles = async (files) => {
+  if (!files?.length) return undefined;
 
-  return await downloadImage(image.url, image.mime_type);
+  const results = [];
+
+  for (const file of files) {
+    try {
+      const result = await parseFile(file);
+      results.push(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  return results;
 };
 
-const downloadImage = async (url, mime_type) => {
+const parseFile = async (file) => {
+  if (!file?.url) return undefined;
+
+  return await downloadFile(file.url, file.mime_type, file.description);
+};
+
+const downloadFile = async (url, mime_type, description) => {
   const cachedData = cache.get(url);
   if (cachedData) {
     return cachedData;
@@ -337,22 +356,26 @@ const downloadImage = async (url, mime_type) => {
 
   try {
     await new Promise((resolve, reject) => {
-      needle.get(encodeURI(url)).pipe(writer).on("ready", (data) => {
-        resolve(data) 
-      }).on("error", (error) => {
-        reject(error)
-      });
+      needle
+        .get(encodeURI(url))
+        .pipe(writer)
+        .on("ready", (data) => {
+          resolve(data);
+        })
+        .on("error", (error) => {
+          reject(error);
+        });
     });
   } catch (err) {
     console.error(err);
     throw error;
-
   }
 
   const data = {
     name: fileName,
     mime_type,
     path: filePath,
+    description,
   };
 
   cache.set(url, data);
