@@ -7,7 +7,17 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Migrations",
+      "name": "Migration - Fetch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/migrations/run.js",
+      "args": ["-f"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Migration - Write",
       "skipFiles": [
         "<node_internals>/**"
       ],
