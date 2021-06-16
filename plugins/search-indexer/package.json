@@ -1,0 +1,20 @@
+{
+  "name": "strapi-plugin-search-indexer",
+  "version": "0.0.0",
+  "description": "Plugin for indexing content into Algolia",
+  "strapi": {
+    "name": "Search indexer",
+    "icon": "plug",
+    "description": "With this plugin you can index all (configured) content with one click of a button."
+  },
+  "indexableContent": [
+    "activity-group",
+    "age-group"
+  ],
+  "dependencies": {},
+  "engines": {
+    "node": ">=10.16.0 <=14.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
