@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/block-widths",
+      "handler": "block-width.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/block-widths/count",
+      "handler": "block-width.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/block-widths/:id",
+      "handler": "block-width.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/block-widths",
+      "handler": "block-width.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/block-widths/:id",
+      "handler": "block-width.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/block-widths/:id",
+      "handler": "block-width.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
