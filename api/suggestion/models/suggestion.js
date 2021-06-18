@@ -5,4 +5,13 @@
  * to customize this model
  */
 
-module.exports = {};
+module.exports = {
+  lifecycles: {
+    async afterCreate(result, data) {
+      if (result.from_web) {
+        // TODO: Send email to interested parties
+        // console.log('Sending notification about new suggestion from web');
+      }
+    },
+  },
+};

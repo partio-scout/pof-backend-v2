@@ -900,6 +900,9 @@
                 "links": {
                   "type": "component"
                 },
+                "from_web": {
+                  "type": "boolean"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {

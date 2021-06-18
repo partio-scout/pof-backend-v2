@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/15/2021 10:54:14 AM"
+    "x-generation-date": "06/18/2021 3:08:23 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10984,6 +10984,69 @@
         ]
       }
     },
+    "/suggestions/new": {
+      "post": {
+        "deprecated": false,
+        "description": "Endpoint for creating new suggestions. This saves the suggestions in draft state, so that they can be later published by admins.",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Suggestion"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Suggestion"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSuggestion"
+              }
+            }
+          }
+        }
+      }
+    },
     "/email/": {
       "post": {
         "deprecated": false,
@@ -14617,6 +14680,9 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "from_web": {
+                  "type": "boolean"
                 },
                 "localizations": {
                   "type": "array",
@@ -18781,6 +18847,10 @@
               }
             }
           },
+          "from_web": {
+            "type": "boolean",
+            "default": false
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -18817,6 +18887,9 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "from_web": {
+                  "type": "boolean"
                 },
                 "localizations": {
                   "type": "array",
@@ -18891,6 +18964,10 @@
                 }
               }
             }
+          },
+          "from_web": {
+            "type": "boolean",
+            "default": false
           },
           "localizations": {
             "type": "array",
