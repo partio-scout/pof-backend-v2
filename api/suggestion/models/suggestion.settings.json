@@ -90,6 +90,24 @@
       "type": "boolean",
       "default": false,
       "required": false
+    },
+    "likes": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "json",
+      "private": true
+    },
+    "like_count": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer",
+      "default": 0
     }
   }
 }

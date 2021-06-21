@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/18/2021 3:08:23 PM"
+    "x-generation-date": "06/21/2021 1:58:49 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11047,6 +11047,168 @@
         }
       }
     },
+    "/suggestions/like/{id}": {
+      "post": {
+        "deprecated": false,
+        "description": "Endpoint for liking suggestions.",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Suggestion"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Suggestion"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "user"
+                ],
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/suggestions/unlike/{id}": {
+      "post": {
+        "deprecated": false,
+        "description": "Endpoint for unliking suggestions.",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Suggestion"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Suggestion"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "user"
+                ],
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/email/": {
       "post": {
         "deprecated": false,
@@ -14683,6 +14845,12 @@
                 },
                 "from_web": {
                   "type": "boolean"
+                },
+                "likes": {
+                  "type": "object"
+                },
+                "like_count": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
@@ -18851,6 +19019,10 @@
             "type": "boolean",
             "default": false
           },
+          "like_count": {
+            "type": "integer",
+            "default": 0
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -18890,6 +19062,12 @@
                 },
                 "from_web": {
                   "type": "boolean"
+                },
+                "likes": {
+                  "type": "object"
+                },
+                "like_count": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
@@ -18968,6 +19146,13 @@
           "from_web": {
             "type": "boolean",
             "default": false
+          },
+          "likes": {
+            "type": "object"
+          },
+          "like_count": {
+            "type": "integer",
+            "default": 0
           },
           "localizations": {
             "type": "array",

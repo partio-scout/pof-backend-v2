@@ -7,6 +7,10 @@
 
 module.exports = {
   lifecycles: {
+    async beforeUpdate(params, data) {
+      // Set the suggestion's like_count based on the current likes
+      data.like_count = data.likes?.length || 0;
+    },
     async afterCreate(result, data) {
       if (result.from_web) {
         // TODO: Send email to interested parties

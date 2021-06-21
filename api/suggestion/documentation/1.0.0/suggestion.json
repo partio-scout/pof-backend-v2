@@ -581,6 +581,148 @@
           }
         }
       }
+    },
+    "/suggestions/like/{id}": {
+      "post": {
+        "deprecated": false,
+        "description": "Endpoint for liking suggestions.",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Suggestion"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/suggestions/unlike/{id}": {
+      "post": {
+        "deprecated": false,
+        "description": "Endpoint for unliking suggestions.",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Suggestion"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -830,6 +972,10 @@
             "type": "boolean",
             "default": false
           },
+          "like_count": {
+            "type": "integer",
+            "default": 0
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -869,6 +1015,12 @@
                 },
                 "from_web": {
                   "type": "boolean"
+                },
+                "likes": {
+                  "type": "object"
+                },
+                "like_count": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
@@ -947,6 +1099,13 @@
           "from_web": {
             "type": "boolean",
             "default": false
+          },
+          "likes": {
+            "type": "object"
+          },
+          "like_count": {
+            "type": "integer",
+            "default": 0
           },
           "localizations": {
             "type": "array",
