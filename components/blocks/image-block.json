@@ -15,6 +15,9 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "block_width": {
+      "model": "block-width"
     }
   }
 }
