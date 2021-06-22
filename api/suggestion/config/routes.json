@@ -47,6 +47,18 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/suggestions/:id/comment",
+      "handler": "suggestion.comment",
+      "config": {
+        "policies": [],
+        "tag": {
+          "name": "Comment",
+          "actionType": "create"
+        }
+      }
     }
   ]
 }

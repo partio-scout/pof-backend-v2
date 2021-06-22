@@ -80,6 +80,10 @@
         }
       },
       "component": "links.links"
+    },
+    "comments": {
+      "via": "suggestion",
+      "collection": "comment"
     }
   }
 }
