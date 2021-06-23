@@ -574,6 +574,12 @@
               "from_web": {
                 "type": "boolean"
               },
+              "likes": {
+                "type": "object"
+              },
+              "like_count": {
+                "type": "integer"
+              },
               "localizations": {
                 "type": "array",
                 "items": {

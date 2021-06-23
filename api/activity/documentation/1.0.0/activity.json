@@ -852,14 +852,20 @@
                 "links": {
                   "type": "component"
                 },
+                "from_web": {
+                  "type": "boolean"
+                },
+                "likes": {
+                  "type": "object"
+                },
+                "like_count": {
+                  "type": "integer"
+                },
                 "comments": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "from_web": {
-                  "type": "boolean"
                 },
                 "localizations": {
                   "type": "array",
