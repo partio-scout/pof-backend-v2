@@ -59,6 +59,15 @@
           "actionType": "create"
         }
       }
+    },
+    {
+      "method": "POST",
+      "path": "/suggestions/new",
+      "handler": "suggestion.new",
+      "config": {
+        "policies": [],
+        "description": "Endpoint for creating new suggestions. This saves the suggestions in draft state, so that they can be later published by admins."
+      }
     }
   ]
 }

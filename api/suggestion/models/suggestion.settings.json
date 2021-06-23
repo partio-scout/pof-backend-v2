@@ -58,11 +58,7 @@
     "files": {
       "collection": "file",
       "via": "related",
-      "allowedTypes": [
-        "files",
-        "images",
-        "videos"
-      ],
+      "allowedTypes": ["files", "images", "videos"],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {
@@ -84,6 +80,16 @@
     "comments": {
       "via": "suggestion",
       "collection": "comment"
+    },
+    "from_web": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "boolean",
+      "default": false,
+      "required": false
     }
   }
 }

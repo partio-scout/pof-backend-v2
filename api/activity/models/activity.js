@@ -1,8 +1,13 @@
-'use strict';
+"use strict";
+const { createLifecycleHooks } = require("../../../utils/algolia");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
  * to customize this model
  */
 
-module.exports = {};
+const contentType = "activity";
+
+module.exports = {
+  lifecycles: createLifecycleHooks(contentType),
+};

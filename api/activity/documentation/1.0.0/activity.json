@@ -50,9 +50,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Activity"
-        ],
+        "tags": ["Activity"],
         "parameters": [
           {
             "name": "_limit",
@@ -238,9 +236,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Activity"
-        ],
+        "tags": ["Activity"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -305,9 +301,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Activity"
-        ],
+        "tags": ["Activity"],
         "parameters": []
       }
     },
@@ -358,9 +352,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Activity"
-        ],
+        "tags": ["Activity"],
         "parameters": [
           {
             "name": "id",
@@ -420,9 +412,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Activity"
-        ],
+        "tags": ["Activity"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -494,9 +484,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Activity"
-        ],
+        "tags": ["Activity"],
         "parameters": [
           {
             "name": "id",
@@ -515,11 +503,7 @@
   "components": {
     "schemas": {
       "Activity": {
-        "required": [
-          "id",
-          "title",
-          "content"
-        ],
+        "required": ["id", "title", "content"],
         "properties": {
           "id": {
             "type": "string"
@@ -537,11 +521,7 @@
           "activity_groups": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "title",
-                "content"
-              ],
+              "required": ["id", "title", "content"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -630,11 +610,7 @@
           "group_sizes": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "name",
-                "slug"
-              ],
+              "required": ["id", "name", "slug"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -664,11 +640,7 @@
             }
           },
           "level": {
-            "required": [
-              "id",
-              "name",
-              "slug"
-            ],
+            "required": ["id", "name", "slug"],
             "properties": {
               "id": {
                 "type": "string"
@@ -699,11 +671,7 @@
           "skill_areas": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "name",
-                "slug"
-              ],
+              "required": ["id", "name", "slug"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -741,11 +709,7 @@
           "equimpent": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "name",
-                "slug"
-              ],
+              "required": ["id", "name", "slug"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -777,10 +741,7 @@
           "educational_objectives": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "slug"
-              ],
+              "required": ["id", "slug"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -818,11 +779,7 @@
           "leader_skills": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "name",
-                "slug"
-              ],
+              "required": ["id", "name", "slug"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -866,12 +823,7 @@
           "suggestions": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "title",
-                "content",
-                "author"
-              ],
+              "required": ["id", "title", "content", "author"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -906,6 +858,9 @@
                     "type": "string"
                   }
                 },
+                "from_web": {
+                  "type": "boolean"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -928,12 +883,7 @@
             }
           },
           "activity_term": {
-            "required": [
-              "id",
-              "name",
-              "singular",
-              "plural"
-            ],
+            "required": ["id", "name", "singular", "plural"],
             "properties": {
               "id": {
                 "type": "string"
@@ -967,11 +917,7 @@
           "locations": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "name",
-                "slug"
-              ],
+              "required": ["id", "name", "slug"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -1007,11 +953,7 @@
             }
           },
           "duration": {
-            "required": [
-              "id",
-              "name",
-              "slug"
-            ],
+            "required": ["id", "name", "slug"],
             "properties": {
               "id": {
                 "type": "string"
@@ -1323,11 +1265,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "id",
-                "description",
-                "url"
-              ],
+              "required": ["id", "description", "url"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -1344,11 +1282,7 @@
           "localizations": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "title",
-                "content"
-              ],
+              "required": ["id", "title", "content"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -1480,10 +1414,7 @@
         }
       },
       "NewActivity": {
-        "required": [
-          "title",
-          "content"
-        ],
+        "required": ["title", "content"],
         "properties": {
           "title": {
             "type": "string"
@@ -1565,11 +1496,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "id",
-                "description",
-                "url"
-              ],
+              "required": ["id", "description", "url"],
               "properties": {
                 "id": {
                   "type": "string"

@@ -127,6 +127,9 @@
                   "type": "string"
                 }
               },
+              "from_web": {
+                "type": "boolean"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
