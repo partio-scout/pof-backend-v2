@@ -101,6 +101,14 @@ node migrations/run.js -wt
 
 ---
 
+## Indexing content to Algolia
+
+Content is indexed to Algolia search engine by using hook `strapi-hook-algolia`. Indexable content types are specified by setting up indexing in their lifecycle events, in file `api/<content type>/models/<content type>.js`. `strapi-hook-algolia` needs also two environment variables: `ALGOLIA_APPLICATION_ID` and `ALGOLIA_API_KEY` and they can be gotten from the [Algolia Console](https://www.algolia.com/dashboard). With these configurations content is indexed automatically when needed.
+
+Content can also be indexed in bulk with created plugin `search-indexer`, which is described [here](./plugins/search-indexer/README.md).
+
+---
+
 ## Notes
 
 Since Strapi is missing `Sámi` locales (for now), they are added via a patch file `patches/strapi-plugin-i18n+3.6.1.patch`, which is automatically run after `yarn install` and such.
