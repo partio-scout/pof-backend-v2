@@ -101,6 +101,10 @@ node migrations/run.js -wt
 
 ---
 
+## Email plugin
+
+Our Strapi uses [Sendgrid](https://sendgrid.com/) to send emails, and it is done by using `strapi-provider-email-sendgrid` package. The package needs three environment variables: `SENDGRID_API_KEY`, `SENDGRID_DEFAULT_FROM_ADDRESS` and `SENDGRID_DEFAULT_REPLY_TO_ADDRESS`, and values fro those can be gotten from the client, who owns the Sendgrid account.
+
 ## Notes
 
 Since Strapi is missing `Sámi` locales (for now), they are added via a patch file `patches/strapi-plugin-i18n+3.6.1.patch`, which is automatically run after `yarn install` and such.
