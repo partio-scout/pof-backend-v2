@@ -968,6 +968,39 @@
               }
             }
           },
+          "comments": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "text",
+                "author"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "author": {
+                  "type": "string"
+                },
+                "suggestion": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "from_web": {
             "type": "boolean",
             "default": false
@@ -1012,6 +1045,12 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "comments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "from_web": {
                   "type": "boolean"
@@ -1094,6 +1133,12 @@
                   "type": "string"
                 }
               }
+            }
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
           "from_web": {
