@@ -12344,6 +12344,69 @@
         ]
       }
     },
+    "/suggestions/new": {
+      "post": {
+        "deprecated": false,
+        "description": "Endpoint for creating new suggestions. This saves the suggestions in draft state, so that they can be later published by admins.",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Suggestion"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Suggestion"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSuggestion"
+              }
+            }
+          }
+        }
+      }
+    },
     "/email/": {
       "post": {
         "deprecated": false,
@@ -15977,6 +16040,9 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "from_web": {
+                  "type": "boolean"
                 },
                 "localizations": {
                   "type": "array",
@@ -21489,6 +21555,10 @@
               }
             }
           },
+          "from_web": {
+            "type": "boolean",
+            "default": false
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -21525,6 +21595,9 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "from_web": {
+                  "type": "boolean"
                 },
                 "localizations": {
                   "type": "array",
@@ -21599,6 +21672,10 @@
                 }
               }
             }
+          },
+          "from_web": {
+            "type": "boolean",
+            "default": false
           },
           "localizations": {
             "type": "array",
