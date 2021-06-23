@@ -46,7 +46,9 @@ module.exports = {
     }
 
     if (entity.likes?.includes(user)) {
-      return sanitizeEntity(entity, { model: strapi.models.suggestion });
+      ctx.response.status = 400;
+      ctx.response.body = 'already liked';
+      return;
     }
 
     entity.likes = [...(entity.likes || []), user];
@@ -71,10 +73,14 @@ module.exports = {
 
     const index = entity.likes?.findIndex((x) => x === user);
 
-    if (index > -1) {
-      entity.likes.splice(index, 1);
-      entity = await strapi.services.suggestion.update({ id }, entity);
+    if (index < 0) {
+      ctx.response.status = 400;
+      ctx.response.body = 'not liked';
+      return;
     }
+
+    entity.likes.splice(index, 1);
+    entity = await strapi.services.suggestion.update({ id }, entity);
 
     return sanitizeEntity(entity, { model: strapi.models.suggestion });
   },
