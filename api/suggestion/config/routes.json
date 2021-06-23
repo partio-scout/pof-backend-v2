@@ -56,6 +56,45 @@
         "policies": [],
         "description": "Endpoint for creating new suggestions. This saves the suggestions in draft state, so that they can be later published by admins."
       }
+    },
+    {
+      "method": "POST",
+      "path": "/suggestions/like/:id",
+      "handler": "suggestion.like",
+      "config": {
+        "policies": [],
+        "description": "Endpoint for liking suggestions."
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/suggestions/:id/comment",
+      "handler": "suggestion.comment",
+      "config": {
+        "policies": [],
+        "tag": {
+          "name": "Comment",
+          "actionType": "create"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/suggestions/unlike/:id",
+      "handler": "suggestion.unlike",
+      "config": {
+        "policies": [],
+        "description": "Endpoint for unliking suggestions."
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/suggestions/new",
+      "handler": "suggestion.new",
+      "config": {
+        "policies": [],
+        "description": "Endpoint for creating new suggestions. This saves the suggestions in draft state, so that they can be later published by admins."
+      }
     }
   ]
 }

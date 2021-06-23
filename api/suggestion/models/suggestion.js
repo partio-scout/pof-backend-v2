@@ -1,19 +1,11 @@
 "use strict";
+const { createLifecycleHooks } = require("../../../utils/algolia");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
  * to customize this model
  */
-
-module.exports = {
-  lifecycles: {
-    async afterCreate(result, data) {
-      if (result.from_web) {
-        await notifyAboutSuggestion(result, process.env.SITE_URL);
-      }
-    },
-  },
-};
+const contentType = "suggestion";
 
 const contentPath =
   "admin/plugins/content-manager/collectionType/application::suggestion.suggestion";
@@ -47,4 +39,19 @@ const sendSuggestionNotification = async (recipient, suggestion, siteUrl) => {
   };
 
   await strapi.plugins.email.services.email.send(emailConfig);
+};
+
+module.exports = {
+  lifecycles: {
+    async afterCreate(result, data) {
+      if (result.from_web) {
+        await notifyAboutSuggestion(result, process.env.SITE_URL);
+      }
+    },
+    async beforeUpdate(params, data) {
+      // Set the suggestion's like_count based on the current likes
+      data.like_count = data.likes?.length || 0;
+    },
+    ...createLifecycleHooks(contentType),
+  },
 };

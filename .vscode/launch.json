@@ -23,6 +23,16 @@
       ],
       "program": "${workspaceFolder}/migrations/run.js",
       "args": ["-wtu"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Strapi",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      
+      "program": "${workspaceFolder}/server.js",
     }
   ]
 }

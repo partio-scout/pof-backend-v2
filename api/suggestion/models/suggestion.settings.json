@@ -58,11 +58,7 @@
     "files": {
       "collection": "file",
       "via": "related",
-      "allowedTypes": [
-        "files",
-        "images",
-        "videos"
-      ],
+      "allowedTypes": ["files", "images", "videos"],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {
@@ -81,6 +77,10 @@
       },
       "component": "links.links"
     },
+    "comments": {
+      "via": "suggestion",
+      "collection": "comment"
+    },
     "from_web": {
       "pluginOptions": {
         "i18n": {
@@ -90,6 +90,24 @@
       "type": "boolean",
       "default": false,
       "required": false
+    },
+    "likes": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "json",
+      "private": true
+    },
+    "like_count": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer",
+      "default": 0
     }
   }
 }
