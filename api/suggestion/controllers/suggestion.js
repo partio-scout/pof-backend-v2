@@ -73,7 +73,7 @@ module.exports = {
 
     const index = entity.likes?.findIndex((x) => x === user);
 
-    if (index < 0) {
+    if (index === undefined || index < 0) {
       ctx.response.status = 400;
       ctx.response.body = 'not liked';
       return;
