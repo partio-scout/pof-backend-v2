@@ -50,6 +50,18 @@
     },
     {
       "method": "POST",
+      "path": "/suggestions/:id/comment",
+      "handler": "suggestion.comment",
+      "config": {
+        "policies": [],
+        "tag": {
+          "name": "Comment",
+          "actionType": "create"
+        }
+      }
+    },
+    {
+      "method": "POST",
       "path": "/suggestions/new",
       "handler": "suggestion.new",
       "config": {
