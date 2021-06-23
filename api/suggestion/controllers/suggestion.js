@@ -16,6 +16,14 @@ module.exports = {
 
     let entity, data;
 
+    // Check that the suggestion exists
+    const suggestions = await strapi.services.suggestion.find({ id });
+
+    if (suggestions.length === 0) {
+      ctx.response.status = 404;
+      return;
+    }
+
     if (ctx.is("multipart")) {
       ({ data } = parseMultipartData(ctx));
     } else {
