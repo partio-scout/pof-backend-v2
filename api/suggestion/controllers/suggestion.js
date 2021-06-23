@@ -12,7 +12,7 @@ module.exports = {
    * so that they can be later published by admins.
    */
   async new(ctx) {
-    let entity, data, files;
+    let data, files;
 
     if (ctx.is("multipart")) {
       ({ data, files } = parseMultipartData(ctx));
@@ -24,7 +24,7 @@ module.exports = {
     data.published_at = null;
     data.from_web = true;
 
-    entity = await strapi.services.suggestion.create(
+    const entity = await strapi.services.suggestion.create(
       data,
       files ? { files } : undefined
     );
