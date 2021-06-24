@@ -31,7 +31,11 @@ const sendSuggestionNotification = async (recipient, suggestion) => {
     text: `Partio-ohjelmaan on lähetetty uusi toteutusehdotus: ${suggestion.title}, kirjoittaja: ${suggestion.author}.`,
   };
 
-  await strapi.plugins.email.services.email.send(emailConfig);
+  try {
+    await strapi.plugins.email.services.email.send(emailConfig);
+  } catch (error) {
+    console.error("Error while sending email:", error);
+  }
 };
 
 module.exports = {
