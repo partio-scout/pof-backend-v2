@@ -6,6 +6,11 @@ const contentType = "suggestion";
 const notifyAboutSuggestion = async (suggestion) => {
   const settings = await getSettings();
 
+  if (!settings) {
+    console.warn('Settings content is not created, not sending notification emails');
+    return;
+  }
+
   const recipients = settings.suggestion_notification_recipients
     ?.split(",")
     .map((email) => email.trim());
