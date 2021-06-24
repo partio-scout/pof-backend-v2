@@ -1,4 +1,5 @@
 const request = require("supertest");
+const { describe } = require("yargs");
 const { grantPriviledge } = require("../helpers/strapi");
 
 describe("Suggestions controller", () => {
@@ -144,5 +145,44 @@ describe("Suggestions controller", () => {
       .then((data) => {
         expect(data.text).toEqual("not liked");
       });
+  });
+
+  it("`comment` should create a draft comment and link it to the suggestion", async () => {
+    // Create a suggestion
+    const suggestion = await strapi.services.suggestion.create({
+      title: "title",
+      content: "content",
+      author: "author",
+    });
+
+    // Create a comment to that suggesion
+    await request(strapi.server)
+      .post(`/suggestions/${suggestion.id}/comment`)
+      .set("Content-Type", "application/json")
+      .send({
+        text: "A test comment",
+        author: "tester",
+      })
+      .expect(200);
+
+    // Check that the comment is linked to the suggestion and it is not published.
+    // By using `starpi.query()` we get also unpublished content.
+    const updatedSuggestion = await strapi.query("suggestion").findOne({
+      id: suggestion.id,
+    });
+    expect(updatedSuggestion.comments.length).toEqual(1);
+    expect(updatedSuggestion.comments[0].text).toEqual("A test comment");
+    expect(updatedSuggestion.comments[0].published_at).toBeNull();
+  });
+  it("`comment` should return 404 when commenting nonexistent suggestion", async () => {
+    // Create a comment to that suggesion
+    await request(strapi.server)
+      .post(`/suggestions/99/comment`)
+      .set("Content-Type", "application/json")
+      .send({
+        text: "A test comment",
+        author: "tester",
+      })
+      .expect(404);
   });
 });
