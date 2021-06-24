@@ -1046,14 +1046,14 @@
                 "links": {
                   "type": "component"
                 },
+                "from_web": {
+                  "type": "boolean"
+                },
                 "comments": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "from_web": {
-                  "type": "boolean"
                 },
                 "likes": {
                   "type": "object"
