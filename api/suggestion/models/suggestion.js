@@ -6,7 +6,9 @@ const contentType = "suggestion";
 const notifyAboutSuggestion = async (suggestion) => {
   const settings = await getSettings();
 
-  const recipients = settings.suggestion_notification_recipients?.split(",");
+  const recipients = settings.suggestion_notification_recipients
+    ?.split(",")
+    .map((email) => email.trim());
 
   await Promise.all(
     recipients.map(
