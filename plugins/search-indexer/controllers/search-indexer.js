@@ -42,10 +42,27 @@ module.exports = {
 };
 
 const indexEntriesOfType = async (contentType) => {
-  const entries = await strapi.query(contentType).find();
+  let num = 0;
+  const allEntries = [];
 
-  return entries.map((entry) => {
-    updateInAlgolia(contentType, entry);
-    return entry.title || entry.name || entry.id;
-  });
+  while (true) {
+    const entries = await strapi
+      .query(contentType)
+      .find({ _limit: 100, _start: num });
+    if (entries.length > 0) {
+      allEntries.push(...entries);
+      num += entries.length;
+    } else {
+      break;
+    }
+  }
+
+  console.log("Found", allEntries.length, "of type", contentType, "to index");
+
+  const results = [];
+  for (const entry of allEntries) {
+    await updateInAlgolia(contentType, entry);
+    results.push(entry.title || entry.name || entry.id);
+  }
+  return results;
 };
