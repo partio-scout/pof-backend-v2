@@ -25,8 +25,8 @@ describe("Suggestions controller", () => {
   });
 
   describe("/suggestions/new", () => {
-    it("should create new suggestion with `from_web` true and `published_at` null", async () => {
-      await request(strapi.server)
+    it("should create new suggestion with `from_web` true and `published_at` null, and return it", async () => {
+      const data = await request(strapi.server)
         .post("/suggestions/new")
         .set("Content-Type", "application/json")
         .send({
@@ -34,19 +34,30 @@ describe("Suggestions controller", () => {
           content: "content",
           author: "author",
         })
-        .expect(200)
-        .then((data) => {
-          expect(data.body.title).toEqual("title");
-          expect(data.body.content).toEqual("content");
-          expect(data.body.author).toEqual("author");
-          expect(data.body.published_at).toBeNull();
-          expect(data.body.from_web).toEqual(true);
-        });
+        .expect(200);
+
+      const verifyEntry = (entry) => {
+        expect(entry.title).toEqual("title");
+        expect(entry.content).toEqual("content");
+        expect(entry.author).toEqual("author");
+        expect(entry.published_at).toBeNull();
+        expect(entry.from_web).toEqual(true);
+      };
+
+      const entry = await strapi
+        .query("suggestion")
+        .findOne({ id: data.body.id });
+
+      // verify from database
+      verifyEntry(entry);
+
+      // verify the response
+      verifyEntry(data.body);
     });
   });
 
   describe("/suggestions/<id>/like", () => {
-    it("should increase like_count", async () => {
+    it("should increase like_count and return the updated entry", async () => {
       // create a suggestion
       const suggestion = await strapi.services.suggestion.create({
         title: "title",
@@ -54,17 +65,28 @@ describe("Suggestions controller", () => {
         author: "author",
       });
 
-      await request(strapi.server)
+      const data = await request(strapi.server)
         .post(`/suggestions/${suggestion.id}/like`)
         .set("Content-Type", "application/json")
         .send({
           user: "user1",
         })
-        .expect(200)
-        .then((data) => {
-          expect(data.body.id).toEqual(suggestion.id);
-          expect(data.body.like_count).toEqual(1);
-        });
+        .expect(200);
+
+      const verifyEntry = (entry, id) => {
+        expect(entry.id).toEqual(id);
+        expect(entry.like_count).toEqual(1);
+      };
+
+      const entry = await strapi
+        .query("suggestion")
+        .findOne({ id: suggestion.id });
+
+      // verify from database
+      verifyEntry(entry, suggestion.id);
+
+      // veridy the response
+      verifyEntry(data.body, suggestion.id);
     });
     it("should not allow multiple likes to same suggestion from one user", async () => {
       // create a suggestion
@@ -110,7 +132,7 @@ describe("Suggestions controller", () => {
   });
 
   describe("/suggestions/<id>/unlike", () => {
-    it("should decrease like_count", async () => {
+    it("should decrease like_count and return the updated entry", async () => {
       // create a suggestion
       const suggestion = await strapi.services.suggestion.create({
         title: "title",
@@ -118,29 +140,48 @@ describe("Suggestions controller", () => {
         author: "author",
       });
 
-      await request(strapi.server)
+      const verifyEntry = (entry, id, likeCount) => {
+        expect(entry.id).toEqual(id);
+        expect(entry.like_count).toEqual(likeCount);
+      };
+
+      const response1 = await request(strapi.server)
         .post(`/suggestions/${suggestion.id}/like`)
         .set("Content-Type", "application/json")
         .send({
           user: "user1",
         })
-        .expect(200)
-        .then((data) => {
-          expect(data.body.id).toEqual(suggestion.id);
-          expect(data.body.like_count).toEqual(1);
-        });
+        .expect(200);
 
-      await request(strapi.server)
+      // Verify that the like was added
+      const entry1 = await strapi
+        .query("suggestion")
+        .findOne({ id: suggestion.id });
+
+      // verify from database
+      verifyEntry(entry1, suggestion.id, 1);
+
+      // verify the response
+      verifyEntry(response1.body, suggestion.id, 1);
+
+      const response2 = await request(strapi.server)
         .post(`/suggestions/${suggestion.id}/unlike`)
         .set("Content-Type", "application/json")
         .send({
           user: "user1",
         })
-        .expect(200)
-        .then((data) => {
-          expect(data.body.id).toEqual(suggestion.id);
-          expect(data.body.like_count).toEqual(0);
-        });
+        .expect(200);
+
+      // Verify that the like was removed
+      const entry2 = await strapi
+        .query("suggestion")
+        .findOne({ id: suggestion.id });
+
+      // verify from database
+      verifyEntry(entry2, suggestion.id, 0);
+
+      // verify the response
+      verifyEntry(response2.body, suggestion.id, 0);
     });
 
     it("should not allow unliking of a not liked suggestion", async () => {
