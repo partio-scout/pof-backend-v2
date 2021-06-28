@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/23/2021 2:57:00 PM"
+    "x-generation-date": "06/28/2021 2:10:47 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -15811,6 +15811,12 @@
                 "links": {
                   "type": "component"
                 },
+                "age_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -15900,6 +15906,9 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "age_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -16335,6 +16344,86 @@
               }
             }
           },
+          "age_group": {
+            "required": [
+              "id",
+              "title",
+              "content",
+              "minimum_age",
+              "maximum_age"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "ingress": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "minimum_age": {
+                "type": "integer"
+              },
+              "maximum_age": {
+                "type": "integer"
+              },
+              "activity_groups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "wp_guid": {
+                "type": "string"
+              },
+              "links": {
+                "type": "component"
+              },
+              "subactivitygroup_term": {
+                "type": "string"
+              },
+              "main_image": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -16403,6 +16492,9 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "age_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -16497,6 +16589,9 @@
                 }
               }
             }
+          },
+          "age_group": {
+            "type": "string"
           },
           "localizations": {
             "type": "array",
@@ -16791,6 +16886,9 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "age_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -17089,6 +17187,12 @@
                 "links": {
                   "type": "component"
                 },
+                "comments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "from_web": {
                   "type": "boolean"
                 },
@@ -17097,12 +17201,6 @@
                 },
                 "like_count": {
                   "type": "integer"
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 },
                 "localizations": {
                   "type": "array",
@@ -17539,6 +17637,89 @@
               }
             }
           },
+          "age_groups": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "title",
+                "content",
+                "minimum_age",
+                "maximum_age"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "ingress": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "minimum_age": {
+                  "type": "integer"
+                },
+                "maximum_age": {
+                  "type": "integer"
+                },
+                "activity_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "wp_guid": {
+                  "type": "string"
+                },
+                "links": {
+                  "type": "component"
+                },
+                "subactivitygroup_term": {
+                  "type": "string"
+                },
+                "main_image": {
+                  "type": "string"
+                },
+                "logo": {
+                  "type": "string"
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -17646,6 +17827,12 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "age_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "localizations": {
                   "type": "array",
@@ -17779,6 +17966,12 @@
                   "type": "string"
                 }
               }
+            }
+          },
+          "age_groups": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           },
           "localizations": {
@@ -17995,6 +18188,9 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "age_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -19886,6 +20082,12 @@
                 "links": {
                   "type": "component"
                 },
+                "age_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -20314,6 +20516,12 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "age_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "localizations": {
                   "type": "array",
@@ -21524,6 +21732,12 @@
                 "links": {
                   "type": "component"
                 },
+                "age_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -21956,6 +22170,12 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "age_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "localizations": {
                   "type": "array",
@@ -22416,6 +22636,12 @@
                 "links": {
                   "type": "component"
                 },
+                "age_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -22642,6 +22868,12 @@
               "links": {
                 "type": "component"
               },
+              "age_groups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "localizations": {
                 "type": "array",
                 "items": {
@@ -22838,14 +23070,14 @@
                 "links": {
                   "type": "component"
                 },
-                "from_web": {
-                  "type": "boolean"
-                },
                 "comments": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
+                },
+                "from_web": {
+                  "type": "boolean"
                 },
                 "likes": {
                   "type": "object"

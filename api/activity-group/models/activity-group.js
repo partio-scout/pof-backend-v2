@@ -8,6 +8,30 @@ const { createLifecycleHooks } = require("../../../utils/algolia");
 
 const contentType = "activity-group";
 
+const hooks = createLifecycleHooks(contentType);
+
 module.exports = {
-  lifecycles: createLifecycleHooks(contentType),
+  lifecycles: {
+    async afterUpdate(result) {
+      if (result.age_group && result.activities?.length) {
+        (async () => {
+          for (const activity of result.activities) {
+            console.log(activity);
+            await strapi.query("activity").update(
+              { id: activity.id },
+              {
+                age_groups: [
+                  ...(activity.age_groups?.map((x) => x.id) || []),
+                  result.age_group.id,
+                ],
+              }
+            );
+          }
+        })();
+      }
+
+      hooks.afterUpdate(result);
+    },
+    afterDelete: hooks.afterDelete,
+  },
 };

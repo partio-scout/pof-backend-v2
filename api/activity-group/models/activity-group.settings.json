@@ -141,6 +141,10 @@
         }
       },
       "component": "links.links"
+    },
+    "age_group": {
+      "via": "activity_groups",
+      "model": "age-group"
     }
   }
 }

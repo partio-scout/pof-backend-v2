@@ -650,6 +650,12 @@
                 "links": {
                   "type": "component"
                 },
+                "age_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "localizations": {
                   "type": "array",
                   "items": {

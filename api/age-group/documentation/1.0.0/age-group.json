@@ -623,6 +623,9 @@
                 "links": {
                   "type": "component"
                 },
+                "age_group": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
