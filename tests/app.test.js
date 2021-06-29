@@ -19,8 +19,12 @@ afterAll(() => {
   }
 });
 
-it("strapi is defined", () => {
-  expect(strapi).toBeDefined();
-});
+describe('Strapi', () => {
+  it("is defined", () => {
+    expect(strapi).toBeDefined();
+  });
+})
+
 
 require("./user");
+require("./suggestion");
