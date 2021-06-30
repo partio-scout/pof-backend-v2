@@ -42,16 +42,14 @@ module.exports = {
 };
 
 const indexEntriesOfType = async (contentType) => {
-  let num = 0;
   const allEntries = [];
 
   while (true) {
     const entries = await strapi
       .query(contentType)
-      .find({ _limit: 100, _start: num });
+      .find({ _limit: 100, _start: allEntries.length });
     if (entries.length > 0) {
       allEntries.push(...entries);
-      num += entries.length;
     } else {
       break;
     }
