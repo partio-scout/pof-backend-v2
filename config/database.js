@@ -1,5 +1,5 @@
 module.exports = ({ env }) => ({
-  defaultConnection: 'default',
+  defaultConnection: env('DATABASE', 'default'),
   connections: {
     default: {
       connector: 'bookshelf',
