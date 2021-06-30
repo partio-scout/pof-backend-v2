@@ -1,6 +1,17 @@
+
+/**
+ * Checks if a value is an object
+ * @param {any} value The value to test
+ * @returns {boolean}
+ */
 const isObject = (value) =>
   Object.prototype.toString.call(value) === "[object Object]";
 
+/**
+ * Get the age-groups that are ancestors of this activity-group in the content hierarchy.
+ * @param {any} activityGroup The activity-group as an `object` or it's id as a `number`
+ * @returns {Object[]} The age-groups of this activity-group
+ */
 const getAgeGroupsFromActivityGroup = async (activityGroup) => {
   let _activityGroup;
   if (typeof activityGroup === "number") {
@@ -17,6 +28,7 @@ const getAgeGroupsFromActivityGroup = async (activityGroup) => {
     );
   }
 
+  // If this activity-group has activity-groups, we can just check them directly
   if (_activityGroup.activity_groups?.length) {
     const ageGroups = [];
     for (const group of _activityGroup.activity_groups) {
@@ -29,6 +41,11 @@ const getAgeGroupsFromActivityGroup = async (activityGroup) => {
   return _activityGroup.age_group ? [_activityGroup.age_group] : [];
 };
 
+/**
+ * Get the age-groups that are ancestors of this activity in the content hierarchy.
+ * @param {any} activity The activity as an `object` or it's id as a `number`
+ * @returns {Object[]} The age-groups of this activity
+ */
 const getAgeGroupForActivity = async (activity) => {
   let _activity;
   if (typeof activity === "number") {
