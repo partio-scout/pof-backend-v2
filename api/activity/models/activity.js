@@ -1,5 +1,6 @@
 "use strict";
 const { createLifecycleHooks } = require("../../../utils/algolia");
+const { getAgeGroupForActivity } = require("../../../utils/content");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
@@ -11,15 +12,20 @@ const contentType = "activity";
 module.exports = {
   lifecycles: {
     async beforeUpdate(params, data) {
-      console.log('beforeUpdate', data);
-      if (data.activity_groups?.length) {
-        const activityGroups = await strapi.query('activity-group').find({ id_in: data.activity_groups });
-        const ageGroupIds = activityGroups.map((x) => x.age_group?.id).filter(Boolean);
-        data.age_groups = ageGroupIds
-        console.log('Added age_groups:', ageGroupIds, 'to activity:', data.title);
+      // Check that `age_groups` is defined, this indicates that the current data is from the updated locale.
+      // This is because all other locales update as well, but they only have the common fields defined.
+      if (data.age_groups) {
+        // Set the age-group for this activity by getting it from the parent activity-groups
+        const ageGroups = await getAgeGroupForActivity(data);
+        data.age_groups = ageGroups.map((x) => x.id)
+        console.log(
+          "Updated age-groups",
+          ageGroups.map((x) => x.title),
+          "for activity",
+          data.title || data
+        );
       }
     },
     ...createLifecycleHooks(contentType),
   },
-
 };
