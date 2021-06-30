@@ -31,11 +31,7 @@ let existingFiles = [];
 let updatedTerms = [];
 let updatedTags = [];
 
-const writeProgramToStrapi = async (
-  programData,
-  forceUpdate = false,
-  limitToOne = false
-) => {
+const writeProgramToStrapi = async (programData, config) => {
   console.log("Writing program data to Strapi");
   if (limitToOne) {
     console.log("Data limited to one ageGroup and one activityGroup");
@@ -53,10 +49,7 @@ const writeProgramToStrapi = async (
 
     // Age groups can be written in parellel, since they don't have affecting crossing relations
     await Promise.all(
-      ageGroups.map(
-        async (ageGroup) =>
-          await writeAgeGroup(ageGroup, forceUpdate, limitToOne)
-      )
+      ageGroups.map(async (ageGroup) => await writeAgeGroup(ageGroup, config))
     );
 
     console.log("Created:", totalResult.created.length, "entries");
@@ -66,21 +59,17 @@ const writeProgramToStrapi = async (
   }
 };
 
-const writeAgeGroup = async (
-  ageGroup,
-  forceUpdate = false,
-  limitToOne = false
-) => {
+const writeAgeGroup = async (ageGroup, config) => {
   try {
     // First write the child activity groups
     const createdActivityGroups = [];
 
-    const activityGroups = limitToOne
+    const activityGroups = config.limitToOne
       ? ageGroup.activity_groups.slice(0, 1)
       : ageGroup.activity_groups;
 
     for (const activityGroup of activityGroups) {
-      const result = await writeActivityGroup(activityGroup, forceUpdate);
+      const result = await writeActivityGroup(activityGroup, config);
       createdActivityGroups.push(...result.entries);
     }
 
@@ -95,9 +84,8 @@ const writeAgeGroup = async (
         activity_groups: createdActivityGroups
           .filter((x) => x.locale === locale)
           .map((x) => x.id),
-        subactivitygroup_term: (
-          await writeTerm(data.subtaskgroup_term, forceUpdate)
-        ).entries[0]?.id,
+        subactivitygroup_term: (await writeTerm(data.subtaskgroup_term, config))
+          .entries[0]?.id,
         main_image: await writeFile(data.main_image),
         logo: await writeFile(data.logo),
         files: await writeFiles(data.files),
@@ -113,7 +101,7 @@ const writeAgeGroup = async (
       contentTypes.ageGroup,
       existingEntry?.id,
       entryData,
-      forceUpdate
+      config.forceUpdate
     );
 
     updateTotalResults(result, contentTypes.ageGroup);
@@ -124,47 +112,69 @@ const writeAgeGroup = async (
   }
 };
 
-const writeActivityGroup = async (activityGroup, forceUpdate = false) => {
+const writeActivityGroup = async (activityGroup, config) => {
   try {
     // First write the child activity groups
     const createdActivityGroups = [];
 
     for (const group of activityGroup.activity_groups) {
-      const result = await writeActivityGroup(group, forceUpdate);
+      const result = await writeActivityGroup(group, config);
       createdActivityGroups.push(...result.entries);
-    }
-
-    // Then write the child activities
-    const createdActivities = [];
-
-    for (const activity of activityGroup.activities) {
-      const result = await writeActivity(activity, forceUpdate);
-      createdActivities.push(...result.entries);
     }
 
     // Then write the activity group
     const entryData = {};
     for (const [locale, data] of Object.entries(activityGroup.locales)) {
       entryData[locale] = {
-        ...data,
+        title: data.title,
+        ingress: data.ingress,
         content: sanitizeTextContent(data.content),
+        wp_guid: data.wp_guid,
+        locale: data.locale,
+        mandatory: data.mandatory,
+        leader_tasks: data.leader_tasks,
         activity_groups: createdActivityGroups
           .filter((x) => x.locale === locale)
           .map((x) => x.id),
-        activities: createdActivities
-          .filter((x) => x.locale === locale)
-          .map((x) => x.id),
-        subactivitygroup_term: (
-          await writeTerm(data.subtaskgroup_term, forceUpdate)
-        ).entries[0]?.id,
-        activitygroup_term: (await writeTerm(data.taskgroup_term, forceUpdate))
-          .entries[0]?.id,
-        subactivity_term: (await writeTerm(data.subtask_term, forceUpdate))
-          .entries[0]?.id,
-        main_image: await writeFile(data.main_image),
-        logo: await writeFile(data.logo),
-        files: await writeFiles(data.files),
       };
+
+      if (!config.skip.includes("subactivitygroup_term")) {
+        entryData[locale].subactivitygroup_term = (
+          await writeTerm(data.subtaskgroup_term, config)
+        ).entries[0]?.id;
+      }
+
+      if (!config.skip.includes("activitygroup_term")) {
+        entryData[locale].activitygroup_term = (
+          await writeTerm(data.taskgroup_term, config)
+        ).entries[0]?.id;
+      }
+
+      if (!config.skip.includes("subactivity_term")) {
+        entryData[locale].subactivity_term = (
+          await writeTerm(data.subtask_term, config)
+        ).entries[0]?.id;
+      }
+
+      if (!config.skip.includes("files")) {
+        entryData[locale].main_image = await writeFile(data.main_image);
+        entryData[locale].logo = await writeFile(data.logo);
+        entryData[locale].files = await writeFiles(data.files);
+      }
+
+      if (!config.skip.includes("activity")) {
+        // Then write the child activities
+        const createdActivities = [];
+
+        for (const activity of activityGroup.activities) {
+          const result = await writeActivity(activity, config);
+          createdActivities.push(...result.entries);
+        }
+
+        entryData[locale].activities = createdActivities
+          .filter((x) => x.locale === locale)
+          .map((x) => x.id);
+      }
     }
 
     const existingEntry = await findEntry(contentTypes.activityGroup, {
@@ -176,7 +186,7 @@ const writeActivityGroup = async (activityGroup, forceUpdate = false) => {
       contentTypes.activityGroup,
       existingEntry?.id,
       entryData,
-      forceUpdate
+      config.forceUpdate
     );
 
     updateTotalResults(result, contentTypes.activityGroup);
@@ -187,50 +197,84 @@ const writeActivityGroup = async (activityGroup, forceUpdate = false) => {
   }
 };
 
-const writeActivity = async (activity, forceUpdate = false) => {
+const writeActivity = async (activity, config) => {
   try {
     const entryData = {};
 
     for (const [locale, data] of Object.entries(activity.locales)) {
-      // Write the child suggestions and terms
-      const createdSuggestions = [];
+      entryData[locale] = {
+        title: data.title,
+        ingress: data.ingress,
+        content: sanitizeTextContent(data.content),
+        wp_guid: data.wp_guid,
+        locale: data.locale,
+        mandatory: data.mandatory,
+        leader_tasks: data.leader_tasks,
+      };
 
-      for (const suggestion of data.suggestions || []) {
-        const result = await writeSuggestion(suggestion, forceUpdate);
-        createdSuggestions.push(...result.entries);
+      if (!config.skip.includes("files")) {
+        entryData[locale].main_image = await writeFile(data.main_image);
+        entryData[locale].logo = await writeFile(data.logo);
+        entryData[locale].files = await writeFiles(data.files);
       }
 
-      entryData[locale] = {
-        ...data,
-        content: sanitizeTextContent(data.content),
-        suggestions: createdSuggestions.map((s) => s.id),
-        activity_term: (await writeTerm(data.task_term, forceUpdate)).entries[0]
-          ?.id,
-        duration: (await writeTag(data.duration, forceUpdate)).entries[0]?.id,
-        locations: await MapPromises(
-          data.location?.map(
-            async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id
+      if (!config.skip.includes("activity_term")) {
+        entryData[locale].activity_term = (
+          await writeTerm(data.task_term, config)
+        ).entries[0]?.id;
+      }
+
+      if (!config.skip.includes("duration")) {
+        entryData[locale].durations = await MapPromises(
+          data.durations?.map(
+            async (x) => (await writeTag(x, config)).entries[0]?.id
           )
-        ),
-        skill_areas: await MapPromises(
+        );
+      }
+
+      if (!config.skip.includes("location")) {
+        entryData[locale].locations = await MapPromises(
+          data.locations?.map(
+            async (x) => (await writeTag(x, config)).entries[0]?.id
+          )
+        );
+      }
+
+      if (!config.skip.includes("skill_area")) {
+        entryData[locale].skill_areas = await MapPromises(
           data.skill_areas?.map(
-            async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id
+            async (x) => (await writeTag(x, config)).entries[0]?.id
           )
-        ),
-        leader_skills: await MapPromises(
+        );
+      }
+
+      if (!config.skip.includes("leader_skill")) {
+        entryData[locale].leader_skills = await MapPromises(
           data.leader_skills?.map(
-            async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id
+            async (x) => (await writeTag(x, config)).entries[0]?.id
           )
-        ),
-        educational_objectives: await MapPromises(
+        );
+      }
+
+      if (!config.skip.includes("educational_objective")) {
+        entryData[locale].educational_objectives = await MapPromises(
           data.educational_objectives?.map(
-            async (x) => (await writeTag(x, forceUpdate)).entries[0]?.id
+            async (x) => (await writeTag(x, config)).entries[0]?.id
           )
-        ),
-        main_image: await writeFile(data.main_image),
-        logo: await writeFile(data.logo),
-        files: await writeFiles(data.files),
-      };
+        );
+      }
+
+      if (!config.skip.includes("suggestion")) {
+        // Write the child suggestions
+        const createdSuggestions = [];
+
+        for (const suggestion of data.suggestions || []) {
+          const result = await writeSuggestion(suggestion, config);
+          createdSuggestions.push(...result.entries);
+        }
+
+        entryData[locale].suggestions = createdSuggestions.map((s) => s.id);
+      }
     }
 
     // Then write the activity
@@ -243,7 +287,7 @@ const writeActivity = async (activity, forceUpdate = false) => {
       contentTypes.activity,
       existingEntry?.id,
       entryData,
-      forceUpdate
+      config.forceUpdate
     );
 
     updateTotalResults(result, contentTypes.activity);
@@ -308,14 +352,16 @@ const writeFiles = async (files) => {
   return results;
 };
 
-const writeSuggestion = async (suggestion, forceUpdate = false) => {
+const writeSuggestion = async (suggestion, config) => {
   try {
     const existingEntry = await findEntry(contentTypes.suggestion, {
       wp_guid: suggestion.wp_guid,
       _locale: "all",
     });
 
-    suggestion.files = await writeFiles(suggestion.files);
+    if (!config.skip.includes("files")) {
+      suggestion.files = await writeFiles(suggestion.files);
+    }
 
     const data = {
       [suggestion.locale]: suggestion,
@@ -325,7 +371,7 @@ const writeSuggestion = async (suggestion, forceUpdate = false) => {
       contentTypes.suggestion,
       existingEntry?.id,
       data,
-      forceUpdate
+      config.forceUpdate
     );
 
     updateTotalResults(result, contentTypes.suggestion);
@@ -336,7 +382,7 @@ const writeSuggestion = async (suggestion, forceUpdate = false) => {
   }
 };
 
-const writeTerm = async (term, forceUpdate = false) => {
+const writeTerm = async (term, config) => {
   if (!term)
     return {
       entries: [],
@@ -362,7 +408,7 @@ const writeTerm = async (term, forceUpdate = false) => {
       contentTypes[term.type],
       existingEntry?.id,
       term.locales,
-      forceUpdate
+      config.forceUpdate
     );
 
     updateTotalResults(result, contentTypes[term.type]);
@@ -375,7 +421,7 @@ const writeTerm = async (term, forceUpdate = false) => {
   }
 };
 
-const writeTag = async (tag, forceUpdate = false) => {
+const writeTag = async (tag, config) => {
   if (!tag)
     return {
       entries: [],
@@ -402,7 +448,7 @@ const writeTag = async (tag, forceUpdate = false) => {
       contentTypes[tag.type],
       existingEntry?.id,
       tag.locales,
-      forceUpdate
+      config.forceUpdate
     );
 
     updateTotalResults(result, contentTypes[tag.type]);

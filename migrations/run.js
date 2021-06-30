@@ -35,16 +35,24 @@ const argv = yargs
     alias: "t",
     type: "boolean",
   })
+  .option("skip", {
+    description: "Skip content types",
+    alias: "s",
+    type: 'array'
+  })
   .help()
   .alias("help", "h").argv;
 
 
 const config = {
-  testing: argv.test,
-  programUrl: argv.dataUrl,
-  forceUpdate: argv.forceUpdate,
-  noCache: argv.noCache,
+  testing: argv.test || false,
+  programUrl: argv.dataUrl || false,
+  forceUpdate: argv.forceUpdate || false,
+  noCache: argv.noCache || false,
+  skip: argv.skip || [],
 };
+
+console.log('Config:', config);
 
 const runMigrations = async (config) => {
   try {
