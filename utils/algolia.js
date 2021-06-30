@@ -6,17 +6,19 @@ const cleanDeep = require("clean-deep");
  * @param {Object} data Entry data
  * @param {boolean} draftMode To use draft mode or not (default `true`)
  */
-const updateInAlgolia = (contentType, data, draftMode = true) => {
+const updateInAlgolia = async (contentType, data, draftMode = true) => {
+  if (process.env.NODE_ENV === "test") return;
+
   const sanitizedData = sanitizeData(data);
 
   if (draftMode) {
     if (data.published_at) {
-      strapi.services.algolia.saveObject(sanitizedData, contentType);
+      await strapi.services.algolia.saveObject(sanitizedData, contentType);
     } else {
-      deleteFromAlgolia(sanitizedData.id, contentType);
+      await deleteFromAlgolia(sanitizedData.id, contentType);
     }
   } else {
-    strapi.services.algolia.saveObject(sanitizedData, contentType);
+    await strapi.services.algolia.saveObject(sanitizedData, contentType);
   }
 };
 
@@ -25,8 +27,10 @@ const updateInAlgolia = (contentType, data, draftMode = true) => {
  * @param {string} contentType Type of the entry
  * @param {string} id Entry's id
  */
-const deleteFromAlgolia = (contentType, id) => {
-  strapi.services.algolia.deleteObject(id, contentType);
+const deleteFromAlgolia = async (contentType, id) => {
+  if (process.env.NODE_ENV === "test") return;
+
+  await strapi.services.algolia.deleteObject(id, contentType);
 };
 
 /**

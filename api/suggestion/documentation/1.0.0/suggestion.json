@@ -582,7 +582,7 @@
         }
       }
     },
-    "/suggestions/like/{id}": {
+    "/suggestions/{id}/like": {
       "post": {
         "deprecated": false,
         "description": "Endpoint for liking suggestions.",
@@ -653,7 +653,7 @@
         }
       }
     },
-    "/suggestions/unlike/{id}": {
+    "/suggestions/{id}/unlike": {
       "post": {
         "deprecated": false,
         "description": "Endpoint for unliking suggestions.",
