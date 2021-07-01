@@ -33,17 +33,17 @@ let updatedTags = [];
 
 const writeProgramToStrapi = async (programData, config) => {
   console.log("Writing program data to Strapi");
-  if (limitToOne) {
+  if (config.limitToOne) {
     console.log("Data limited to one ageGroup and one activityGroup");
   }
-  if (forceUpdate) {
+  if (config.forceUpdate) {
     console.log("Updating every entry");
   }
 
   existingFiles = await getExistingFiles();
 
   try {
-    const ageGroups = limitToOne
+    const ageGroups = config.limitToOne
       ? programData.ageGroups.slice(0, 1)
       : programData.ageGroups;
 
