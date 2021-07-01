@@ -12,15 +12,15 @@ const contentType = "activity";
 module.exports = {
   lifecycles: {
     async beforeUpdate(params, data) {
-      // Check that `age_groups` is defined, this indicates that the current data is from the updated locale.
+      // Check that `age_group` is defined, this indicates that the current data is from the updated locale.
       // This is because all other locales update as well, but they only have the common fields defined.
-      if (data.age_groups) {
+      if (data.age_group) {
         // Set the age-group for this activity by getting it from the parent activity-groups
         data.age_group = await getAgeGroupIdForActivity(data);
 
         console.log(
-          "Updated age-groups",
-          ageGroups.map((x) => x.title),
+          "Updated age-group",
+          data.ageGroup,
           "for activity",
           data.title || data
         );

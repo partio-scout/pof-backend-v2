@@ -7,7 +7,7 @@ const isObject = (value) =>
   Object.prototype.toString.call(value) === "[object Object]";
 
 /**
- * Get the age-groups that are ancestors of this activity-group in the content hierarchy.
+ * Get the age-group's id that is an ancestor of this activity-group in the content hierarchy.
  * @param {number} id The activity-group's id as a `number`
  * @returns {Promise<number>} The id of the age-group of this activity-group
  */
@@ -52,9 +52,9 @@ const getAgeGroupIdFromActivityGroup = async (id) => {
 };
 
 /**
- * Get the age-group that is the ancestors of this activity in the content hierarchy.
+ * Get the age-group's id that is an ancestor of this activity in the content hierarchy.
  * @param {number} id The activity's id as a `number`
- * @returns {Promise<Object[]>} The age-group of this activity
+ * @returns {Promise<number>} The id of the age-group of this activity
  */
 const getAgeGroupIdForActivity = async (id) => {
   let _activity;
