@@ -567,12 +567,6 @@
                 "mandatory": {
                   "type": "boolean"
                 },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "ingress": {
                   "type": "string"
                 },
@@ -654,11 +648,11 @@
                 "links": {
                   "type": "component"
                 },
-                "age_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -713,6 +707,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "parent_activity_group": {
+                  "type": "string"
                 },
                 "wp_guid": {
                   "type": "string"
@@ -771,6 +768,99 @@
                 "updated_by": {
                   "type": "string"
                 }
+              }
+            }
+          },
+          "parent_activity_group": {
+            "required": [
+              "id",
+              "title",
+              "content"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "ingress": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "activity_groups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_activity_group": {
+                "type": "string"
+              },
+              "wp_guid": {
+                "type": "string"
+              },
+              "mandatory": {
+                "type": "boolean"
+              },
+              "subactivity_term": {
+                "type": "string"
+              },
+              "subactivitygroup_term": {
+                "type": "string"
+              },
+              "activitygroup_term": {
+                "type": "string"
+              },
+              "main_image": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "links": {
+                "type": "component"
+              },
+              "age_group": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
@@ -1300,6 +1390,9 @@
                     "type": "string"
                   }
                 },
+                "parent_activity_group": {
+                  "type": "string"
+                },
                 "wp_guid": {
                   "type": "string"
                 },
@@ -1395,6 +1488,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "parent_activity_group": {
+            "type": "string"
           },
           "wp_guid": {
             "type": "string"

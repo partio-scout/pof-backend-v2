@@ -43,12 +43,16 @@
       "required": true
     },
     "activities": {
-      "via": "activity_groups",
-      "collection": "activity",
-      "dominant": true
+      "via": "activity_group",
+      "collection": "activity"
     },
     "activity_groups": {
-      "collection": "activity-group"
+      "collection": "activity-group",
+      "via": "parent_activity_group"
+    },
+    "parent_activity_group": {
+      "model": "activity-group",
+      "via": "activity_groups"
     },
     "wp_guid": {
       "pluginOptions": {

@@ -43,10 +43,6 @@
       "type": "boolean",
       "default": false
     },
-    "activity_groups": {
-      "via": "activities",
-      "collection": "activity-group"
-    },
     "ingress": {
       "pluginOptions": {
         "i18n": {
@@ -179,8 +175,12 @@
       },
       "component": "links.links"
     },
-    "age_groups": {
-      "collection": "age-group"
+    "age_group": {
+      "model": "age-group"
+    },
+    "activity_group": {
+      "via": "activities",
+      "model": "activity-group"
     }
   }
 }

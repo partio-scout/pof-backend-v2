@@ -587,6 +587,9 @@
                     "type": "string"
                   }
                 },
+                "parent_activity_group": {
+                  "type": "string"
+                },
                 "wp_guid": {
                   "type": "string"
                 },

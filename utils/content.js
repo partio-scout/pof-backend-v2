@@ -1,4 +1,3 @@
-
 /**
  * Checks if a value is an object
  * @param {any} value The value to test
@@ -9,65 +8,72 @@ const isObject = (value) =>
 
 /**
  * Get the age-groups that are ancestors of this activity-group in the content hierarchy.
- * @param {any} activityGroup The activity-group as an `object` or it's id as a `number`
- * @returns {Object[]} The age-groups of this activity-group
+ * @param {number} id The activity-group's id as a `number`
+ * @returns {Promise<number>} The id of the age-group of this activity-group
  */
-const getAgeGroupsFromActivityGroup = async (activityGroup) => {
+const getAgeGroupIdFromActivityGroup = async (id) => {
   let _activityGroup;
-  if (typeof activityGroup === "number") {
+  if (typeof id === "number") {
     // We have an id
     _activityGroup = await strapi
       .query("activity-group")
-      .findOne({ id: activityGroup });
-  } else if (isObject(activityGroup)) {
-    // We have the entry
-    _activityGroup = activityGroup;
+      .findOne({ id: id });
   } else {
     throw new Error(
-      "Bad argument `activityGroup`, must be an object or a number"
+      "Bad argument `activityGroup`, must be a number"
     );
   }
 
-  // If this activity-group has activity-groups, we can just check them directly
-  if (_activityGroup.activity_groups?.length) {
-    const ageGroups = [];
-    for (const group of _activityGroup.activity_groups) {
-      const g = await getAgeGroupsFromActivityGroup(group);
-      if (g) ageGroups.push(g);
+  if (_activityGroup.age_group) {
+    if (typeof _activityGroup.age_group === 'number'){
+      return _activityGroup.age_group;
+    } else {
+      return _activityGroup.age_group.id;
     }
-    return ageGroups;
   }
 
-  return _activityGroup.age_group ? [_activityGroup.age_group] : [];
+  // If this activity-group has a parent activity-group, and it has an age-group,
+  // we can just return it. And because it isn't a direct relation of the current
+  // activity-group, it's represented as an id (which we can return directly).
+  if (_activityGroup.parent_activity_group?.age_group) {
+    return _activityGroup.parent_activity_group?.age_group;
+  }
+
+  // If this activity-group has a parent activity-group, check them
+  if (_activityGroup.parent_activity_group) {
+    const ageGroup = await getAgeGroupIdFromActivityGroup(
+      _activityGroup.parent_activity_group.id
+    );
+
+    return ageGroup;
+  }
+
+  return undefined;
 };
 
 /**
- * Get the age-groups that are ancestors of this activity in the content hierarchy.
- * @param {any} activity The activity as an `object` or it's id as a `number`
- * @returns {Object[]} The age-groups of this activity
+ * Get the age-group that is the ancestors of this activity in the content hierarchy.
+ * @param {number} id The activity's id as a `number`
+ * @returns {Promise<Object[]>} The age-group of this activity
  */
-const getAgeGroupForActivity = async (activity) => {
+const getAgeGroupIdForActivity = async (id) => {
   let _activity;
-  if (typeof activity === "number") {
+  if (typeof id === "number") {
     // We have an id
-    _activity = await strapi.query("activity").findOne({ id: activity });
-  } else if (isObject(activity)) {
-    // We have the entry
-    _activity = activity;
+    _activity = await strapi.query("activity").findOne({ id });
   } else {
-    throw new Error("Bad argument `activity`, must be an object or a number");
+    throw new Error("Bad argument `activity`, must be a number");
   }
 
-  const ageGroups = [];
-  for (const group of activity.activity_groups || []) {
-    const g = await getAgeGroupsFromActivityGroup(group);
-    if (g) ageGroups.push(...g);
+  if (_activity.activity_group) {
+    return await getAgeGroupIdFromActivityGroup(_activity.activity_group.id);
   }
 
-  return ageGroups;
+  return undefined;
 };
 
 module.exports = {
-  getAgeGroupForActivity,
-  getAgeGroupsFromActivityGroup,
+  getAgeGroupIdForActivity,
+  getAgeGroupIdFromActivityGroup,
+  isObject,
 };
