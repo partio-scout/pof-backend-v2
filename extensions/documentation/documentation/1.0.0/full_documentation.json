@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/29/2021 8:46:00 AM"
+    "x-generation-date": "07/01/2021 10:07:32 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -13293,7 +13293,7 @@
         }
       }
     },
-    "/suggestions/like/{id}": {
+    "/suggestions/{id}/like": {
       "post": {
         "deprecated": false,
         "description": "Endpoint for liking suggestions.",
@@ -13303,7 +13303,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Suggestion"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -13349,32 +13353,18 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "user"
-                ],
                 "properties": {
-                  "user": {
+                  "foo": {
                     "type": "string"
                   }
                 }
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
-    "/suggestions/unlike/{id}": {
+    "/suggestions/{id}/unlike": {
       "post": {
         "deprecated": false,
         "description": "Endpoint for unliking suggestions.",
@@ -13384,7 +13374,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Suggestion"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -13430,29 +13424,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "user"
-                ],
                 "properties": {
-                  "user": {
+                  "foo": {
                     "type": "string"
                   }
                 }
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        }
       }
     },
     "/email/": {
@@ -15724,12 +15704,6 @@
                 "mandatory": {
                   "type": "boolean"
                 },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "ingress": {
                   "type": "string"
                 },
@@ -15811,11 +15785,11 @@
                 "links": {
                   "type": "component"
                 },
-                "age_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -15870,6 +15844,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "parent_activity_group": {
+                  "type": "string"
                 },
                 "wp_guid": {
                   "type": "string"
@@ -15928,6 +15905,99 @@
                 "updated_by": {
                   "type": "string"
                 }
+              }
+            }
+          },
+          "parent_activity_group": {
+            "required": [
+              "id",
+              "title",
+              "content"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "ingress": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "activity_groups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_activity_group": {
+                "type": "string"
+              },
+              "wp_guid": {
+                "type": "string"
+              },
+              "mandatory": {
+                "type": "boolean"
+              },
+              "subactivity_term": {
+                "type": "string"
+              },
+              "subactivitygroup_term": {
+                "type": "string"
+              },
+              "activitygroup_term": {
+                "type": "string"
+              },
+              "main_image": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "links": {
+                "type": "component"
+              },
+              "age_group": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
@@ -16457,6 +16527,9 @@
                     "type": "string"
                   }
                 },
+                "parent_activity_group": {
+                  "type": "string"
+                },
                 "wp_guid": {
                   "type": "string"
                 },
@@ -16552,6 +16625,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "parent_activity_group": {
+            "type": "string"
           },
           "wp_guid": {
             "type": "string"
@@ -16817,99 +16893,6 @@
           "mandatory": {
             "type": "boolean",
             "default": false
-          },
-          "activity_groups": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "title",
-                "content"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "ingress": {
-                  "type": "string"
-                },
-                "content": {
-                  "type": "string"
-                },
-                "activities": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "wp_guid": {
-                  "type": "string"
-                },
-                "mandatory": {
-                  "type": "boolean"
-                },
-                "subactivity_term": {
-                  "type": "string"
-                },
-                "subactivitygroup_term": {
-                  "type": "string"
-                },
-                "activitygroup_term": {
-                  "type": "string"
-                },
-                "main_image": {
-                  "type": "string"
-                },
-                "logo": {
-                  "type": "string"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "images": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "links": {
-                  "type": "component"
-                },
-                "age_group": {
-                  "type": "string"
-                },
-                "localizations": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "locale": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
           },
           "ingress": {
             "type": "string"
@@ -17637,86 +17620,176 @@
               }
             }
           },
-          "age_groups": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "title",
-                "content",
-                "minimum_age",
-                "maximum_age"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "ingress": {
-                  "type": "string"
-                },
-                "content": {
-                  "type": "string"
-                },
-                "minimum_age": {
-                  "type": "integer"
-                },
-                "maximum_age": {
-                  "type": "integer"
-                },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "wp_guid": {
-                  "type": "string"
-                },
-                "links": {
-                  "type": "component"
-                },
-                "subactivitygroup_term": {
-                  "type": "string"
-                },
-                "main_image": {
-                  "type": "string"
-                },
-                "logo": {
-                  "type": "string"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "images": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "localizations": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "locale": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
+          "age_group": {
+            "required": [
+              "id",
+              "title",
+              "content",
+              "minimum_age",
+              "maximum_age"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "ingress": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "minimum_age": {
+                "type": "integer"
+              },
+              "maximum_age": {
+                "type": "integer"
+              },
+              "activity_groups": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
+              },
+              "wp_guid": {
+                "type": "string"
+              },
+              "links": {
+                "type": "component"
+              },
+              "subactivitygroup_term": {
+                "type": "string"
+              },
+              "main_image": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "activity_group": {
+            "required": [
+              "id",
+              "title",
+              "content"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "ingress": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "activity_groups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_activity_group": {
+                "type": "string"
+              },
+              "wp_guid": {
+                "type": "string"
+              },
+              "mandatory": {
+                "type": "boolean"
+              },
+              "subactivity_term": {
+                "type": "string"
+              },
+              "subactivitygroup_term": {
+                "type": "string"
+              },
+              "activitygroup_term": {
+                "type": "string"
+              },
+              "main_image": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "links": {
+                "type": "component"
+              },
+              "age_group": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
@@ -17740,12 +17813,6 @@
                 },
                 "mandatory": {
                   "type": "boolean"
-                },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 },
                 "ingress": {
                   "type": "string"
@@ -17828,11 +17895,11 @@
                 "links": {
                   "type": "component"
                 },
-                "age_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -17879,12 +17946,6 @@
           "mandatory": {
             "type": "boolean",
             "default": false
-          },
-          "activity_groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "ingress": {
             "type": "string"
@@ -17968,11 +18029,11 @@
               }
             }
           },
-          "age_groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "age_group": {
+            "type": "string"
+          },
+          "activity_group": {
+            "type": "string"
           },
           "localizations": {
             "type": "array",
@@ -18152,6 +18213,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "parent_activity_group": {
+                  "type": "string"
                 },
                 "wp_guid": {
                   "type": "string"
@@ -19995,12 +20059,6 @@
                 "mandatory": {
                   "type": "boolean"
                 },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "ingress": {
                   "type": "string"
                 },
@@ -20082,11 +20140,11 @@
                 "links": {
                   "type": "component"
                 },
-                "age_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -20430,12 +20488,6 @@
                 "mandatory": {
                   "type": "boolean"
                 },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "ingress": {
                   "type": "string"
                 },
@@ -20517,11 +20569,11 @@
                 "links": {
                   "type": "component"
                 },
-                "age_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -21645,12 +21697,6 @@
                 "mandatory": {
                   "type": "boolean"
                 },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "ingress": {
                   "type": "string"
                 },
@@ -21732,11 +21778,11 @@
                 "links": {
                   "type": "component"
                 },
-                "age_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -22084,12 +22130,6 @@
                 "mandatory": {
                   "type": "boolean"
                 },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "ingress": {
                   "type": "string"
                 },
@@ -22171,11 +22211,11 @@
                 "links": {
                   "type": "component"
                 },
-                "age_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -22549,12 +22589,6 @@
                 "mandatory": {
                   "type": "boolean"
                 },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "ingress": {
                   "type": "string"
                 },
@@ -22636,11 +22670,11 @@
                 "links": {
                   "type": "component"
                 },
-                "age_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -22781,12 +22815,6 @@
               "mandatory": {
                 "type": "boolean"
               },
-              "activity_groups": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "ingress": {
                 "type": "string"
               },
@@ -22868,11 +22896,11 @@
               "links": {
                 "type": "component"
               },
-              "age_groups": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+              "age_group": {
+                "type": "string"
+              },
+              "activity_group": {
+                "type": "string"
               },
               "localizations": {
                 "type": "array",
