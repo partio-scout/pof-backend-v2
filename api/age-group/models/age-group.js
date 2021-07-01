@@ -41,10 +41,7 @@ const updateActivityGroupActivities = async (group, ageGroupId) => {
       await strapi.query("activity").update(
         { id: activity.id },
         {
-          age_groups: [
-            ...(activity.age_groups?.map((x) => x.id) || []),
-            ageGroupId,
-          ],
+          age_group: ageGroupId,
         }
       );
     }
@@ -55,7 +52,6 @@ module.exports = {
   lifecycles: {
     async afterUpdate(result) {
       if (result.activity_groups?.length) {
-        console.log(result.activity_groups);
         (async () => {
           for (const group of result.activity_groups) {
             await updateActivityGroupActivities(group, result.id);
