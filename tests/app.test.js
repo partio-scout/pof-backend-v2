@@ -28,3 +28,4 @@ describe('Strapi', () => {
 
 require("./user");
 require("./suggestion");
+require("./utils/content");
