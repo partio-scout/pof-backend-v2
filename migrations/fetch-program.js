@@ -139,7 +139,8 @@ const parseAgeGroup = async (ageGroup) => {
   return data;
 };
 
-const parseLinks = (links) => links?.map((link) => ({
+const parseLinks = (links) =>
+  links?.map((link) => ({
     description: link.description,
     url: link.url,
   }));
@@ -299,18 +300,70 @@ const parseTerm = (term, type, locale) => {
 
 const parseTag = (tag, type, locale) => {
   if (tag) {
+    const slug = parseSlug(tag.slug, type);
     return {
       type,
-      slug: tag.slug,
+      slug: slug,
       locales: {
         [locale]: {
           name: tag.name,
-          slug: tag.slug,
+          slug: slug,
         },
       },
     };
   }
   return undefined;
+};
+
+const parseLocationSlug = (slug) => {
+  if (slug.startsWith("A_")) {
+    return slug.slice(2).toLowerCase();
+  }
+  switch (slug) {
+    case "other":
+      return "muu";
+    case "metsä":
+      return "metsässä";
+    case "kolo":
+      return "kololla";
+    case "meeting_place":
+      return "kololla";
+    default:
+      return slug.toLowerCase();
+  }
+};
+
+const parseDurationSlug = (slug) => {
+  let _slug = slug;
+  if (_slug.startsWith("A_")) {
+    _slug = _slug.slice(2).replace(/_/g, " ").toLowerCase();
+  }
+  const timeRangeResult = /^(\d+)(-\d+)?(min|h)?$/.exec(_slug);
+  if (timeRangeResult !== null) {
+    _slug = `${timeRangeResult[1]}${timeRangeResult[2] || ""} ${
+      timeRangeResult[3] || "min"
+    }`;
+  }
+
+  switch (_slug) {
+    case "120 min":
+      return "2 tuntia";
+    case "90 min":
+      return "1,5 tuntia";
+    default:
+      return _slug;
+  }
+};
+
+const parseSlug = (slug, type) => {
+  switch (type) {
+    case "activityLocation":
+      return parseLocationSlug(slug);
+    case "activityDuration":
+      return parseDurationSlug(slug);
+    default:
+      return slug.toLowerCase();
+  }
 };
 
 const parseFiles = async (files) => {
