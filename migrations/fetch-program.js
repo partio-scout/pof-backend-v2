@@ -227,7 +227,7 @@ const parseTask = async (task) => {
       mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
       leader_tasks: details.leader_tasks,
       // TODO Group size
-      location: details.tags?.paikka?.map((x) =>
+      locations: details.tags?.paikka?.map((x) =>
         parseTag(x, "activityLocation", correctLocale)
       ),
       duration: parseTag(

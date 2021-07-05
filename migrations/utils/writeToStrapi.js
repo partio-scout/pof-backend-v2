@@ -5,6 +5,9 @@ const {
   createFile,
 } = require("./utils");
 
+/**
+ * All content types
+ */
 const contentTypes = {
   suggestion: "suggestions",
   activity: "activities",
@@ -20,6 +23,17 @@ const contentTypes = {
   file: "file",
 };
 
+/**
+ * Content types that are tags in the input data
+ */
+const tagTypes = [
+  contentTypes.activityLocation,
+  contentTypes.activitySkillArea,
+  contentTypes.activityDuration,
+  contentTypes.activityLeaderSkill,
+  contentTypes.activityEducationalObjective,
+];
+
 const totalResult = {
   created: [],
   updated: [],
@@ -29,7 +43,10 @@ const totalResult = {
 
 let existingFiles = [];
 let updatedTerms = [];
-let updatedTags = [];
+let updatedTags = Object.keys(contentTypes).reduce(
+  (obj, curr) => ({ ...obj, [curr]: [] }),
+  {}
+);
 
 const writeProgramToStrapi = async (programData, config) => {
   console.log("Writing program data to Strapi");
@@ -225,42 +242,36 @@ const writeActivity = async (activity, config) => {
       }
 
       if (!config.skip.includes("duration")) {
-        entryData[locale].durations = await MapPromises(
-          data.durations?.map(
-            async (x) => (await writeTag(x, config)).entries[0]?.id
-          )
-        );
+        entryData[locale].duration = (
+          await writeTag(data.duration, config)
+        ).entries[0]?.id;
       }
 
       if (!config.skip.includes("location")) {
-        entryData[locale].locations = await MapPromises(
-          data.locations?.map(
-            async (x) => (await writeTag(x, config)).entries[0]?.id
-          )
-        );
+        entryData[locale].locations = await WriteTags(data.locations, contentTypes.activityLocation, config);
       }
 
       if (!config.skip.includes("skill_area")) {
-        entryData[locale].skill_areas = await MapPromises(
-          data.skill_areas?.map(
-            async (x) => (await writeTag(x, config)).entries[0]?.id
-          )
+        entryData[locale].skill_areas = await WriteTags(
+          data.skill_areas,
+          contentTypes.activitySkillArea,
+          config
         );
       }
 
       if (!config.skip.includes("leader_skill")) {
-        entryData[locale].leader_skills = await MapPromises(
-          data.leader_skills?.map(
-            async (x) => (await writeTag(x, config)).entries[0]?.id
-          )
+        entryData[locale].leader_skills = await WriteTags(
+          data.leader_skills,
+          contentTypes.activityLeaderSkill,
+          config
         );
       }
 
       if (!config.skip.includes("educational_objective")) {
-        entryData[locale].educational_objectives = await MapPromises(
-          data.educational_objectives?.map(
-            async (x) => (await writeTag(x, config)).entries[0]?.id
-          )
+        entryData[locale].educational_objectives = await WriteTags(
+          data.educational_objectives,
+          contentTypes.activityEducationalObjective,
+          config
         );
       }
 
@@ -310,6 +321,22 @@ const MapPromises = async (promises) => {
       console.error(error);
     }
   }
+  return results;
+};
+
+const WriteTags = async (tags, type, config) => {
+  const results = [];
+
+  if (!tags) return results;
+
+  for (const tag of tags) {
+    const result = await tagWriters[type](tag, config);
+    const id = result.entries[0]?.id;
+    if (id) {
+      results.push(id);
+    }
+  }
+
   return results;
 };
 
@@ -421,17 +448,31 @@ const writeTerm = async (term, config) => {
   }
 };
 
-const writeTag = async (tag, config) => {
+/**
+ * Create a rate-limited version of a function, 
+ * which allows the function to be called only once at a time.
+ * @param {Function} fn Function to run
+ * @returns Rate-limited function
+ */
+const disallowConcurrency = (fn) => {
+  let inprogressPromise = Promise.resolve();
+
+  return async (...args) => {
+    await inprogressPromise;
+    inprogressPromise = inprogressPromise.then(() => fn(...args));
+
+    return inprogressPromise;
+  };
+};
+
+const _writeTag = async (tag, config) => {
   if (!tag)
     return {
       entries: [],
     };
 
-  const alreadyUpdatedTag = updatedTags.find(
-    (t) =>
-      t.slug === tag.slug &&
-      t.locale === Object.keys(tag.locales)[0] &&
-      t.type === tag.type
+  const alreadyUpdatedTag = updatedTags[tag.type].find(
+    (t) => t.slug === tag.slug && t.locale === Object.keys(tag.locales)[0]
   );
   if (alreadyUpdatedTag)
     return {
@@ -453,13 +494,26 @@ const writeTag = async (tag, config) => {
 
     updateTotalResults(result, contentTypes[tag.type]);
 
-    updatedTags.push({ ...result.entries[0], type: tag.type });
+    updatedTags[tag.type].push(result.entries[0]);
 
     return result;
   } catch (error) {
     throw error;
   }
 };
+
+/**
+ * Rate-limited tag writer
+ */
+const writeTag = disallowConcurrency(_writeTag);
+
+/**
+ * Rate-limited writers for all types of tags
+ */
+const tagWriters = tagTypes.reduce(
+  (obj, curr) => ({ ...obj, [curr]: disallowConcurrency(_writeTag) }),
+  {}
+);
 
 /**
  * Replace line breaks with paragraphs and such
