@@ -181,6 +181,10 @@
     "activity_group": {
       "via": "activities",
       "model": "activity-group"
+    },
+    "preparation_duration": {
+      "model": "duration",
+      "via": "preparation_activities"
     }
   }
 }

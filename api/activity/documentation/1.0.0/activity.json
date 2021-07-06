@@ -555,6 +555,9 @@
                 "slug": {
                   "type": "string"
                 },
+                "icon": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -942,6 +945,12 @@
                 "type": "string"
               },
               "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "preparation_activities": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -1433,6 +1442,51 @@
               }
             }
           },
+          "preparation_duration": {
+            "required": [
+              "id",
+              "name",
+              "slug"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              },
+              "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "preparation_activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -1539,6 +1593,9 @@
                   "type": "string"
                 },
                 "activity_group": {
+                  "type": "string"
+                },
+                "preparation_duration": {
                   "type": "string"
                 },
                 "localizations": {
@@ -1673,6 +1730,9 @@
             "type": "string"
           },
           "activity_group": {
+            "type": "string"
+          },
+          "preparation_duration": {
             "type": "string"
           },
           "localizations": {
