@@ -20,6 +20,8 @@ const contentTypes = {
   activityEducationalObjective: "educational-objectives",
   activityDuration: "durations",
   activityLeaderSkill: "leader-skills",
+  activityGroupSize: "group-sizes",
+  activityPreparationDuration: "durations",
   file: "file",
 };
 
@@ -32,6 +34,7 @@ const tagTypes = [
   contentTypes.activityDuration,
   contentTypes.activityLeaderSkill,
   contentTypes.activityEducationalObjective,
+  contentTypes.activityGroupSize,
 ];
 
 const totalResult = {
@@ -248,7 +251,11 @@ const writeActivity = async (activity, config) => {
       }
 
       if (!config.skip.includes("location")) {
-        entryData[locale].locations = await WriteTags(data.locations, contentTypes.activityLocation, config);
+        entryData[locale].locations = await WriteTags(
+          data.locations,
+          contentTypes.activityLocation,
+          config
+        );
       }
 
       if (!config.skip.includes("skill_area")) {
@@ -273,6 +280,24 @@ const writeActivity = async (activity, config) => {
           contentTypes.activityEducationalObjective,
           config
         );
+      }
+
+      if (!config.skip.includes("group_size")) {
+        entryData[locale].group_sizes = await WriteTags(
+          data.group_sizes,
+          contentTypes.activityGroupSize,
+          config
+        );
+      }
+
+      if (!config.skip.includes("preparation_duration")) {
+        entryData[locale].preparation_duration = (
+          await writeTag(
+            data.preparation_duration,
+            contentTypes.activityDuration,
+            config
+          )
+        ).entries[0]?.id;
       }
 
       if (!config.skip.includes("suggestion")) {
@@ -449,7 +474,7 @@ const writeTerm = async (term, config) => {
 };
 
 /**
- * Create a rate-limited version of a function, 
+ * Create a rate-limited version of a function,
  * which allows the function to be called only once at a time.
  * @param {Function} fn Function to run
  * @returns Rate-limited function
@@ -484,6 +509,12 @@ const _writeTag = async (tag, config) => {
       slug: tag.slug,
       _locale: "all",
     });
+
+    for (const lang of Object.keys(tag.locales)) {
+      if (tag.locales[lang].icon) {
+        tag.locales[lang].icon = await writeFile(tag.locales[lang].icon);
+      }
+    }
 
     const result = await createOrUpdateEntry(
       contentTypes[tag.type],
