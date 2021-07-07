@@ -763,12 +763,6 @@
               "mandatory": {
                 "type": "boolean"
               },
-              "activity_groups": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "ingress": {
                 "type": "string"
               },
@@ -849,6 +843,12 @@
               },
               "links": {
                 "type": "component"
+              },
+              "age_group": {
+                "type": "string"
+              },
+              "activity_group": {
+                "type": "string"
               },
               "localizations": {
                 "type": "array",
@@ -1046,14 +1046,14 @@
                 "links": {
                   "type": "component"
                 },
-                "from_web": {
-                  "type": "boolean"
-                },
                 "comments": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
+                },
+                "from_web": {
+                  "type": "boolean"
                 },
                 "likes": {
                   "type": "object"

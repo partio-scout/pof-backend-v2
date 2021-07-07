@@ -50,7 +50,9 @@
           }
         },
         "summary": "",
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -236,7 +238,9 @@
           }
         },
         "summary": "",
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -301,7 +305,9 @@
           }
         },
         "summary": "",
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "parameters": []
       }
     },
@@ -352,7 +358,9 @@
           }
         },
         "summary": "",
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -412,7 +420,9 @@
           }
         },
         "summary": "",
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -484,7 +494,9 @@
           }
         },
         "summary": "",
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -503,7 +515,11 @@
   "components": {
     "schemas": {
       "Activity": {
-        "required": ["id", "title", "content"],
+        "required": [
+          "id",
+          "title",
+          "content"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -518,99 +534,17 @@
             "type": "boolean",
             "default": false
           },
-          "activity_groups": {
-            "type": "array",
-            "items": {
-              "required": ["id", "title", "content"],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "ingress": {
-                  "type": "string"
-                },
-                "content": {
-                  "type": "string"
-                },
-                "activities": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "wp_guid": {
-                  "type": "string"
-                },
-                "mandatory": {
-                  "type": "boolean"
-                },
-                "subactivity_term": {
-                  "type": "string"
-                },
-                "subactivitygroup_term": {
-                  "type": "string"
-                },
-                "activitygroup_term": {
-                  "type": "string"
-                },
-                "main_image": {
-                  "type": "string"
-                },
-                "logo": {
-                  "type": "string"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "images": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "links": {
-                  "type": "component"
-                },
-                "localizations": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "locale": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "ingress": {
             "type": "string"
           },
           "group_sizes": {
             "type": "array",
             "items": {
-              "required": ["id", "name", "slug"],
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -640,7 +574,11 @@
             }
           },
           "level": {
-            "required": ["id", "name", "slug"],
+            "required": [
+              "id",
+              "name",
+              "slug"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -671,7 +609,11 @@
           "skill_areas": {
             "type": "array",
             "items": {
-              "required": ["id", "name", "slug"],
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -709,7 +651,11 @@
           "equimpent": {
             "type": "array",
             "items": {
-              "required": ["id", "name", "slug"],
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -741,7 +687,10 @@
           "educational_objectives": {
             "type": "array",
             "items": {
-              "required": ["id", "slug"],
+              "required": [
+                "id",
+                "slug"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -779,7 +728,11 @@
           "leader_skills": {
             "type": "array",
             "items": {
-              "required": ["id", "name", "slug"],
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -823,7 +776,12 @@
           "suggestions": {
             "type": "array",
             "items": {
-              "required": ["id", "title", "content", "author"],
+              "required": [
+                "id",
+                "title",
+                "content",
+                "author"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -852,6 +810,12 @@
                 "links": {
                   "type": "component"
                 },
+                "comments": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "from_web": {
                   "type": "boolean"
                 },
@@ -860,12 +824,6 @@
                 },
                 "like_count": {
                   "type": "integer"
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 },
                 "localizations": {
                   "type": "array",
@@ -889,7 +847,12 @@
             }
           },
           "activity_term": {
-            "required": ["id", "name", "singular", "plural"],
+            "required": [
+              "id",
+              "name",
+              "singular",
+              "plural"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -923,7 +886,11 @@
           "locations": {
             "type": "array",
             "items": {
-              "required": ["id", "name", "slug"],
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -959,7 +926,11 @@
             }
           },
           "duration": {
-            "required": ["id", "name", "slug"],
+            "required": [
+              "id",
+              "name",
+              "slug"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -1271,7 +1242,11 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "description", "url"],
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -1285,10 +1260,187 @@
               }
             }
           },
+          "age_group": {
+            "required": [
+              "id",
+              "title",
+              "content",
+              "minimum_age",
+              "maximum_age"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "ingress": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "minimum_age": {
+                "type": "integer"
+              },
+              "maximum_age": {
+                "type": "integer"
+              },
+              "activity_groups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "wp_guid": {
+                "type": "string"
+              },
+              "links": {
+                "type": "component"
+              },
+              "subactivitygroup_term": {
+                "type": "string"
+              },
+              "main_image": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "activity_group": {
+            "required": [
+              "id",
+              "title",
+              "content"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "ingress": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "activity_groups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_activity_group": {
+                "type": "string"
+              },
+              "wp_guid": {
+                "type": "string"
+              },
+              "mandatory": {
+                "type": "boolean"
+              },
+              "subactivity_term": {
+                "type": "string"
+              },
+              "subactivitygroup_term": {
+                "type": "string"
+              },
+              "activitygroup_term": {
+                "type": "string"
+              },
+              "main_image": {
+                "type": "string"
+              },
+              "logo": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "links": {
+                "type": "component"
+              },
+              "age_group": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
-              "required": ["id", "title", "content"],
+              "required": [
+                "id",
+                "title",
+                "content"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -1301,12 +1453,6 @@
                 },
                 "mandatory": {
                   "type": "boolean"
-                },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 },
                 "ingress": {
                   "type": "string"
@@ -1389,6 +1535,12 @@
                 "links": {
                   "type": "component"
                 },
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -1420,7 +1572,10 @@
         }
       },
       "NewActivity": {
-        "required": ["title", "content"],
+        "required": [
+          "title",
+          "content"
+        ],
         "properties": {
           "title": {
             "type": "string"
@@ -1431,12 +1586,6 @@
           "mandatory": {
             "type": "boolean",
             "default": false
-          },
-          "activity_groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "ingress": {
             "type": "string"
@@ -1502,7 +1651,11 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["id", "description", "url"],
+              "required": [
+                "id",
+                "description",
+                "url"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -1515,6 +1668,12 @@
                 }
               }
             }
+          },
+          "age_group": {
+            "type": "string"
+          },
+          "activity_group": {
+            "type": "string"
           },
           "localizations": {
             "type": "array",

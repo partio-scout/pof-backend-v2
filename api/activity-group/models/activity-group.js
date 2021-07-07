@@ -8,6 +8,4 @@ const { createLifecycleHooks } = require("../../../utils/algolia");
 
 const contentType = "activity-group";
 
-module.exports = {
-  lifecycles: createLifecycleHooks(contentType),
-};
+module.exports = createLifecycleHooks(contentType);

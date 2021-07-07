@@ -65,6 +65,7 @@
       "min": 1
     },
     "activity_groups": {
+      "via": "age_group",
       "collection": "activity-group"
     },
     "wp_guid": {
