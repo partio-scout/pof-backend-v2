@@ -10,8 +10,7 @@
   "indexableContent": [
     "activity-group",
     "age-group",
-    "activity",
-    "suggestion"
+    "activity"
   ],
   "dependencies": {},
   "engines": {
