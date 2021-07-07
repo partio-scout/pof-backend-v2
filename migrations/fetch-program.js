@@ -321,7 +321,10 @@ const parseTags = async (tags, type, locale) => {
   const results = [];
   for (const tag of tags) {
     const result = await parseTag(tag, type, locale);
-    results.push(result);
+
+    if (result) {
+      results.push(result);
+    }
   }
 
   return results;
