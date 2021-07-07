@@ -48,7 +48,7 @@ const createInstance = () => {
   return axiosInstance;
 };
 
-const rateLimitedInstance = rateLimit(createInstance(), { maxRPS: 5 });
+const rateLimitedInstance = rateLimit(createInstance(), { maxRPS: 20 });
 
 module.exports = {
   rateLimited: rateLimitedInstance,

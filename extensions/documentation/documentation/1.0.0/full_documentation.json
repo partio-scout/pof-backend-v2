@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "07/01/2021 10:07:32 AM"
+    "x-generation-date": "07/06/2021 11:24:54 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -15791,6 +15791,9 @@
                 "activity_group": {
                   "type": "string"
                 },
+                "preparation_duration": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -16915,6 +16918,9 @@
                 "slug": {
                   "type": "string"
                 },
+                "icon": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -17302,6 +17308,12 @@
                 "type": "string"
               },
               "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "preparation_activities": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -17793,6 +17805,51 @@
               }
             }
           },
+          "preparation_duration": {
+            "required": [
+              "id",
+              "name",
+              "slug"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              },
+              "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "preparation_activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -17899,6 +17956,9 @@
                   "type": "string"
                 },
                 "activity_group": {
+                  "type": "string"
+                },
+                "preparation_duration": {
                   "type": "string"
                 },
                 "localizations": {
@@ -18033,6 +18093,9 @@
             "type": "string"
           },
           "activity_group": {
+            "type": "string"
+          },
+          "preparation_duration": {
             "type": "string"
           },
           "localizations": {
@@ -20146,6 +20209,141 @@
                 "activity_group": {
                   "type": "string"
                 },
+                "preparation_duration": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "preparation_activities": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "title",
+                "content"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "mandatory": {
+                  "type": "boolean"
+                },
+                "ingress": {
+                  "type": "string"
+                },
+                "group_sizes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "level": {
+                  "type": "string"
+                },
+                "skill_areas": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "equimpent": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "educational_objectives": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "leader_skills": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "wp_guid": {
+                  "type": "string"
+                },
+                "leader_tasks": {
+                  "type": "string"
+                },
+                "suggestions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "activity_term": {
+                  "type": "string"
+                },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "duration": {
+                  "type": "string"
+                },
+                "main_image": {
+                  "type": "string"
+                },
+                "logo": {
+                  "type": "string"
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "links": {
+                  "type": "component"
+                },
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
+                },
+                "preparation_duration": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -20191,6 +20389,12 @@
                     "type": "string"
                   }
                 },
+                "preparation_activities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -20227,6 +20431,12 @@
             "type": "string"
           },
           "activities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "preparation_activities": {
             "type": "array",
             "items": {
               "type": "string"
@@ -20573,6 +20783,9 @@
                   "type": "string"
                 },
                 "activity_group": {
+                  "type": "string"
+                },
+                "preparation_duration": {
                   "type": "string"
                 },
                 "localizations": {
@@ -21384,6 +21597,73 @@
           "slug": {
             "type": "string"
           },
+          "icon": {
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {
+                "type": "object"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {
+                "type": "object"
+              },
+              "related": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -21400,6 +21680,9 @@
                   "type": "string"
                 },
                 "slug": {
+                  "type": "string"
+                },
+                "icon": {
                   "type": "string"
                 },
                 "localizations": {
@@ -21782,6 +22065,9 @@
                   "type": "string"
                 },
                 "activity_group": {
+                  "type": "string"
+                },
+                "preparation_duration": {
                   "type": "string"
                 },
                 "localizations": {
@@ -22215,6 +22501,9 @@
                   "type": "string"
                 },
                 "activity_group": {
+                  "type": "string"
+                },
+                "preparation_duration": {
                   "type": "string"
                 },
                 "localizations": {
@@ -22676,6 +22965,9 @@
                 "activity_group": {
                   "type": "string"
                 },
+                "preparation_duration": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -22900,6 +23192,9 @@
                 "type": "string"
               },
               "activity_group": {
+                "type": "string"
+              },
+              "preparation_duration": {
                 "type": "string"
               },
               "localizations": {

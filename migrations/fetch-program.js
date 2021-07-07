@@ -21,7 +21,10 @@ class Cache {
     this.cache = data;
   }
   get(url) {
-    if (this.disabled) return undefined;
+    if (this.disabled) {
+      console.log("Cache skip", url);
+      return undefined;
+    }
 
     if (this.cache[url]) {
       this.hits++;
@@ -139,7 +142,8 @@ const parseAgeGroup = async (ageGroup) => {
   return data;
 };
 
-const parseLinks = (links) => links?.map((link) => ({
+const parseLinks = (links) =>
+  links?.map((link) => ({
     description: link.description,
     url: link.url,
   }));
@@ -226,31 +230,45 @@ const parseTask = async (task) => {
       locale: correctLocale,
       mandatory: details.tags?.pakollisuus[0]?.slug === "mandatory",
       leader_tasks: details.leader_tasks,
-      // TODO Group size
-      location: details.tags?.paikka?.map((x) =>
-        parseTag(x, "activityLocation", correctLocale)
+      group_sizes: await parseTags(
+        details.tags?.ryhmakoko,
+        "activityGroupSize",
+        correctLocale
       ),
-      duration: parseTag(
+      locations: await parseTags(
+        details.tags?.paikka,
+        "activityLocation",
+        correctLocale
+      ),
+      duration: await parseTag(
         details.tags?.suoritus_kesto,
         "activityDuration",
         correctLocale
       ),
       links: parseLinks(details.additional_content?.links),
-      skill_areas: details.tags?.taitoalueet?.map((x) =>
-        parseTag(x, "activitySkillArea", correctLocale)
+      skill_areas: await parseTags(
+        details.tags?.taitoalueet,
+        "activitySkillArea",
+        correctLocale
       ),
-      leader_skills: details.tags?.johtamistaito?.map((x) =>
-        parseTag(x, "activityLeaderSkill", correctLocale)
+      leader_skills: await parseTags(
+        details.tags?.johtamistaito,
+        "activityLeaderSkill",
+        correctLocale
       ),
-      educational_objectives: details.tags?.kasvatustavoitteet?.map((x) =>
-        parseTag(x, "activityEducationalObjective", correctLocale)
+      educational_objectives: await parseTags(
+        details.tags?.kasvatustavoitteet,
+        "activityEducationalObjective",
+        correctLocale
+      ),
+      preparation_duration: await parseTag(
+        details.tags?.suoritus_valmistelu_kesto,
+        "activityPreparationDuration",
+        correctLocale
       ),
       main_image: await parseFile(details.images?.main_image),
       logo: await parseFile(details.images?.logo),
       files: await parseFiles(details.additional_content?.files),
-      // TODO Preparation duration
-      // TODO Level
-      // TODO Equipment
     };
 
     const languagesSuggestions = details.suggestions_details?.find(
@@ -297,20 +315,108 @@ const parseTerm = (term, type, locale) => {
   return undefined;
 };
 
-const parseTag = (tag, type, locale) => {
-  if (tag) {
-    return {
-      type,
-      slug: tag.slug,
-      locales: {
-        [locale]: {
-          name: tag.name,
-          slug: tag.slug,
-        },
-      },
-    };
+const parseTags = async (tags, type, locale) => {
+  if (!tags) return undefined;
+
+  const results = [];
+  for (const tag of tags) {
+    const result = await parseTag(tag, type, locale);
+
+    if (result) {
+      results.push(result);
+    }
   }
-  return undefined;
+
+  return results;
+};
+
+const parseTag = async (tag, type, locale) => {
+  if (!tag) {
+    return undefined;
+  }
+
+  const slug = parseTagSlug(tag.slug || tag.name, type);
+
+  const data = {
+    type,
+    slug: slug,
+    locales: {
+      [locale]: {
+        name: parseTagName(tag.name, type),
+        slug: slug,
+      },
+    },
+  };
+
+  if (tag.icon) {
+    data.locales[locale].icon = await parseFile({ url: tag.icon });
+  }
+
+  return data;
+};
+
+const parseTagName = (name, type) => {
+  switch (type) {
+    case "activityPreparationDuration":
+      return `${name} min`;
+    default:
+      return name;
+  }
+};
+
+const parseLocationSlug = (slug) => {
+  if (!slug) return undefined;
+
+  if (slug.startsWith("A_")) {
+    return slug.slice(2).toLowerCase();
+  }
+  switch (slug) {
+    case "other":
+      return "muu";
+    case "metsä":
+      return "metsässä";
+    case "kolo":
+      return "kololla";
+    case "meeting_place":
+      return "kololla";
+    default:
+      return slug.toLowerCase();
+  }
+};
+
+const parseDurationSlug = (slug) => {
+  let _slug = slug;
+  if (_slug.startsWith("A_")) {
+    _slug = _slug.slice(2).replace(/_/g, " ").toLowerCase();
+  }
+  const timeRangeResult = /^(\d+)(-\d+)?(min|h)?$/.exec(_slug);
+  if (timeRangeResult !== null) {
+    _slug = `${timeRangeResult[1]}${timeRangeResult[2] || ""} ${
+      timeRangeResult[3] || "min"
+    }`;
+  }
+
+  switch (_slug) {
+    case "120 min":
+      return "2 tuntia";
+    case "90 min":
+      return "1,5 tuntia";
+    default:
+      return _slug;
+  }
+};
+
+const parseTagSlug = (slug, type) => {
+  switch (type) {
+    case "activityLocation":
+      return parseLocationSlug(slug);
+    case "activityDuration":
+      return parseDurationSlug(slug);
+    case "activityPreparationDuration":
+      return `${slug} min`;
+    default:
+      return slug.toLowerCase();
+  }
 };
 
 const parseFiles = async (files) => {
