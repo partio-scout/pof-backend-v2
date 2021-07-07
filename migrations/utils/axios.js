@@ -1,4 +1,5 @@
 const axios = require("axios");
+const https = require("https");
 const rateLimit = require("axios-rate-limit");
 const { readFileSync, existsSync, exists } = require("fs");
 
@@ -20,6 +21,8 @@ const createInstance = () => {
     headers: {
       Authorization: `Bearer ${config.strapiAdminToken}`,
     },
+    // This is important!! Without it the migration fails at some point to an error: connect ETIMEDOUT. More info here: https://stackoverflow.com/a/63585550/6025830
+    httpsAgent: new https.Agent({ keepAlive: true }),
   });
 
   axiosInstance.interceptors.response.use(
