@@ -1,7 +1,8 @@
 const axios = require("axios");
+const axiosRetry = require("axios-retry");
 const https = require("https");
 const rateLimit = require("axios-rate-limit");
-const { readFileSync, existsSync, exists } = require("fs");
+const { readFileSync, existsSync } = require("fs");
 
 const createInstance = () => {
   // Read the config from file
@@ -23,6 +24,7 @@ const createInstance = () => {
     },
     // This is important!! Without it the migration fails at some point to an error: connect ETIMEDOUT. More info here: https://stackoverflow.com/a/63585550/6025830
     httpsAgent: new https.Agent({ keepAlive: true }),
+    timeout: 120000,
   });
 
   axiosInstance.interceptors.response.use(
@@ -51,9 +53,13 @@ const createInstance = () => {
   return axiosInstance;
 };
 
+
 const rateLimitedInstance = rateLimit(createInstance(), { maxRPS: 20 });
+const fastInstance = createInstance();
+
+axiosRetry(fastInstance, { retries: 3 }),
 
 module.exports = {
   rateLimited: rateLimitedInstance,
-  fast: createInstance(),
+  fast: fastInstance,
 };

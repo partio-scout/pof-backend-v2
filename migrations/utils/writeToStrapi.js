@@ -65,9 +65,16 @@ const writeProgramToStrapi = async (programData, config) => {
   try {
     const ageGroups = config.limitToOne
       ? programData.ageGroups.slice(0, 1)
+      : config.ageGroup
+      ? programData.ageGroups.filter((x) => x.locales.fi.title === config.ageGroup)
       : programData.ageGroups;
 
-    // Age groups can be written in parellel, since they don't have affecting crossing relations
+    console.log(
+      "Writing age groups:",
+      ageGroups.map((x) => x.locales.fi.title)
+    );
+
+    // Age groups can be written in parallel, since they don't have affecting crossing relations
     await Promise.all(
       ageGroups.map(async (ageGroup) => await writeAgeGroup(ageGroup, config))
     );

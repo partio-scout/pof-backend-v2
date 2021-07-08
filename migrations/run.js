@@ -40,6 +40,11 @@ const argv = yargs
     alias: "s",
     type: 'array'
   })
+  .option("ageGroup", {
+    description: "Migrate single age group (write only)",
+    alias: "a",
+    type: 'string'
+  })
   .help()
   .alias("help", "h").argv;
 
@@ -50,6 +55,7 @@ const config = {
   forceUpdate: argv.forceUpdate || false,
   noCache: argv.noCache || false,
   skip: argv.skip || [],
+  ageGroup: argv.ageGroup,
 };
 
 console.log('Config:', config);
