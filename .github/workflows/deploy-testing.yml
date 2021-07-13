@@ -5,7 +5,9 @@ on:
     branches: [ main ]
     
 env:
-  NODE_VERSION: '14.x' 
+  NODE_VERSION: '14.x'
+  
+concurrency: testing-environment
 
 jobs:
   test:
