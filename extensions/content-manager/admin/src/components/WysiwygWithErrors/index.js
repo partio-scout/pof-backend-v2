@@ -25,7 +25,7 @@ const WysiwygWithErrors = ({
   // We can distinguish admins by the role: "admin::roles.create"
   const isAdmin =
     user.userPermissions.find(
-      (x) => x.action === "admin::roles.create"
+      (permission) => permission.action === "admin::roles.create"
     ) !== undefined;
 
   const [isOpen, setIsOpen] = useState(false);
