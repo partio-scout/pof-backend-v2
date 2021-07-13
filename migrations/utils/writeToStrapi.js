@@ -66,7 +66,7 @@ const writeProgramToStrapi = async (programData, config) => {
     const ageGroups = config.limitToOne
       ? programData.ageGroups.slice(0, 1)
       : config.ageGroup
-      ? programData.ageGroups.filter((x) => x.locales.fi.title === config.ageGroup)
+      ? programData.ageGroups.filter((ageGroup) => ageGroup.locales.fi.title === config.ageGroup)
       : programData.ageGroups;
 
     console.log(
