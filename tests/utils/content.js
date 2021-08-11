@@ -72,39 +72,11 @@ describe("Content utils", () => {
 
       expect(ageGroupId).toEqual(ageGroup.id);
     });
-
-    it("gets age-group 2 levels over", async () => {
-      const ageGroupId = await getAgeGroupIdFromActivityGroup(
-        activityGroups[1].id
-      );
-
-      expect(ageGroupId).toEqual(ageGroup.id);
-    });
-
-    it("gets age-group 3 levels over", async () => {
-      const ageGroupId = await getAgeGroupIdFromActivityGroup(
-        activityGroups[0].id
-      );
-
-      expect(ageGroupId).toEqual(ageGroup.id);
-    });
   });
 
   describe("getAgeGroupIdForActivity", () => {
     it("gets age-group directly over the parent activity-group", async () => {
       const ageGroupId = await getAgeGroupIdForActivity(activities[2].id);
-
-      expect(ageGroupId).toEqual(ageGroup.id);
-    });
-
-    it("gets age-group 2 levels over the parent activity-group", async () => {
-      const ageGroupId = await getAgeGroupIdForActivity(activities[1].id);
-
-      expect(ageGroupId).toEqual(ageGroup.id);
-    });
-
-    it("gets age-group 3 levels over the parent activity-group", async () => {
-      const ageGroupId = await getAgeGroupIdForActivity(activities[0].id);
 
       expect(ageGroupId).toEqual(ageGroup.id);
     });
