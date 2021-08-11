@@ -1374,15 +1374,6 @@
                   "type": "string"
                 }
               },
-              "activity_groups": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "parent_activity_group": {
-                "type": "string"
-              },
               "wp_guid": {
                 "type": "string"
               },
@@ -1420,6 +1411,9 @@
                 "type": "component"
               },
               "age_group": {
+                "type": "string"
+              },
+              "activity_group_category": {
                 "type": "string"
               },
               "localizations": {
