@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Editor = ({ onChange, name, value, isAdmin }) => {
-  const toolbar =
+  let toolbar =
     "undo redo | formatselect | \
   bold italic underline strikethrough removeformat | \
   alignleft aligncenter alignright alignjustify | \
