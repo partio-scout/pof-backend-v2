@@ -1340,6 +1340,12 @@
                   "type": "string"
                 }
               },
+              "upper_content_area": {
+                "type": "dynamiczone"
+              },
+              "lower_content_area": {
+                "type": "dynamiczone"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
