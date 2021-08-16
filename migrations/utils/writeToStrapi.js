@@ -14,6 +14,7 @@ const contentTypes = {
   activityGroup: "activity-groups",
   ageGroup: "age-groups",
   activityGroupTerm: "activitygroup-terms",
+  activityGroupCategory: "activity-group-categories",
   activityTerm: "activity-terms",
   activityLocation: "locations",
   activitySkillArea: "skill-areas",
@@ -53,7 +54,7 @@ let updatedTags = Object.keys(contentTypes).reduce(
 
 const writeProgramToStrapi = async (programData, config) => {
   console.log("Writing program data to Strapi");
-  if (config.limitToOne) {
+  if (config.testing) {
     console.log("Data limited to one ageGroup and one activityGroup");
   }
   if (config.forceUpdate) {
@@ -63,10 +64,12 @@ const writeProgramToStrapi = async (programData, config) => {
   existingFiles = await getExistingFiles();
 
   try {
-    const ageGroups = config.limitToOne
+    const ageGroups = config.testing
       ? programData.ageGroups.slice(0, 1)
       : config.ageGroup
-      ? programData.ageGroups.filter((ageGroup) => ageGroup.locales.fi.title === config.ageGroup)
+      ? programData.ageGroups.filter(
+          (ageGroup) => ageGroup.locales.fi.title === config.ageGroup
+        )
       : programData.ageGroups;
 
     console.log(
@@ -91,9 +94,7 @@ const writeAgeGroup = async (ageGroup, config) => {
     // First write the child activity groups
     const createdActivityGroups = [];
 
-    const activityGroups = config.limitToOne
-      ? ageGroup.activity_groups.slice(0, 1)
-      : ageGroup.activity_groups;
+    const activityGroups = ageGroup.activity_groups;
 
     for (const activityGroup of activityGroups) {
       const result = await writeActivityGroup(activityGroup, config);
@@ -141,12 +142,55 @@ const writeAgeGroup = async (ageGroup, config) => {
 
 const writeActivityGroup = async (activityGroup, config) => {
   try {
-    // First write the child activity groups
     const createdActivityGroups = [];
 
-    for (const group of activityGroup.activity_groups) {
-      const result = await writeActivityGroup(group, config);
-      createdActivityGroups.push(...result.entries);
+    // If this group has child activityGroups, we write this one as an activityGroupCategory, and link it to the child activityGroups.
+    // The children groups are then returned so they are linked directly to the ageGroup.
+    if (activityGroup.activity_groups.length) {
+      const entryData = {};
+
+      for (const [locale, data] of Object.entries(activityGroup.locales)) {
+        entryData[locale] = {
+          name: data.title,
+          wp_guid: data.wp_guid,
+          locale: data.locale,
+        };
+      }
+
+      const existingEntry = await findEntry(
+        contentTypes.activityGroupCategory,
+        {
+          wp_guid: activityGroup.wp_guid,
+          _locale: "all",
+        }
+      );
+
+      const result = await createOrUpdateEntry(
+        contentTypes.activityGroupCategory,
+        existingEntry?.id,
+        entryData,
+        config.forceUpdate
+      );
+
+      for (const group of activityGroup.activity_groups) {
+        group.locales = Object.entries(group.locales).reduce(
+          (obj, [locale, data]) => ({
+            ...obj,
+            [locale]: {
+              ...data,
+              activity_group_category: result.entries?.filter(
+                (x) => x.locale === locale
+              )?.[0]?.id,
+            },
+          }),
+          {}
+        );
+
+        const _result = await writeActivityGroup(group, config);
+        createdActivityGroups.push(..._result.entries);
+      }
+
+      return { entries: createdActivityGroups };
     }
 
     // Then write the activity group
@@ -160,9 +204,7 @@ const writeActivityGroup = async (activityGroup, config) => {
         locale: data.locale,
         mandatory: data.mandatory,
         leader_tasks: data.leader_tasks,
-        activity_groups: createdActivityGroups
-          .filter((x) => x.locale === locale)
-          .map((x) => x.id),
+        activity_group_category: data.activity_group_category,
       };
 
       if (!config.skip.includes("subactivitygroup_term")) {
@@ -339,21 +381,6 @@ const writeActivity = async (activity, config) => {
   } catch (error) {
     throw error;
   }
-};
-
-const MapPromises = async (promises) => {
-  const results = [];
-  if (!promises) return results;
-
-  for (const p of promises) {
-    try {
-      const result = await p;
-      results.push(result);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  return results;
 };
 
 const WriteTags = async (tags, type, config) => {

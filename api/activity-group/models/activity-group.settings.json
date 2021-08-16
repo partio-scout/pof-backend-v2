@@ -46,14 +46,6 @@
       "via": "activity_group",
       "collection": "activity"
     },
-    "activity_groups": {
-      "collection": "activity-group",
-      "via": "parent_activity_group"
-    },
-    "parent_activity_group": {
-      "model": "activity-group",
-      "via": "activity_groups"
-    },
     "wp_guid": {
       "pluginOptions": {
         "i18n": {
@@ -149,6 +141,10 @@
     "age_group": {
       "via": "activity_groups",
       "model": "age-group"
+    },
+    "activity_group_category": {
+      "model": "activity-group-category",
+      "via": "activity_groups"
     }
   }
 }

@@ -22,7 +22,7 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/migrations/run.js",
-      "args": ["-wtu"]
+      "args": ["-wtu", "--skip=suggestion", "activity", "files"]
     },
     {
       "type": "node",
