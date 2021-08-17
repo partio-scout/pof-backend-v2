@@ -9,4 +9,10 @@ module.exports = ({ env }) => ({
       defaultReplyTo: env("SENDGRID_DEFAULT_REPLY_TO_ADDRESS"),
     },
   },
+  "github-actions": {
+    hasEnvPat: true,
+    pats: {
+      "Deploy site": env("GITHUB_PERSONAL_ACCESS_TOKEN_FOR_DEPLOY")
+    }
+  }
 });

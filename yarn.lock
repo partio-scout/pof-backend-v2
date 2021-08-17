@@ -4227,6 +4227,11 @@ date-fns@^2.19.0:
   resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.21.2.tgz"
   integrity sha512-FMkG7pIPx64mGIpS2LOb3Wp3O606H/hatoiz7G0oiYWai1izdM4tF1dd7QABv2NogkIDI4wxsfLLFQSuVvDHgA==
 
+dayjs@^1.10.4:
+  version "1.10.6"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.6.tgz#288b2aa82f2d8418a6c9d4df5898c0737ad02a63"
+  integrity sha512-AztC/IOW4L1Q41A86phW5Thhcrco3xuAA+YX/BLpLWWjRcTj5TOt/QImBLmCKlrF7u7k47arTnOyL6GnbG8Hvw==
+
 debug@*, debug@4, debug@4.3.1, debug@^4.1.0, debug@^4.1.1:
   version "4.3.1"
   resolved "https://registry.npmjs.org/debug/-/debug-4.3.1.tgz"
@@ -6113,7 +6118,7 @@ http-errors@1.7.3, http-errors@~1.7.2:
     statuses ">= 1.5.0 < 2"
     toidentifier "1.0.0"
 
-http-errors@^1.3.1, http-errors@^1.6.3, http-errors@^1.7.3:
+http-errors@^1.3.1, http-errors@^1.6.3, http-errors@^1.7.3, http-errors@^1.8.0:
   version "1.8.0"
   resolved "https://registry.npmjs.org/http-errors/-/http-errors-1.8.0.tgz"
   integrity sha512-4I8r0C5JDhT5VkvI47QktDW75rNlGVsUf/8hzjCC/wkWI/jdTRmBb9aI7erSG82r1bjKY3F6k28WnsVxB1C73A==
@@ -11892,6 +11897,15 @@ strapi-plugin-email@3.6.3:
     lodash "4.17.21"
     strapi-provider-email-sendmail "3.6.3"
     strapi-utils "3.6.3"
+
+strapi-plugin-github-actions@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-github-actions/-/strapi-plugin-github-actions-0.1.0.tgz#a7f7076ba6565840ecc515ca23a10f4de916a8bc"
+  integrity sha512-XaJ36cvoEiMb7a+JSqnQy1vhZ/37cLol8LLdjFewyOzLQZyxy9XwYs1nFr1rRYgmU3FqBqBPmryTYpXjJO3ewg==
+  dependencies:
+    axios "^0.21.1"
+    dayjs "^1.10.4"
+    http-errors "^1.8.0"
 
 strapi-plugin-i18n@3.6.3:
   version "3.6.3"
