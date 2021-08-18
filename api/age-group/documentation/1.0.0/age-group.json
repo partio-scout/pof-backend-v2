@@ -1004,7 +1004,7 @@
                     "text": {
                       "type": "string"
                     },
-                    "image": {
+                    "background": {
                       "required": [
                         "id",
                         "name",
@@ -1459,7 +1459,7 @@
                     "text": {
                       "type": "string"
                     },
-                    "image": {
+                    "background": {
                       "required": [
                         "id",
                         "name",
@@ -2069,7 +2069,7 @@
                     "text": {
                       "type": "string"
                     },
-                    "image": {
+                    "background": {
                       "required": [
                         "id",
                         "name",
@@ -2524,7 +2524,7 @@
                     "text": {
                       "type": "string"
                     },
-                    "image": {
+                    "background": {
                       "required": [
                         "id",
                         "name",
