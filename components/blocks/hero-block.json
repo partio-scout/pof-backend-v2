@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_hero_blocks",
   "info": {
-    "name": "Hero Block",
+    "name": "Highlight Block",
     "icon": "image",
     "description": ""
   },
@@ -13,7 +13,7 @@
     "text": {
       "type": "text"
     },
-    "image": {
+    "background": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
@@ -28,9 +28,6 @@
     },
     "link_url": {
       "type": "string"
-    },
-    "block_width": {
-      "model": "block-width"
     }
   }
 }
