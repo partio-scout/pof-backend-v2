@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "08/18/2021 12:44:53 PM"
+    "x-generation-date": "08/18/2021 1:35:23 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -19318,26 +19318,6 @@
                     },
                     "link_url": {
                       "type": "string"
-                    },
-                    "block_width": {
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "created_by": {
-                          "type": "string"
-                        },
-                        "updated_by": {
-                          "type": "string"
-                        }
-                      }
                     }
                   },
                   "required": [
@@ -19773,26 +19753,6 @@
                     },
                     "link_url": {
                       "type": "string"
-                    },
-                    "block_width": {
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "created_by": {
-                          "type": "string"
-                        },
-                        "updated_by": {
-                          "type": "string"
-                        }
-                      }
                     }
                   },
                   "required": [
@@ -20383,26 +20343,6 @@
                     },
                     "link_url": {
                       "type": "string"
-                    },
-                    "block_width": {
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "created_by": {
-                          "type": "string"
-                        },
-                        "updated_by": {
-                          "type": "string"
-                        }
-                      }
                     }
                   },
                   "required": [
@@ -20838,26 +20778,6 @@
                     },
                     "link_url": {
                       "type": "string"
-                    },
-                    "block_width": {
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "created_by": {
-                          "type": "string"
-                        },
-                        "updated_by": {
-                          "type": "string"
-                        }
-                      }
                     }
                   },
                   "required": [
@@ -21660,26 +21580,6 @@
                     },
                     "link_url": {
                       "type": "string"
-                    },
-                    "block_width": {
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "created_by": {
-                          "type": "string"
-                        },
-                        "updated_by": {
-                          "type": "string"
-                        }
-                      }
                     }
                   },
                   "required": [
@@ -22087,26 +21987,6 @@
                     },
                     "link_url": {
                       "type": "string"
-                    },
-                    "block_width": {
-                      "required": [
-                        "id",
-                        "name"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "created_by": {
-                          "type": "string"
-                        },
-                        "updated_by": {
-                          "type": "string"
-                        }
-                      }
                     }
                   },
                   "required": [

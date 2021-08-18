@@ -28,9 +28,6 @@
     },
     "link_url": {
       "type": "string"
-    },
-    "block_width": {
-      "model": "block-width"
     }
   }
 }
