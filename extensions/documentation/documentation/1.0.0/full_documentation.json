@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "08/18/2021 1:35:23 PM"
+    "x-generation-date": "08/20/2021 3:44:53 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -21380,7 +21380,8 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block"
                       ]
                     },
                     "id": {
@@ -21496,7 +21497,8 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block"
                       ]
                     },
                     "id": {
@@ -21593,7 +21595,8 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block"
                       ]
                     },
                     "id": {
@@ -21665,6 +21668,51 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
                     },
                     "block_width": {
                       "required": [
@@ -21787,7 +21835,8 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block"
                       ]
                     },
                     "id": {
@@ -21903,7 +21952,8 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block"
                       ]
                     },
                     "id": {
@@ -22000,7 +22050,8 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block"
                       ]
                     },
                     "id": {
@@ -22072,6 +22123,51 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
                     },
                     "block_width": {
                       "required": [

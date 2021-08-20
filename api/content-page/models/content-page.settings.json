@@ -57,7 +57,8 @@
       "components": [
         "blocks.text-block",
         "blocks.hero-block",
-        "blocks.image-block"
+        "blocks.image-block",
+        "blocks.link-block"
       ]
     },
     "main_text": {
