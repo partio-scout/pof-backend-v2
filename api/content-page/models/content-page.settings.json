@@ -58,7 +58,8 @@
         "blocks.text-block",
         "blocks.hero-block",
         "blocks.image-block",
-        "blocks.link-block"
+        "blocks.link-block",
+        "blocks.activity-block"
       ]
     },
     "main_text": {
