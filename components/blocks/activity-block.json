@@ -2,12 +2,13 @@
   "collectionName": "components_blocks_activity_blocks",
   "info": {
     "name": "Activity Block",
-    "icon": "atlas"
+    "icon": "atlas",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "activity": {
-      "model": "activity"
+    "activities": {
+      "collection": "activity"
     }
   }
 }
