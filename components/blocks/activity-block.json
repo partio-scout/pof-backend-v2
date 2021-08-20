@@ -9,6 +9,9 @@
   "attributes": {
     "activities": {
       "collection": "activity"
+    },
+    "block_width": {
+      "model": "block-width"
     }
   }
 }
