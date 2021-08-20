@@ -9,6 +9,9 @@ module.exports = ({ env }) => ({
       },
       options: {
         useNullAsDefault: true,
+        pool: {
+          propagateCreateError: false,
+        },
       },
     },
     // This is for testing Psql compatibility, i.e. are column names short enough...
