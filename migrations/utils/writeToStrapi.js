@@ -90,6 +90,9 @@ const writeProgramToStrapi = async (programData, config) => {
 };
 
 const writeAgeGroup = async (ageGroup, config) => {
+  // Special case
+  const tervetuloaVaeltajaksiGuid = '3fe943a574a7e16e53cf1482c1602282';
+
   try {
     // First write the child activity groups
     const createdActivityGroups = [];
@@ -97,8 +100,20 @@ const writeAgeGroup = async (ageGroup, config) => {
     const activityGroups = ageGroup.activity_groups;
 
     for (const activityGroup of activityGroups) {
+      if (activityGroup.wp_guid === tervetuloaVaeltajaksiGuid) {
+        // Suomiprojekti is moved one level up
+        const suomiProjektiGroup = activityGroup.activity_groups[0];
+        const result = await writeActivityGroup(suomiProjektiGroup, config);
+        if (result?.entries) {
+          createdActivityGroups.push(...result.entries);
+        }
+        activityGroup.activity_groups = [];
+      } 
+
       const result = await writeActivityGroup(activityGroup, config);
-      createdActivityGroups.push(...result.entries);
+      if (result?.entries) {
+        createdActivityGroups.push(...result.entries);
+      }
     }
 
     // Then write the age group
@@ -141,12 +156,20 @@ const writeAgeGroup = async (ageGroup, config) => {
 };
 
 const writeActivityGroup = async (activityGroup, config) => {
+  // Special cases
+  const paussitGuids = ["5f6c4cefac801370cd255dd36e6dacbf", "31a10f9b294621699cf21f67b5d0c1ab"];
+
   try {
     const createdActivityGroups = [];
 
     // If this group has child activityGroups, we write this one as an activityGroupCategory, and link it to the child activityGroups.
     // The children groups are then returned so they are linked directly to the ageGroup.
-    if (activityGroup.activity_groups.length) {
+    if (
+      activityGroup.activity_groups.length &&
+      !paussitGuids.includes(activityGroup.wp_guid)
+    ) {
+      console.log('ActivityGroup with ActivityGroups:', activityGroup.locales['fi']?.title, ', wp_guid:', activityGroup.wp_guid);
+
       const entryData = {};
 
       for (const [locale, data] of Object.entries(activityGroup.locales)) {
@@ -171,6 +194,8 @@ const writeActivityGroup = async (activityGroup, config) => {
         entryData,
         config.forceUpdate
       );
+
+      updateTotalResults(result, contentTypes.activityGroupCategory);
 
       for (const group of activityGroup.activity_groups) {
         group.locales = Object.entries(group.locales).reduce(
@@ -235,9 +260,70 @@ const writeActivityGroup = async (activityGroup, config) => {
         // Then write the child activities
         const createdActivities = [];
 
-        for (const activity of activityGroup.activities) {
-          const result = await writeActivity(activity, config);
-          createdActivities.push(...result.entries);
+        if (paussitGuids.includes(activityGroup.wp_guid)) {
+          let activities = activityGroup.activity_groups?.map((group) => {
+            const additionalEducationalObjectives = Object.entries(
+              group.locales
+            ).reduce(
+              (prev, [locale, localeVersion]) => ({
+                ...prev,
+                [locale]: localeVersion.title,
+              }),
+              {}
+            );
+            const activities = group.activity_groups?.map((innerGroup) => {
+              const prefixes = Object.entries(innerGroup.locales).reduce(
+                (prev, [locale, localeVersion]) => ({
+                  ...prev,
+                  [locale]: localeVersion.title,
+                }),
+                {}
+              );
+              const activities = innerGroup.activities?.map((activity) => ({
+                ...activity,
+                locales: Object.entries(activity.locales).reduce(
+                  (obj, [locale, data]) => ({
+                    ...obj,
+                    [locale]: {
+                      ...data,
+                      title: `${prefixes[locale]}: ${data.title}`,
+                      educational_objectives: [
+                        ...(data.educational_objectives || []),
+                        {
+                          type: "activityEducationalObjective",
+                          slug: additionalEducationalObjectives[locale],
+                          locales: {
+                            fi: {
+                              name: additionalEducationalObjectives[locale],
+                              slug: additionalEducationalObjectives[locale],
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  }),
+                  {}
+                ),
+              }));
+              return activities;
+            });
+            return activities;
+          });
+
+
+          activities = activities.flat(2);
+
+          // console.log(activities);
+
+          for (const activity of activities) {
+            const result = await writeActivity(activity, config);
+            createdActivities.push(...result.entries);
+          }
+        } else {
+          for (const activity of activityGroup.activities) {
+            const result = await writeActivity(activity, config);
+            createdActivities.push(...result.entries);
+          }
         }
 
         entryData[locale].activities = createdActivities
@@ -266,7 +352,7 @@ const writeActivityGroup = async (activityGroup, config) => {
   }
 };
 
-const writeActivity = async (activity, config) => {
+const writeActivity = async (activity, config, modifyEntry) => {
   try {
     const entryData = {};
 
@@ -360,6 +446,10 @@ const writeActivity = async (activity, config) => {
 
         entryData[locale].suggestions = createdSuggestions.map((s) => s.id);
       }
+    }
+
+    if (modifyEntry) {
+      entryData = modifyEntry(entryData);
     }
 
     // Then write the activity
