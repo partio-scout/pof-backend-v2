@@ -620,7 +620,9 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
                       ]
                     },
                     "id": {
@@ -736,7 +738,9 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
                       ]
                     },
                     "id": {
@@ -833,7 +837,9 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
                       ]
                     },
                     "id": {
@@ -903,6 +909,224 @@
                         },
                         "updated_by": {
                           "type": "string"
+                        }
+                      }
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "activities": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "title",
+                          "content"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "content": {
+                            "type": "string"
+                          },
+                          "mandatory": {
+                            "type": "boolean"
+                          },
+                          "ingress": {
+                            "type": "string"
+                          },
+                          "group_sizes": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "level": {
+                            "type": "string"
+                          },
+                          "skill_areas": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "equimpent": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "educational_objectives": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "leader_skills": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "wp_guid": {
+                            "type": "string"
+                          },
+                          "leader_tasks": {
+                            "type": "string"
+                          },
+                          "suggestions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "activity_term": {
+                            "type": "string"
+                          },
+                          "locations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "duration": {
+                            "type": "string"
+                          },
+                          "main_image": {
+                            "type": "string"
+                          },
+                          "logo": {
+                            "type": "string"
+                          },
+                          "files": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "images": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "links": {
+                            "type": "component"
+                          },
+                          "age_group": {
+                            "type": "string"
+                          },
+                          "activity_group": {
+                            "type": "string"
+                          },
+                          "preparation_duration": {
+                            "type": "string"
+                          },
+                          "localizations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "locale": {
+                            "type": "string"
+                          },
+                          "published_at": {
+                            "type": "string"
+                          },
+                          "created_by": {
+                            "type": "string"
+                          },
+                          "updated_by": {
+                            "type": "string"
+                          }
                         }
                       }
                     },
@@ -1027,7 +1251,9 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
                       ]
                     },
                     "id": {
@@ -1143,7 +1369,9 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
                       ]
                     },
                     "id": {
@@ -1240,7 +1468,9 @@
                       "enum": [
                         "blocks.text-block",
                         "blocks.hero-block",
-                        "blocks.image-block"
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
                       ]
                     },
                     "id": {
@@ -1310,6 +1540,224 @@
                         },
                         "updated_by": {
                           "type": "string"
+                        }
+                      }
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "activities": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "title",
+                          "content"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "content": {
+                            "type": "string"
+                          },
+                          "mandatory": {
+                            "type": "boolean"
+                          },
+                          "ingress": {
+                            "type": "string"
+                          },
+                          "group_sizes": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "level": {
+                            "type": "string"
+                          },
+                          "skill_areas": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "equimpent": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "educational_objectives": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "leader_skills": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "wp_guid": {
+                            "type": "string"
+                          },
+                          "leader_tasks": {
+                            "type": "string"
+                          },
+                          "suggestions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "activity_term": {
+                            "type": "string"
+                          },
+                          "locations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "duration": {
+                            "type": "string"
+                          },
+                          "main_image": {
+                            "type": "string"
+                          },
+                          "logo": {
+                            "type": "string"
+                          },
+                          "files": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "images": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "links": {
+                            "type": "component"
+                          },
+                          "age_group": {
+                            "type": "string"
+                          },
+                          "activity_group": {
+                            "type": "string"
+                          },
+                          "preparation_duration": {
+                            "type": "string"
+                          },
+                          "localizations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "locale": {
+                            "type": "string"
+                          },
+                          "published_at": {
+                            "type": "string"
+                          },
+                          "created_by": {
+                            "type": "string"
+                          },
+                          "updated_by": {
+                            "type": "string"
+                          }
                         }
                       }
                     },
