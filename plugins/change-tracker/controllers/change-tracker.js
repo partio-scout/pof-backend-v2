@@ -23,8 +23,8 @@ module.exports = {
       change_time: created_at,
     };
 
-    // If the change was not to a content-change entry, write it as a new content-change
-    if (newChange.content_type !== "content-change") {
+    // If the change was not to a content-change or workflow entry, write it as a new content-change
+    if (!["content-change", "workflow"].includes(newChange.content_type)) {
       await strapi.query("content-change", "change-tracker").create(newChange);
     }
 
