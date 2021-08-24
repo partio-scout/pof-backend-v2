@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "content_changes",
+  "info": {
+    "name": "content-change"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "timestamps": true,
+    "increments": true,
+    "comment": ""
+  },
+  "attributes": {
+    "content_name": {
+      "type": "string",
+      "required": true
+    },
+    "content_type": {
+      "type": "string",
+      "required": true
+    },
+    "content_id": {
+      "type": "integer",
+      "required": true
+    },
+    "change_type": {
+      "type": "string",
+      "required": true
+    },
+    "change_time": {
+      "type": "datetime"
+    },
+    "deployed_at": {
+      "type": "datetime"
+    }
+  }
+}
