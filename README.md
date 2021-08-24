@@ -110,6 +110,12 @@ Content is indexed to Algolia search engine by using hook `strapi-hook-algolia`.
 
 Content can also be indexed in bulk with created plugin `search-indexer`, which is described [here](./plugins/search-indexer/README.md).
 
+Algolia's settings are saved in `/algolia-settings/settings.js`. If you modify the settings from Algolia's web console and want to save them here, just export the index's configuration and update it to the settings file to `indexes/<index name>`.
+You can run the settings to algolia with the utility `algolia-settings/set-settings.js`, which takes the application id and admin token as parameters, like this:
+```bash
+node algolia-settings/set-settings.js <application id> <admin token>
+```
+
 ---
 
 ## Notes
