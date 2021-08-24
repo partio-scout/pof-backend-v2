@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { request } from "strapi-helper-plugin";
 import { markdownToHtml } from "../../utils/markdown";
-import './guide.css';
+import "./guide.css";
 
 function Guide() {
   const { id } = useParams();
