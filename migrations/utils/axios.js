@@ -24,7 +24,7 @@ const createInstance = () => {
     },
     // This is important!! Without it the migration fails at some point to an error: connect ETIMEDOUT. More info here: https://stackoverflow.com/a/63585550/6025830
     httpsAgent: new https.Agent({ keepAlive: true }),
-    timeout: 120000,
+    timeout: 300000,
   });
 
   axiosInstance.interceptors.response.use(
