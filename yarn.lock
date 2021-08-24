@@ -11796,6 +11796,15 @@ strapi-plugin-github-actions@^0.1.0:
     dayjs "^1.10.4"
     http-errors "^1.8.0"
 
+strapi-plugin-i18n@3.6.3:
+  version "3.6.3"
+  resolved "https://registry.npmjs.org/strapi-plugin-i18n/-/strapi-plugin-i18n-3.6.3.tgz"
+  integrity sha512-qb0WghVEZ+kOC52wwXGyH90j/DsO4UXI6MSARdGtyNpLv2trCvFHflsYFX/Q1IVVMTnEGy9KI25skFAMjAJxfA==
+  dependencies:
+    axios "^0.21.1"
+    dayjs "^1.10.4"
+    http-errors "^1.8.0"
+
 strapi-plugin-i18n@3.6.7:
   version "3.6.7"
   resolved "https://registry.yarnpkg.com/strapi-plugin-i18n/-/strapi-plugin-i18n-3.6.7.tgz#799b3b205baf66fc6f4cecab1844ebb2a49b223b"
