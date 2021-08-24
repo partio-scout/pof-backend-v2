@@ -5,6 +5,6 @@ module.exports = ({ env }) => ({
     auth: {
       secret: env('ADMIN_JWT_SECRET', '255a8bb6c62d421ce19160f15bea8aa9'),
     },
-    watchIgnoreFiles: ['**/migrations/**', '**/tests/**']
+    watchIgnoreFiles: ['**/migrations/**', '**/tests/**', '**/algolia-settings/**']
   },
 });

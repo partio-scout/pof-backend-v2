@@ -15,7 +15,7 @@ const updateInAlgolia = async (contentType, data, draftMode = true) => {
     if (data.published_at) {
       await strapi.services.algolia.saveObject(sanitizedData, contentType);
     } else {
-      await deleteFromAlgolia(sanitizedData.id, contentType);
+      await deleteFromAlgolia(contentType, sanitizedData.id);
     }
   } else {
     await strapi.services.algolia.saveObject(sanitizedData, contentType);
