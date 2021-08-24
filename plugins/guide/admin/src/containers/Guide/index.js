@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { request } from "strapi-helper-plugin";
 import { markdownToHtml } from "../../utils/markdown";
+import './guide.css';
 
 function Guide() {
   const { id } = useParams();
@@ -16,8 +17,8 @@ function Guide() {
   return (
     <div style={{}}>
       <div style={{ borderBottom: "2px solid black", padding: "1rem 0" }}>
-        Viewing guide: <strong>{id.replace(".md", "")}</strong> -{" "}
-        <Link to={"/plugins/guide"}>Go back</Link>
+        Katsotaan ohjetta: <strong>{id.replace(".md", "")}</strong> -{" "}
+        <Link to={"/plugins/guide"}>Palaa alkuun</Link>
       </div>
       <div
         dangerouslySetInnerHTML={{ __html: guide }}

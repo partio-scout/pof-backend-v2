@@ -21,6 +21,7 @@ const HomePage = () => {
   return (
     <div>
       <h1>Ohjekirja</h1>
+      <p>Tästä ohjekirjasta löydät ohjeet Strapin käyttöön. Alla olevista linkeistä voit selata ohjeita.</p>
       <ul>
         {guides.map((guide) => (
           <li key={guide}>
