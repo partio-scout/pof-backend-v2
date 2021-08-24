@@ -22,4 +22,7 @@ Muiden sisältösivujen navigaatio on sisällöntuottajien muokattavissa `Front 
 
 ## <a name="sivuston-julkaisu"></a> Sivuston julkaisu
 
-Sivuston julkaisu eli sisällön päivitys tapahtuu manuaalisesti `Github Actions Plugin` -lisäosan (löytyy vasemmasta navigaatiosta `Plugins`-kategorian alta) avulla. Sieltä löytyy toiminto `Deploy site`, jonka voi ajaa painamalla vasemmalta `Start`. Tämä käynnistää sivuston julkaisun.
+Sivuston julkaisu eli sen sisällön päivitys tapahtuu manuaalisesti `Github Actions Plugin` -lisäosan (löytyy vasemmasta navigaatiosta `Plugins`-kategorian alta) avulla. Sieltä löytyy toiminto `Deploy site`, jonka voi ajaa painamalla vasemmalta `Start`. Tämä käynnistää sivuston julkaisun.
+![](/public/images/julkaisu.png)
+
+Ennen sivuston päivitystä kannattaa tarkistaa mitä muutoksia sivulle on menossa. Kaikista muutokset tallennetaan `Content-changes`-sisältötyyppeinä, ja ne löytyvät vasemmasta navigaatiosta kohdasta `Collection types / Content-changes`. Jokainen muutos näyttää mikä sisältötyyppi on kyseessä, mikä sen nimi on, minkä tyylinen muutos on kyseessä, koska muutos on tapahtunut ja koska muutos on julkaistu. Jos julkaistu (deployed_at) sarake on tyhjä, se tarkoittaa että sisältöä ei ole vielä julkaistu sivustolle ja se päivittyy seuraavassa ajossa. Julkaistu-sarake päivittyy n. minuutin viiveellä julkaisusta, joten jos tulet heti sivuston julkaisun jälkeen tarkastamaan muutokset, se tieto ei todennäköisesti ole vielä päivittynyt.
