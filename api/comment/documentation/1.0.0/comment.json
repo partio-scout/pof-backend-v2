@@ -580,6 +580,9 @@
               "like_count": {
                 "type": "integer"
               },
+              "pinned": {
+                "type": "boolean"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
