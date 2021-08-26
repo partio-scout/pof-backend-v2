@@ -1422,6 +1422,9 @@
               "activity_group_category": {
                 "type": "string"
               },
+              "sort_order": {
+                "type": "integer"
+              },
               "localizations": {
                 "type": "array",
                 "items": {

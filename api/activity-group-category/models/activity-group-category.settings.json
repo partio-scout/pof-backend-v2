@@ -36,6 +36,14 @@
     "activity_groups": {
       "via": "activity_group_category",
       "collection": "activity-group"
+    },
+    "sort_order": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer"
     }
   }
 }

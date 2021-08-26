@@ -143,8 +143,16 @@
       "model": "age-group"
     },
     "activity_group_category": {
-      "model": "activity-group-category",
-      "via": "activity_groups"
+      "via": "activity_groups",
+      "model": "activity-group-category"
+    },
+    "sort_order": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer"
     }
   }
 }
