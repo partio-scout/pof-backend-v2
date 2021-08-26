@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "08/20/2021 4:10:26 PM"
+    "x-generation-date": "08/26/2021 1:35:29 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -16272,6 +16272,9 @@
                 "activity_group_category": {
                   "type": "string"
                 },
+                "sort_order": {
+                  "type": "integer"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -16292,6 +16295,9 @@
                 }
               }
             }
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "localizations": {
             "type": "array",
@@ -16315,6 +16321,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "sort_order": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
@@ -16355,6 +16364,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "localizations": {
             "type": "array",
@@ -17044,6 +17056,9 @@
                   "type": "string"
                 }
               },
+              "sort_order": {
+                "type": "integer"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
@@ -17060,6 +17075,9 @@
                 "type": "string"
               }
             }
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "localizations": {
             "type": "array",
@@ -17129,6 +17147,9 @@
                 },
                 "activity_group_category": {
                   "type": "string"
+                },
+                "sort_order": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
@@ -17223,6 +17244,9 @@
           },
           "activity_group_category": {
             "type": "string"
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "localizations": {
             "type": "array",
@@ -18337,6 +18361,9 @@
               "activity_group_category": {
                 "type": "string"
               },
+              "sort_order": {
+                "type": "integer"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
@@ -18864,6 +18891,9 @@
                 },
                 "activity_group_category": {
                   "type": "string"
+                },
+                "sort_order": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
