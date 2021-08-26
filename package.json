@@ -30,6 +30,7 @@
     "knex": "0.21.18",
     "pg": "^8.6.0",
     "react-quill": "^1.3.5",
+    "showdown": "^1.9.1",
     "sqlite3": "5.0.0",
     "strapi": "3.6.7",
     "strapi-admin": "3.6.7",

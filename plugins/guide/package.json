@@ -7,9 +7,7 @@
     "icon": "plug",
     "description": "Description of guide plugin."
   },
-  "dependencies": {
-    "showdown": "^1.9.1"
-  },
+  "dependencies": {},
   "author": {
     "name": "A Strapi developer",
     "email": "",
