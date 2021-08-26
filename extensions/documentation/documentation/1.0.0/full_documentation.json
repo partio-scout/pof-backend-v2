@@ -16272,6 +16272,9 @@
                 "activity_group_category": {
                   "type": "string"
                 },
+                "sort_order": {
+                  "type": "integer"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -16292,6 +16295,9 @@
                 }
               }
             }
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "localizations": {
             "type": "array",
@@ -16315,6 +16321,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "sort_order": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
@@ -16355,6 +16364,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "localizations": {
             "type": "array",
@@ -17044,6 +17056,9 @@
                   "type": "string"
                 }
               },
+              "sort_order": {
+                "type": "integer"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
@@ -17060,6 +17075,9 @@
                 "type": "string"
               }
             }
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "localizations": {
             "type": "array",
@@ -17129,6 +17147,9 @@
                 },
                 "activity_group_category": {
                   "type": "string"
+                },
+                "sort_order": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
@@ -17223,6 +17244,9 @@
           },
           "activity_group_category": {
             "type": "string"
+          },
+          "sort_order": {
+            "type": "integer"
           },
           "localizations": {
             "type": "array",
@@ -18340,6 +18364,9 @@
               "activity_group_category": {
                 "type": "string"
               },
+              "sort_order": {
+                "type": "integer"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
@@ -18867,6 +18894,9 @@
                 },
                 "activity_group_category": {
                   "type": "string"
+                },
+                "sort_order": {
+                  "type": "integer"
                 },
                 "localizations": {
                   "type": "array",
