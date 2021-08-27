@@ -7,19 +7,49 @@ const cleanDeep = require("clean-deep");
  * @param {boolean} draftMode To use draft mode or not (default `true`)
  */
 const updateInAlgolia = async (contentType, data, draftMode = true) => {
+  if (draftMode) {
+    if (data.published_at && isSaveable(contentType, data)) {
+      await saveToAlgolia(contentType, data);
+    } else {
+      await deleteFromAlgolia(contentType, data.id);
+    }
+  } else {
+    if (isSaveable(contentType, data)) {
+      await saveToAlgolia(contentType, data);
+    } else {
+      await deleteFromAlgolia(contentType, data.id);
+    }
+  }
+};
+
+/**
+ * Check if it's safe to save the content in Algolia
+ * @param {string} contentType
+ * @param {Object} data
+ * @returns {boolean}
+ */
+const isSaveable = (contentType, data) => {
+  switch (contentType) {
+    case "activity":
+      return data.activity_group !== null;
+    case "activity-group":
+      return data.age_group !== null;
+    default:
+      return true;
+  }
+};
+
+/**
+ * Save an entry to Algolia
+ * @param {string} contentType Type of the entry
+ * @param {Object} data Entry's data
+ */
+const saveToAlgolia = async (contentType, data) => {
   if (process.env.NODE_ENV === "test" || !strapi.services.algolia) return;
 
   const sanitizedData = sanitizeData(data);
 
-  if (draftMode) {
-    if (data.published_at) {
-      await strapi.services.algolia.saveObject(sanitizedData, contentType);
-    } else {
-      await deleteFromAlgolia(contentType, sanitizedData.id);
-    }
-  } else {
-    await strapi.services.algolia.saveObject(sanitizedData, contentType);
-  }
+  await strapi.services.algolia.saveObject(sanitizedData, contentType);
 };
 
 /**
