@@ -153,6 +153,21 @@
         }
       },
       "type": "integer"
+    },
+    "content_area": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "blocks.text-block",
+        "blocks.hero-block",
+        "blocks.image-block",
+        "blocks.link-block",
+        "blocks.activity-block"
+      ]
     }
   }
 }

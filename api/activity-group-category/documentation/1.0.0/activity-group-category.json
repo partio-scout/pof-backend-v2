@@ -614,6 +614,9 @@
                 "sort_order": {
                   "type": "integer"
                 },
+                "content_area": {
+                  "type": "dynamiczone"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
