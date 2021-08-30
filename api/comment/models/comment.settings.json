@@ -20,8 +20,8 @@
       "required": true
     },
     "suggestion": {
-      "model": "suggestion",
-      "via": "comments"
+      "via": "comments",
+      "model": "suggestion"
     }
   }
 }

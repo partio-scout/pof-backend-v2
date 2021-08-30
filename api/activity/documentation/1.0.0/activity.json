@@ -831,6 +831,15 @@
                 "pinned": {
                   "type": "boolean"
                 },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "duration": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
