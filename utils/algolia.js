@@ -1,4 +1,5 @@
 const cleanDeep = require("clean-deep");
+const pick = require("lodash/pick");
 
 /**
  * Index/delete one entry in Algolia
@@ -7,6 +8,8 @@ const cleanDeep = require("clean-deep");
  * @param {boolean} draftMode To use draft mode or not (default `true`)
  */
 const updateInAlgolia = async (contentType, data, draftMode = true) => {
+  if (process.env.NODE_ENV === "test" || !strapi.services.algolia) return;
+
   if (draftMode) {
     if (data.published_at && isSaveable(contentType, data)) {
       await saveToAlgolia(contentType, data);
@@ -31,12 +34,30 @@ const updateInAlgolia = async (contentType, data, draftMode = true) => {
 const isSaveable = (contentType, data) => {
   switch (contentType) {
     case "activity":
-      return data.activity_group !== null;
+      return (
+        isRelationPublished(data.activity_group) &&
+        isRelationPublished(data.age_group)
+      );
     case "activity-group":
-      return data.age_group !== null;
+      return isRelationPublished(data.age_group);
+    case "suggestion":
+      return isRelationPublished(data.activity?.age_group);
     default:
       return true;
   }
+};
+/**
+ * Checks if a relation is published
+ * @param {number | object | undefined | null} relation
+ */
+const isRelationPublished = (relation) => {
+  if (relation == null || relation === undefined) return false;
+
+  if (typeof relation === "number") return true;
+
+  if (!relation?.id || !relation?.published_at) return false;
+
+  return true;
 };
 
 /**
@@ -45,9 +66,7 @@ const isSaveable = (contentType, data) => {
  * @param {Object} data Entry's data
  */
 const saveToAlgolia = async (contentType, data) => {
-  if (process.env.NODE_ENV === "test" || !strapi.services.algolia) return;
-
-  const sanitizedData = sanitizeData(data);
+  const sanitizedData = sanitizeData(contentType, data);
 
   await strapi.services.algolia.saveObject(sanitizedData, contentType);
 };
@@ -68,10 +87,26 @@ const deleteFromAlgolia = async (contentType, id) => {
  * @param {Object} data The entry
  * @returns Clean entry data
  */
-const sanitizeData = (data) => {
-  return cleanDeep(data, {
+const sanitizeData = (contentType, data) => {
+  let cleanedData = cleanDeep(data, {
     cleanKeys: ["created_by", "updated_by"],
   });
+
+  switch (contentType) {
+    case "activity-group":
+      return sanitizeActivityGroup(cleanedData);
+
+    default:
+      return cleanedData;
+  }
+};
+
+const sanitizeActivityGroup = (data) => {
+  return {
+    ...data,
+    // Get only id and title from activities, because otherwise there's too much data for Algolia
+    activities: data.activities.map((x) => pick(x, ["id", "title"])),
+  };
 };
 
 /**
@@ -92,4 +127,7 @@ module.exports = {
   updateInAlgolia,
   deleteFromAlgolia,
   createLifecycleHooks,
+  isRelationPublished,
+  sanitizeData,
+  sanitizeActivityGroup,
 };
