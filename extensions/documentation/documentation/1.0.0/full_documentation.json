@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "08/30/2021 10:52:28 AM"
+    "x-generation-date": "08/31/2021 1:22:50 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -25019,57 +25019,75 @@
                             "type": "string"
                           }
                         }
+                      },
+                      "subnavigation": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "title"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "page": {
+                              "required": [
+                                "id",
+                                "title"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "ingress": {
+                                  "type": "string"
+                                },
+                                "main_image": {
+                                  "type": "string"
+                                },
+                                "content": {
+                                  "type": "dynamiczone"
+                                },
+                                "main_text": {
+                                  "type": "string"
+                                },
+                                "meta_description": {
+                                  "type": "string"
+                                },
+                                "meta_title": {
+                                  "type": "string"
+                                },
+                                "localizations": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "locale": {
+                                  "type": "string"
+                                },
+                                "published_at": {
+                                  "type": "string"
+                                },
+                                "created_by": {
+                                  "type": "string"
+                                },
+                                "updated_by": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
-                    }
-                  }
-                },
-                "page": {
-                  "required": [
-                    "id",
-                    "title"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
-                    },
-                    "ingress": {
-                      "type": "string"
-                    },
-                    "main_image": {
-                      "type": "string"
-                    },
-                    "content": {
-                      "type": "dynamiczone"
-                    },
-                    "main_text": {
-                      "type": "string"
-                    },
-                    "meta_description": {
-                      "type": "string"
-                    },
-                    "meta_title": {
-                      "type": "string"
-                    },
-                    "localizations": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "locale": {
-                      "type": "string"
-                    },
-                    "published_at": {
-                      "type": "string"
-                    },
-                    "created_by": {
-                      "type": "string"
-                    },
-                    "updated_by": {
-                      "type": "string"
                     }
                   }
                 }
@@ -25253,57 +25271,75 @@
                             "type": "string"
                           }
                         }
+                      },
+                      "subnavigation": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "title"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "page": {
+                              "required": [
+                                "id",
+                                "title"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "ingress": {
+                                  "type": "string"
+                                },
+                                "main_image": {
+                                  "type": "string"
+                                },
+                                "content": {
+                                  "type": "dynamiczone"
+                                },
+                                "main_text": {
+                                  "type": "string"
+                                },
+                                "meta_description": {
+                                  "type": "string"
+                                },
+                                "meta_title": {
+                                  "type": "string"
+                                },
+                                "localizations": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "locale": {
+                                  "type": "string"
+                                },
+                                "published_at": {
+                                  "type": "string"
+                                },
+                                "created_by": {
+                                  "type": "string"
+                                },
+                                "updated_by": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
-                    }
-                  }
-                },
-                "page": {
-                  "required": [
-                    "id",
-                    "title"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
-                    },
-                    "ingress": {
-                      "type": "string"
-                    },
-                    "main_image": {
-                      "type": "string"
-                    },
-                    "content": {
-                      "type": "dynamiczone"
-                    },
-                    "main_text": {
-                      "type": "string"
-                    },
-                    "meta_description": {
-                      "type": "string"
-                    },
-                    "meta_title": {
-                      "type": "string"
-                    },
-                    "localizations": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "locale": {
-                      "type": "string"
-                    },
-                    "published_at": {
-                      "type": "string"
-                    },
-                    "created_by": {
-                      "type": "string"
-                    },
-                    "updated_by": {
-                      "type": "string"
                     }
                   }
                 }
@@ -26483,6 +26519,9 @@
           },
           "suggestion_notification_recipients": {
             "type": "string"
+          },
+          "translations": {
+            "type": "object"
           }
         }
       },
@@ -26490,6 +26529,9 @@
         "properties": {
           "suggestion_notification_recipients": {
             "type": "string"
+          },
+          "translations": {
+            "type": "object"
           },
           "created_by": {
             "type": "string"

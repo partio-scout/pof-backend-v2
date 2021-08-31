@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_navigation_subnavigations",
+  "collectionName": "components_navigation_subsubnavigations",
   "info": {
-    "name": "subnavigation",
+    "name": "subsubnavigation",
     "icon": "bars",
     "description": ""
   },
@@ -13,11 +13,6 @@
     },
     "page": {
       "model": "content-page"
-    },
-    "subnavigation": {
-      "type": "component",
-      "repeatable": true,
-      "component": "navigation.subsubnavigation"
     }
   }
 }

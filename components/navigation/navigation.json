@@ -15,9 +15,6 @@
       "type": "component",
       "repeatable": true,
       "component": "navigation.subnavigation"
-    },
-    "page": {
-      "model": "content-page"
     }
   }
 }

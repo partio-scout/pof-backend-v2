@@ -320,6 +320,9 @@
           },
           "suggestion_notification_recipients": {
             "type": "string"
+          },
+          "translations": {
+            "type": "object"
           }
         }
       },
@@ -327,6 +330,9 @@
         "properties": {
           "suggestion_notification_recipients": {
             "type": "string"
+          },
+          "translations": {
+            "type": "object"
           },
           "created_by": {
             "type": "string"

@@ -409,57 +409,75 @@
                             "type": "string"
                           }
                         }
+                      },
+                      "subnavigation": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "title"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "page": {
+                              "required": [
+                                "id",
+                                "title"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "ingress": {
+                                  "type": "string"
+                                },
+                                "main_image": {
+                                  "type": "string"
+                                },
+                                "content": {
+                                  "type": "dynamiczone"
+                                },
+                                "main_text": {
+                                  "type": "string"
+                                },
+                                "meta_description": {
+                                  "type": "string"
+                                },
+                                "meta_title": {
+                                  "type": "string"
+                                },
+                                "localizations": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "locale": {
+                                  "type": "string"
+                                },
+                                "published_at": {
+                                  "type": "string"
+                                },
+                                "created_by": {
+                                  "type": "string"
+                                },
+                                "updated_by": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
-                    }
-                  }
-                },
-                "page": {
-                  "required": [
-                    "id",
-                    "title"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
-                    },
-                    "ingress": {
-                      "type": "string"
-                    },
-                    "main_image": {
-                      "type": "string"
-                    },
-                    "content": {
-                      "type": "dynamiczone"
-                    },
-                    "main_text": {
-                      "type": "string"
-                    },
-                    "meta_description": {
-                      "type": "string"
-                    },
-                    "meta_title": {
-                      "type": "string"
-                    },
-                    "localizations": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "locale": {
-                      "type": "string"
-                    },
-                    "published_at": {
-                      "type": "string"
-                    },
-                    "created_by": {
-                      "type": "string"
-                    },
-                    "updated_by": {
-                      "type": "string"
                     }
                   }
                 }
@@ -643,57 +661,75 @@
                             "type": "string"
                           }
                         }
+                      },
+                      "subnavigation": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "title"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "page": {
+                              "required": [
+                                "id",
+                                "title"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "ingress": {
+                                  "type": "string"
+                                },
+                                "main_image": {
+                                  "type": "string"
+                                },
+                                "content": {
+                                  "type": "dynamiczone"
+                                },
+                                "main_text": {
+                                  "type": "string"
+                                },
+                                "meta_description": {
+                                  "type": "string"
+                                },
+                                "meta_title": {
+                                  "type": "string"
+                                },
+                                "localizations": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "locale": {
+                                  "type": "string"
+                                },
+                                "published_at": {
+                                  "type": "string"
+                                },
+                                "created_by": {
+                                  "type": "string"
+                                },
+                                "updated_by": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
-                    }
-                  }
-                },
-                "page": {
-                  "required": [
-                    "id",
-                    "title"
-                  ],
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
-                    },
-                    "ingress": {
-                      "type": "string"
-                    },
-                    "main_image": {
-                      "type": "string"
-                    },
-                    "content": {
-                      "type": "dynamiczone"
-                    },
-                    "main_text": {
-                      "type": "string"
-                    },
-                    "meta_description": {
-                      "type": "string"
-                    },
-                    "meta_title": {
-                      "type": "string"
-                    },
-                    "localizations": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "locale": {
-                      "type": "string"
-                    },
-                    "published_at": {
-                      "type": "string"
-                    },
-                    "created_by": {
-                      "type": "string"
-                    },
-                    "updated_by": {
-                      "type": "string"
                     }
                   }
                 }
