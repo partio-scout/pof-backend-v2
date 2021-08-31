@@ -105,7 +105,7 @@ const sanitizeActivityGroup = (data) => {
   return {
     ...data,
     // Get only id and title from activities, because otherwise there's too much data for Algolia
-    activities: data.activities.map((x) => pick(x, ["id", "title"])),
+    activities: data.activities?.map((x) => pick(x, ["id", "title"])) || [],
   };
 };
 
