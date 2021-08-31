@@ -11,19 +11,19 @@ Uuden sisällön luominen tapahtuu aina kyseisen sisältötyypin listausnäkymä
 Sivuston navigaatio rakentuu osin automaattisesti ja osin manuaalisesti Strapissa olevan sisällön mukaan.
 
 ### Ohjelmasisältö
-![](/public/images/ohjelma-navigaatio.png)
+![](/images/ohjelma-navigaatio.png)
 
 Ohjelmasisällön (Ikäryhmät, Aktiviteettipaketit ja Aktiviteetit) navigaatio muodostuu automaattisesti sen hierarkian perusteella, ja se löytyy sivuston päänavigaatiosta aina ensimmäiseltä paikalta.
 
 ### Muut sivut
-![](/public/images/muu-navigaatio.png)
+![](/images/muu-navigaatio.png)
 
 Muiden sisältösivujen navigaatio on sisällöntuottajien muokattavissa `Front page`-sisällön kautta, joka löytyy vasemmasta navigaatiosta kategorian `Single types` alta. Siellä navigaatio on muokattavissa kohdassa `Navigation`. Siinä olevat kohteet määrittävät sivuston navigaation muiden kuin ohjelmasisällön osalta. Ensimmäisen tason navigaatiokohteilla on kentät `Title` ja `Subnavigation`. `Title` määrittää luodun navigaatiolinkin tekstin, ja `Subnavigation` sen alle muodostuvan alinavigaation. `Subnavigationiin` tulevat kohteet ovat samankaltaisia kuin ylemmällä tasolla, mutta niissä ei ole `Subnavigation`-kenttää, vaan `Page`-kenttä, johon valitaan sivu mihin luotu linkki tulee osoittamaan.
 
 ## <a name="sivuston-julkaisu"></a> Verkkosivuston päivitys
 
 Verkkosivuston sisällön päivitys tapahtuu manuaalisesti `Github Actions Plugin` -lisäosan avulla (löytyy vasemmasta navigaatiosta `Plugins`-kategorian alta). Sieltä löytyy toiminto `Deploy site`, jonka voi ajaa painamalla vasemmalta `Start`. Tämä käynnistää sivuston päivittämisen.
-![](/public/images/julkaisu.png)
+![](/images/julkaisu.png)
 
 Ennen sivuston päivitystä kannattaa tarkistaa mitä muutoksia sivustolle on menossa. Kaikki muutokset tallennetaan `Content-changes`-sisältötyyppeinä, ja ne löytyvät vasemmasta navigaatiosta kohdasta `Collection types / Content-changes`. Jokainen muutos näyttää mikä sisältötyyppi on kyseessä, mikä sen nimi on, minkä tyylinen muutos on kyseessä, koska muutos on tapahtunut ja koska muutos on julkaistu. Jos julkaistu (deployed_at) sarake on tyhjä, se tarkoittaa että sisältöä ei ole vielä julkaistu sivustolle ja se päivittyy seuraavassa ajossa. Julkaistu-sarake päivittyy n. minuutin viiveellä julkaisusta, joten jos tulet heti sivuston julkaisun jälkeen tarkastamaan muutokset, se tieto ei todennäköisesti ole vielä päivittynyt.
 
