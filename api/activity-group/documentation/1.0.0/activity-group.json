@@ -1097,7 +1097,8 @@
               "title",
               "content",
               "minimum_age",
-              "maximum_age"
+              "maximum_age",
+              "color"
             ],
             "properties": {
               "id": {
@@ -1156,6 +1157,9 @@
               },
               "lower_content_area": {
                 "type": "dynamiczone"
+              },
+              "color": {
+                "type": "string"
               },
               "localizations": {
                 "type": "array",

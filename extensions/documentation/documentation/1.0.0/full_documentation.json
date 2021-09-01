@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "08/31/2021 4:42:34 PM"
+    "x-generation-date": "09/01/2021 11:49:56 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -16958,7 +16958,8 @@
               "title",
               "content",
               "minimum_age",
-              "maximum_age"
+              "maximum_age",
+              "color"
             ],
             "properties": {
               "id": {
@@ -17017,6 +17018,9 @@
               },
               "lower_content_area": {
                 "type": "dynamiczone"
+              },
+              "color": {
+                "type": "string"
               },
               "localizations": {
                 "type": "array",
@@ -19330,7 +19334,8 @@
               "title",
               "content",
               "minimum_age",
-              "maximum_age"
+              "maximum_age",
+              "color"
             ],
             "properties": {
               "id": {
@@ -19389,6 +19394,9 @@
               },
               "lower_content_area": {
                 "type": "dynamiczone"
+              },
+              "color": {
+                "type": "string"
               },
               "localizations": {
                 "type": "array",
@@ -19921,7 +19929,8 @@
           "title",
           "content",
           "minimum_age",
-          "maximum_age"
+          "maximum_age",
+          "color"
         ],
         "properties": {
           "id": {
@@ -21244,6 +21253,9 @@
               ]
             }
           },
+          "color": {
+            "type": "string"
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -21252,7 +21264,8 @@
                 "title",
                 "content",
                 "minimum_age",
-                "maximum_age"
+                "maximum_age",
+                "color"
               ],
               "properties": {
                 "id": {
@@ -21312,6 +21325,9 @@
                 "lower_content_area": {
                   "type": "dynamiczone"
                 },
+                "color": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -21347,7 +21363,8 @@
           "title",
           "content",
           "minimum_age",
-          "maximum_age"
+          "maximum_age",
+          "color"
         ],
         "properties": {
           "title": {
@@ -22268,6 +22285,9 @@
                 }
               ]
             }
+          },
+          "color": {
+            "type": "string"
           },
           "localizations": {
             "type": "array",
