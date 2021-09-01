@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_blocks_content_page_blocks",
+  "info": {
+    "name": "Content Page Block",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "content_pages": {
+      "collection": "content-page"
+    },
+    "block_width": {
+      "model": "block-width"
+    }
+  }
+}
