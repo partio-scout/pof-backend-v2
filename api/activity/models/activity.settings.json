@@ -100,8 +100,8 @@
       "model": "activity-term"
     },
     "locations": {
-      "collection": "location",
       "via": "activities",
+      "collection": "location",
       "dominant": true
     },
     "duration": {
