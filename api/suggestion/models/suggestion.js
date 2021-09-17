@@ -13,8 +13,8 @@ const notifyAboutSuggestion = async (suggestion) => {
 
   const recipients = settings.suggestion_notification_recipients
     ?.split(",")
-    .map((email) => email.trim());
-
+    .map((email) => email.trim()) || [];
+ 
   await Promise.all(
     recipients.map(
       async (recipient) =>
@@ -45,9 +45,9 @@ const sendSuggestionNotification = async (recipient, suggestion) => {
 
 module.exports = {
   lifecycles: {
-    async afterCreate(result, data) {
+    afterCreate(result, data) {
       if (result.from_web) {
-        await notifyAboutSuggestion(result);
+        notifyAboutSuggestion(result);
       }
     },
     async beforeUpdate(params, data) {
