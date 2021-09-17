@@ -2,25 +2,27 @@ const { isRelationPublished, sanitizeData, sanitizeActivityGroup } = require("..
 
 describe("Algolia utils", () => {
   describe("isRelationPublished", () => {
-    it("catches null relations", () => {
-      expect(isRelationPublished(null)).toEqual(false);
+    it("catches null relations", async () => {
+      const value = await isRelationPublished(null);
+      expect(value).toEqual(false);
     });
-    it("catches undefined relations", () => {
-      expect(isRelationPublished(undefined)).toEqual(false);
+    it("catches undefined relations", async () => {
+      const value = await isRelationPublished(undefined);
+      expect(value).toEqual(false);
     });
-    it("catches relations with no id", () => {
-      expect(isRelationPublished({})).toEqual(false);
+    it("catches relations with no id", async () => {
+      const value = await isRelationPublished({});
+      expect(value).toEqual(false);
     });
-    it("catches relations with no published_at", () => {
-      expect(isRelationPublished({ id: 1 })).toEqual(false);
+    it("catches relations with no published_at", async () => {
+      const value = await isRelationPublished({ id: 1 });
+      expect(value).toEqual(false);
     });
-    it("passes relations with published_at and id", () => {
+    it("passes relations with published_at and id", async () => {
+      const value = await isRelationPublished({ id: 1, published_at: "2020-01-01" });
       expect(
-        isRelationPublished({ id: 1, published_at: "2020-01-01" })
+        value
       ).toEqual(true);
-    });
-    it("passes number relations", () => {
-      expect(isRelationPublished(10)).toEqual(true);
     });
   });
 

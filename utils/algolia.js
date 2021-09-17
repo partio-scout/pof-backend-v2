@@ -61,7 +61,7 @@ const isRelationPublished = async (relation, contentType) => {
       // If no entity is returned, it is not published
       if (!entity) return false;
 
-      return isRelationPublished(entity);
+      return await isRelationPublished(entity);
     } catch (error) {
       console.error(error);
     }
