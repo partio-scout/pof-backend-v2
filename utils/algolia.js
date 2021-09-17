@@ -11,13 +11,13 @@ const updateInAlgolia = async (contentType, data, draftMode = true) => {
   if (process.env.NODE_ENV === "test" || !strapi.services.algolia) return;
 
   if (draftMode) {
-    if (data.published_at && isSaveable(contentType, data)) {
+    if (data.published_at && await isSaveable(contentType, data)) {
       await saveToAlgolia(contentType, data);
     } else {
       await deleteFromAlgolia(contentType, data.id);
     }
   } else {
-    if (isSaveable(contentType, data)) {
+    if (await isSaveable(contentType, data)) {
       await saveToAlgolia(contentType, data);
     } else {
       await deleteFromAlgolia(contentType, data.id);
@@ -29,19 +29,19 @@ const updateInAlgolia = async (contentType, data, draftMode = true) => {
  * Check if it's safe to save the content in Algolia
  * @param {string} contentType
  * @param {Object} data
- * @returns {boolean}
+ * @returns {Promise<boolean>}
  */
-const isSaveable = (contentType, data) => {
+const isSaveable = async (contentType, data) => {
   switch (contentType) {
     case "activity":
       return (
-        isRelationPublished(data.activity_group) &&
-        isRelationPublished(data.age_group)
+        await isRelationPublished(data.activity_group, 'activity-group') &&
+        await isRelationPublished(data.age_group, 'age-group')
       );
     case "activity-group":
-      return isRelationPublished(data.age_group);
+      return await isRelationPublished(data.age_group, 'age-group');
     case "suggestion":
-      return isRelationPublished(data.activity?.age_group);
+      return await isRelationPublished(data.activity?.age_group, 'age-group');
     default:
       return true;
   }
@@ -49,12 +49,24 @@ const isSaveable = (contentType, data) => {
 /**
  * Checks if a relation is published
  * @param {number | object | undefined | null} relation
+ * @returns {Promise<boolean>}
  */
-const isRelationPublished = (relation) => {
+const isRelationPublished = async (relation, contentType) => {
   if (relation == null || relation === undefined) return false;
 
-  if (typeof relation === "number") return true;
+  if (typeof relation === "number") {
+    try {
+      let entity = await strapi.services[contentType].findOne({ id: relation });
+      
+      // If no entity is returned, it is not published
+      if (!entity) return false;
 
+      return isRelationPublished(entity);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   if (!relation?.id || !relation?.published_at) return false;
 
   return true;
