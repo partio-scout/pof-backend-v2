@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "09/16/2021 3:16:21 PM"
+    "x-generation-date": "09/20/2021 5:14:31 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -16278,6 +16278,18 @@
                 "content_area": {
                   "type": "dynamiczone"
                 },
+                "mandatory_activities_title": {
+                  "type": "string"
+                },
+                "mandatory_activities_description": {
+                  "type": "string"
+                },
+                "optional_activities_title": {
+                  "type": "string"
+                },
+                "optional_activities_description": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -17635,6 +17647,18 @@
               ]
             }
           },
+          "mandatory_activities_title": {
+            "type": "string"
+          },
+          "mandatory_activities_description": {
+            "type": "string"
+          },
+          "optional_activities_title": {
+            "type": "string"
+          },
+          "optional_activities_description": {
+            "type": "string"
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -17709,6 +17733,18 @@
                 },
                 "content_area": {
                   "type": "dynamiczone"
+                },
+                "mandatory_activities_title": {
+                  "type": "string"
+                },
+                "mandatory_activities_description": {
+                  "type": "string"
+                },
+                "optional_activities_title": {
+                  "type": "string"
+                },
+                "optional_activities_description": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -18355,6 +18391,18 @@
                 }
               ]
             }
+          },
+          "mandatory_activities_title": {
+            "type": "string"
+          },
+          "mandatory_activities_description": {
+            "type": "string"
+          },
+          "optional_activities_title": {
+            "type": "string"
+          },
+          "optional_activities_description": {
+            "type": "string"
           },
           "localizations": {
             "type": "array",
@@ -19494,6 +19542,18 @@
               "content_area": {
                 "type": "dynamiczone"
               },
+              "mandatory_activities_title": {
+                "type": "string"
+              },
+              "mandatory_activities_description": {
+                "type": "string"
+              },
+              "optional_activities_title": {
+                "type": "string"
+              },
+              "optional_activities_description": {
+                "type": "string"
+              },
               "localizations": {
                 "type": "array",
                 "items": {
@@ -20028,6 +20088,18 @@
                 },
                 "content_area": {
                   "type": "dynamiczone"
+                },
+                "mandatory_activities_title": {
+                  "type": "string"
+                },
+                "mandatory_activities_description": {
+                  "type": "string"
+                },
+                "optional_activities_title": {
+                  "type": "string"
+                },
+                "optional_activities_description": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
