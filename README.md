@@ -122,3 +122,5 @@ node algolia-settings/set-settings.js <application id> <admin token>
 
 Since Strapi is missing `Sámi` locales (for now), they are added via a patch file `patches/strapi-plugin-i18n+3.6.1.patch`, which is automatically run after `yarn install` and such.
 
+Another patch: `patches/strapi-middleware-cache+1.5.0.patch` is for fixing a bug in that package. There is an issue about it already in [GitHub](https://github.com/patrixr/strapi-middleware-cache/issues/54).
+
