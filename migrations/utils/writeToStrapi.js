@@ -52,6 +52,16 @@ let updatedTags = Object.keys(contentTypes).reduce(
   {}
 );
 
+const shouldSkip = (contentType, config) => {
+  if (config.include?.length) {
+    return !config.include.includes(contentType);
+  }
+  if (config.skip?.length) {
+    return config.skip.includes(contentType);
+  }
+  return false;
+}
+
 const writeProgramToStrapi = async (programData, config) => {
   console.log("Writing program data to Strapi");
   if (config.testing) {
@@ -91,7 +101,7 @@ const writeProgramToStrapi = async (programData, config) => {
 
 const writeAgeGroup = async (ageGroup, config) => {
   // Special case
-  const tervetuloaVaeltajaksiGuid = '3fe943a574a7e16e53cf1482c1602282';
+  const tervetuloaVaeltajaksiGuid = "3fe943a574a7e16e53cf1482c1602282";
 
   try {
     // First write the child activity groups
@@ -108,7 +118,7 @@ const writeAgeGroup = async (ageGroup, config) => {
           createdActivityGroups.push(...result.entries);
         }
         activityGroup.activity_groups = [];
-      } 
+      }
 
       const result = await writeActivityGroup(activityGroup, config);
       if (result?.entries) {
@@ -135,21 +145,24 @@ const writeAgeGroup = async (ageGroup, config) => {
       };
     }
 
-    const existingEntry = await findEntry(contentTypes.ageGroup, {
-      wp_guid: ageGroup.wp_guid,
-      _locale: Object.keys(ageGroup.locales)[0],
-    });
+    if (!shouldSkip("age-group", config)) {
+      const existingEntry = await findEntry(contentTypes.ageGroup, {
+        wp_guid: ageGroup.wp_guid,
+        _locale: Object.keys(ageGroup.locales)[0],
+      });
 
-    const result = await createOrUpdateEntry(
-      contentTypes.ageGroup,
-      existingEntry?.id,
-      entryData,
-      config.forceUpdate
-    );
+      const result = await createOrUpdateEntry(
+        contentTypes.ageGroup,
+        existingEntry?.id,
+        entryData,
+        config.forceUpdate
+      );
 
-    updateTotalResults(result, contentTypes.ageGroup);
+      updateTotalResults(result, contentTypes.ageGroup);
 
-    return result;
+      return result;
+    }
+    return { entries: [] };
   } catch (error) {
     throw error;
   }
@@ -157,7 +170,10 @@ const writeAgeGroup = async (ageGroup, config) => {
 
 const writeActivityGroup = async (activityGroup, config) => {
   // Special cases
-  const paussitGuids = ["5f6c4cefac801370cd255dd36e6dacbf", "31a10f9b294621699cf21f67b5d0c1ab"];
+  const paussitGuids = [
+    "5f6c4cefac801370cd255dd36e6dacbf",
+    "31a10f9b294621699cf21f67b5d0c1ab",
+  ];
 
   try {
     const createdActivityGroups = [];
@@ -168,7 +184,12 @@ const writeActivityGroup = async (activityGroup, config) => {
       activityGroup.activity_groups.length &&
       !paussitGuids.includes(activityGroup.wp_guid)
     ) {
-      console.log('ActivityGroup with ActivityGroups:', activityGroup.locales['fi']?.title, ', wp_guid:', activityGroup.wp_guid);
+      console.log(
+        "ActivityGroup with ActivityGroups:",
+        activityGroup.locales["fi"]?.title,
+        ", wp_guid:",
+        activityGroup.wp_guid
+      );
 
       const entryData = {};
 
@@ -232,121 +253,122 @@ const writeActivityGroup = async (activityGroup, config) => {
         activity_group_category: data.activity_group_category,
       };
 
-      if (!config.skip.includes("subactivitygroup_term")) {
+      if (!shouldSkip("subactivitygroup_term", config)) {
         entryData[locale].subactivitygroup_term = (
           await writeTerm(data.subtaskgroup_term, config)
         ).entries[0]?.id;
       }
 
-      if (!config.skip.includes("activitygroup_term")) {
+      if (!shouldSkip("activitygroup_term", config)) {
         entryData[locale].activitygroup_term = (
           await writeTerm(data.taskgroup_term, config)
         ).entries[0]?.id;
       }
 
-      if (!config.skip.includes("subactivity_term")) {
+      if (!shouldSkip("subactivity_term", config)) {
         entryData[locale].subactivity_term = (
           await writeTerm(data.subtask_term, config)
         ).entries[0]?.id;
       }
 
-      if (!config.skip.includes("files")) {
+      if (!shouldSkip("files", config)) {
         entryData[locale].main_image = await writeFile(data.main_image);
         entryData[locale].logo = await writeFile(data.logo);
         entryData[locale].files = await writeFiles(data.files);
       }
 
-      if (!config.skip.includes("activity")) {
-        // Then write the child activities
-        const createdActivities = [];
+      // Then write the child activities
+      const createdActivities = [];
 
-        if (paussitGuids.includes(activityGroup.wp_guid)) {
-          let activities = activityGroup.activity_groups?.map((group) => {
-            const additionalEducationalObjectives = Object.entries(
-              group.locales
-            ).reduce(
+      if (paussitGuids.includes(activityGroup.wp_guid)) {
+        let activities = activityGroup.activity_groups?.map((group) => {
+          const additionalEducationalObjectives = Object.entries(
+            group.locales
+          ).reduce(
+            (prev, [locale, localeVersion]) => ({
+              ...prev,
+              [locale]: localeVersion.title,
+            }),
+            {}
+          );
+          const activities = group.activity_groups?.map((innerGroup) => {
+            const prefixes = Object.entries(innerGroup.locales).reduce(
               (prev, [locale, localeVersion]) => ({
                 ...prev,
                 [locale]: localeVersion.title,
               }),
               {}
             );
-            const activities = group.activity_groups?.map((innerGroup) => {
-              const prefixes = Object.entries(innerGroup.locales).reduce(
-                (prev, [locale, localeVersion]) => ({
-                  ...prev,
-                  [locale]: localeVersion.title,
-                }),
-                {}
-              );
-              const activities = innerGroup.activities?.map((activity) => ({
-                ...activity,
-                locales: Object.entries(activity.locales).reduce(
-                  (obj, [locale, data]) => ({
-                    ...obj,
-                    [locale]: {
-                      ...data,
-                      title: `${prefixes[locale]}: ${data.title}`,
-                      educational_objectives: [
-                        ...(data.educational_objectives || []),
-                        {
-                          type: "activityEducationalObjective",
-                          slug: additionalEducationalObjectives[locale],
-                          locales: {
-                            fi: {
-                              name: additionalEducationalObjectives[locale],
-                              slug: additionalEducationalObjectives[locale],
-                            },
+            const activities = innerGroup.activities?.map((activity) => ({
+              ...activity,
+              locales: Object.entries(activity.locales).reduce(
+                (obj, [locale, data]) => ({
+                  ...obj,
+                  [locale]: {
+                    ...data,
+                    title: `${prefixes[locale]}: ${data.title}`,
+                    educational_objectives: [
+                      ...(data.educational_objectives || []),
+                      {
+                        type: "activityEducationalObjective",
+                        slug: additionalEducationalObjectives[locale],
+                        locales: {
+                          fi: {
+                            name: additionalEducationalObjectives[locale],
+                            slug: additionalEducationalObjectives[locale],
                           },
                         },
-                      ],
-                    },
-                  }),
-                  {}
-                ),
-              }));
-              return activities;
-            });
+                      },
+                    ],
+                  },
+                }),
+                {}
+              ),
+            }));
             return activities;
           });
+          return activities;
+        });
 
+        activities = activities.flat(2);
 
-          activities = activities.flat(2);
-
-          // console.log(activities);
-
-          for (const activity of activities) {
-            const result = await writeActivity(activity, config);
-            createdActivities.push(...result.entries);
-          }
-        } else {
-          for (const activity of activityGroup.activities) {
-            const result = await writeActivity(activity, config);
-            createdActivities.push(...result.entries);
-          }
+        for (const activity of activities) {
+          const result = await writeActivity(activity, config);
+          createdActivities.push(...result.entries);
         }
-
-        entryData[locale].activities = createdActivities
-          .filter((x) => x.locale === locale)
-          .map((x) => x.id);
+      } else {
+        for (const activity of activityGroup.activities) {
+          const result = await writeActivity(activity, config);
+          createdActivities.push(...result.entries);
+        }
       }
+
+      entryData[locale].activities =
+        createdActivities.length > 0
+          ? createdActivities
+              .filter((x) => x.locale === locale)
+              .map((x) => x.id)
+          : undefined;
     }
 
-    const existingEntry = await findEntry(contentTypes.activityGroup, {
-      wp_guid: activityGroup.wp_guid,
-      _locale: "all",
-    });
+    if (!shouldSkip("activity-, configgroup")) {
+      const existingEntry = await findEntry(contentTypes.activityGroup, {
+        wp_guid: activityGroup.wp_guid,
+        _locale: "all",
+      });
 
-    const result = await createOrUpdateEntry(
-      contentTypes.activityGroup,
-      existingEntry?.id,
-      entryData,
-      config.forceUpdate
-    );
+      const result = await createOrUpdateEntry(
+        contentTypes.activityGroup,
+        existingEntry?.id,
+        entryData,
+        config.forceUpdate
+      );
 
-    updateTotalResults(result, contentTypes.activityGroup);
+      updateTotalResults(result, contentTypes.activityGroup);
 
-    return result;
+      return result;
+    }
+    return { entries: [] };
   } catch (error) {
     throw error;
   }
@@ -367,25 +389,25 @@ const writeActivity = async (activity, config, modifyEntry) => {
         leader_tasks: data.leader_tasks,
       };
 
-      if (!config.skip.includes("files")) {
+      if (!shouldSkip("files", config)) {
         entryData[locale].main_image = await writeFile(data.main_image);
         entryData[locale].logo = await writeFile(data.logo);
         entryData[locale].files = await writeFiles(data.files);
       }
 
-      if (!config.skip.includes("activity_term")) {
+      if (!shouldSkip("activity_term", config)) {
         entryData[locale].activity_term = (
           await writeTerm(data.task_term, config)
         ).entries[0]?.id;
       }
 
-      if (!config.skip.includes("duration")) {
+      if (!shouldSkip("duration", config)) {
         entryData[locale].duration = (
           await writeTag(data.duration, config)
         ).entries[0]?.id;
       }
 
-      if (!config.skip.includes("location")) {
+      if (!shouldSkip("location", config)) {
         entryData[locale].locations = await WriteTags(
           data.locations,
           contentTypes.activityLocation,
@@ -393,7 +415,7 @@ const writeActivity = async (activity, config, modifyEntry) => {
         );
       }
 
-      if (!config.skip.includes("skill_area")) {
+      if (!shouldSkip("skill_area", config)) {
         entryData[locale].skill_areas = await WriteTags(
           data.skill_areas,
           contentTypes.activitySkillArea,
@@ -401,7 +423,7 @@ const writeActivity = async (activity, config, modifyEntry) => {
         );
       }
 
-      if (!config.skip.includes("leader_skill")) {
+      if (!shouldSkip("leader_skill", config)) {
         entryData[locale].leader_skills = await WriteTags(
           data.leader_skills,
           contentTypes.activityLeaderSkill,
@@ -409,7 +431,7 @@ const writeActivity = async (activity, config, modifyEntry) => {
         );
       }
 
-      if (!config.skip.includes("educational_objective")) {
+      if (!shouldSkip("educational_objective", config)) {
         entryData[locale].educational_objectives = await WriteTags(
           data.educational_objectives,
           contentTypes.activityEducationalObjective,
@@ -417,7 +439,7 @@ const writeActivity = async (activity, config, modifyEntry) => {
         );
       }
 
-      if (!config.skip.includes("group_size")) {
+      if (!shouldSkip("group_size", config)) {
         entryData[locale].group_sizes = await WriteTags(
           data.group_sizes,
           contentTypes.activityGroupSize,
@@ -425,7 +447,7 @@ const writeActivity = async (activity, config, modifyEntry) => {
         );
       }
 
-      if (!config.skip.includes("preparation_duration")) {
+      if (!shouldSkip("preparation_duration", config)) {
         entryData[locale].preparation_duration = (
           await writeTag(
             data.preparation_duration,
@@ -435,7 +457,7 @@ const writeActivity = async (activity, config, modifyEntry) => {
         ).entries[0]?.id;
       }
 
-      if (!config.skip.includes("suggestion")) {
+      if (!shouldSkip("suggestion", config)) {
         // Write the child suggestions
         const createdSuggestions = [];
 
@@ -452,22 +474,25 @@ const writeActivity = async (activity, config, modifyEntry) => {
       entryData = modifyEntry(entryData);
     }
 
-    // Then write the activity
-    const existingEntry = await findEntry(contentTypes.activity, {
-      wp_guid: activity.wp_guid,
-      _locale: "all",
-    });
+    if (!shouldSkip("acitivty", config)) {
+      // Then write the activity
+      const existingEntry = await findEntry(contentTypes.activity, {
+        wp_guid: activity.wp_guid,
+        _locale: "all",
+      });
 
-    const result = await createOrUpdateEntry(
-      contentTypes.activity,
-      existingEntry?.id,
-      entryData,
-      config.forceUpdate
-    );
+      const result = await createOrUpdateEntry(
+        contentTypes.activity,
+        existingEntry?.id,
+        entryData,
+        config.forceUpdate
+      );
 
-    updateTotalResults(result, contentTypes.activity);
+      updateTotalResults(result, contentTypes.activity);
 
-    return result;
+      return result;
+    }
+    return { entries: [] };
   } catch (error) {
     throw error;
   }
@@ -535,12 +560,15 @@ const writeSuggestion = async (suggestion, config) => {
       _locale: "all",
     });
 
-    if (!config.skip.includes("files")) {
+    if (!shouldSkip("files", config)) {
       suggestion.files = await writeFiles(suggestion.files);
     }
 
     const data = {
-      [suggestion.locale]: suggestion,
+      [suggestion.locale]: {
+        ...suggestion,
+        content: removeHtml(suggestion.content),
+      },
     };
 
     const result = await createOrUpdateEntry(
@@ -556,6 +584,10 @@ const writeSuggestion = async (suggestion, config) => {
   } catch (error) {
     throw error;
   }
+};
+
+const removeHtml = (input) => {
+  return input.replace(/(<([^>]+)>)/gi, "");
 };
 
 const writeTerm = async (term, config) => {

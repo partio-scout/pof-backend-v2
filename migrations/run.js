@@ -40,6 +40,11 @@ const argv = yargs
     alias: "s",
     type: 'array'
   })
+  .option("include", {
+    description: "Inlude content types (this trumps skip)",
+    alias: "i",
+    type: 'array'
+  })
   .option("ageGroup", {
     description: "Migrate single age group (write only)",
     alias: "a",
@@ -55,6 +60,7 @@ const config = {
   forceUpdate: argv.forceUpdate || false,
   noCache: argv.noCache || false,
   skip: argv.skip || [],
+  include: argv.include || [],
   ageGroup: argv.ageGroup,
 };
 
