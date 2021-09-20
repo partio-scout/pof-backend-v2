@@ -1,6 +1,6 @@
 const { getSettings } = require('../utils/content');
 
-const notifyAboutContent = async (content, type) => {
+const notifyAboutContent = async (content, type, title = undefined) => {
   const settings = await getSettings();
 
   if (!settings) {
@@ -15,20 +15,20 @@ const notifyAboutContent = async (content, type) => {
   await Promise.all(
     recipients.map(
       async (recipient) =>
-        await sendContentNotification(recipient, content, type)
+        await sendContentNotification(recipient, content, type, title)
     )
   );
 };
 
 
 
-const sendContentNotification = async (recipient, content, type) => {
+const sendContentNotification = async (recipient, content, type, title = undefined) => {
   console.log("Sending new content notification to:", recipient);
 
   const emailConfig = {
     to: recipient,
     subject: `Uusi ${type}`,
-    text: `Partio-ohjelmaan on lähetetty uusi ${type}: ${content.title || content.name}`,
+    text: `Partio-ohjelmaan on lähetetty uusi ${type}: ${title || content.title || content.name}`,
   };
 
   try {

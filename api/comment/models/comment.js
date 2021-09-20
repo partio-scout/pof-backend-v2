@@ -9,7 +9,7 @@ const { notifyAboutContent } = require('../../../utils/emailNotifications');
 module.exports = {
   lifecycles: {
     afterCreate(result, data) {
-      notifyAboutContent(result, 'kommentti');
+      notifyAboutContent(result, 'kommentti', `${result.author}: ${result.text}`);
     },
   },
 };
