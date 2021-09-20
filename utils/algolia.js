@@ -11,7 +11,7 @@ const updateInAlgolia = async (contentType, data, draftMode = true) => {
   if (process.env.NODE_ENV === "test" || !strapi.services.algolia) return;
 
   if (draftMode) {
-    if (data.published_at && await isSaveable(contentType, data)) {
+    if (data.published_at && (await isSaveable(contentType, data))) {
       await saveToAlgolia(contentType, data);
     } else {
       await deleteFromAlgolia(contentType, data.id);
@@ -35,13 +35,13 @@ const isSaveable = async (contentType, data) => {
   switch (contentType) {
     case "activity":
       return (
-        await isRelationPublished(data.activity_group, 'activity-group') &&
-        await isRelationPublished(data.age_group, 'age-group')
+        (await isRelationPublished(data.activity_group, "activity-group")) &&
+        (await isRelationPublished(data.age_group, "age-group"))
       );
     case "activity-group":
-      return await isRelationPublished(data.age_group, 'age-group');
+      return await isRelationPublished(data.age_group, "age-group");
     case "suggestion":
-      return await isRelationPublished(data.activity?.age_group, 'age-group');
+      return await isRelationPublished(data.activity?.age_group, "age-group");
     default:
       return true;
   }
@@ -57,7 +57,7 @@ const isRelationPublished = async (relation, contentType) => {
   if (typeof relation === "number") {
     try {
       let entity = await strapi.services[contentType].findOne({ id: relation });
-      
+
       // If no entity is returned, it is not published
       if (!entity) return false;
 
@@ -66,7 +66,7 @@ const isRelationPublished = async (relation, contentType) => {
       console.error(error);
     }
   }
-  
+
   if (!relation?.id || !relation?.published_at) return false;
 
   return true;
@@ -79,8 +79,9 @@ const isRelationPublished = async (relation, contentType) => {
  */
 const saveToAlgolia = async (contentType, data) => {
   const sanitizedData = sanitizeData(contentType, data);
+  const augmentedData = await augmentData(contentType, sanitizedData);
 
-  await strapi.services.algolia.saveObject(sanitizedData, contentType);
+  await strapi.services.algolia.saveObject(augmentedData, contentType);
 };
 
 /**
@@ -96,6 +97,7 @@ const deleteFromAlgolia = async (contentType, id) => {
 
 /**
  * Remove stuff we don't want to index from the data
+ * @param {string} contentType The name of the content type
  * @param {Object} data The entry
  * @returns Clean entry data
  */
@@ -110,6 +112,34 @@ const sanitizeData = (contentType, data) => {
 
     default:
       return cleanedData;
+  }
+};
+
+/**
+ * Add properties to the indexed data
+ * @param {string} contentType The name of the content type
+ * @param {Object} data The entry
+ * @returns Augmented data
+ */
+const augmentData = async (contentType, data) => {
+  switch (contentType) {
+    case "suggestion": {
+      if (!data.activity?.age_group) return data;
+
+      const ageGroup = await strapi.services["age-group"].findOne({
+        id: data.activity.age_group,
+      });
+
+      if (ageGroup) {
+        data.age_group = {
+          id: ageGroup.id,
+          title: ageGroup.title,
+        };
+      }
+      return data;
+    }
+    default:
+      return data;
   }
 };
 

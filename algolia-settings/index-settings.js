@@ -68,6 +68,7 @@ module.exports = {
           "unordered(title)",
           "unordered(content)",
           "unordered(activity.title)",
+          "unordered(age_group.title)",
         ],
         numericAttributesToIndex: null,
         attributesToRetrieve: null,
