@@ -164,7 +164,8 @@ const writeAgeGroup = async (ageGroup, config) => {
     }
     return { entries: [] };
   } catch (error) {
-    throw error;
+    console.error(error);
+    return { entries: [] };
   }
 };
 
@@ -351,7 +352,7 @@ const writeActivityGroup = async (activityGroup, config) => {
           : undefined;
     }
 
-    if (!shouldSkip("activity-, configgroup")) {
+    if (!shouldSkip("activity-group", config)) {
       const existingEntry = await findEntry(contentTypes.activityGroup, {
         wp_guid: activityGroup.wp_guid,
         _locale: "all",
@@ -370,7 +371,8 @@ const writeActivityGroup = async (activityGroup, config) => {
     }
     return { entries: [] };
   } catch (error) {
-    throw error;
+    console.error(error);
+    return { entries: [] };
   }
 };
 
@@ -474,7 +476,7 @@ const writeActivity = async (activity, config, modifyEntry) => {
       entryData = modifyEntry(entryData);
     }
 
-    if (!shouldSkip("acitivty", config)) {
+    if (!shouldSkip("activity", config)) {
       // Then write the activity
       const existingEntry = await findEntry(contentTypes.activity, {
         wp_guid: activity.wp_guid,
@@ -494,7 +496,8 @@ const writeActivity = async (activity, config, modifyEntry) => {
     }
     return { entries: [] };
   } catch (error) {
-    throw error;
+    console.error(error);
+    return { entries: [] };
   }
 };
 
@@ -582,7 +585,8 @@ const writeSuggestion = async (suggestion, config) => {
 
     return result;
   } catch (error) {
-    throw error;
+    console.error(error);
+    return { entries: [] };
   }
 };
 
@@ -722,13 +726,13 @@ const updateTotalResults = (result, contentType) => {
   if (result.created?.length) {
     console.log(
       `Created ${contentType || "unknown types"}:`,
-      result.entries.map((x) => x?.title || x?.name || x)
+      result.entries.map((x) => `${x?.title || x?.name || '-'} (${x.id})`)
     );
   }
   if (result.updated?.length) {
     console.log(
       `Updated ${contentType || "unknown types"}:`,
-      result.entries.map((x) => x?.title || x?.name || x)
+      result.entries.map((x) => `${x?.title || x?.name || '-'} (${x.id})`)
     );
   }
   totalResult.created.push(...(result.created || []));
