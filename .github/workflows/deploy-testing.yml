@@ -2,7 +2,7 @@ name: Deploy testing from master
 
 on:
   push:
-    branches: [ main ]
+    branches: [ testing ]
     
 env:
   NODE_VERSION: '14.x'
