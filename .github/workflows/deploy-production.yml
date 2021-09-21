@@ -34,6 +34,9 @@ jobs:
       with: 
         node-version: ${{ env.NODE_VERSION }}
     - name: yarn build
+      env:
+        # The license needs to present when building, so that the admin-ui is built as enterprise version
+        STRAPI_LICENSE: ${{ secrets.STRAPI_LICENSE }} 
       run: |
         yarn install --silent
         yarn build
