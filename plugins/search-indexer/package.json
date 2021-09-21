@@ -11,6 +11,7 @@
     "activity-group",
     "age-group",
     "activity",
+    "content-page",
     "suggestion"
   ],
   "dependencies": {},

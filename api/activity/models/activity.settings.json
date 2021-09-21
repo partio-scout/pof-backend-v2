@@ -43,10 +43,6 @@
       "type": "boolean",
       "default": false
     },
-    "activity_groups": {
-      "via": "activities",
-      "collection": "activity-group"
-    },
     "ingress": {
       "pluginOptions": {
         "i18n": {
@@ -104,8 +100,8 @@
       "model": "activity-term"
     },
     "locations": {
-      "collection": "location",
       "via": "activities",
+      "collection": "location",
       "dominant": true
     },
     "duration": {
@@ -178,6 +174,17 @@
         }
       },
       "component": "links.links"
+    },
+    "age_group": {
+      "model": "age-group"
+    },
+    "activity_group": {
+      "via": "activities",
+      "model": "activity-group"
+    },
+    "preparation_duration": {
+      "model": "duration",
+      "via": "preparation_activities"
     }
   }
 }

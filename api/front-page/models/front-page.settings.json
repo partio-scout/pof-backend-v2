@@ -69,6 +69,24 @@
         }
       },
       "type": "string"
+    },
+    "content": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "blocks.content-page-block",
+        "blocks.age-group-block",
+        "blocks.hero-block",
+        "blocks.link-block",
+        "blocks.video-block",
+        "blocks.image-block",
+        "blocks.text-block",
+        "blocks.activity-block"
+      ]
     }
   }
 }

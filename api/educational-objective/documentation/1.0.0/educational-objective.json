@@ -563,12 +563,6 @@
                 "mandatory": {
                   "type": "boolean"
                 },
-                "activity_groups": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "ingress": {
                   "type": "string"
                 },
@@ -649,6 +643,15 @@
                 },
                 "links": {
                   "type": "component"
+                },
+                "age_group": {
+                  "type": "string"
+                },
+                "activity_group": {
+                  "type": "string"
+                },
+                "preparation_duration": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",

@@ -58,7 +58,11 @@
     "files": {
       "collection": "file",
       "via": "related",
-      "allowedTypes": ["files", "images", "videos"],
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {
@@ -108,6 +112,17 @@
       },
       "type": "integer",
       "default": 0
+    },
+    "pinned": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "locations": {
+      "collection": "location"
+    },
+    "duration": {
+      "model": "duration"
     }
   }
 }

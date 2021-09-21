@@ -1,0 +1,13 @@
+diff --git a/node_modules/strapi-middleware-cache/lib/index.js b/node_modules/strapi-middleware-cache/lib/index.js
+index 2dbd7d2..0a62f72 100644
+--- a/node_modules/strapi-middleware-cache/lib/index.js
++++ b/node_modules/strapi-middleware-cache/lib/index.js
+@@ -99,7 +99,7 @@ const Cache = (strapi) => {
+ 
+           if (!attr.via) continue;
+ 
+-          if (attr.collection) {
++          if (attr.collection && attr.collection !== 'file') {
+             relatedModels[attr.collection] = models[attr.collection];
+           } else if (attr.model && attr.model !== 'file') {
+             relatedModels[attr.model] = models[attr.model];

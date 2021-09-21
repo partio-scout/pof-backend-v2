@@ -47,7 +47,7 @@ module.exports = {
 
     if (entity.likes?.includes(user)) {
       ctx.response.status = 400;
-      ctx.response.body = 'already liked';
+      ctx.response.body = "already liked";
       return;
     }
 
@@ -75,7 +75,7 @@ module.exports = {
 
     if (index === undefined || index < 0) {
       ctx.response.status = 400;
-      ctx.response.body = 'not liked';
+      ctx.response.body = "not liked";
       return;
     }
 

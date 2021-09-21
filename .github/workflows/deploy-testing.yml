@@ -1,11 +1,13 @@
-name: Deploy testing from master
+name: Deploy testing from testing
 
 on:
   push:
-    branches: [ main ]
+    branches: [ testing ]
     
 env:
-  NODE_VERSION: '14.x' 
+  NODE_VERSION: '14.x'
+  
+concurrency: testing-environment
 
 jobs:
   test:

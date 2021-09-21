@@ -38,6 +38,10 @@
     "activities": {
       "via": "duration",
       "collection": "activity"
+    },
+    "preparation_activities": {
+      "via": "preparation_duration",
+      "collection": "activity"
     }
   }
 }

@@ -22,7 +22,7 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/migrations/run.js",
-      "args": ["-wtu"]
+      "args": ["-wtu", "--skip=suggestion", "activity", "files"]
     },
     {
       "type": "node",
@@ -31,8 +31,20 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      
+      "outputCapture": "std",
       "program": "${workspaceFolder}/server.js",
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jest",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": [
+          "-i"
+      ],
+       "skipFiles": [
+        "<node_internals>/**/*.js", "node_modules",
+      ]
     }
   ]
 }

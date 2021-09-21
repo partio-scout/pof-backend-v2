@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_navigation_subsubnavigations",
+  "info": {
+    "name": "subsubnavigation",
+    "icon": "bars",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "page": {
+      "model": "content-page"
+    }
+  }
+}

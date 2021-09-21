@@ -763,12 +763,6 @@
               "mandatory": {
                 "type": "boolean"
               },
-              "activity_groups": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "ingress": {
                 "type": "string"
               },
@@ -849,6 +843,15 @@
               },
               "links": {
                 "type": "component"
+              },
+              "age_group": {
+                "type": "string"
+              },
+              "activity_group": {
+                "type": "string"
+              },
+              "preparation_duration": {
+                "type": "string"
               },
               "localizations": {
                 "type": "array",
@@ -1009,6 +1012,100 @@
             "type": "integer",
             "default": 0
           },
+          "pinned": {
+            "type": "boolean",
+            "default": false
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "slug"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "activities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "icon": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "duration": {
+            "required": [
+              "id",
+              "name",
+              "slug"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              },
+              "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "preparation_activities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "localizations": {
             "type": "array",
             "items": {
@@ -1046,20 +1143,32 @@
                 "links": {
                   "type": "component"
                 },
-                "from_web": {
-                  "type": "boolean"
-                },
                 "comments": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
+                "from_web": {
+                  "type": "boolean"
+                },
                 "likes": {
                   "type": "object"
                 },
                 "like_count": {
                   "type": "integer"
+                },
+                "pinned": {
+                  "type": "boolean"
+                },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "duration": {
+                  "type": "string"
                 },
                 "localizations": {
                   "type": "array",
@@ -1151,6 +1260,19 @@
           "like_count": {
             "type": "integer",
             "default": 0
+          },
+          "pinned": {
+            "type": "boolean",
+            "default": false
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "duration": {
+            "type": "string"
           },
           "localizations": {
             "type": "array",

@@ -43,12 +43,8 @@
       "required": true
     },
     "activities": {
-      "via": "activity_groups",
-      "collection": "activity",
-      "dominant": true
-    },
-    "activity_groups": {
-      "collection": "activity-group"
+      "via": "activity_group",
+      "collection": "activity"
     },
     "wp_guid": {
       "pluginOptions": {
@@ -141,6 +137,69 @@
         }
       },
       "component": "links.links"
+    },
+    "age_group": {
+      "via": "activity_groups",
+      "model": "age-group"
+    },
+    "activity_group_category": {
+      "via": "activity_groups",
+      "model": "activity-group-category"
+    },
+    "sort_order": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer"
+    },
+    "content_area": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "blocks.text-block",
+        "blocks.hero-block",
+        "blocks.image-block",
+        "blocks.link-block",
+        "blocks.activity-block"
+      ]
+    },
+    "mandatory_activities_title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "mandatory_activities_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
+    },
+    "optional_activities_title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "optional_activities_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
     }
   }
 }

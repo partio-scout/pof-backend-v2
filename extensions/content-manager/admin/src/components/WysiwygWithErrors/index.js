@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
-import { Button } from '@buffetjs/core';
-import { Label, InputDescription, InputErrors } from 'strapi-helper-plugin';
-import Editor from './Tinymce';
-import MediaLib from './MediaLib';
+import React, { useState, useContext } from "react";
+import PropTypes from "prop-types";
+import { isEmpty } from "lodash";
+import { Button } from "@buffetjs/core";
+import {
+  Label,
+  InputDescription,
+  InputErrors,
+  useUser,
+} from "strapi-helper-plugin";
+import Editor from "./Tinymce";
+import MediaLib from "./MediaLib";
 
 const WysiwygWithErrors = ({
   inputDescription,
@@ -15,9 +20,17 @@ const WysiwygWithErrors = ({
   onChange,
   value,
 }) => {
+  const user = useUser();
+
+  // We can distinguish admins by the role: "admin::roles.create"
+  const isAdmin =
+    user.userPermissions.find(
+      (permission) => permission.action === "admin::roles.create"
+    ) !== undefined;
+
   const [isOpen, setIsOpen] = useState(false);
   let spacer = !isEmpty(inputDescription) ? (
-    <div style={{ height: '.4rem' }} />
+    <div style={{ height: ".4rem" }} />
   ) : (
     <div />
   );
@@ -25,9 +38,9 @@ const WysiwygWithErrors = ({
   if (!noErrorsDescription && !isEmpty(errors)) {
     spacer = <div />;
   }
-  const handleToggle = () => setIsOpen(prev => !prev);
-  const handleChange = data => {
-    if (data.mime.includes('image') && typeof window !== 'undefined') {
+  const handleToggle = () => setIsOpen((prev) => !prev);
+  const handleChange = (data) => {
+    if (data.mime.includes("image") && typeof window !== "undefined") {
       /**
        * @tutorial Check the data object from media library, to insert the options you need to the image.
        * @example console.log(data);
@@ -40,35 +53,42 @@ const WysiwygWithErrors = ({
       onChange({ target: { name, value: newValue } });
     }
     // Handle videos and other type of files by adding some code
-
   };
 
   return (
     <div
       className="col-12"
       style={{
-        marginBottom: '1.6rem',
-        fontSize: '1.3rem',
-        fontFamily: 'Lato',
+        marginBottom: "1.6rem",
+        fontSize: "1.3rem",
+        fontFamily: "Lato",
       }}
     >
       <Label htmlFor={name} message={label} style={{ marginBottom: 10 }} />
       <div>
-        <Button style={{lineHeight: '1', marginBottom: '16px'}} color="primary" onClick={handleToggle}>
+        <Button
+          style={{ lineHeight: "1", marginBottom: "16px" }}
+          color="primary"
+          onClick={handleToggle}
+        >
           Media Library
         </Button>
       </div>
-      <Editor name={name} onChange={onChange} value={value || ""} />
+      <Editor name={name} onChange={onChange} value={value || ""} isAdmin={isAdmin} />
       <InputDescription
         message={inputDescription}
-        style={!isEmpty(inputDescription) ? { marginTop: '1.4rem' } : {}}
+        style={!isEmpty(inputDescription) ? { marginTop: "1.4rem" } : {}}
       />
       <InputErrors
         errors={(!noErrorsDescription && errors) || []}
         name={name}
       />
       {spacer}
-      <MediaLib onToggle={handleToggle} isOpen={isOpen} onChange={handleChange} />
+      <MediaLib
+        onToggle={handleToggle}
+        isOpen={isOpen}
+        onChange={handleChange}
+      />
     </div>
   );
 };
@@ -76,9 +96,9 @@ const WysiwygWithErrors = ({
 WysiwygWithErrors.defaultProps = {
   errors: [],
   inputDescription: null,
-  label: '',
+  label: "",
   noErrorsDescription: false,
-  value: '',
+  value: "",
 };
 
 WysiwygWithErrors.propTypes = {

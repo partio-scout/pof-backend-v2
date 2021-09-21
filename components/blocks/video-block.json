@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_blocks_video_blocks",
+  "info": {
+    "name": "Video block",
+    "icon": "photo-video",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "video": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    },
+    "block_width": {
+      "model": "block-width"
+    }
+  }
+}

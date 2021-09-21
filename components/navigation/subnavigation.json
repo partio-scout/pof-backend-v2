@@ -13,6 +13,11 @@
     },
     "page": {
       "model": "content-page"
+    },
+    "subnavigation": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.subsubnavigation"
     }
   }
 }
