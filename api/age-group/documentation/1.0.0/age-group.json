@@ -630,6 +630,18 @@
                 "content_area": {
                   "type": "dynamiczone"
                 },
+                "mandatory_activities_title": {
+                  "type": "string"
+                },
+                "mandatory_activities_description": {
+                  "type": "string"
+                },
+                "optional_activities_title": {
+                  "type": "string"
+                },
+                "optional_activities_description": {
+                  "type": "string"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
