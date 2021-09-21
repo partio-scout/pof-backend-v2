@@ -1,13 +1,13 @@
-name: Deploy testing from testing
+name: Deploy production from main
 
 on:
   push:
-    branches: [ testing ]
+    branches: [ main ]
     
 env:
   NODE_VERSION: '14.x'
   
-concurrency: testing-environment
+concurrency: production-environment
 
 jobs:
   test:
@@ -26,7 +26,7 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     needs: test
-    environment: testing
+    environment: production
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.NODE_VERSION }}
@@ -40,5 +40,5 @@ jobs:
     - name: Deploy to Azure webApp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: pof-backend-testing
+        app-name: pof-backend-production
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
