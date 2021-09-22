@@ -4,6 +4,11 @@ import { Switch, Route } from "react-router-dom";
 import pluginId from "../../pluginId";
 import { Button, InputText, Label } from "@buffetjs/core";
 import { request } from "strapi-helper-plugin";
+import styled from "styled-components";
+
+const Section = styled.div`
+  margin: 2rem 0;
+`;
 
 const Settings = ({ settingsBaseURL }) => {
   const [deployWebhookUrl, setDeployWebhookUrl] = useState();
@@ -57,20 +62,24 @@ const Settings = ({ settingsBaseURL }) => {
   return (
     <div>
       <h1>Deployment settings</h1>
-      <Label htmlFor="input1">Give Gatsby Cloud's deployment url</Label>
-      <InputText
-        name="input1"
-        type="text"
-        onChange={({ target: { value } }) => setDeployWebhookUrl(value)}
-        value={deployWebhookUrl}
-      />
-      <Label htmlFor="input2">Give preview url</Label>
-      <InputText
-        name="input2"
-        type="text"
-        onChange={({ target: { value } }) => setPreviewUrl(value)}
-        value={previewUrl}
-      />
+      <Section>
+        <Label htmlFor="input1">Deployment webhook url</Label>
+        <InputText
+          name="input1"
+          type="text"
+          onChange={({ target: { value } }) => setDeployWebhookUrl(value)}
+          value={deployWebhookUrl}
+        />
+      </Section>
+      <Section>
+        <Label htmlFor="input2">Preview url</Label>
+        <InputText
+          name="input2"
+          type="text"
+          onChange={({ target: { value } }) => setPreviewUrl(value)}
+          value={previewUrl}
+        />
+      </Section>
       <Button onClick={saveSettings}>Save</Button>
     </div>
   );
