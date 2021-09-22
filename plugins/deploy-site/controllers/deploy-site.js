@@ -1,4 +1,5 @@
 "use strict";
+const axios = require('axios');
 
 /**
  * deploy-site.js controller
@@ -51,7 +52,7 @@ module.exports = {
   },
   changes: async (ctx) => {
     const changes = await strapi
-      .query("content-change", "change-tracker")
+      .query("content-change", "deploy-site")
       .find();
 
     const notPublishedChanges = changes.filter((change) => !change.deployed_at)
@@ -62,10 +63,26 @@ module.exports = {
     });
   },
   deploy: async (ctx) => {
-    await strapi.plugins["change-tracker"].services['change-tracker'].checkForChanges();
+    const [settings] = await strapi
+      .query("deploy-site-settings", "deploy-site")
+      .find();
+
+    if (!settings.deploy_webhook_url) {
+      ctx.send({
+        status: 500,
+        message: "deploy_webhook_url is not set",
+      });
+      return;
+    }
+
+    await axios.post(settings.deploy_webhook_url);
+
+    console.log('deploy-site: Site deployment started');
+
+    await strapi.plugins["deploy-site"].services['deploy-site'].setChangesAsDeployed();
 
     ctx.send({
-      message: 'ok'
+      message: 'ok',
     })
   }
 };
