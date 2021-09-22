@@ -19,6 +19,7 @@ module.exports = ({ env }) => {
         "**/tests/**",
         "**/algolia-settings/**",
       ],
+      port: 1338,
     },
     cron: {
       enabled: true,

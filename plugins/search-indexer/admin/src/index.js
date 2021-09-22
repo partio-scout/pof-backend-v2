@@ -38,10 +38,10 @@ export default strapi => {
           name,
           permissions: [
             // Uncomment to set the permissions of the plugin here
-            // {
-            //   action: '', // the action name should be plugins::plugin-name.actionType
-            //   subject: null,
-            // },
+            {
+              action: 'plugins::search-indexer.index', // the action name should be plugins::plugin-name.actionType
+              subject: null,
+            },
           ],
         },
       ],
