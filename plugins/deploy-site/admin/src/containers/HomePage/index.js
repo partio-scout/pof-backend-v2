@@ -44,7 +44,7 @@ const HomePage = () => {
       return;
     }
 
-    fetch(settings.deploy_webhook_url, { method: "POST" })
+    request("/deploy-site/deploy")
       .then(() => {
         strapi.notification.toggle({
           message: "Deployment started successfully",
@@ -53,9 +53,8 @@ const HomePage = () => {
           type: "success",
         });
       })
-      .then(() => request("/deploy-site/deploy"))
       .then(() => request("/deploy-site/changes"))
-      .then(({changes}) => setChanges(changes))
+      .then(({ changes }) => setChanges(changes))
       .catch((error) => {
         console.error(error);
         strapi.notification.toggle({

@@ -11,5 +11,6 @@
  */
 
 module.exports = {
-  "* * * * *": async () => await strapi.plugins["change-tracker"].services['change-tracker'].checkForChanges(),
+  // Check for old content-changes every hour
+  "1 * * * *": async () => await strapi.plugins["deploy-site"].services['deploy-site'].checkForOldChanges(),
 };
