@@ -43,7 +43,7 @@ const registerPermissionActions = () => {
   // If the change was not to a content-change or workflow entry, write it as a new content-change
   if (!["content-change", "workflow"].includes(newChange.content_type)) {
     console.log("Creating new content-change", newChange);
-    await strapi.query("content-change", "change-tracker").create(newChange);
+    await strapi.query("content-change", "deploy-site").create(newChange);
   }
 };
 
