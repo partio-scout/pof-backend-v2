@@ -1,11 +1,11 @@
 {
-  "name": "strapi-plugin-change-tracker",
+  "name": "strapi-plugin-deploy-site",
   "version": "0.0.0",
   "description": "This is the description of the plugin.",
   "strapi": {
-    "name": "change-tracker",
+    "name": "deploy-site",
     "icon": "plug",
-    "description": "Description of change-tracker plugin."
+    "description": "Description of deploy-site plugin."
   },
   "dependencies": {},
   "author": {
