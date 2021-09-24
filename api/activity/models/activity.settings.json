@@ -173,7 +173,7 @@
           "localized": true
         }
       },
-      "component": "links.links"
+      "component": "links.link"
     },
     "age_group": {
       "model": "age-group"

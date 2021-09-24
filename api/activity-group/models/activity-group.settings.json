@@ -136,7 +136,7 @@
           "localized": true
         }
       },
-      "component": "links.links"
+      "component": "links.link"
     },
     "age_group": {
       "via": "activity_groups",
