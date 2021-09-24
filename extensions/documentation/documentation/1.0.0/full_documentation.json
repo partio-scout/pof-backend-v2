@@ -17015,9 +17015,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -17885,9 +17883,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -19430,9 +19426,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -19909,9 +19903,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -20198,9 +20190,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -21539,9 +21529,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -25257,23 +25245,84 @@
               }
             }
           },
-          "footer_links": {
+          "footer_sections": {
             "type": "array",
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "description": {
-                  "type": "string"
+                "link-groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "url": {
+                              "type": "string"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "some_links": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "facebook_url": {
+                            "type": "string"
+                          },
+                          "twitter_url": {
+                            "type": "string"
+                          },
+                          "instagram_url": {
+                            "type": "string"
+                          },
+                          "youtube_url": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
-                "url": {
+                "title": {
                   "type": "string"
                 }
               }
@@ -26125,7 +26174,7 @@
                 "navigation": {
                   "type": "component"
                 },
-                "footer_links": {
+                "footer_sections": {
                   "type": "component"
                 },
                 "meta_description": {
@@ -26332,23 +26381,84 @@
               }
             }
           },
-          "footer_links": {
+          "footer_sections": {
             "type": "array",
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "description": {
-                  "type": "string"
+                "link-groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "url": {
+                              "type": "string"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "some_links": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "facebook_url": {
+                            "type": "string"
+                          },
+                          "twitter_url": {
+                            "type": "string"
+                          },
+                          "instagram_url": {
+                            "type": "string"
+                          },
+                          "youtube_url": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
-                "url": {
+                "title": {
                   "type": "string"
                 }
               }
@@ -29126,9 +29236,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -29399,9 +29507,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_links_link",
+  "info": {
+    "name": "Link",
+    "icon": "external-link-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

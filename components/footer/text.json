@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_footer_texts",
+  "info": {
+    "name": "text",
+    "icon": "align-center"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text"
+    }
+  }
+}
