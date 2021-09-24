@@ -84,7 +84,7 @@
           "localized": true
         }
       },
-      "component": "links.links"
+      "component": "links.link"
     },
     "subactivitygroup_term": {
       "model": "activitygroup-term"

@@ -79,7 +79,7 @@
           "localized": true
         }
       },
-      "component": "links.links"
+      "component": "links.link"
     },
     "comments": {
       "via": "suggestion",
