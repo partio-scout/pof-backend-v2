@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_footer_link_groups",
+  "info": {
+    "name": "LinkGroup",
+    "icon": "align-justify"
+  },
+  "options": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "footer.link"
+    },
+    "some_links": {
+      "type": "component",
+      "component": "footer.some-links"
+    }
+  }
+}

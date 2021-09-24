@@ -12127,6 +12127,74 @@
         "parameters": []
       }
     },
+    "/settings/translations/{locale}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Retrieve settings document(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Settings"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/activity-skill-areas": {
       "get": {
         "deprecated": false,
@@ -16947,9 +17015,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -17817,9 +17883,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -19362,9 +19426,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -19841,9 +19903,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -20130,9 +20190,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -21471,9 +21529,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -25189,23 +25245,84 @@
               }
             }
           },
-          "footer_links": {
+          "footer_sections": {
             "type": "array",
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "description": {
-                  "type": "string"
+                "link-groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "url": {
+                              "type": "string"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "some_links": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "facebook_url": {
+                            "type": "string"
+                          },
+                          "twitter_url": {
+                            "type": "string"
+                          },
+                          "instagram_url": {
+                            "type": "string"
+                          },
+                          "youtube_url": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
-                "url": {
+                "title": {
                   "type": "string"
                 }
               }
@@ -26057,7 +26174,7 @@
                 "navigation": {
                   "type": "component"
                 },
-                "footer_links": {
+                "footer_sections": {
                   "type": "component"
                 },
                 "meta_description": {
@@ -26264,23 +26381,84 @@
               }
             }
           },
-          "footer_links": {
+          "footer_sections": {
             "type": "array",
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "description": {
-                  "type": "string"
+                "link-groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "url": {
+                              "type": "string"
+                            },
+                            "phone_number": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "some_links": {
+                        "type": "object",
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "facebook_url": {
+                            "type": "string"
+                          },
+                          "twitter_url": {
+                            "type": "string"
+                          },
+                          "instagram_url": {
+                            "type": "string"
+                          },
+                          "youtube_url": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
-                "url": {
+                "title": {
                   "type": "string"
                 }
               }
@@ -28330,6 +28508,43 @@
           },
           "translations": {
             "type": "object"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "suggestion_notification_recipients": {
+                  "type": "string"
+                },
+                "translations": {
+                  "type": "object"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "locale": {
+            "type": "string"
           }
         }
       },
@@ -28340,6 +28555,15 @@
           },
           "translations": {
             "type": "object"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "locale": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"
@@ -29012,9 +29236,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -29285,9 +29507,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {

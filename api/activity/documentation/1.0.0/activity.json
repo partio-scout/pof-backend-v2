@@ -1267,9 +1267,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -1746,9 +1744,7 @@
             "items": {
               "type": "object",
               "required": [
-                "id",
-                "description",
-                "url"
+                "id"
               ],
               "properties": {
                 "id": {

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_footer_some_links",
+  "info": {
+    "name": "some_links",
+    "icon": "at"
+  },
+  "options": {},
+  "attributes": {
+    "facebook_url": {
+      "type": "string"
+    },
+    "twitter_url": {
+      "type": "string"
+    },
+    "instagram_url": {
+      "type": "string"
+    },
+    "youtube_url": {
+      "type": "string"
+    }
+  }
+}

@@ -44,7 +44,7 @@
       },
       "component": "navigation.navigation"
     },
-    "footer_links": {
+    "footer_sections": {
       "type": "component",
       "repeatable": true,
       "pluginOptions": {
@@ -52,7 +52,7 @@
           "localized": true
         }
       },
-      "component": "links.links"
+      "component": "footer.footer-section"
     },
     "meta_description": {
       "pluginOptions": {
