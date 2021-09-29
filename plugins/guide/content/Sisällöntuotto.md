@@ -6,7 +6,25 @@ Uuden sisällön luominen tapahtuu aina kyseisen sisältötyypin listausnäkymä
 
 **Huomio julkaistu/luonnos -tiloista**: Kun muokkaat julkaistua sisältökohdetta ja tallennat sen, sisältö päivittyy suoraan julkaistuun versioon, eikä toista luonnostilassa olevaa versiota luoda. Tämä on Strapin ominaisuus (ongelma), joka on kuitenkin osittain kierretty sisällöntuotannon helpottamiseksi. Kun sisältökohdetta päivitetään, se ei automaattisesti päivity verkkosivulle, vaan sivuston päivitys pitää ajaa manuaalisesti, kts. [Verkkosivuston päivitys](#sivuston-julkaisu). Strapin rajapintaan sisältö päivittyy kuitenkin sen tilan mukaisesti, eli jos kohde on julkaistu, se palautuu rajapinnasta.
 
-## Sivuston navigaatio
+
+### Sisältökohteen näkymä
+
+Sisältökohteen näkymässä vasemmassa yläkulmassa lukee sisällön tyyppi. Oikealla ylhäällä on edellä mainitut tallennus- ja julkaisupainikkeet.
+
+Näiden alta sijaitsevat sisältökohteen kentät. Vasemassa laidassa `Information`-laatikon alla ovat kaikki relaatiot (viittaukset muihin sisältökohteisiin), ja vasemmalla kaikki muut kentät.
+
+### Kieliversion vaihtaminen
+
+Mikäli sisältökohteen näkymässä oikeassa reunassa on `Internalization`-kohta, sisällöllä voi olla eri kielisiä versioita. Voit vaihtaa kieliversiota `Internalization`-kohdan alta `Locales`-valikosta. Avatussa valikossa on listattuna kaikki mahdolliset kieliversiot. Nimen vasemmalla puolella oleva pallo kertoo onko kieliversio olemassa. 
+
+Pallon värit:
+- valkoinen = versiota ei ole olemassa
+- sininen = versio on olemassa mutta ei ole julkaistu
+- vihreä = versio on julkaistu
+
+![](/images/sisältökohde.png)
+
+## Partio-ohjelma -sivuston navigaatio
 
 Sivuston navigaatio rakentuu osin automaattisesti ja osin manuaalisesti Strapissa olevan sisällön mukaan.
 
