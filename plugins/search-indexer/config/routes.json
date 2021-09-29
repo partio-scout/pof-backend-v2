@@ -5,7 +5,7 @@
       "path": "/:type",
       "handler": "search-indexer.index",
       "config": {
-        "policies": ["admin::isAuthenticatedAdmin"]
+        "policies": [["admin::hasPermissions", ["plugins::search-indexer.index"]]]
       }
     }
   ]
