@@ -14,11 +14,14 @@
         "videos"
       ],
       "plugin": "upload",
-      "required": true,
+      "required": false,
       "pluginOptions": {}
     },
     "block_width": {
       "model": "block-width"
+    },
+    "video_url": {
+      "type": "string"
     }
   }
 }

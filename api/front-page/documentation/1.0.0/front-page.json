@@ -977,11 +977,13 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id",
-                    "video"
+                    "id"
                   ]
                 },
                 {
@@ -2113,11 +2115,13 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id",
-                    "video"
+                    "id"
                   ]
                 },
                 {

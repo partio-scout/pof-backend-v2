@@ -59,7 +59,10 @@
         "blocks.hero-block",
         "blocks.image-block",
         "blocks.link-block",
-        "blocks.activity-block"
+        "blocks.activity-block",
+        "blocks.age-group-block",
+        "blocks.content-page-block",
+        "blocks.video-block"
       ]
     },
     "main_text": {

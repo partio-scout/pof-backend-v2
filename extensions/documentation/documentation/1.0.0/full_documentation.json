@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "09/29/2021 1:10:07 PM"
+    "x-generation-date": "09/29/2021 3:36:33 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -20946,11 +20946,13 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id",
-                    "video"
+                    "id"
                   ]
                 }
               ]
@@ -21381,11 +21383,13 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id",
-                    "video"
+                    "id"
                   ]
                 }
               ]
@@ -21977,11 +21981,13 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id",
-                    "video"
+                    "id"
                   ]
                 }
               ]
@@ -22412,11 +22418,13 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id",
-                    "video"
+                    "id"
                   ]
                 }
               ]
@@ -22702,7 +22710,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -22820,7 +22831,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -22919,7 +22933,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -23026,7 +23043,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -23072,7 +23092,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -23229,6 +23252,264 @@
                           "type": "string"
                         }
                       }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "ingress": {
+                      "type": "string"
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "content_pages": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "title"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "ingress": {
+                            "type": "string"
+                          },
+                          "main_image": {
+                            "type": "string"
+                          },
+                          "content": {
+                            "type": "dynamiczone"
+                          },
+                          "main_text": {
+                            "type": "string"
+                          },
+                          "meta_description": {
+                            "type": "string"
+                          },
+                          "meta_title": {
+                            "type": "string"
+                          },
+                          "localizations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "locale": {
+                            "type": "string"
+                          },
+                          "published_at": {
+                            "type": "string"
+                          },
+                          "created_by": {
+                            "type": "string"
+                          },
+                          "updated_by": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "video": {
+                      "required": [
+                        "id",
+                        "name",
+                        "hash",
+                        "mime",
+                        "size",
+                        "url",
+                        "provider"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "alternativeText": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "width": {
+                          "type": "integer"
+                        },
+                        "height": {
+                          "type": "integer"
+                        },
+                        "formats": {
+                          "type": "object"
+                        },
+                        "hash": {
+                          "type": "string"
+                        },
+                        "ext": {
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "previewUrl": {
+                          "type": "string"
+                        },
+                        "provider": {
+                          "type": "string"
+                        },
+                        "provider_metadata": {
+                          "type": "object"
+                        },
+                        "related": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
@@ -23333,7 +23614,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -23451,7 +23735,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -23550,7 +23837,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -23657,7 +23947,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -23703,7 +23996,10 @@
                         "blocks.hero-block",
                         "blocks.image-block",
                         "blocks.link-block",
-                        "blocks.activity-block"
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
                       ]
                     },
                     "id": {
@@ -23860,6 +24156,264 @@
                           "type": "string"
                         }
                       }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "ingress": {
+                      "type": "string"
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "content_pages": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "title"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "ingress": {
+                            "type": "string"
+                          },
+                          "main_image": {
+                            "type": "string"
+                          },
+                          "content": {
+                            "type": "dynamiczone"
+                          },
+                          "main_text": {
+                            "type": "string"
+                          },
+                          "meta_description": {
+                            "type": "string"
+                          },
+                          "meta_title": {
+                            "type": "string"
+                          },
+                          "localizations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "locale": {
+                            "type": "string"
+                          },
+                          "published_at": {
+                            "type": "string"
+                          },
+                          "created_by": {
+                            "type": "string"
+                          },
+                          "updated_by": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "blocks.text-block",
+                        "blocks.hero-block",
+                        "blocks.image-block",
+                        "blocks.link-block",
+                        "blocks.activity-block",
+                        "blocks.age-group-block",
+                        "blocks.content-page-block",
+                        "blocks.video-block"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "video": {
+                      "required": [
+                        "id",
+                        "name",
+                        "hash",
+                        "mime",
+                        "size",
+                        "url",
+                        "provider"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "alternativeText": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "width": {
+                          "type": "integer"
+                        },
+                        "height": {
+                          "type": "integer"
+                        },
+                        "formats": {
+                          "type": "object"
+                        },
+                        "hash": {
+                          "type": "string"
+                        },
+                        "ext": {
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "previewUrl": {
+                          "type": "string"
+                        },
+                        "provider": {
+                          "type": "string"
+                        },
+                        "provider_metadata": {
+                          "type": "object"
+                        },
+                        "related": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "block_width": {
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "created_by": {
+                          "type": "string"
+                        },
+                        "updated_by": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
@@ -25743,11 +26297,13 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id",
-                    "video"
+                    "id"
                   ]
                 },
                 {
@@ -26879,11 +27435,13 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "video_url": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id",
-                    "video"
+                    "id"
                   ]
                 },
                 {
