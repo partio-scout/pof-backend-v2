@@ -42,10 +42,36 @@ const isSaveable = async (contentType, data) => {
       return await isRelationPublished(data.age_group, "age-group");
     case "suggestion":
       return await isRelationPublished(data.activity?.age_group, "age-group");
+    case "content-page":
+      return await isContentPageSaveable(data);
     default:
       return true;
   }
 };
+
+const contentPageIsInNavigation = (page, navigation) => {
+  for (const navigationItem of navigation) {
+    if (navigationItem.page?.id === page.id) return true;
+    if (navigationItem.subnavigation && contentPageIsInNavigation(page, navigationItem.subnavigation)) return true;
+  }
+  return false;
+}
+
+/**
+ * Check if a ContentPage is in FrontPage's navigation
+ * @param {Object} contentPage The page
+ * @returns {Promise<boolean>}
+ */
+const isContentPageSaveable = async (contentPage) => {
+  const frontPage = await strapi.services['front-page'].find({ _locale: contentPage.locale });
+
+  if (!frontPage) return false;
+
+  const navigation = frontPage.navigation || [];
+
+  return contentPageIsInNavigation(contentPage, navigation);
+}
+
 /**
  * Checks if a relation is published
  * @param {number | object | undefined | null} relation
