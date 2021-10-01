@@ -119,7 +119,9 @@ module.exports = {
         attributesToRetrieve: null,
         unretrievableAttributes: null,
         optionalWords: null,
-        attributesForFaceting: null,
+        attributesForFaceting: [
+          "locale",
+        ],
         attributesToSnippet: null,
         attributesToHighlight: null,
         paginationLimitedTo: 1000,
