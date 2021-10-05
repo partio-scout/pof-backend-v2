@@ -55,7 +55,6 @@ Kentät:
 - **title**: Otsikko
 - **text**: Teksti
 - **block_width**: Lohkon leveys sivustolla
-- **image**: Kuva
 
 ## Video Block
 

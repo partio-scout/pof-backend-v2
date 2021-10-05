@@ -46,3 +46,7 @@ Verkkosivuston sisällön päivitys tapahtuu manuaalisesti `Github Actions Plugi
 Ennen sivuston päivitystä kannattaa tarkistaa mitä muutoksia sivustolle on menossa. Kaikki muutokset tallennetaan `Content-changes`-sisältötyyppeinä, ja ne löytyvät vasemmasta navigaatiosta kohdasta `Collection types / Content-changes`. Jokainen muutos näyttää mikä sisältötyyppi on kyseessä, mikä sen nimi on, minkä tyylinen muutos on kyseessä, koska muutos on tapahtunut ja koska muutos on julkaistu. Jos julkaistu (deployed_at) sarake on tyhjä, se tarkoittaa että sisältöä ei ole vielä julkaistu sivustolle ja se päivittyy seuraavassa ajossa. Julkaistu-sarake päivittyy n. minuutin viiveellä julkaisusta, joten jos tulet heti sivuston julkaisun jälkeen tarkastamaan muutokset, se tieto ei todennäköisesti ole vielä päivittynyt.
 
 **HUOM!** Listaa sisältömuutoksista ei ole tarkoitus muokata käsin. Yli kuukauden vanhat julkaistut muutokset poistuvat automaattisesti, jolloin tallennettujen muutosten määrä pysyy automaattisesti aisoissa.
+
+## Huomioita
+
+- Jos sisältö ei suostu tallentumaan (`Save`-nappi ei tunnu tekevän mitään), on syynä yleensä se että jossakin kentässä on virheellistä sisältöä. Esimerkiksi jos jokin kenttä on merkitty pakolliseksi, ei Strapi anna tallentaa sisältökohdetta ennen kuin siihen kenttään on laitettu jotain. Kenttien virheet näkyvät niiden itsensä alapuolella, eli kannattaa vierittää sivua alaspäin ja tarkistaa mikä kenttä on kyseessä.
