@@ -568,7 +568,7 @@
                 "id": {
                   "type": "string"
                 },
-                "link-groups": {
+                "link_groups": {
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -1649,7 +1649,7 @@
                 "id": {
                   "type": "string"
                 },
-                "link-groups": {
+                "link_groups": {
                   "type": "array",
                   "items": {
                     "type": "object",
