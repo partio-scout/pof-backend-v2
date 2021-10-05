@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/not-found-page",
+      "handler": "not-found-page.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/not-found-page",
+      "handler": "not-found-page.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/not-found-page",
+      "handler": "not-found-page.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
