@@ -53,7 +53,7 @@ module.exports = {
   changes: async (ctx) => {
     const changes = await strapi
       .query("content-change", "deploy-site")
-      .find();
+      .find({ _limit: -1 });
 
     const notPublishedChanges = changes.filter((change) => !change.deployed_at)
 

@@ -13,7 +13,7 @@ module.exports = {
   checkForOldChanges: async () => {
     const contentChanges = strapi.query("content-change", "deploy-site");
 
-    const changes = await contentChanges.find();
+    const changes = await contentChanges.find({ _limit: -1 });
 
     // Delete changes older than a month
     const monthAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 31);
@@ -35,7 +35,7 @@ module.exports = {
   setChangesAsDeployed: async () => {
     const contentChanges = strapi.query("content-change", "deploy-site");
 
-    const changes = await contentChanges.find();
+    const changes = await contentChanges.find({ _limit: -1 });
 
     const changesThatNeedUpdating = changes.filter((x) => !x.deployed_at);
 
