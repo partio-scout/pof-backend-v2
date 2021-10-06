@@ -531,7 +531,6 @@
         "required": [
           "id",
           "title",
-          "content",
           "minimum_age",
           "maximum_age",
           "color"
@@ -591,9 +590,6 @@
                 "subactivity_term": {
                   "type": "string"
                 },
-                "subactivitygroup_term": {
-                  "type": "string"
-                },
                 "activitygroup_term": {
                   "type": "string"
                 },
@@ -602,18 +598,6 @@
                 },
                 "logo": {
                   "type": "string"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "images": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 },
                 "links": {
                   "type": "component"
@@ -683,43 +667,6 @@
                 "url": {
                   "type": "string"
                 }
-              }
-            }
-          },
-          "subactivitygroup_term": {
-            "required": [
-              "id",
-              "name",
-              "singular",
-              "plural"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "singular": {
-                "type": "string"
-              },
-              "plural": {
-                "type": "string"
-              },
-              "localizations": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "locale": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
               }
             }
           },
@@ -854,146 +801,6 @@
               },
               "updated_by": {
                 "type": "string"
-              }
-            }
-          },
-          "files": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "hash",
-                "mime",
-                "size",
-                "url",
-                "provider"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "alternativeText": {
-                  "type": "string"
-                },
-                "caption": {
-                  "type": "string"
-                },
-                "width": {
-                  "type": "integer"
-                },
-                "height": {
-                  "type": "integer"
-                },
-                "formats": {
-                  "type": "object"
-                },
-                "hash": {
-                  "type": "string"
-                },
-                "ext": {
-                  "type": "string"
-                },
-                "mime": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "previewUrl": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "provider_metadata": {
-                  "type": "object"
-                },
-                "related": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "images": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "hash",
-                "mime",
-                "size",
-                "url",
-                "provider"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "alternativeText": {
-                  "type": "string"
-                },
-                "caption": {
-                  "type": "string"
-                },
-                "width": {
-                  "type": "integer"
-                },
-                "height": {
-                  "type": "integer"
-                },
-                "formats": {
-                  "type": "object"
-                },
-                "hash": {
-                  "type": "string"
-                },
-                "ext": {
-                  "type": "string"
-                },
-                "mime": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "previewUrl": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "provider_metadata": {
-                  "type": "object"
-                },
-                "related": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
               }
             }
           },
@@ -1736,7 +1543,6 @@
               "required": [
                 "id",
                 "title",
-                "content",
                 "minimum_age",
                 "maximum_age",
                 "color"
@@ -1772,26 +1578,11 @@
                 "links": {
                   "type": "component"
                 },
-                "subactivitygroup_term": {
-                  "type": "string"
-                },
                 "main_image": {
                   "type": "string"
                 },
                 "logo": {
                   "type": "string"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "images": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 },
                 "upper_content_area": {
                   "type": "dynamiczone"
@@ -1835,7 +1626,6 @@
       "NewAge-group": {
         "required": [
           "title",
-          "content",
           "minimum_age",
           "maximum_age",
           "color"
@@ -1884,9 +1674,6 @@
                 }
               }
             }
-          },
-          "subactivitygroup_term": {
-            "type": "string"
           },
           "upper_content_area": {
             "type": "array",

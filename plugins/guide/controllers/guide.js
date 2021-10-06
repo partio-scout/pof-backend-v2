@@ -20,8 +20,7 @@ module.exports = {
 
   listGuides: async (ctx) => {
     // Add your own logic here.
-    const guides = fs.readdirSync(contentDir);
-
+    let guides = fs.readdirSync(contentDir);
 
     // Send 200 `ok`
     ctx.send({

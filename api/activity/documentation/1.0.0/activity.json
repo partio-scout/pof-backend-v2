@@ -1286,7 +1286,6 @@
             "required": [
               "id",
               "title",
-              "content",
               "minimum_age",
               "maximum_age",
               "color"
@@ -1322,26 +1321,11 @@
               "links": {
                 "type": "component"
               },
-              "subactivitygroup_term": {
-                "type": "string"
-              },
               "main_image": {
                 "type": "string"
               },
               "logo": {
                 "type": "string"
-              },
-              "files": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "images": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "upper_content_area": {
                 "type": "dynamiczone"
@@ -1406,9 +1390,6 @@
               "subactivity_term": {
                 "type": "string"
               },
-              "subactivitygroup_term": {
-                "type": "string"
-              },
               "activitygroup_term": {
                 "type": "string"
               },
@@ -1417,18 +1398,6 @@
               },
               "logo": {
                 "type": "string"
-              },
-              "files": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "images": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "links": {
                 "type": "component"

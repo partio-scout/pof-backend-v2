@@ -65,9 +65,6 @@
     "subactivity_term": {
       "model": "activity-term"
     },
-    "subactivitygroup_term": {
-      "model": "activitygroup-term"
-    },
     "activitygroup_term": {
       "model": "activitygroup-term"
     },
@@ -87,35 +84,6 @@
     },
     "logo": {
       "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
-    },
-    "files": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
-    },
-    "images": {
-      "collection": "file",
       "via": "related",
       "allowedTypes": [
         "images"

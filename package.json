@@ -42,7 +42,6 @@
     "strapi-plugin-content-type-builder": "3.6.7",
     "strapi-plugin-documentation": "3.6.7",
     "strapi-plugin-email": "3.6.7",
-    "strapi-plugin-github-actions": "^0.1.0",
     "strapi-plugin-i18n": "3.6.7",
     "strapi-plugin-migrate": "^3.6.2",
     "strapi-plugin-upload": "3.6.7",

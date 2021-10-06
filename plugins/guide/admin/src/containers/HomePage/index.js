@@ -21,7 +21,7 @@ const HomePage = () => {
         {guides.map((guide) => (
           <li key={guide}>
             <Link to={`/plugins/guide/${guide}`}>
-              {guide.replace(".md", "").replace("-", " ")}
+              {guide.replace(".md", "").replace("_", " ").replace(/^\d-/, '')}
             </Link>
           </li>
         ))}

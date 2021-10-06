@@ -39,8 +39,7 @@
           "localized": true
         }
       },
-      "type": "richtext",
-      "required": true
+      "type": "richtext"
     },
     "minimum_age": {
       "pluginOptions": {
@@ -86,9 +85,6 @@
       },
       "component": "links.link"
     },
-    "subactivitygroup_term": {
-      "model": "activitygroup-term"
-    },
     "main_image": {
       "model": "file",
       "via": "related",
@@ -105,35 +101,6 @@
     },
     "logo": {
       "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
-    },
-    "files": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
-    },
-    "images": {
-      "collection": "file",
       "via": "related",
       "allowedTypes": [
         "images"

@@ -578,9 +578,6 @@
                 "subactivity_term": {
                   "type": "string"
                 },
-                "subactivitygroup_term": {
-                  "type": "string"
-                },
                 "activitygroup_term": {
                   "type": "string"
                 },
@@ -589,18 +586,6 @@
                 },
                 "logo": {
                   "type": "string"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "images": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 },
                 "links": {
                   "type": "component"
