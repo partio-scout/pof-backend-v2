@@ -990,6 +990,12 @@
                 "suggestion": {
                   "type": "string"
                 },
+                "title": {
+                  "type": "string"
+                },
+                "scout_group": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },

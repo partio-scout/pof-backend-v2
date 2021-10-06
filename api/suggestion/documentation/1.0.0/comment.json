@@ -168,6 +168,12 @@
               }
             }
           },
+          "title": {
+            "type": "string"
+          },
+          "scout_group": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -187,6 +193,12 @@
             "type": "string"
           },
           "suggestion": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "scout_group": {
             "type": "string"
           },
           "published_at": {

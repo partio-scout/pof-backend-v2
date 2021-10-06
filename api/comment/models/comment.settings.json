@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "comments",
   "info": {
-    "name": "Comment"
+    "name": "Comment",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -22,6 +23,12 @@
     "suggestion": {
       "via": "comments",
       "model": "suggestion"
+    },
+    "title": {
+      "type": "string"
+    },
+    "scout_group": {
+      "type": "string"
     }
   }
 }
