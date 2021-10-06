@@ -111,8 +111,10 @@ Toteutusvinkkejä voi luoda lisää partio-ohjelma.fi -sivuston kautta, aktivite
 Toteutusvinkin kommentteja voi luoda lisää partio-ohjelma.fi -sivuston kautta, aktiviteetin sivulta. Sivuston kautta luodut kommentit jäävät automaattisesti luonnostilaan, ja ne pitää käydä käsin julkaisemassa. Uusista kommenteista lähtee automaattisesti sähköpostiviesti osoitteisiin, jotka on syötetty `Settings`-tyypin `Suggestion_notification_recipients`-kenttään pilkulla erotettuina.
 
 **Kentät:**
+- **title**: Kommentin otsikko
 - **text**: Kommentin otsikko
 - **author**: Kommentin tekijän nimi
+- **scout_group**: Kommentin tekijän lippukunta
 - **suggestion**: Kommentin toteutusvinkki
 
 ### Activity Group Category / Avtiviteettipaketin kategoria
