@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 module.exports = async () => {
   registerPermissionActions();
   addContentEventListeners();
@@ -5,13 +7,6 @@ module.exports = async () => {
 
 const registerPermissionActions = () => {
   const actions = [
-    {
-      section: "settings",
-      displayName: "Access deploy-site in the settings",
-      uid: "settings.access",
-      category: "deploy-site",
-      pluginName: "deploy-site",
-    },
     {
       section: "plugins",
       displayName: "Can deploy site",
@@ -25,11 +20,47 @@ const registerPermissionActions = () => {
 };
 
 /**
+ * Trigger Gatsby preview update on content changes.
+ * This replaces Strapi's webhook, because in those you can't dispatch them just for certain types.
+ * @param {object}
+ * @param {string} contentType Strapi's content type
+ */
+const triggerGatsbyPreviewUpdate = async (settings, contentType) => {
+  if (!settings.preview_updates) return;
+
+  const typesToNotUpdatePreviewFor = [
+    "content-change",
+    "workflow",
+    "suggestion",
+    "deploy-site-settings",
+    "comment"
+  ];
+
+  if (settings.preview_webhook_url) {
+    if (!typesToNotUpdatePreviewFor.includes(contentType)) {
+      try {
+        await axios.post(settings.preview_webhook_url, {});
+        console.log("deploy-site: triggered Gatsby preview update");
+      } catch (error) {
+        console.error(
+          "deploy-site: failed triggering Gatsby preview update:",
+          error
+        );
+      }
+    }
+  } else {
+    console.warn(
+      "deploy-site: setting `preview_webhook_url` is not set, can't trigger Gatsby preview update"
+    );
+  }
+};
+
+/**
  * Write content changes to collection `content-change`
  * @param {string} eventType Strapi's event type
  * @param {Object} event Strapi's event object
  */
- const onContentEvent = async (eventType, event) => {
+const onContentEvent = async (eventType, event) => {
   const { entry, model } = event;
 
   const newChange = {
@@ -40,9 +71,25 @@ const registerPermissionActions = () => {
     change_time: new Date(),
   };
 
-  // If the change was not to a content-change or workflow entry, write it as a new content-change
-  if (!["content-change", "workflow"].includes(newChange.content_type)) {
-    console.log("Creating new content-change", newChange);
+  const [settings] = await strapi
+    .query("deploy-site-settings", "deploy-site")
+    .find();
+
+  await triggerGatsbyPreviewUpdate(settings, model);
+
+  if (!settings.track_content_changes) return;
+
+  // If the change was not to a content-change, workflow entry or a suggestion, write it as a new content-change
+  if (
+    ![
+      "content-change",
+      "workflow",
+      "suggestion",
+      "deploy-site-settings",
+      "comment"
+    ].includes(newChange.content_type)
+  ) {
+    console.log("deploy-site: Creating new content-change", newChange);
     await strapi.query("content-change", "deploy-site").create(newChange);
   }
 };

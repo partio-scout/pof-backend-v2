@@ -16,6 +16,17 @@
     },
     "preview_url": {
       "type": "string"
+    },
+    "preview_webhook_url": {
+      "type": "string"
+    },
+    "track_content_changes": {
+      "type": "boolean",
+      "default": true
+    },
+    "preview_updates": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
