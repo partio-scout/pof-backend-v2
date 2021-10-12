@@ -14,11 +14,11 @@ const Wrapper = styled.div`
 
 const Editor = ({ onChange, name, value, isAdmin }) => {
   let toolbar =
-    "undo redo | formatselect | \
+    "undo redo | formatselect styleselect | \
   bold italic underline strikethrough removeformat | \
   alignleft aligncenter alignright alignjustify | \
   outdent indent | numlist bullist | \
-  link anchor | charmap emoticons | \
+  link anchor | charmap emoticons | table | \
   fullscreen";
 
   // Let's add the code editor for admins
@@ -51,7 +51,31 @@ const Editor = ({ onChange, name, value, isAdmin }) => {
               "hr visualchars imagetools emoticons",
             ],
             toolbar,
-            block_formats: "Paragraph=p; Heading 2=h2; Heading 3=h3; Heading 4=h4;"
+            block_formats:
+              "Paragraph=p; Heading 2=h2; Heading 3=h3; Heading 4=h4;",
+            style_formats: [
+              {
+                title: "Table with borders",
+                selector: "table",
+                classes: "table-border",
+              },
+              {
+                title: "Table with light borders",
+                selector: "table",
+                classes: "table-border-light",
+              },
+              {
+                title: "Table odd rows background",
+                selector: "table",
+                classes: "table-border-bg-odd",
+              },
+              {
+                title: "Table even rows background",
+                selector: "table",
+                classes: "table-border-bg-even",
+              },
+            ],
+            content_css: "/tinymce/editor-styles.css",
           }}
           onEditorChange={(content, editor) => {
             onChange({ target: { name, value: content } });

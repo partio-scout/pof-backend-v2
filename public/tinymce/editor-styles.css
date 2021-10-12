@@ -1,0 +1,23 @@
+.table-border, .table-border td, .table-border tr {
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: #253764 !important;
+}
+
+table td {
+  padding: .5rem;
+}
+
+.table-border-bg-odd tr:nth-child(odd) {
+  background-color: #EAF7FC;
+}
+
+.table-border-bg-even tr:nth-child(even) {
+  background-color: #EAF7FC;
+}
+
+.table-border-light, .table-border-light td, .table-border-light tr {
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: #93D4F0 !important;
+}
