@@ -112,6 +112,7 @@ const addContentEventListener = (eventType) => {
  * The listeners create new `content-change` entries from the events.
  */
 const addContentEventListeners = () => {
+  if (process.env.NODE_ENV === 'test') return;
  
   const listenedEvents = [
     "entry.create",
