@@ -61,6 +61,7 @@ const triggerGatsbyPreviewUpdate = async (settings, contentType) => {
  * @param {Object} event Strapi's event object
  */
 const onContentEvent = async (eventType, event) => {
+  console.log('onContentEvent', eventType, event)
   const { entry, model } = event;
 
   const newChange = {
@@ -103,6 +104,7 @@ const addContentEventListener = (eventType) => {
     eventType,
     async (event) => await onContentEvent(eventType, event)
   );
+  console.log('Added listener for content event', eventType);
 };
 
 /**
