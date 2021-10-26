@@ -1,6 +1,7 @@
 const axios = require("axios");
 
-module.exports = async () => {
+module.exports = () => {
+  console.log('deploy-site: bootstrap')
   registerPermissionActions();
   addContentEventListeners();
 };
@@ -104,7 +105,7 @@ const addContentEventListener = (eventType) => {
     eventType,
     async (event) => await onContentEvent(eventType, event)
   );
-  console.log('Added listener for content event', eventType);
+  console.log('deploy-site: Added listener for content event', eventType);
 };
 
 /**
@@ -123,6 +124,8 @@ const addContentEventListeners = () => {
       "entry.unpublish"
   */
   const listenedEvents = strapi.eventHub.eventNames();
+
+  console.log('deploy-site: listenable events:', listenedEvents);
 
   // And add listeners for all of those
   listenedEvents.forEach(addContentEventListener);
