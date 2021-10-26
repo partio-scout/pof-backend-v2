@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 module.exports = () => {
-  console.log('deploy-site: bootstrap')
+  console.log("deploy-site: bootstrap");
   registerPermissionActions();
   addContentEventListeners();
 };
@@ -34,7 +34,7 @@ const triggerGatsbyPreviewUpdate = async (settings, contentType) => {
     "workflow",
     "suggestion",
     "deploy-site-settings",
-    "comment"
+    "comment",
   ];
 
   if (settings.preview_webhook_url) {
@@ -62,7 +62,6 @@ const triggerGatsbyPreviewUpdate = async (settings, contentType) => {
  * @param {Object} event Strapi's event object
  */
 const onContentEvent = async (eventType, event) => {
-  console.log('onContentEvent', eventType, event)
   const { entry, model } = event;
 
   const newChange = {
@@ -88,7 +87,7 @@ const onContentEvent = async (eventType, event) => {
       "workflow",
       "suggestion",
       "deploy-site-settings",
-      "comment"
+      "comment",
     ].includes(newChange.content_type)
   ) {
     console.log("deploy-site: Creating new content-change", newChange);
@@ -105,7 +104,7 @@ const addContentEventListener = (eventType) => {
     eventType,
     async (event) => await onContentEvent(eventType, event)
   );
-  console.log('deploy-site: Added listener for content event', eventType);
+  console.log("deploy-site: Added listener for content event", eventType);
 };
 
 /**
@@ -113,19 +112,14 @@ const addContentEventListener = (eventType) => {
  * The listeners create new `content-change` entries from the events.
  */
 const addContentEventListeners = () => {
-  /*
-    Get all event types from strapi.
-
-    Which are:
-      "entry.create"
-      "entry.update"
-      "entry.delete"
-      "entry.publish"
-      "entry.unpublish"
-  */
-  const listenedEvents = strapi.eventHub.eventNames();
-
-  console.log('deploy-site: listenable events:', listenedEvents);
+ 
+  const listenedEvents = [
+    "entry.create",
+    "entry.update",
+    "entry.delete",
+    "entry.publish",
+    "entry.unpublish",
+  ];
 
   // And add listeners for all of those
   listenedEvents.forEach(addContentEventListener);
