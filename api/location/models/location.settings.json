@@ -37,8 +37,8 @@
     },
     "activities": {
       "via": "locations",
-      "collection": "activity",
-      "autoPopulate": false
+      "autoPopulate": false,
+      "collection": "activity"
     },
     "icon": {
       "model": "file",

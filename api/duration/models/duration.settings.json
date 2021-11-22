@@ -37,13 +37,13 @@
     },
     "activities": {
       "via": "duration",
-      "collection": "activity",
-      "autoPopulate": false
+      "autoPopulate": false,
+      "collection": "activity"
     },
     "preparation_activities": {
       "via": "preparation_duration",
-      "collection": "activity",
-      "autoPopulate": false
+      "autoPopulate": false,
+      "collection": "activity"
     }
   }
 }
