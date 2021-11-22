@@ -22,6 +22,9 @@ Strapi keeps the used locales only in the database, so they have to be added man
 
 ---
 
+## Deployments
+Anything pushed to the `staging` branch is automatically deployed to the test environment. When ready to deploy to production create a PR from `staging` to `main` and Github actions will deploy to the production environment.
+
 ## Migrations
 
 Content can be migrated from `pof-api-v1` by using the script `migrations/run.js`.
