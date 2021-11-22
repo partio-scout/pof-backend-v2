@@ -1,4 +1,4 @@
-name: Deploy testing from testing
+name: Deploy testing from staging
 
 on:
   push:
