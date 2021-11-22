@@ -641,6 +641,9 @@
                 "preparation_duration": {
                   "type": "string"
                 },
+                "is_marine_activity": {
+                  "type": "boolean"
+                },
                 "localizations": {
                   "type": "array",
                   "items": {
@@ -772,6 +775,9 @@
                 },
                 "preparation_duration": {
                   "type": "string"
+                },
+                "is_marine_activity": {
+                  "type": "boolean"
                 },
                 "localizations": {
                   "type": "array",
