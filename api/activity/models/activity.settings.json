@@ -185,6 +185,14 @@
     "preparation_duration": {
       "model": "duration",
       "via": "preparation_activities"
+    },
+    "is_marine_activity": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "boolean"
     }
   }
 }
