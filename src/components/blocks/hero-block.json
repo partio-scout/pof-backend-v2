@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_content_hero_blocks",
+  "info": {
+    "icon": "image",
+    "description": "",
+    "displayName": "Highlight Block"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "background": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": false,
+      "required": false
+    },
+    "link_text": {
+      "type": "string"
+    },
+    "link_url": {
+      "type": "string"
+    }
+  }
+}

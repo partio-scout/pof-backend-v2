@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_link_blocks",
+  "info": {
+    "icon": "link",
+    "displayName": "Link Block"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "block_width": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block-width.block-width"
+    }
+  }
+}

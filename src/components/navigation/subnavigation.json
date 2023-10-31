@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_navigation_subnavigations",
+  "info": {
+    "icon": "bars",
+    "description": "",
+    "displayName": "subnavigation"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "page": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::content-page.content-page"
+    },
+    "subnavigation": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.subsubnavigation"
+    }
+  }
+}

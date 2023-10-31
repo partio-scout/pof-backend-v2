@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_age_group_blocks",
+  "info": {
+    "icon": "address-book",
+    "displayName": "Age Group Block"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "ingress": {
+      "type": "richtext"
+    },
+    "block_width": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block-width.block-width"
+    }
+  }
+}
