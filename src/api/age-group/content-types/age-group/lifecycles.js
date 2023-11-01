@@ -31,7 +31,8 @@ const updateActivityGroupActivities = async (group, ageGroupId) => {
 };
 
 module.exports = {
-  async afterUpdate(result) {
+  async afterUpdate(event) {
+    const { result, params } = event;
     if (result.activity_groups?.length) {
       (async () => {
         for (const group of result.activity_groups) {

@@ -28,7 +28,8 @@ const updateActivityGroupActivities = async (activityGroup) => {
 };
 
 module.exports = {
-  async afterUpdate(result) {
+  async afterUpdate(event) {
+    const { result, params } = event;
     updateActivityGroupActivities(result);
 
     hooks.afterUpdate(result);

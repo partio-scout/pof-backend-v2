@@ -10,12 +10,13 @@ const { getAgeGroupIdForActivity } = require("../../../utils/content");
 const contentType = "activity";
 
 module.exports = {
-  async beforeUpdate(params, data) {
+  async beforeUpdate(event) {
+    let { data, id } = event.params;
     // Check that `age_group` is defined, this indicates that the current data is from the updated locale.
     // This is because all other locales update as well, but they only have the common fields defined.
     if (data.activity_group) {
       // Set the age-group for this activity by getting it from the parent activity-groups
-      data.age_group = await getAgeGroupIdForActivity(params.id);
+      data.age_group = await getAgeGroupIdForActivity(id);
 
       console.log(
         "Updated age-group",

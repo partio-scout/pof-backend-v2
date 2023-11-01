@@ -7,7 +7,8 @@ const { notifyAboutContent } = require("../../../utils/emailNotifications");
  */
 
 module.exports = {
-  afterCreate(result, data) {
+  afterCreate(event) {
+    const { result, params } = event;
     notifyAboutContent(result, "kommentti", `${result.author}: ${result.text}`);
   },
 };
