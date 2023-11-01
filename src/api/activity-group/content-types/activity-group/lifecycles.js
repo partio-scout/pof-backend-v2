@@ -28,12 +28,10 @@ const updateActivityGroupActivities = async (activityGroup) => {
 };
 
 module.exports = {
-  lifecycles: {
-    async afterUpdate(result) {
-      updateActivityGroupActivities(result);
+  async afterUpdate(result) {
+    updateActivityGroupActivities(result);
 
-      hooks.afterUpdate(result);
-    },
-    afterDelete: hooks.afterDelete,
+    hooks.afterUpdate(result);
   },
+  afterDelete: hooks.afterDelete,
 };

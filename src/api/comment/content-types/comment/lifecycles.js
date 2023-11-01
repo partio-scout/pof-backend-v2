@@ -1,5 +1,5 @@
-'use strict';
-const { notifyAboutContent } = require('../../../utils/emailNotifications');
+"use strict";
+const { notifyAboutContent } = require("../../../utils/emailNotifications");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
@@ -7,9 +7,7 @@ const { notifyAboutContent } = require('../../../utils/emailNotifications');
  */
 
 module.exports = {
-  lifecycles: {
-    afterCreate(result, data) {
-      notifyAboutContent(result, 'kommentti', `${result.author}: ${result.text}`);
-    },
+  afterCreate(result, data) {
+    notifyAboutContent(result, "kommentti", `${result.author}: ${result.text}`);
   },
 };

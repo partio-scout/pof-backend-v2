@@ -31,18 +31,16 @@ const updateActivityGroupActivities = async (group, ageGroupId) => {
 };
 
 module.exports = {
-  lifecycles: {
-    async afterUpdate(result) {
-      if (result.activity_groups?.length) {
-        (async () => {
-          for (const group of result.activity_groups) {
-            await updateActivityGroupActivities(group, result.id);
-          }
-        })();
-      }
+  async afterUpdate(result) {
+    if (result.activity_groups?.length) {
+      (async () => {
+        for (const group of result.activity_groups) {
+          await updateActivityGroupActivities(group, result.id);
+        }
+      })();
+    }
 
-      hooks.afterUpdate(result);
-    },
-    afterDelete: hooks.afterDelete,
+    hooks.afterUpdate(result);
   },
+  afterDelete: hooks.afterDelete,
 };
