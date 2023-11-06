@@ -1,4 +1,4 @@
-import cronTasks from "./cron-tasks";
+const cronTasks = require("./cron-tasks");
 
 module.exports = ({ env }) => ({
   host: env("HOST", "0.0.0.0"),

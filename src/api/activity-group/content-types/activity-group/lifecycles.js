@@ -1,5 +1,5 @@
 "use strict";
-const { createLifecycleHooks } = require("../../../utils/algolia");
+// const { createLifecycleHooks } = require("../../../utils/algolia");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
@@ -8,7 +8,7 @@ const { createLifecycleHooks } = require("../../../utils/algolia");
 
 const contentType = "activity-group";
 
-const hooks = createLifecycleHooks(contentType);
+// const hooks = createLifecycleHooks(contentType);
 
 const updateActivityGroupActivities = async (activityGroup) => {
   if (activityGroup.activities?.length) {
@@ -32,7 +32,7 @@ module.exports = {
     const { result, params } = event;
     updateActivityGroupActivities(result);
 
-    hooks.afterUpdate(result);
+    // hooks.afterUpdate(result);
   },
-  afterDelete: hooks.afterDelete,
+  // afterDelete: hooks.afterDelete,
 };

@@ -1,13 +1,13 @@
 "use strict";
-const { createLifecycleHooks } = require("../../../utils/algolia");
-const { getAgeGroupIdForActivity } = require("../../../utils/content");
+// const { createLifecycleHooks } = require("../../../utils/algolia");
+const { getAgeGroupIdForActivity } = require("../../../../../utils/content");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
  * to customize this model
  */
 
-const contentType = "activity";
+// const contentType = "activity";
 
 module.exports = {
   async beforeUpdate(event) {
@@ -26,5 +26,5 @@ module.exports = {
       );
     }
   },
-  ...createLifecycleHooks(contentType),
+  // ...createLifecycleHooks(contentType),
 };

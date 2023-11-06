@@ -30,7 +30,7 @@
     "@strapi/provider-email-sendgrid": "4.15.0",
     "@strapi/strapi": "4.15.0",
     "@tinymce/tinymce-react": "3.12.6",
-    "axios": "0.21.4",
+    "axios": "0.22.0",
     "axios-retry": "3.1.9",
     "better-sqlite3": "^7.6.2",
     "clean-deep": "3.4.0",
@@ -46,7 +46,7 @@
     "uuid": "f874c59e-fcd5-4d24-86ae-b255ad184ceb"
   },
   "engines": {
-    "node": ">=14.19.1 <=18.x.x",
+    "node": ">=16.x.x <=18.x.x",
     "npm": ">=6.0.0"
   },
   "jest": {
