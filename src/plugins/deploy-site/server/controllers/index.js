@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const deploySite = require('./deploy-site');
+const deploySite = require("./deploy-site");
 
 module.exports = {
-  deploySite
+  "deploy-site": deploySite,
 };
