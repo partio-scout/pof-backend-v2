@@ -482,6 +482,81 @@ export interface PluginUploadFolder extends Schema.CollectionType {
   };
 }
 
+export interface PluginDeploySiteContentChange extends Schema.CollectionType {
+  collectionName: 'content_changes';
+  info: {
+    singularName: 'content-change';
+    pluralName: 'content-changes';
+    displayName: 'Content-change';
+    name: 'content-change';
+  };
+  options: {
+    draftAndPublish: false;
+    timestamps: true;
+    increments: true;
+    comment: '';
+  };
+  attributes: {
+    content_name: Attribute.String & Attribute.Required;
+    content_type: Attribute.String & Attribute.Required;
+    content_id: Attribute.Integer & Attribute.Required;
+    change_type: Attribute.String & Attribute.Required;
+    change_time: Attribute.DateTime;
+    deployed_at: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::deploy-site.content-change',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::deploy-site.content-change',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginDeploySiteDeploySiteSetting extends Schema.SingleType {
+  collectionName: 'deploy_site_settings';
+  info: {
+    singularName: 'deploy-site-setting';
+    pluralName: 'deploy-site-settings';
+    displayName: 'Deploy-site-settings';
+    name: 'deploy-site-settings';
+  };
+  options: {
+    draftAndPublish: false;
+    timestamps: true;
+    increments: true;
+    comment: '';
+  };
+  attributes: {
+    deploy_webhook_url: Attribute.String;
+    preview_url: Attribute.String;
+    preview_webhook_url: Attribute.String;
+    track_content_changes: Attribute.Boolean & Attribute.DefaultTo<true>;
+    preview_updates: Attribute.Boolean & Attribute.DefaultTo<true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::deploy-site.deploy-site-setting',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::deploy-site.deploy-site-setting',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginI18NLocale extends Schema.CollectionType {
   collectionName: 'i18n_locale';
   info: {
@@ -2398,6 +2473,8 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
+      'plugin::deploy-site.content-change': PluginDeploySiteContentChange;
+      'plugin::deploy-site.deploy-site-setting': PluginDeploySiteDeploySiteSetting;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;

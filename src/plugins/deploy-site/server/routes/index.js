@@ -4,7 +4,7 @@ module.exports = [
     path: "/",
     handler: "deploy-site.index",
     config: {
-      policies: [["admin::hasPermissions", ["plugins::deploy-site.deploy"]]],
+      policies: ["admin::hasPermissions"],
     },
   },
   {
@@ -12,9 +12,7 @@ module.exports = [
     path: "/set",
     handler: "deploy-site.set",
     config: {
-      policies: [
-        ["admin::hasPermissions", ["plugins::deploy-site.settings.access"]],
-      ],
+      policies: ["admin::hasPermissions"],
     },
   },
   {
@@ -22,7 +20,7 @@ module.exports = [
     path: "/changes",
     handler: "deploy-site.changes",
     config: {
-      policies: [["admin::hasPermissions", ["plugins::deploy-site.deploy"]]],
+      policies: ["admin::hasPermissions"],
     },
   },
   {
@@ -30,7 +28,7 @@ module.exports = [
     path: "/deploy",
     handler: "deploy-site.deploy",
     config: {
-      policies: [["admin::hasPermissions", ["plugins::deploy-site.deploy"]]],
+      policies: ["admin::hasPermissions"],
     },
   },
 ];
