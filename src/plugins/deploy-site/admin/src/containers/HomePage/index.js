@@ -7,9 +7,9 @@
 import React, { memo, useState, useEffect } from "react";
 // import PropTypes from 'prop-types';
 import pluginId from "../../pluginId";
-import { Button, Table } from "@buffetjs/core";
+import { Button, Table } from "@strapi/design-system";
 import styled from "styled-components";
-import { request } from "strapi-helper-plugin";
+import { request } from "@strapi/helper-plugin";
 
 const Box = styled.div`
   padding: 2rem;

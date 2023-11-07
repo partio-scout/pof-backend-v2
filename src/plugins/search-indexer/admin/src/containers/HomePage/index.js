@@ -5,7 +5,7 @@
  */
 
 import React, { memo, useState } from "react";
-import { request } from "strapi-helper-plugin";
+import { request } from "@strapi/helper-plugin";
 import { Button } from "@buffetjs/core";
 import { LoadingIndicator } from "@buffetjs/styles";
 import pluginPkg from "../../../../package.json";

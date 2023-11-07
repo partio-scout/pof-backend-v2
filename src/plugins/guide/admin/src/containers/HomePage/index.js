@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { request } from "strapi-helper-plugin";
+import { request } from "@strapi/helper-plugin";
 
 const HomePage = () => {
   const [guides, setGuides] = useState([]);
@@ -21,7 +21,7 @@ const HomePage = () => {
         {guides.map((guide) => (
           <li key={guide}>
             <Link to={`/plugins/guide/${guide}`}>
-              {guide.replace(".md", "").replace("_", " ").replace(/^\d-/, '')}
+              {guide.replace(".md", "").replace("_", " ").replace(/^\d-/, "")}
             </Link>
           </li>
         ))}

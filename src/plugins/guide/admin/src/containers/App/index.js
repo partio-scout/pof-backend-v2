@@ -5,18 +5,18 @@
  *
  */
 
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { NotFound } from 'strapi-helper-plugin';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import { NotFound } from "@strapi/helper-plugin";
 // Utils
-import pluginId from '../../pluginId';
+import pluginId from "../../pluginId";
 // Containers
-import HomePage from '../HomePage';
-import Guide from '../Guide';
+import HomePage from "../HomePage";
+import Guide from "../Guide";
 
 const App = () => {
   return (
-    <div style={{ padding: '2rem' }}>
+    <div style={{ padding: "2rem" }}>
       <Switch>
         <Route path={`/plugins/${pluginId}`} component={HomePage} exact />
         <Route path={`/plugins/${pluginId}/:id`} component={Guide} exact />
