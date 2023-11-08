@@ -10,7 +10,7 @@ import { Switch, Route } from "react-router-dom";
 import { NotFound } from "@strapi/helper-plugin";
 // Utils
 import pluginId from "../../pluginId";
-// Containers
+// Pages
 import HomePage from "../HomePage";
 
 const App = () => {

@@ -1,10 +1,6 @@
 const axios = require("axios");
 
-module.exports = (
-  {
-    strapi
-  }
-) => {
+module.exports = ({ strapi }) => {
   console.log("deploy-site: bootstrap");
   registerPermissionActions();
   addContentEventListeners();
@@ -37,7 +33,7 @@ const triggerGatsbyPreviewUpdate = async (settings, contentType) => {
     "content-change",
     "workflow",
     "suggestion",
-    "deploy-site-settings",
+    "deploy-site-setting",
     "comment",
   ];
 
@@ -77,8 +73,8 @@ const onContentEvent = async (eventType, event) => {
   };
 
   const [settings] = await strapi
-    .query("deploy-site-settings", "deploy-site")
-    .find();
+    .query("plugin::deploy-site.deploy-site-setting")
+    .findOne();
 
   await triggerGatsbyPreviewUpdate(settings, model);
 
@@ -90,7 +86,7 @@ const onContentEvent = async (eventType, event) => {
       "content-change",
       "workflow",
       "suggestion",
-      "deploy-site-settings",
+      "deploy-site-setting",
       "comment",
     ].includes(newChange.content_type)
   ) {
@@ -116,8 +112,8 @@ const addContentEventListener = (eventType) => {
  * The listeners create new `content-change` entries from the events.
  */
 const addContentEventListeners = () => {
-  if (process.env.NODE_ENV === 'test') return;
- 
+  if (process.env.NODE_ENV === "test") return;
+
   const listenedEvents = [
     "entry.create",
     "entry.update",

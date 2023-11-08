@@ -1,8 +1,8 @@
 import pluginPkg from "../../package.json";
 import pluginId from "./pluginId";
-import Initializer from "./containers/Initializer";
+import Initializer from "./components/Initializer";
 import { prefixPluginTranslations } from "@strapi/helper-plugin";
-import DeploymentPluginIcon from "../../components/PluginIcon";
+import DeploymentPluginIcon from "./components/PluginIcon";
 
 export default {
   register(app) {
@@ -16,13 +16,13 @@ export default {
       },
       Component: async () => {
         const component = await import(
-          /* webpackChunkName: "[request]" */ "./containers/App"
+          /* webpackChunkName: "[request]" */ "./pages/App"
         );
 
         return component;
       },
       permissions: [
-        // Uncomment to set the permissions of the plugin here
+        // // Uncomment to set the permissions of the plugin here
         // {
         //   action: "plugins::deploy-site.deploy", // the action name should be plugins::plugin-name.actionType
         //   subject: null,

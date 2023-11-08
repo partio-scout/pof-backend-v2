@@ -6,17 +6,13 @@
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
 
-module.exports = (
-  {
-    strapi
-  }
-) => {
+module.exports = ({ strapi }) => {
   return {
     /**
      * Check if there's any content-changes that need to be set as published
      */
     checkForOldChanges: async () => {
-      const contentChanges = strapi.query("content-change", "deploy-site");
+      const contentChanges = strapi.query("plugin::deploy-site.content-change");
 
       const changes = await contentChanges.find({ _limit: -1 });
 
@@ -39,7 +35,7 @@ module.exports = (
      * Set all undeployed content as deployed
      */
     setChangesAsDeployed: async () => {
-      const contentChanges = strapi.query("content-change", "deploy-site");
+      const contentChanges = strapi.query("plugin::deploy-site.content-change");
 
       const changes = await contentChanges.find({ _limit: -1 });
 
@@ -54,6 +50,6 @@ module.exports = (
       console.log(
         `Deploy-site: Updated ${changesThatNeedUpdating.length} entries.`
       );
-    }
+    },
   };
 };

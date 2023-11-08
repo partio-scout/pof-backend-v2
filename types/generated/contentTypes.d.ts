@@ -524,9 +524,9 @@ export interface PluginDeploySiteDeploySiteSetting extends Schema.SingleType {
   collectionName: 'deploy_site_settings';
   info: {
     singularName: 'deploy-site-setting';
-    pluralName: 'deploy-site-settings';
-    displayName: 'Deploy-site-settings';
-    name: 'deploy-site-settings';
+    pluralName: 'deploy-site-setting';
+    displayName: 'deploy-site-setting';
+    name: 'deploy-site-setting';
   };
   options: {
     draftAndPublish: false;

@@ -1,5 +1,5 @@
 "use strict";
-const axios = require('axios');
+const axios = require("axios");
 
 /**
  * deploy-site.js controller
@@ -10,8 +10,8 @@ const axios = require('axios');
 module.exports = {
   index: async (ctx) => {
     const [settings] = await strapi
-      .query("deploy-site-settings", "deploy-site")
-      .find();
+      .query("plugin::deploy-site.deploy-site-setting")
+      .findMany();
 
     ctx.send({
       settings,
@@ -26,19 +26,18 @@ module.exports = {
       });
       return;
     }
-
     const [existingSettings] = await strapi
-      .query("deploy-site-settings", "deploy-site")
-      .find();
+      .query("plugin::deploy-site.deploy-site-setting")
+      .findOne();
 
     let entry;
     if (existingSettings) {
       entry = await strapi
-        .query("deploy-site-settings", "deploy-site")
+        .query("plugin::deploy-site.deploy-site-setting")
         .update({ id: existingSettings.id }, { ...settings });
     } else {
       entry = await strapi
-        .query("deploy-site-settings", "deploy-site")
+        .query("plugin::deploy-site.deploy-site-setting")
         .create({ ...settings });
     }
 
@@ -52,10 +51,10 @@ module.exports = {
   },
   changes: async (ctx) => {
     const changes = await strapi
-      .query("content-change", "deploy-site")
-      .find({ _limit: -1 });
+      .query("plugin::deploy-site.content-change")
+      .findMany({ _limit: -1 });
 
-    const notPublishedChanges = changes.filter((change) => !change.deployed_at)
+    const notPublishedChanges = changes.filter((change) => !change.deployed_at);
 
     // Send 200 `ok`
     ctx.send({
@@ -64,8 +63,8 @@ module.exports = {
   },
   deploy: async (ctx) => {
     const [settings] = await strapi
-      .query("deploy-site-settings", "deploy-site")
-      .find();
+      .query("plugin::deploy-site.deploy-site-setting")
+      .findOne();
 
     if (!settings.deploy_webhook_url) {
       ctx.send({
@@ -77,12 +76,14 @@ module.exports = {
 
     await axios.post(settings.deploy_webhook_url);
 
-    console.log('deploy-site: Site deployment started');
+    console.log("deploy-site: Site deployment started");
 
-    await strapi.plugins["deploy-site"].services['deploy-site'].setChangesAsDeployed();
+    await strapi.plugins["deploy-site"].services[
+      "deploy-site"
+    ].setChangesAsDeployed();
 
     ctx.send({
-      message: 'ok',
-    })
-  }
+      message: "ok",
+    });
+  },
 };
