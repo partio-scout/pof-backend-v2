@@ -9,6 +9,7 @@ import { request } from "@strapi/helper-plugin";
 import { Button } from "@buffetjs/core";
 import { LoadingIndicator } from "@buffetjs/styles";
 import pluginPkg from "../../../../package.json";
+import { useNotification } from "@strapi/helper-plugin";
 
 import styled from "styled-components";
 
@@ -26,6 +27,7 @@ const ContentListItem = styled.div`
 `;
 
 const HomePage = () => {
+  const toggleNotification = useNotification();
   const [indexedContent, setIndexedContent] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -34,9 +36,9 @@ const HomePage = () => {
     request(`/search-indexer/${type}`)
       .then((res) => setIndexedContent(res.result))
       .catch((err) => {
-        strapi.notification.toggle({
+        toggleNotification({
           type: "warning",
-          message: `Failed indexing content: ${err}`,
+          message: { defaultMessage: `Failed indexing content: ${err}` },
           title: "Error",
           timeout: 10000,
         });

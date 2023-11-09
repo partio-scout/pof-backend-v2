@@ -10,6 +10,7 @@ import pluginId from "../../pluginId";
 import { Button, Table } from "@strapi/design-system";
 import styled from "styled-components";
 import { request } from "@strapi/helper-plugin";
+import { useNotification } from "@strapi/helper-plugin";
 
 const Box = styled.div`
   padding: 2rem;
@@ -20,6 +21,7 @@ const Section = styled.div`
 `;
 
 const HomePage = () => {
+  const toggleNotification = useNotification();
   const [settings, setSettings] = useState();
   const [changes, setChanges] = useState([]);
 
@@ -34,9 +36,11 @@ const HomePage = () => {
 
   const deploySite = () => {
     if (!settings.deploy_webhook_url) {
-      strapi.notification.toggle({
-        message:
-          "Setting `deploy_webhook_url` is not set. Contact your administrator for setting it",
+      toggleNotification({
+        message: {
+          defaultMessage:
+            "Setting `deploy_webhook_url` is not set. Contact your administrator for setting it",
+        },
         timeout: 3500,
         title: "Error",
         type: "warning",
@@ -46,8 +50,8 @@ const HomePage = () => {
 
     request("/deploy-site/deploy")
       .then(() => {
-        strapi.notification.toggle({
-          message: "Deployment started successfully",
+        toggleNotification({
+          message: { defaultMessage: "Deployment started successfully" },
           timeout: 3500,
           title: "Success",
           type: "success",
@@ -57,10 +61,12 @@ const HomePage = () => {
       .then(({ changes }) => setChanges(changes))
       .catch((error) => {
         console.error(error);
-        strapi.notification.toggle({
-          message:
-            "Deployment failed to start. Contact your administrator for fixing this. " +
-            error,
+        toggleNotification({
+          message: {
+            defaultMessage:
+              "Deployment failed to start. Contact your administrator for fixing this. " +
+              error,
+          },
           timeout: 60000,
           title: "Error",
           type: "warning",
@@ -70,9 +76,11 @@ const HomePage = () => {
 
   const openPreview = () => {
     if (!settings.preview_url) {
-      strapi.notification.toggle({
-        message:
-          "Preview is not set up. Contact your administrator for fixing this.",
+      toggleNotification({
+        message: {
+          defaultMessage:
+            "Preview is not set up. Contact your administrator for fixing this.",
+        },
         timeout: 60000,
         title: "Error",
         type: "warning",
