@@ -488,13 +488,18 @@ export interface PluginDeploySiteContentChange extends Schema.CollectionType {
     singularName: 'content-change';
     pluralName: 'content-changes';
     displayName: 'Content-change';
-    name: 'content-change';
+    description: 'Content changes';
   };
   options: {
-    draftAndPublish: false;
-    timestamps: true;
-    increments: true;
-    comment: '';
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
   };
   attributes: {
     content_name: Attribute.String & Attribute.Required;
@@ -505,6 +510,7 @@ export interface PluginDeploySiteContentChange extends Schema.CollectionType {
     deployed_at: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'plugin::deploy-site.content-change',
       'oneToOne',
@@ -524,9 +530,9 @@ export interface PluginDeploySiteDeploySiteSetting extends Schema.SingleType {
   collectionName: 'deploy_site_settings';
   info: {
     singularName: 'deploy-site-setting';
-    pluralName: 'deploy-site-setting';
+    pluralName: 'deploy-site-settings';
     displayName: 'deploy-site-setting';
-    name: 'deploy-site-setting';
+    description: 'Deploy site settings';
   };
   options: {
     draftAndPublish: false;

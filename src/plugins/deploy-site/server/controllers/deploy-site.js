@@ -7,7 +7,7 @@ const axios = require("axios");
  * @description: A set of functions called "actions" of the `deploy-site` plugin.
  */
 
-module.exports = {
+module.exports = ({ strapi }) => ({
   index: async (ctx) => {
     const [settings] = await strapi
       .query("plugin::deploy-site.deploy-site-setting")
@@ -18,6 +18,7 @@ module.exports = {
     });
   },
   set: async (ctx) => {
+    console.log("CTX settings", ctx.request.body);
     const settings = ctx.request.body;
 
     if (!settings.deploy_webhook_url || !settings.preview_url) {
@@ -28,7 +29,7 @@ module.exports = {
     }
     const [existingSettings] = await strapi
       .query("plugin::deploy-site.deploy-site-setting")
-      .findOne();
+      .findMany();
 
     let entry;
     if (existingSettings) {
@@ -64,7 +65,7 @@ module.exports = {
   deploy: async (ctx) => {
     const [settings] = await strapi
       .query("plugin::deploy-site.deploy-site-setting")
-      .findOne();
+      .findMany();
 
     if (!settings.deploy_webhook_url) {
       ctx.send({
@@ -86,4 +87,4 @@ module.exports = {
       message: "ok",
     });
   },
-};
+});

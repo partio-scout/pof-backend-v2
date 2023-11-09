@@ -1,9 +1,0 @@
-'use strict';
-
-const schema = require('./schema');
-const lifecycles = require('./lifecycles');
-
-module.exports = {
-  lifecycles,
-  schema
-};

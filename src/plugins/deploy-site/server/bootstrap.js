@@ -72,9 +72,9 @@ const onContentEvent = async (eventType, event) => {
     change_time: new Date(),
   };
 
-  const [settings] = await strapi
+  const settings = await strapi
     .query("plugin::deploy-site.deploy-site-setting")
-    .findOne();
+    .findMany();
 
   await triggerGatsbyPreviewUpdate(settings, model);
 
@@ -91,7 +91,7 @@ const onContentEvent = async (eventType, event) => {
     ].includes(newChange.content_type)
   ) {
     console.log("deploy-site: Creating new content-change", newChange);
-    await strapi.query("content-change", "deploy-site").create(newChange);
+    await strapi.query("plugin::deploy-site.content-change").create(newChange);
   }
 };
 
