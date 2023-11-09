@@ -12,10 +12,13 @@ module.exports = ({ strapi }) => {
      * Check if there's any content-changes that need to be set as published
      */
     checkForOldChanges: async () => {
-      const contentChanges = strapi.query("plugin::deploy-site.content-change");
+      const contentChanges = strapi.db.query(
+        "plugin::deploy-site.content-changes"
+      );
 
-      const changes = await contentChanges.find({ _limit: -1 });
+      const changes = await contentChanges.findMany();
 
+      console.log("changes ----->", contentChanges);
       // Delete changes older than a month
       const monthAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 31);
 
@@ -37,7 +40,7 @@ module.exports = ({ strapi }) => {
     setChangesAsDeployed: async () => {
       const contentChanges = strapi.query("plugin::deploy-site.content-change");
 
-      const changes = await contentChanges.find({ _limit: -1 });
+      const changes = await contentChanges.find();
 
       const changesThatNeedUpdating = changes.filter((x) => !x.deployed_at);
 

@@ -9,7 +9,7 @@ const axios = require("axios");
 
 module.exports = ({ strapi }) => ({
   index: async (ctx) => {
-    const [settings] = await strapi
+    const settings = await strapi
       .query("plugin::deploy-site.deploy-site-setting")
       .findMany();
 
@@ -53,7 +53,9 @@ module.exports = ({ strapi }) => ({
   changes: async (ctx) => {
     const changes = await strapi
       .query("plugin::deploy-site.content-change")
-      .findMany({ _limit: -1 });
+      .findMany();
+
+    console.log("CHANGEEEESSS", changes);
 
     const notPublishedChanges = changes.filter((change) => !change.deployed_at);
 
@@ -63,7 +65,7 @@ module.exports = ({ strapi }) => ({
     });
   },
   deploy: async (ctx) => {
-    const [settings] = await strapi
+    const settings = await strapi
       .query("plugin::deploy-site.deploy-site-setting")
       .findMany();
 
