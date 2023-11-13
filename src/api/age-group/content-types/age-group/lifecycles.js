@@ -40,8 +40,24 @@ module.exports = {
         }
       })();
     }
-
+    await strapi.plugins["deploy-site"].services[
+      "deploy-site"
+    ].handleContentChange("update", result);
     // hooks.afterUpdate(result);
+  },
+  async afterCreate(event) {
+    const { result, params } = event;
+    // Logic to handle after create.
+    await strapi.plugins["deploy-site"].services[
+      "deploy-site"
+    ].handleContentChange("create", result);
+  },
+  async afterDelete(event) {
+    const { result, params } = event;
+    // Logic to handle after delete.
+    await strapi.plugins["deploy-site"].services[
+      "deploy-site"
+    ].handleContentChange("delete", result);
   },
   // afterDelete: hooks.afterDelete,
 };

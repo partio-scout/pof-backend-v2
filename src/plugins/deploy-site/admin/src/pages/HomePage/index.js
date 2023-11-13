@@ -7,12 +7,21 @@
 import React, { memo, useState, useEffect } from "react";
 // import PropTypes from 'prop-types';
 import pluginId from "../../pluginId";
-import { Button, Table } from "@strapi/design-system";
+import {
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Td,
+  Th,
+  Button,
+} from "@strapi/design-system";
 import styled from "styled-components";
 import { request } from "@strapi/helper-plugin";
 import { useNotification } from "@strapi/helper-plugin";
 
-const Box = styled.div`
+const StyledBox = styled.div`
   padding: 2rem;
 `;
 
@@ -33,6 +42,8 @@ const HomePage = () => {
       setChanges(changes);
     });
   }, []);
+
+  console.log("changes", changes);
 
   const deploySite = () => {
     if (!settings.deploy_webhook_url) {
@@ -115,11 +126,34 @@ const HomePage = () => {
   ];
 
   return (
-    <Box>
+    <StyledBox>
       <h1>Deployment actions</h1>
       <Section>
         <p>There are {changes.length} unpublished changes</p>
-        {changes.length > 0 && <Table headers={tableHeaders} rows={changes} />}
+        {changes.length > 0 && (
+          <Box padding={8} background="neutral100">
+            <Table colCount={tableHeaders.length} rowCount={changes.length}>
+              <Thead>
+                <Tr>
+                  {tableHeaders.map((header) => (
+                    <Th>{header.name}</Th>
+                  ))}
+                </Tr>
+              </Thead>
+              <Tbody>
+                {changes.map((change) => (
+                  <Tr key={change.id}>
+                    <Td>{change.id}</Td>
+                    <Td>{change.content_name}</Td>
+                    <Td>{change.content_type}</Td>
+                    <Td>{change.change_type}</Td>
+                    <Td>{change.change_time}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </Box>
+        )}
       </Section>
       <Section>
         <p>From this button you can start the website's deployment</p>
@@ -132,7 +166,7 @@ const HomePage = () => {
         </p>
         <Button onClick={openPreview}>Open preview</Button>
       </Section>
-    </Box>
+    </StyledBox>
   );
 };
 

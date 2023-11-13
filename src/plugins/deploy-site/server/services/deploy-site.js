@@ -18,7 +18,6 @@ module.exports = ({ strapi }) => {
 
       const changes = await contentChanges.findMany();
 
-      console.log("changes ----->", contentChanges);
       // Delete changes older than a month
       const monthAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 31);
 
@@ -53,6 +52,23 @@ module.exports = ({ strapi }) => {
       console.log(
         `Deploy-site: Updated ${changesThatNeedUpdating.length} entries.`
       );
+    },
+    async handleContentChange(action, data) {
+      // Logic to determine if a change should be recorded.
+      const shouldRecord = true; /* some logic to determine if the change should be recorded */
+
+      if (shouldRecord) {
+        await strapi.query("plugin::deploy-site.content-change").create({
+          data: {
+            content_name: data.title || data.name || "",
+            content_type: data.__contentType,
+            content_id: data.id,
+            change_type: action,
+            change_time: new Date(),
+            // Other fields as necessary...
+          },
+        });
+      }
     },
   };
 };
