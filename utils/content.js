@@ -15,7 +15,9 @@ const getAgeGroupIdFromActivityGroup = async (id) => {
   let _activityGroup;
   if (typeof id === "number") {
     // We have an id
-    _activityGroup = await strapi.query("activity-group").findOne({ id: id });
+    _activityGroup = await strapi
+      .query("api::activity-group.activity-group")
+      .findOne({ id: id });
   } else {
     throw new Error("Bad argument `activityGroup`, must be a number");
   }

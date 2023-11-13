@@ -236,9 +236,11 @@ describe("Suggestions controller", () => {
 
       // Check that the comment is linked to the suggestion and it is not published.
       // By using `starpi.query()` we get also unpublished content.
-      const updatedSuggestion = await strapi.query("suggestion").findOne({
-        id: suggestion.id,
-      });
+      const updatedSuggestion = await strapi
+        .query("api::suggestion.suggestion")
+        .findOne({
+          id: suggestion.id,
+        });
       expect(updatedSuggestion.comments.length).toEqual(1);
       expect(updatedSuggestion.comments[0].text).toEqual("A test comment");
       expect(updatedSuggestion.comments[0].published_at).toBeNull();
