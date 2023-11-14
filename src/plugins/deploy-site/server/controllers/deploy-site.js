@@ -18,7 +18,6 @@ module.exports = ({ strapi }) => ({
     });
   },
   set: async (ctx) => {
-    console.log("CTX settings", ctx.request.body);
     const settings = ctx.request.body;
 
     if (!settings.deploy_webhook_url || !settings.preview_url) {
@@ -54,8 +53,6 @@ module.exports = ({ strapi }) => ({
     const changes = await strapi
       .query("plugin::deploy-site.content-change")
       .findMany();
-
-    console.log("CHANGEEEESSS", changes);
 
     const notPublishedChanges = changes.filter((change) => !change.deployed_at);
 
