@@ -36,19 +36,18 @@ const HomePage = () => {
 
   useEffect(() => {
     request("/deploy-site").then(({ settings }) => {
-      setSettings(settings);
+      setSettings(settings[0]);
     });
     request("/deploy-site/changes").then(({ changes }) => {
       setChanges(changes);
     });
   }, []);
 
-  console.log("changes", changes);
-
   const deploySite = () => {
     if (!settings.deploy_webhook_url) {
       toggleNotification({
         message: {
+          id: "deploy-site deploy_webhook_url missing",
           defaultMessage:
             "Setting `deploy_webhook_url` is not set. Contact your administrator for setting it",
         },
@@ -62,7 +61,10 @@ const HomePage = () => {
     request("/deploy-site/deploy")
       .then(() => {
         toggleNotification({
-          message: { defaultMessage: "Deployment started successfully" },
+          message: {
+            id: "deploy-site deploy started",
+            defaultMessage: "Deployment started successfully",
+          },
           timeout: 3500,
           title: "Success",
           type: "success",
@@ -74,6 +76,7 @@ const HomePage = () => {
         console.error(error);
         toggleNotification({
           message: {
+            id: "deploy-site deploy failed",
             defaultMessage:
               "Deployment failed to start. Contact your administrator for fixing this. " +
               error,
@@ -89,6 +92,7 @@ const HomePage = () => {
     if (!settings.preview_url) {
       toggleNotification({
         message: {
+          id: "deploy-site preview_url missing",
           defaultMessage:
             "Preview is not set up. Contact your administrator for fixing this.",
         },

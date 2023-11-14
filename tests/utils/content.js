@@ -20,40 +20,40 @@ describe("Content utils", () => {
             - activityGroup1
               - activity1
     */
-    const activity1 = await strapi.query("activity").create({
+    const activity1 = await strapi.query("api::activity.activity").create({
       title: "activity",
       content: "test",
     });
-    const activity2 = await strapi.query("activity").create({
+    const activity2 = await strapi.query("api::activity.activity").create({
       title: "activity",
       content: "test",
     });
-    const activity3 = await strapi.query("activity").create({
+    const activity3 = await strapi.query("api::activity.activity").create({
       title: "activity",
       content: "test",
     });
 
-    const activityGroup1 = await strapi.query("activity-group").create({
+    const activityGroup1 = await strapi.query("api::activity-group.activity-group").create({
       title: "activity-group1",
       content: "test",
       activities: [activity1.id],
     });
 
-    const activityGroup2 = await strapi.query("activity-group").create({
+    const activityGroup2 = await strapi.query("api::activity-group.activity-group").create({
       title: "activity-group2",
       content: "test",
       activity_groups: [activityGroup1.id],
       activities: [activity2.id],
     });
 
-    const activityGroup3 = await strapi.query("activity-group").create({
+    const activityGroup3 = await strapi.query("api::activity-group.activity-group").create({
       title: "activity-group2",
       content: "test",
       activity_groups: [activityGroup2.id],
       activities: [activity3.id],
     });
 
-    ageGroup = await strapi.query("age-group").create({
+    ageGroup = await strapi.query("api::age-group.age-group").create({
       title: "age-group1",
       content: "test",
       minimum_age: 1,
