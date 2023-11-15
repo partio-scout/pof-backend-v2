@@ -172,9 +172,10 @@ const saveToAlgolia = async (contentType, data) => {
  * @param {string} id Entry's id
  */
 const deleteFromAlgolia = async (contentType, id) => {
-  if (process.env.NODE_ENV === "test" || !strapi.services.algolia) return;
-
-  await strapi.services.algolia.deleteObject(id, contentType);
+  if (process.env.NODE_ENV === "test") return;
+  console.log("NODE NEV: ", process.env.NODE_ENV);
+  const index = client.initIndex(contentType);
+  await index.deleteObject(id);
 };
 
 /**

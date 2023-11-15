@@ -1,10 +1,10 @@
 "use strict";
-// const { createLifecycleHooks } = require("../../../utils/algolia");
+const { createLifecycleHooks } = require("../../../../../utils/algolia");
 const {
   notifyAboutContent,
 } = require("../../../../../utils/emailNotifications");
 
-// const contentType = "suggestion";
+const contentType = "suggestion";
 
 module.exports = {
   afterCreate(event) {
@@ -18,5 +18,5 @@ module.exports = {
     // Set the suggestion's like_count based on the current likes
     data.like_count = data.likes?.length || 0;
   },
-  // ...createLifecycleHooks(contentType),
+  ...createLifecycleHooks(contentType),
 };

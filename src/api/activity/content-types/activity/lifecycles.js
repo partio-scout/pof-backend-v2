@@ -1,13 +1,16 @@
 "use strict";
-// const { createLifecycleHooks } = require("../../../utils/algolia");
 const { getAgeGroupIdForActivity } = require("../../../../../utils/content");
+const {
+  deleteFromAlgolia,
+  updateInAlgolia,
+} = require("../../../../../utils/algolia");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
  * to customize this model
  */
 
-// const contentType = "activity";
+const contentType = "activity";
 
 module.exports = {
   async beforeUpdate(event) {
@@ -41,6 +44,8 @@ module.exports = {
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
     ].handleContentChange("update", result);
+
+    updateInAlgolia(contentType, result);
   },
   async afterDelete(event) {
     const { result, params } = event;
@@ -48,6 +53,7 @@ module.exports = {
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
     ].handleContentChange("delete", result);
+
+    deleteFromAlgolia(contentType, result.id);
   },
-  // ...createLifecycleHooks(contentType),
 };

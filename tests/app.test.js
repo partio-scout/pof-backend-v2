@@ -1,8 +1,9 @@
 const fs = require("fs");
 const { setupStrapi } = require("./helpers/strapi");
 
-/** this code is called once before any test is called */
+// /** this code is called once before any test is called */
 beforeAll(async () => {
+  console.log("täääää");
   await setupStrapi();
 });
 
@@ -19,12 +20,11 @@ afterAll(() => {
   }
 });
 
-describe('Strapi', () => {
+describe("Strapi", () => {
   it("is defined", () => {
     expect(strapi).toBeDefined();
   });
-})
-
+});
 
 require("./user");
 require("./suggestion");
