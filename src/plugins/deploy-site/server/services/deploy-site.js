@@ -13,7 +13,7 @@ module.exports = ({ strapi }) => {
      */
     checkForOldChanges: async () => {
       const contentChanges = strapi.db.query(
-        "plugin::deploy-site.content-changes"
+        "plugin::deploy-site.content-change"
       );
 
       const changes = await contentChanges.findMany();

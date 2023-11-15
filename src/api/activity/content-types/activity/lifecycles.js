@@ -12,12 +12,10 @@ const { getAgeGroupIdForActivity } = require("../../../../../utils/content");
 module.exports = {
   async beforeUpdate(event) {
     let { result, params } = event;
-    console.log(result, params);
     const data = params.data;
     // Check that `age_group` is defined, this indicates that the current data is from the updated locale.
     // This is because all other locales update as well, but they only have the common fields defined.
     if (data.activity_group) {
-      console.log("lifecycles", data.id, data.activity_group);
       // Set the age-group for this activity by getting it from the parent activity-groups
       data.age_group = await getAgeGroupIdForActivity(data.id);
 
@@ -32,8 +30,6 @@ module.exports = {
   async afterCreate(event) {
     const { result, params } = event;
 
-    console.log("RESULT", result);
-    console.log("PARAMS", params);
     // Logic to handle after create.
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
