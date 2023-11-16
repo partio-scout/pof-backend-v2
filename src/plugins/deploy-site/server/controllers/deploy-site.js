@@ -64,7 +64,7 @@ module.exports = ({ strapi }) => ({
   deploy: async (ctx) => {
     const settings = await strapi
       .query("plugin::deploy-site.deploy-site-setting")
-      .findMany();
+      .findOne();
 
     if (!settings.deploy_webhook_url) {
       ctx.send({
@@ -74,7 +74,11 @@ module.exports = ({ strapi }) => ({
       return;
     }
 
-    await axios.post(settings.deploy_webhook_url);
+    try {
+      await axios.post(settings.deploy_webhook_url);
+    } catch (error) {
+      console.log("error", error);
+    }
 
     console.log("deploy-site: Site deployment started");
 

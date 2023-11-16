@@ -39,15 +39,18 @@ module.exports = ({ strapi }) => {
     setChangesAsDeployed: async () => {
       const contentChanges = strapi.query("plugin::deploy-site.content-change");
 
-      const changes = await contentChanges.find();
+      const changes = await contentChanges.findMany();
 
       const changesThatNeedUpdating = changes.filter((x) => !x.deployed_at);
 
       for (const change of changesThatNeedUpdating) {
-        await contentChanges.update(
-          { id: change.id },
-          { deployed_at: new Date() }
-        );
+        await contentChanges.update({
+          where: { id: change.id },
+          data: {
+            id: change.id,
+            deployed_at: new Date(),
+          },
+        });
       }
       console.log(
         `Deploy-site: Updated ${changesThatNeedUpdating.length} entries.`
