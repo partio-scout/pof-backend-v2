@@ -160,7 +160,6 @@ const isRelationPublished = async (relation, contentType) => {
 const saveToAlgolia = async (contentType, data) => {
   const sanitizedData = sanitizeData(contentType, data);
   const augmentedData = await augmentData(contentType, sanitizedData);
-  // const client = algoliaClient();
   const index = client.initIndex(contentType);
 
   await index.saveObject({ objectID: augmentedData.id, ...augmentedData });
@@ -173,7 +172,6 @@ const saveToAlgolia = async (contentType, data) => {
  */
 const deleteFromAlgolia = async (contentType, id) => {
   if (process.env.NODE_ENV === "test") return;
-  console.log("NODE NEV: ", process.env.NODE_ENV);
   const index = client.initIndex(contentType);
   await index.deleteObject(id);
 };

@@ -6,7 +6,7 @@
 
 import React, { memo, useState } from "react";
 import { request, useNotification } from "@strapi/helper-plugin";
-import { Button, Loader } from "@strapi/design-system";
+import { Button, Loader, Typography } from "@strapi/design-system";
 import pluginPkg from "../../../../package.json";
 
 import styled from "styled-components";
@@ -14,6 +14,8 @@ import styled from "styled-components";
 const availableContentTypes = pluginPkg.indexableContent || [];
 
 const Section = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-bottom: 2rem;
 `;
 
@@ -51,11 +53,13 @@ const HomePage = () => {
   return (
     <div style={{ padding: "1rem", maxWidth: "50rem" }}>
       <Section>
-        <h1>Search indexing</h1>
-        <p>Here you can re-index all content items.</p>
+        <Typography variant="alpha">Search indexing</Typography>
+        <Typography variant="omega">
+          Here you can re-index all content items.
+        </Typography>
       </Section>
       <Section>
-        <h2>Available types</h2>
+        <Typography variant="beta">Available types</Typography>
         <ul style={{ maxWidth: "30rem" }}>
           {availableContentTypes.map((t) => (
             <li key={t}>
@@ -65,19 +69,21 @@ const HomePage = () => {
             </li>
           ))}
         </ul>
-        <Button onClick={() => indexContent("all")}>
-          Press here to index all content
-        </Button>
       </Section>
+      <Button onClick={() => indexContent("all")}>
+        Press here to index all content
+      </Button>
       <Section>
         {loading && <Loader />}
         {indexedContent && (
           <>
-            <h2>Indexed content</h2>
+            <Typography variant="beta">Indexed content</Typography>
             <ul>
               {Object.entries(indexedContent).map(([contentType, entries]) => (
                 <li key={contentType}>
-                  <b>{contentType}</b>: {entries.length} entries
+                  <Typography variant="omega">
+                    <b>{contentType}</b>: {entries.length} entries
+                  </Typography>
                 </li>
               ))}
             </ul>

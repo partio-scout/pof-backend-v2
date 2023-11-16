@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { request } from "@strapi/helper-plugin";
+import { Typography, Link } from "@strapi/design-system";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
 
 const HomePage = () => {
   const [guides, setGuides] = useState([]);
@@ -10,12 +17,12 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Ohjekirja</h1>
-      <p>
+    <Container>
+      <Typography variant="alpha">Ohjekirja</Typography>
+      <Typography variant="omega">
         Tästä ohjekirjasta löydät ohjeet Strapin käyttöön. Alla olevista
         linkeistä voit selata ohjeita.
-      </p>
+      </Typography>
       <ul>
         {guides.map((guide) => (
           <li key={guide}>
@@ -25,7 +32,7 @@ const HomePage = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Container>
   );
 };
 

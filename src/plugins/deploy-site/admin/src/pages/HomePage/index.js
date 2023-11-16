@@ -16,6 +16,7 @@ import {
   Td,
   Th,
   Button,
+  Typography
 } from "@strapi/design-system";
 import styled from "styled-components";
 import { request } from "@strapi/helper-plugin";
@@ -131,9 +132,9 @@ const HomePage = () => {
 
   return (
     <StyledBox>
-      <h1>Deployment actions</h1>
+      <Typography variant="alpha">Deployment actions</Typography>
       <Section>
-        <p>There are {changes.length} unpublished changes</p>
+        <Typography variant="omega">There are {changes.length} unpublished changes</Typography>
         {changes.length > 0 && (
           <Box padding={8} background="neutral100">
             <Table colCount={tableHeaders.length} rowCount={changes.length}>
@@ -160,14 +161,14 @@ const HomePage = () => {
         )}
       </Section>
       <Section>
-        <p>From this button you can start the website's deployment</p>
+        <Typography variant="omega">From this button you can start the website's deployment</Typography>
         <Button onClick={deploySite}>Deploy site</Button>
       </Section>
       <Section>
-        <p>
+        <Typography variant="omega">
           From this button you can open the preview site, which shows any
           changes made to Strapi's content
-        </p>
+        </Typography>
         <Button onClick={openPreview}>Open preview</Button>
       </Section>
     </StyledBox>
