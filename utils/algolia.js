@@ -100,13 +100,13 @@ const isSuggestionSaveable = async (relation) => {
   if (relation == null || relation === undefined) return false;
   try {
     // Find and check if age-group is published
-    let activity = await strapi.query("api::activity.activity").findOne({
+    let activity = await strapi.db.query("api::activity.activity").findOne({
       where: { id: relation.id },
       populate: true,
     });
 
     if (activity) {
-      let ageGroup = await strapi.query("api::age-group.age-group").findOne({
+      let ageGroup = await strapi.db.query("api::age-group.age-group").findOne({
         id: activity.age_group.id,
       });
       if (!ageGroup?.id || !ageGroup?.publishedAt) {
@@ -134,7 +134,7 @@ const isRelationPublished = async (relation, contentType) => {
 
   if (typeof relation === "number") {
     try {
-      let entity = await strapi.query(contentTypeService).findOne({
+      let entity = await strapi.db.query(contentTypeService).findOne({
         id: relation,
       });
 
@@ -207,9 +207,11 @@ const augmentData = async (contentType, data) => {
     case "suggestion": {
       if (!data.activity?.age_group) return data;
 
-      const ageGroup = await strapi.query("api::age-group.age-group").findOne({
-        id: data.activity.age_group,
-      });
+      const ageGroup = await strapi.db
+        .query("api::age-group.age-group")
+        .findOne({
+          id: data.activity.age_group,
+        });
 
       if (ageGroup) {
         data.age_group = {

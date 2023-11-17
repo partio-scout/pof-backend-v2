@@ -1,31 +1,19 @@
 const http = require("http");
 const Strapi = require("@strapi/strapi");
 
-// async function setupStrapi() {
-//   if (!instance) {
-//     await Strapi().start();
-//     instance = strapi;
-//   }
-//   return instance;
-// }
-
 let instance;
 
 async function setupStrapi() {
-  console.log("tuleeks tää tänne", instance);
   if (!instance) {
-    /**
-     * The following code in copied from `./node_modules/strapi/lib/Strapi.js`.
-     *
-     * Strapi() call sets strapi as a global variable.
-     * */
+    try {
+      await Strapi().load();
+      instance = strapi;
 
-    instance = await Strapi().load();
-    await instance.app
-      .use(instance.router.routes()) // populate KOA routes
-      .use(instance.router.allowedMethods()); // populate KOA methods
-
-    instance.server = http.createServer(instance.app.callback());
+      instance.server.mount();
+    } catch (error) {
+      console.error("Error during Strapi setup:", error);
+      throw error;
+    }
   }
   return instance;
 }

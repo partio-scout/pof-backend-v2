@@ -37,7 +37,9 @@ module.exports = ({ strapi }) => {
      * Set all undeployed content as deployed
      */
     setChangesAsDeployed: async () => {
-      const contentChanges = strapi.query("plugin::deploy-site.content-change");
+      const contentChanges = strapi.db.query(
+        "plugin::deploy-site.content-change"
+      );
 
       const changes = await contentChanges.findMany();
 
@@ -61,7 +63,7 @@ module.exports = ({ strapi }) => {
       const shouldRecord = true; /* some logic to determine if the change should be recorded */
 
       if (shouldRecord) {
-        await strapi.query("plugin::deploy-site.content-change").create({
+        await strapi.db.query("plugin::deploy-site.content-change").create({
           data: {
             content_name: data.title || data.name || "",
             content_type: data.__contentType,

@@ -91,7 +91,9 @@ const onContentEvent = async (eventType, event) => {
     ].includes(newChange.content_type)
   ) {
     console.log("deploy-site: Creating new content-change", newChange);
-    await strapi.query("plugin::deploy-site.content-change").create(newChange);
+    await strapi.db
+      .query("plugin::deploy-site.content-change")
+      .create(newChange);
   }
 };
 

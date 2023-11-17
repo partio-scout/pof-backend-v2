@@ -17,7 +17,7 @@ const updateActivityGroupActivities = async (activityGroup) => {
       const ageGroupId = activityGroup.age_group?.id || null;
       if (activity.age_group !== ageGroupId) {
         console.log("Updating age-group", ageGroupId, "to", activity.title);
-        await strapi.query("api::activity.activity").update(
+        await strapi.db.query("api::activity.activity").update(
           { id: activity.id },
           {
             age_group: ageGroupId,

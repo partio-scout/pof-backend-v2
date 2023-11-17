@@ -3,13 +3,12 @@ const { setupStrapi } = require("./helpers/strapi");
 
 // /** this code is called once before any test is called */
 beforeAll(async () => {
-  console.log("täääää");
   await setupStrapi();
 });
 
 /** this code is called once before all the tested are finished */
 afterAll(() => {
-  const dbSettings = strapi.config.get("database.connections.default.settings");
+  const dbSettings = strapi.config.database.connection.connection;
 
   //delete test database after all tests
   if (dbSettings && dbSettings.filename) {
