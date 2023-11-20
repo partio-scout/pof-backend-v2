@@ -9,16 +9,17 @@ const mockUserData = {
   confirmed: true,
   blocked: null,
 };
+const createUniqueUser = (uniqueSuffix) => ({
+  ...mockUserData,
+  email: `test${uniqueSuffix}@strapi.com`,
+  username: `testuser${uniqueSuffix}`,
+});
 
 describe("Authentication", () => {
   it("should login user and return jwt token", async () => {
     /** Creates a new user and save it to the database */
-    const uniqueSuffix = Date.now().toString();
-    const uniqueUser = {
-      ...mockUserData,
-      email: `test${uniqueSuffix}@strapi.com`,
-      username: `testuser${uniqueSuffix}`,
-    };
+    const randomNumber = Math.random();
+    const uniqueUser = createUniqueUser(randomNumber);
     await strapi.plugins["users-permissions"].services.user.add(uniqueUser);
 
     await request(strapi.server.httpServer) // app server is an instance of Class: http.Server
@@ -32,17 +33,12 @@ describe("Authentication", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .then((data) => {
-        console.log("🤔🤔 resopnse", data); // Check the status code
         expect(data.body.jwt).toBeDefined();
       });
   });
 
-  it.only("should return users data for authenticated user", async () => {
+  it("should return users data for authenticated user", async () => {
     /** Gets the default user role */
-    // const defaultRole = await strapi
-    //   .query("role", "users-permissions")
-    //   .findOne({}, []);
-    // const role = defaultRole ? defaultRole.id : null;
 
     const defaultRole = await strapi.entityService.findMany(
       "plugin::users-permissions.role",
@@ -53,11 +49,11 @@ describe("Authentication", () => {
     );
     const role = defaultRole.length > 0 ? defaultRole[0].id : null;
 
+    const randomNumber = Math.random();
+    const uniqueUser = createUniqueUser(randomNumber);
     /** Creates a new user an push to database */
     const user = await strapi.plugins["users-permissions"].services.user.add({
-      ...mockUserData,
-      username: "tester2",
-      email: "tester2@strapi.com",
+      ...uniqueUser,
       role,
     });
 
@@ -66,7 +62,7 @@ describe("Authentication", () => {
     });
 
     await request(strapi.server.httpServer) // app server is an instance of Class: http.Server
-      .get("/users/me")
+      .get("/api/users/me")
       .set("accept", "application/json")
       .set("Content-Type", "application/json")
       .set("Authorization", "Bearer " + jwt)
