@@ -35,9 +35,9 @@ const grantPriviledge = async (roleID, value, enabled = true, policy = "") => {
     .split(".")
     .reduceRight((obj, next) => ({ [next]: obj }), { enabled, policy });
 
-  return await strapi.plugins[
-    "users-permissions"
-  ].services.userspermissions.updateRole(roleID, updateObj);
+  return await strapi
+    .plugin("users-permissions")
+    .services.role.updateRole(roleID, updateObj);
 };
 
 module.exports = { setupStrapi, grantPriviledge };

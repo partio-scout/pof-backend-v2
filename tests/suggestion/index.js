@@ -7,7 +7,7 @@ describe("Suggestions controller", () => {
     await Promise.all([
       await grantPriviledge(
         2,
-        "permissions.application.controllers.suggestion.new"
+        "permissions.application.controllers.api::suggestion.new"
       ),
       await grantPriviledge(
         2,
@@ -26,8 +26,8 @@ describe("Suggestions controller", () => {
 
   describe("/suggestions/new", () => {
     it("should create new suggestion with `from_web` true and `published_at` null, and return it", async () => {
-      const data = await request(strapi.server)
-        .post("/suggestions/new")
+      const data = await request(strapi.server.httpServer)
+        .post("/api/suggestions/new")
         .set("Content-Type", "application/json")
         .send({
           title: "title",
@@ -65,7 +65,7 @@ describe("Suggestions controller", () => {
         author: "author",
       });
 
-      const data = await request(strapi.server)
+      const data = await request(strapi.server.httpServer)
         .post(`/suggestions/${suggestion.id}/like`)
         .set("Content-Type", "application/json")
         .send({
@@ -96,7 +96,7 @@ describe("Suggestions controller", () => {
         author: "author",
       });
 
-      await request(strapi.server)
+      await request(strapi.server.httpServer)
         .post(`/suggestions/${suggestion.id}/like`)
         .set("Content-Type", "application/json")
         .send({
@@ -108,8 +108,8 @@ describe("Suggestions controller", () => {
           expect(data.body.like_count).toEqual(1);
         });
 
-      await request(strapi.server)
-        .post(`/suggestions/${suggestion.id}/like`)
+      await request(strapi.server.httpServer)
+        .post(`/api/suggestions/${suggestion.id}/like`)
         .set("Content-Type", "application/json")
         .send({
           user: "user1",
@@ -121,8 +121,8 @@ describe("Suggestions controller", () => {
     });
     it("should return 404 when liking nonexistent suggestion", async () => {
       // Create a comment to that suggesion
-      await request(strapi.server)
-        .post(`/suggestions/99/like`)
+      await request(strapi.server.httpServer)
+        .post(`/api/suggestions/99/like`)
         .set("Content-Type", "application/json")
         .send({
           user: "test",
@@ -145,8 +145,8 @@ describe("Suggestions controller", () => {
         expect(entry.like_count).toEqual(likeCount);
       };
 
-      const response1 = await request(strapi.server)
-        .post(`/suggestions/${suggestion.id}/like`)
+      const response1 = await request(strapi.server.httpServer)
+        .post(`/api/suggestions/${suggestion.id}/like`)
         .set("Content-Type", "application/json")
         .send({
           user: "user1",
@@ -164,8 +164,8 @@ describe("Suggestions controller", () => {
       // verify the response
       verifyEntry(response1.body, suggestion.id, 1);
 
-      const response2 = await request(strapi.server)
-        .post(`/suggestions/${suggestion.id}/unlike`)
+      const response2 = await request(strapi.server.httpServer)
+        .post(`/api/suggestions/${suggestion.id}/unlike`)
         .set("Content-Type", "application/json")
         .send({
           user: "user1",
@@ -192,8 +192,8 @@ describe("Suggestions controller", () => {
         author: "author",
       });
 
-      await request(strapi.server)
-        .post(`/suggestions/${suggestion.id}/unlike`)
+      await request(strapi.server.httpServer)
+        .post(`/api/suggestions/${suggestion.id}/unlike`)
         .set("Content-Type", "application/json")
         .send({
           user: "user1",
@@ -225,8 +225,8 @@ describe("Suggestions controller", () => {
       });
 
       // Create a comment to that suggesion
-      await request(strapi.server)
-        .post(`/suggestions/${suggestion.id}/comment`)
+      await request(strapi.server.httpServer)
+        .post(`/api/suggestions/${suggestion.id}/comment`)
         .set("Content-Type", "application/json")
         .send({
           text: "A test comment",
@@ -247,8 +247,8 @@ describe("Suggestions controller", () => {
     });
     it("should return 404 when commenting nonexistent suggestion", async () => {
       // Create a comment to that suggesion
-      await request(strapi.server)
-        .post(`/suggestions/99/comment`)
+      await request(strapi.server.httpServer)
+        .post(`/api/suggestions/99/comment`)
         .set("Content-Type", "application/json")
         .send({
           text: "A test comment",
