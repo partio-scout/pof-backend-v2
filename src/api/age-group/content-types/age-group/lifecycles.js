@@ -43,7 +43,8 @@ module.exports = {
     }
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
-    ].handleContentChange("update", result);
+    ].handleContentChange("update", contentType, result);
+
     updateInAlgolia(contentType, result);
   },
   async afterCreate(event) {
@@ -51,14 +52,16 @@ module.exports = {
 
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
-    ].handleContentChange("create", result);
+    ].handleContentChange("create", contentType, result);
+
+    updateInAlgolia(contentType, result);
   },
   async afterDelete(event) {
     const { result, params } = event;
     // Logic to handle after delete.
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
-    ].handleContentChange("delete", result);
+    ].handleContentChange("delete", contentType, result);
 
     deleteFromAlgolia(contentType, result.id);
   },

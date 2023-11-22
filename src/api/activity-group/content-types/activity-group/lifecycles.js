@@ -29,32 +29,31 @@ const updateActivityGroupActivities = async (activityGroup) => {
 };
 
 module.exports = {
-  async afterUpdate(event) {
-    const { result, params } = event;
-    updateActivityGroupActivities(result);
-
-    updateInAlgolia(conentType, result);
-  },
   async afterCreate(event) {
     const { result, params } = event;
     // Logic to handle after create.
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
-    ].handleContentChange("create", result);
+    ].handleContentChange("create", contentType, result);
+
+    updateInAlgolia(contentType, result);
   },
   async afterUpdate(event) {
     const { result, params } = event;
-    // Logic to handle after update.
+    updateActivityGroupActivities(result);
+
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
-    ].handleContentChange("update", result);
+    ].handleContentChange("update", contentType, result);
+
+    updateInAlgolia(contentType, result);
   },
   async afterDelete(event) {
     const { result, params } = event;
     // Logic to handle after delete.
     await strapi.plugins["deploy-site"].services[
       "deploy-site"
-    ].handleContentChange("delete", result);
+    ].handleContentChange("delete", contentType, result);
 
     deleteFromAlgolia(contentType, result.id);
   },
