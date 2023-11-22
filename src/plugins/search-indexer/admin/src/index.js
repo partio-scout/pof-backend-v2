@@ -21,13 +21,12 @@ export default {
         );
         return component;
       },
-      // permissions: [],
       permissions: [
         // Uncomment to set the permissions of the plugin here
-        // {
-        //   action: "plugins::search-indexer.index", // the action name should be plugins::plugin-name.actionType
-        //   subject: null,
-        // },
+        {
+          action: "plugin::search-indexer.index", // the action name should be plugin::plugin-name.actionType
+          subject: null,
+        },
       ],
     });
     app.registerPlugin({

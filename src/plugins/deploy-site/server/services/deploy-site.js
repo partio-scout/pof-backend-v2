@@ -58,7 +58,7 @@ module.exports = ({ strapi }) => {
         `Deploy-site: Updated ${changesThatNeedUpdating.length} entries.`
       );
     },
-    async handleContentChange(action, data) {
+    async handleContentChange(action, contentType, data) {
       // Logic to determine if a change should be recorded.
       const shouldRecord = true; /* some logic to determine if the change should be recorded */
 
@@ -66,7 +66,7 @@ module.exports = ({ strapi }) => {
         await strapi.db.query("plugin::deploy-site.content-change").create({
           data: {
             content_name: data.title || data.name || "",
-            content_type: data.__contentType,
+            content_type: contentType,
             content_id: data.id,
             change_type: action,
             change_time: new Date(),

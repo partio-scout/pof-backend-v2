@@ -22,11 +22,11 @@ export default {
         return component;
       },
       permissions: [
-        // // Uncomment to set the permissions of the plugin here
-        // {
-        //   action: "plugins::deploy-site.deploy", // the action name should be plugins::plugin-name.actionType
-        //   subject: null,
-        // },
+        // Uncomment to set the permissions of the plugin here
+        {
+          action: "plugin::deploy-site.deploy", // the action name should be plugin::plugin-name.actionType
+          subject: null,
+        },
       ],
     });
     app.registerPlugin({

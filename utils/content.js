@@ -77,7 +77,7 @@ const getAgeGroupIdForActivity = async (id) => {
  * @returns Settings object
  */
 const getSettings = async () => {
-  return await strapi.services.settings.find();
+  return await strapi.services.settings.findOne();
 };
 
 module.exports = {

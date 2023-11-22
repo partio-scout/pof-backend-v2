@@ -1,10 +1,7 @@
 import pluginPkg from "../../package.json";
 import pluginId from "./pluginId";
 import GuidePluginIcon from "./components/PluginIcon";
-import App from "./pages/App";
 import Initializer from "./components/Initializer";
-import lifecycles from "./lifecycles";
-import trads from "./translations";
 
 export default {
   register(app) {
