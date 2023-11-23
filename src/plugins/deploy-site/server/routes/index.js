@@ -12,7 +12,10 @@ module.exports = [
     path: "/set",
     handler: "deploy-site.set",
     // config: {
-    //   policies: ["admin::hasPermissions"],
+    //   policies: [
+    //     "admin::hasPermissions",
+    //     "plugins::deploy-site.settings.access",
+    //   ],
     // },
   },
   {
@@ -20,7 +23,7 @@ module.exports = [
     path: "/changes",
     handler: "deploy-site.changes",
     // config: {
-    //   policies: ["admin::hasPermissions"],
+    //   policies: ["admin::hasPermissions", "plugins::deploy-site.deploy"],
     // },
   },
   {
@@ -28,8 +31,7 @@ module.exports = [
     path: "/deploy",
     handler: "deploy-site.deploy",
     // config: {
-    //   auth: false,
-    //   policies: ["admin::hasPermissions"],
+    //   policies: ["admin::hasPermissions", "plugins::deploy-site.deploy"],
     // },
   },
 ];

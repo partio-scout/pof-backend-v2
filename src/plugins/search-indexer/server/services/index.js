@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const searchIndexer = require('./search-indexer');
+const searchIndexer = require("./search-indexer");
 
 module.exports = {
-  searchIndexer
+  "search-indexer": searchIndexer,
 };

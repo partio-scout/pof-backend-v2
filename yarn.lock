@@ -2148,6 +2148,13 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
+"@sklinet/strapi-plugin-tinymce@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@sklinet/strapi-plugin-tinymce/-/strapi-plugin-tinymce-1.0.6.tgz#bb8b2981b9cc9de1c17e63599f42bfb8b5b439dc"
+  integrity sha512-m5g7noVQAqo6zJgUt8GsjKoV1umhr00KjspXiTBGVE8tZdWL2WYkCDoosG3YlZNmIeX8vrHCRFOWxfwyCfgJ9g==
+  dependencies:
+    "@tinymce/tinymce-react" "4.2.0"
+
 "@strapi/admin@4.15.0":
   version "4.15.0"
   resolved "https://registry.yarnpkg.com/@strapi/admin/-/admin-4.15.0.tgz#fbde9d807641309a46093f76cd4048618bbb3fe8"
@@ -2357,6 +2364,22 @@
   version "4.15.0"
   resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.15.0.tgz#176881c832287a4bd3117250e8cd482f75c47833"
   integrity sha512-PLX/zucxFsNHOrkSguIps9JvQytKT5gBGhRE/L0mViJ7Z3a0cN5NY9f3eL08BTOwnkhI4NkptisO50r6Uej4+Q==
+  dependencies:
+    axios "1.5.0"
+    date-fns "2.30.0"
+    formik "2.4.0"
+    immer "9.0.19"
+    lodash "4.17.21"
+    qs "6.11.1"
+    react-helmet "6.1.0"
+    react-intl "6.4.1"
+    react-query "3.39.3"
+    react-select "5.7.0"
+
+"@strapi/helper-plugin@^4.15.4":
+  version "4.15.4"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.15.4.tgz#3de01237f5c89e58a9d34fd402e8fd9110fc53e4"
+  integrity sha512-JMPlV1T1W7NKIqiik3GoxUDXwfRjkfY9WIwZhWXb2F2Bubw4Akcm9aEmyGobApIdvK7XpRCt5Bp7IQkbnpQLFg==
   dependencies:
     axios "1.5.0"
     date-fns "2.30.0"
@@ -2783,6 +2806,14 @@
   dependencies:
     prop-types "^15.6.2"
     tinymce "^5.5.1"
+
+"@tinymce/tinymce-react@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-react/-/tinymce-react-4.2.0.tgz#af2a098153e6eeadc36cfb8940880d7dce425ac5"
+  integrity sha512-Oyi/hDvARR29oqUwTgYXDnMV9E/c7C8V+iK+gUj9tndVXsfSJRYVOw3MTK9CCC9f7alN/S4CYaPpIaA3f4VZzw==
+  dependencies:
+    prop-types "^15.6.2"
+    tinymce "^6.0.0 || ^5.5.1"
 
 "@types/argparse@1.0.38":
   version "1.0.38"
@@ -11236,6 +11267,11 @@ std-env@^3.0.1:
   resolved "https://registry.yarnpkg.com/std-env/-/std-env-3.4.3.tgz#326f11db518db751c83fd58574f449b7c3060910"
   integrity sha512-f9aPhy8fYBuMN+sNfakZV18U39PbalgjXG3lLB9WkaYTxijru61wb57V9wxxNthXM5Sd88ETBWi29qLAsHO52Q==
 
+strapi-plugin-transformer@3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-transformer/-/strapi-plugin-transformer-3.1.2.tgz#c9676fb369baf009a7f321a44258609e52aef8aa"
+  integrity sha512-aRjWqrZJ2QcsSDqOE27xzzmDG1c+yg8o9yUb5zFhR94+4zbGxTpLQndelkWtzNaLv5s2HhExx1JyCn/F9GZPpQ==
+
 stream-chain@2.2.5, stream-chain@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/stream-chain/-/stream-chain-2.2.5.tgz#b30967e8f14ee033c5b9a19bbe8a2cba90ba0d09"
@@ -11631,6 +11667,11 @@ tinymce@^5.5.1:
   version "5.8.2"
   resolved "https://registry.npmjs.org/tinymce/-/tinymce-5.8.2.tgz"
   integrity sha512-qfWThBrSzbj4DoUk+lgGeDoP2GzLDSWrfvVUxf40HZhTzsG15X2nZ4N49IFqwaVgRl5AyFDtuWiEH/lCmiAcRA==
+
+"tinymce@^6.0.0 || ^5.5.1":
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-6.8.0.tgz#5704cdaa7c01c07fd63c64b0f2f390f6e6244592"
+  integrity sha512-WSQlyfW8aPkOVMmmHmSVeA5Dq4JuUZjTB+PmePJ27oQ+ruv3Zn4KSTsvSnDUrHlqygjDvRidrCB/m5nTWCC2nA==
 
 title-case@^2.1.0:
   version "2.1.1"

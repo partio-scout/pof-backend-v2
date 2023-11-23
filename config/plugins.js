@@ -11,6 +11,21 @@ module.exports = ({ env }) => ({
     enabled: true,
     resolve: "./src/plugins/search-indexer",
   },
+  tinymce: {
+    enabled: true,
+  },
+  transformer: {
+    enabled: true,
+    config: {
+      responseTransforms: {
+        removeAttributesKey: true,
+        removeDataKey: true,
+      },
+      requestTransforms: {
+        wrapBodyWithDataKey: true,
+      },
+    },
+  },
   email: {
     config: {
       provider: "sendgrid",
