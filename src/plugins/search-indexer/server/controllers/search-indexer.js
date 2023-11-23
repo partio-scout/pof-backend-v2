@@ -47,7 +47,7 @@ const indexEntriesOfType = async (contentType) => {
   const query = `api::${contentType}.${contentType}`;
   const entries = await strapi
     .query(query)
-    .findMany({ populate: true, limit: 100, start: allEntries.length });
+    .findMany({ limit: 100, start: allEntries.length });
   allEntries.push(...entries);
 
   console.log("Found", allEntries.length, "of type", contentType, "to index");

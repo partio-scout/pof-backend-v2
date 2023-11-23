@@ -97,7 +97,7 @@ describe("Suggestions controller", () => {
       });
 
       await request(strapi.server.httpServer)
-        .post(`/suggestions/${suggestion.id}/like`)
+        .post(`api/suggestions/${suggestion.id}/like`)
         .set("Content-Type", "application/json")
         .send({
           user: "user1",

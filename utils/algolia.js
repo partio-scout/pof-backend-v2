@@ -22,7 +22,6 @@ const client = algoliaClient();
  */
 const updateInAlgolia = async (contentType, data, draftMode = true) => {
   if (process.env.NODE_ENV === "test") return;
-
   if (draftMode) {
     if (data.publishedAt && (await isSaveable(contentType, data))) {
       await saveToAlgolia(contentType, data);
@@ -80,9 +79,13 @@ const contentPageIsInNavigation = (page, navigation) => {
  * @returns {Promise<boolean>}
  */
 const isContentPageSaveable = async (contentPage) => {
-  const frontPage = await strapi.services["front-page"].find({
-    _locale: contentPage.locale,
-  });
+  const frontPage = await strapi.db
+    .query("api::front-page.front-page")
+    .findOne({
+      _locale: contentPage.locale,
+    });
+
+  console.log(frontPage);
 
   if (!frontPage) return false;
 
