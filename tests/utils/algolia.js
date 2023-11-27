@@ -1,4 +1,8 @@
-const { isRelationPublished, sanitizeData, sanitizeActivityGroup } = require("../../utils/algolia");
+const {
+  isRelationPublished,
+  sanitizeData,
+  sanitizeActivityGroup,
+} = require("../../utils/algolia");
 
 describe("Algolia utils", () => {
   describe("isRelationPublished", () => {
@@ -19,10 +23,11 @@ describe("Algolia utils", () => {
       expect(value).toEqual(false);
     });
     it("passes relations with published_at and id", async () => {
-      const value = await isRelationPublished({ id: 1, published_at: "2020-01-01" });
-      expect(
-        value
-      ).toEqual(true);
+      const value = await isRelationPublished({
+        id: 1,
+        publishedAt: "2020-01-01",
+      });
+      expect(value).toEqual(true);
     });
   });
 
@@ -87,50 +92,50 @@ describe("Algolia utils", () => {
     });
   });
 
-  describe('cleanActivityGroup', () => {
-    it('removes all but `id` and `title` from acitvities', () => {
+  describe("cleanActivityGroup", () => {
+    it("removes all but `id` and `title` from acitvities", () => {
       const input = {
         id: 1,
-        title: 'asd',
+        title: "asd",
         activities: [
           {
             id: 2,
-            title: 'asd',
-            ingress: 'ingress asdasd',
+            title: "asd",
+            ingress: "ingress asdasd",
             dummy: 123,
           },
           {
             id: 3,
-            title: 'bsd',
-            ingress: 'ingress asdasd',
-            fake: true
+            title: "bsd",
+            ingress: "ingress asdasd",
+            fake: true,
           },
           {
             id: 4,
-            ingress: 'ingress asdasd'
+            ingress: "ingress asdasd",
           },
-        ]
+        ],
       };
 
       const targetOutput = {
         id: 1,
-        title: 'asd',
+        title: "asd",
         activities: [
           {
             id: 2,
-            title: 'asd',
+            title: "asd",
           },
           {
             id: 3,
-            title: 'bsd',
+            title: "bsd",
           },
           {
             id: 4,
           },
-        ]
+        ],
       };
 
       expect(sanitizeActivityGroup(input)).toEqual(targetOutput);
-    })
-  })
+    });
+  });
 });

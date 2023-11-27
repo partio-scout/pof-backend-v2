@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_blocks_video_blocks",
+  "info": {
+    "icon": "photo-video",
+    "description": "",
+    "displayName": "Video block"
+  },
+  "options": {},
+  "attributes": {
+    "video": {
+      "type": "media",
+      "allowedTypes": [
+        "videos"
+      ],
+      "multiple": false,
+      "required": false
+    },
+    "block_width": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block-width.block-width"
+    },
+    "video_url": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_blocks_content_page_blocks",
+  "info": {
+    "icon": "ad",
+    "displayName": "Content Page Block"
+  },
+  "options": {},
+  "attributes": {
+    "content_pages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::content-page.content-page"
+    },
+    "block_width": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block-width.block-width"
+    }
+  }
+}

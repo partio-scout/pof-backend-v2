@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_footer_link",
+  "info": {
+    "icon": "external-link-alt",
+    "description": "",
+    "displayName": "Link"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "url": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    }
+  }
+}

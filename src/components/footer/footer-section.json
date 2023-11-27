@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_footer_footer_sections",
+  "info": {
+    "icon": "th-large",
+    "displayName": "Footer section"
+  },
+  "options": {},
+  "attributes": {
+    "link_groups": {
+      "type": "component",
+      "repeatable": true,
+      "component": "footer.link-group"
+    },
+    "title": {
+      "type": "text"
+    }
+  }
+}

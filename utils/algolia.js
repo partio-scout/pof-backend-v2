@@ -1,6 +1,19 @@
 const cleanDeep = require("clean-deep");
 const pick = require("lodash/pick");
+const algoliasearch = require("algoliasearch");
 
+("use strict");
+
+function algoliaClient() {
+  // Initiate the Algolia client
+  const client = algoliasearch(
+    process.env.ALGOLIA_APPLICATION_ID,
+    process.env.ALGOLIA_API_KEY
+  );
+  return client;
+}
+
+const client = algoliaClient();
 /**
  * Index/delete one entry in Algolia
  * @param {string} contentType Type of the entry
@@ -8,10 +21,9 @@ const pick = require("lodash/pick");
  * @param {boolean} draftMode To use draft mode or not (default `true`)
  */
 const updateInAlgolia = async (contentType, data, draftMode = true) => {
-  if (process.env.NODE_ENV === "test" || !strapi.services.algolia) return;
-
+  if (process.env.NODE_ENV === "test") return;
   if (draftMode) {
-    if (data.published_at && (await isSaveable(contentType, data))) {
+    if (data.publishedAt && (await isSaveable(contentType, data))) {
       await saveToAlgolia(contentType, data);
     } else {
       await deleteFromAlgolia(contentType, data.id);
@@ -41,7 +53,7 @@ const isSaveable = async (contentType, data) => {
     case "activity-group":
       return await isRelationPublished(data.age_group, "age-group");
     case "suggestion":
-      return await isRelationPublished(data.activity?.age_group, "age-group");
+      return await isSuggestionSaveable(data.activity);
     case "content-page":
       return await isContentPageSaveable(data);
     default:
@@ -52,10 +64,14 @@ const isSaveable = async (contentType, data) => {
 const contentPageIsInNavigation = (page, navigation) => {
   for (const navigationItem of navigation) {
     if (navigationItem.page?.id === page.id) return true;
-    if (navigationItem.subnavigation && contentPageIsInNavigation(page, navigationItem.subnavigation)) return true;
+    if (
+      navigationItem.subnavigation &&
+      contentPageIsInNavigation(page, navigationItem.subnavigation)
+    )
+      return true;
   }
   return false;
-}
+};
 
 /**
  * Check if a ContentPage is in FrontPage's navigation
@@ -63,14 +79,51 @@ const contentPageIsInNavigation = (page, navigation) => {
  * @returns {Promise<boolean>}
  */
 const isContentPageSaveable = async (contentPage) => {
-  const frontPage = await strapi.services['front-page'].find({ _locale: contentPage.locale });
+  const frontPage = await strapi.db
+    .query("api::front-page.front-page")
+    .findOne({
+      _locale: contentPage.locale,
+    });
+
+  console.log(frontPage);
 
   if (!frontPage) return false;
 
   const navigation = frontPage.navigation || [];
 
   return contentPageIsInNavigation(contentPage, navigation);
-}
+};
+
+/**
+ * Checks if a suggestion can be indexed
+ * @param {number | object | undefined | null} relation
+ * @returns {Promise<boolean>}
+ */
+const isSuggestionSaveable = async (relation) => {
+  if (relation == null || relation === undefined) return false;
+  try {
+    // Find and check if age-group is published
+    let activity = await strapi.db.query("api::activity.activity").findOne({
+      where: { id: relation.id },
+      populate: true,
+    });
+
+    if (activity) {
+      let ageGroup = await strapi.db.query("api::age-group.age-group").findOne({
+        id: activity.age_group.id,
+      });
+      if (!ageGroup?.id || !ageGroup?.publishedAt) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("suggestion check isSaveable failed: ", error);
+  }
+};
 
 /**
  * Checks if a relation is published
@@ -80,9 +133,13 @@ const isContentPageSaveable = async (contentPage) => {
 const isRelationPublished = async (relation, contentType) => {
   if (relation == null || relation === undefined) return false;
 
+  const contentTypeService = `api::${contentType}.${contentType}`;
+
   if (typeof relation === "number") {
     try {
-      let entity = await strapi.services[contentType].findOne({ id: relation });
+      let entity = await strapi.db.query(contentTypeService).findOne({
+        id: relation,
+      });
 
       // If no entity is returned, it is not published
       if (!entity) return false;
@@ -93,7 +150,7 @@ const isRelationPublished = async (relation, contentType) => {
     }
   }
 
-  if (!relation?.id || !relation?.published_at) return false;
+  if (!relation?.id || !relation?.publishedAt) return false;
 
   return true;
 };
@@ -106,8 +163,9 @@ const isRelationPublished = async (relation, contentType) => {
 const saveToAlgolia = async (contentType, data) => {
   const sanitizedData = sanitizeData(contentType, data);
   const augmentedData = await augmentData(contentType, sanitizedData);
+  const index = client.initIndex(contentType);
 
-  await strapi.services.algolia.saveObject(augmentedData, contentType);
+  await index.saveObject({ objectID: augmentedData.id, ...augmentedData });
 };
 
 /**
@@ -116,9 +174,9 @@ const saveToAlgolia = async (contentType, data) => {
  * @param {string} id Entry's id
  */
 const deleteFromAlgolia = async (contentType, id) => {
-  if (process.env.NODE_ENV === "test" || !strapi.services.algolia) return;
-
-  await strapi.services.algolia.deleteObject(id, contentType);
+  if (process.env.NODE_ENV === "test") return;
+  const index = client.initIndex(contentType);
+  await index.deleteObject(id);
 };
 
 /**
@@ -152,9 +210,11 @@ const augmentData = async (contentType, data) => {
     case "suggestion": {
       if (!data.activity?.age_group) return data;
 
-      const ageGroup = await strapi.services["age-group"].findOne({
-        id: data.activity.age_group,
-      });
+      const ageGroup = await strapi.db
+        .query("api::age-group.age-group")
+        .findOne({
+          id: data.activity.age_group,
+        });
 
       if (ageGroup) {
         data.age_group = {

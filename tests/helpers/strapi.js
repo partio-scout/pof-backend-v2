@@ -1,22 +1,19 @@
-const Strapi = require("strapi");
 const http = require("http");
+const Strapi = require("@strapi/strapi");
 
 let instance;
 
 async function setupStrapi() {
   if (!instance) {
-    /**
-     * The following code in copied from `./node_modules/strapi/lib/Strapi.js`.
-     *
-     * Strapi() call sets strapi as a global variable.
-     * */
+    try {
+      await Strapi().load();
+      instance = strapi;
 
-    instance = await Strapi().load();
-    await instance.app
-      .use(instance.router.routes()) // populate KOA routes
-      .use(instance.router.allowedMethods()); // populate KOA methods
-
-    instance.server = http.createServer(instance.app.callback());
+      instance.server.mount();
+    } catch (error) {
+      console.error("Error during Strapi setup:", error);
+      throw error;
+    }
   }
   return instance;
 }
@@ -38,9 +35,9 @@ const grantPriviledge = async (roleID, value, enabled = true, policy = "") => {
     .split(".")
     .reduceRight((obj, next) => ({ [next]: obj }), { enabled, policy });
 
-  return await strapi.plugins[
-    "users-permissions"
-  ].services.userspermissions.updateRole(roleID, updateObj);
+  return await strapi
+    .plugin("users-permissions")
+    .services.role.updateRole(roleID, updateObj);
 };
 
 module.exports = { setupStrapi, grantPriviledge };

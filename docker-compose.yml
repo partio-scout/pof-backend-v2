@@ -1,0 +1,13 @@
+# create local postgres database for local development
+
+version: "3"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: strapi_v4
+    ports:
+      - 5432:5432

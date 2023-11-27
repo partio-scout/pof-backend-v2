@@ -1,30 +1,29 @@
+const path = require("path");
+
 module.exports = ({ env }) => ({
-  defaultConnection: env('DATABASE', 'default'),
-  connections: {
-    default: {
-      connector: 'bookshelf',
-      settings: {
-        client: 'sqlite',
-        filename: env('DATABASE_FILENAME', '.tmp/data.db'),
-      },
-      options: {
-        useNullAsDefault: true,
-        pool: {
-          propagateCreateError: false,
-        },
-      },
+  connection: {
+    client: "postgres",
+    connection: {
+      host: env("DATABASE_V4_HOST", "localhost"),
+      port: env.int("DATABASE_V4_PORT", 5432),
+      database: env("DATABASE_V4_DATABASE", "strapi_v4"),
+      user: env("DATABASE_V4_USER", "user"),
+      password: env("DATABASE_V4_PASSWORD", "pass"),
+      schema: env("DATABASE_V4_SCHEMA", "public"), // Not required
     },
-    // This is for testing Psql compatibility, i.e. are column names short enough...
-    psql: {
-      connector: "bookshelf",
-      settings: {
-        client: "postgres",
-        host: env("STRAPI_DATABASE_CONNECTION_NAME"),
-        database: env("STRAPI_DATABASE_NAME"),
-        username: env("STRAPI_DATABASE_USERNAME"),
-        password: env("STRAPI_DATABASE_PASSWORD"),
-      },
-      options: {},
-    }
+    debug: false,
   },
 });
+// module.exports = ({ env }) => ({
+//   connection: {
+//     client: "sqlite",
+//     connection: {
+//       filename: path.join(
+//         __dirname,
+//         "..",
+//         env("DATABASE_FILENAME", ".tmp/data.db")
+//       ),
+//     },
+//     useNullAsDefault: true,
+//   },
+// });

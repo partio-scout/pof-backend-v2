@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "singularName": "comment",
+    "pluralName": "comments",
+    "displayName": "Comment",
+    "name": "comment"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "author": {
+      "type": "string",
+      "required": true
+    },
+    "suggestion": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::suggestion.suggestion",
+      "inversedBy": "comments"
+    },
+    "title": {
+      "type": "string"
+    },
+    "scout_group": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_activity_blocks",
+  "info": {
+    "icon": "atlas",
+    "description": "",
+    "displayName": "Activity Block"
+  },
+  "options": {},
+  "attributes": {
+    "activities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity.activity"
+    },
+    "block_width": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block-width.block-width"
+    }
+  }
+}

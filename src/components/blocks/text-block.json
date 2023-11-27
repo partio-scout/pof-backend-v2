@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_content_text_blocks",
+  "info": {
+    "icon": "text-height",
+    "description": "",
+    "displayName": "Text block"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "richtext"
+    },
+    "block_width": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block-width.block-width"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "skill_areas",
+  "info": {
+    "singularName": "skill-area",
+    "pluralName": "skill-areas",
+    "displayName": "Skill-area",
+    "name": "skill-area"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "activities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::activity.activity",
+      "mappedBy": "skill_areas"
+    }
+  }
+}
