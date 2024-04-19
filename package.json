@@ -1,27 +1,29 @@
 {
   "name": "pof-backend-v2",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application",
-  "scripts": {
-    "develop": "strapi develop",
-    "start": "node ./server.js",
-    "build": "strapi build",
-    "strapi": "strapi",
-    "gcp-build": "strapi build",
-    "test": "jest --forceExit --detectOpenHandles",
-    "postinstall": "patch-package"
+  "license": "MIT",
+  "author": {
+    "name": "A Strapi developer"
   },
-  "devDependencies": {
-    "algoliasearch": "4.10.4",
-    "axios-rate-limit": "1.3.0",
-    "form-data": "4.0.0",
-    "jest": "26.6.3",
-    "needle": "2.6.0",
-    "patch-package": "6.4.7",
-    "postinstall-postinstall": "2.1.0",
-    "supertest": "6.1.3",
-    "yargs": "17.0.1"
+  "scripts": {
+    "build": "strapi build",
+    "develop": "strapi develop",
+    "gcp-build": "strapi build",
+    "postinstall": "patch-package",
+    "start": "node ./server.js",
+    "strapi": "strapi",
+    "test": "jest --forceExit --detectOpenHandles"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      ".tmp",
+      ".cache"
+    ],
+    "testTimeout": 60000
   },
   "dependencies": {
     "@tinymce/tinymce-react": "3.12.6",
@@ -50,24 +52,22 @@
     "strapi-provider-upload-azure-storage": "1.1.3",
     "strapi-utils": "3.6.11"
   },
-  "author": {
-    "name": "A Strapi developer"
+  "devDependencies": {
+    "algoliasearch": "4.10.4",
+    "axios-rate-limit": "1.3.0",
+    "form-data": "4.0.0",
+    "jest": "26.6.3",
+    "needle": "2.6.0",
+    "patch-package": "6.4.7",
+    "postinstall-postinstall": "2.1.0",
+    "supertest": "6.1.3",
+    "yargs": "17.0.1"
+  },
+  "engines": {
+    "node": "14.x.x || 16.x.x",
+    "npm": "^6.0.0"
   },
   "strapi": {
     "uuid": "f874c59e-fcd5-4d24-86ae-b255ad184ceb"
-  },
-  "engines": {
-    "node": "16.x.x",
-    "npm": "^6.0.0"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      ".tmp",
-      ".cache"
-    ],
-    "testEnvironment": "node",
-    "testTimeout": 60000
-  },
-  "license": "MIT"
+  }
 }
