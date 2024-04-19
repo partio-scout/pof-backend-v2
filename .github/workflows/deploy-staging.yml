@@ -2,10 +2,11 @@ name: Deploy testing from staging
 
 on:
   push:
-    branches: [ staging ]
+    branches: [staging]
+  workflow_dispatch:
 
 env:
-  NODE_VERSION: '14.x'
+  NODE_VERSION: "14.x"
 
 concurrency: testing-environment
 
@@ -13,14 +14,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14.x
-    - uses: c-hive/gha-yarn-cache@v1
-    - run: yarn install --silent
-    - run: yarn test
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - uses: c-hive/gha-yarn-cache@v1
+      - run: yarn install --silent
+      - run: yarn test
 
   build-and-deploy:
     name: Build and deploy
@@ -28,17 +29,17 @@ jobs:
     needs: test
     environment: testing
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-    - name: yarn build
-      run: |
-        yarn install --silent
-        yarn build
-    - name: Deploy to Azure webApp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: pof-backend-testing
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: yarn build
+        run: |
+          yarn install --silent
+          yarn build
+      - name: Deploy to Azure webApp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: pof-backend-testing
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
