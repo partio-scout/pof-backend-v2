@@ -5,6 +5,8 @@
  * to customize this model
  */
 
+const contentType = "content-page";
+
 module.exports = {
   async afterCreate(event) {
     const { result, params } = event;

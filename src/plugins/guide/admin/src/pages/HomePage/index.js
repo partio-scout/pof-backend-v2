@@ -17,7 +17,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Container>
+    (<Container>
       <Typography variant="alpha">Ohjekirja</Typography>
       <Typography variant="omega">
         Tästä ohjekirjasta löydät ohjeet Strapin käyttöön. Alla olevista
@@ -32,7 +32,7 @@ const HomePage = () => {
           </li>
         ))}
       </ul>
-    </Container>
+    </Container>)
   );
 };
 

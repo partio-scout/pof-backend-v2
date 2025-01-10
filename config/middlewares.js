@@ -8,20 +8,15 @@ module.exports = [
   "strapi::session",
   "strapi::favicon",
   "strapi::public",
-  {
+  "strapi::errors",
+{
     name: "strapi::security",
     config: {
       contentSecurityPolicy: {
-        useDefaults: true,
+        useDefaults: true,  
         directives: {
           "script-src": ["'self'", "*.tinymce.com", "*.tiny.cloud", "https:"],
-          "connect-src": [
-            "'self'",
-            "*.tinymce.com",
-            "*.tiny.cloud",
-            "blob:",
-            "*.strapi.io",
-          ],
+          "connect-src": ["'self'", "*.tinymce.com", "*.tiny.cloud", "blob:", "*.strapi.io"],
           "img-src": [
             "'self'",
             "*.tinymce.com",
@@ -46,3 +41,4 @@ module.exports = [
     },
   },
 ];
+

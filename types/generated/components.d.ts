@@ -1,11 +1,11 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Attribute, Schema } from '@strapi/strapi';
 
 export interface BlocksActivityBlock extends Schema.Component {
   collectionName: 'components_blocks_activity_blocks';
   info: {
-    icon: 'atlas';
     description: '';
     displayName: 'Activity Block';
+    icon: 'atlas';
   };
   attributes: {
     activities: Attribute.Relation<
@@ -24,36 +24,36 @@ export interface BlocksActivityBlock extends Schema.Component {
 export interface BlocksAgeGroupBlock extends Schema.Component {
   collectionName: 'components_blocks_age_group_blocks';
   info: {
-    icon: 'address-book';
     displayName: 'Age Group Block';
+    icon: 'address-book';
   };
   attributes: {
-    title: Attribute.String;
-    ingress: Attribute.RichText;
     block_width: Attribute.Relation<
       'blocks.age-group-block',
       'oneToOne',
       'api::block-width.block-width'
     >;
+    ingress: Attribute.RichText;
+    title: Attribute.String;
   };
 }
 
 export interface BlocksContentPageBlock extends Schema.Component {
   collectionName: 'components_blocks_content_page_blocks';
   info: {
-    icon: 'ad';
     displayName: 'Content Page Block';
+    icon: 'ad';
   };
   attributes: {
-    content_pages: Attribute.Relation<
-      'blocks.content-page-block',
-      'oneToMany',
-      'api::content-page.content-page'
-    >;
     block_width: Attribute.Relation<
       'blocks.content-page-block',
       'oneToOne',
       'api::block-width.block-width'
+    >;
+    content_pages: Attribute.Relation<
+      'blocks.content-page-block',
+      'oneToMany',
+      'api::content-page.content-page'
     >;
   };
 }
@@ -61,84 +61,84 @@ export interface BlocksContentPageBlock extends Schema.Component {
 export interface BlocksHeroBlock extends Schema.Component {
   collectionName: 'components_content_hero_blocks';
   info: {
-    icon: 'image';
     description: '';
     displayName: 'Highlight Block';
+    icon: 'image';
   };
   attributes: {
-    title: Attribute.String;
-    text: Attribute.Text;
-    background: Attribute.Media;
+    background: Attribute.Media<'images'>;
     link_text: Attribute.String;
     link_url: Attribute.String;
+    text: Attribute.Text;
+    title: Attribute.String;
   };
 }
 
 export interface BlocksImageBlock extends Schema.Component {
   collectionName: 'components_content_image_blocks';
   info: {
-    icon: 'file-image';
     displayName: 'Image Block';
+    icon: 'file-image';
   };
   attributes: {
-    image: Attribute.Media;
     block_width: Attribute.Relation<
       'blocks.image-block',
       'oneToOne',
       'api::block-width.block-width'
     >;
+    image: Attribute.Media<'images'>;
   };
 }
 
 export interface BlocksLinkBlock extends Schema.Component {
   collectionName: 'components_blocks_link_blocks';
   info: {
-    icon: 'link';
     displayName: 'Link Block';
+    icon: 'link';
   };
   attributes: {
-    text: Attribute.String;
-    url: Attribute.String;
     block_width: Attribute.Relation<
       'blocks.link-block',
       'oneToOne',
       'api::block-width.block-width'
     >;
+    text: Attribute.String;
+    url: Attribute.String;
   };
 }
 
 export interface BlocksTextBlock extends Schema.Component {
   collectionName: 'components_content_text_blocks';
   info: {
-    icon: 'text-height';
     description: '';
     displayName: 'Text block';
+    icon: 'text-height';
   };
   attributes: {
-    title: Attribute.String;
-    text: Attribute.RichText;
     block_width: Attribute.Relation<
       'blocks.text-block',
       'oneToOne',
       'api::block-width.block-width'
     >;
+    text: Attribute.RichText;
+    title: Attribute.String;
   };
 }
 
 export interface BlocksVideoBlock extends Schema.Component {
   collectionName: 'components_blocks_video_blocks';
   info: {
-    icon: 'photo-video';
     description: '';
     displayName: 'Video block';
+    icon: 'photo-video';
   };
   attributes: {
-    video: Attribute.Media;
     block_width: Attribute.Relation<
       'blocks.video-block',
       'oneToOne',
       'api::block-width.block-width'
     >;
+    video: Attribute.Media<'videos'>;
     video_url: Attribute.String;
   };
 }
@@ -146,8 +146,8 @@ export interface BlocksVideoBlock extends Schema.Component {
 export interface FooterFooterSection extends Schema.Component {
   collectionName: 'components_footer_footer_sections';
   info: {
-    icon: 'th-large';
     displayName: 'Footer section';
+    icon: 'th-large';
   };
   attributes: {
     link_groups: Attribute.Component<'footer.link-group', true>;
@@ -155,11 +155,27 @@ export interface FooterFooterSection extends Schema.Component {
   };
 }
 
+export interface FooterLink extends Schema.Component {
+  collectionName: 'components_footer_link';
+  info: {
+    description: '';
+    displayName: 'Link';
+    icon: 'external-link-alt';
+  };
+  attributes: {
+    description: Attribute.Text;
+    email: Attribute.String;
+    phone_number: Attribute.String;
+    title: Attribute.String;
+    url: Attribute.String;
+  };
+}
+
 export interface FooterLinkGroup extends Schema.Component {
   collectionName: 'components_footer_link_groups';
   info: {
-    icon: 'align-justify';
     displayName: 'LinkGroup';
+    icon: 'align-justify';
   };
   attributes: {
     links: Attribute.Component<'footer.link', true>;
@@ -167,32 +183,16 @@ export interface FooterLinkGroup extends Schema.Component {
   };
 }
 
-export interface FooterLink extends Schema.Component {
-  collectionName: 'components_footer_link';
-  info: {
-    icon: 'external-link-alt';
-    description: '';
-    displayName: 'Link';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    url: Attribute.String;
-    phone_number: Attribute.String;
-    email: Attribute.String;
-  };
-}
-
 export interface FooterSomeLinks extends Schema.Component {
   collectionName: 'components_footer_some_links';
   info: {
-    icon: 'at';
     displayName: 'some_links';
+    icon: 'at';
   };
   attributes: {
     facebook_url: Attribute.String;
-    twitter_url: Attribute.String;
     instagram_url: Attribute.String;
+    twitter_url: Attribute.String;
     youtube_url: Attribute.String;
   };
 }
@@ -200,8 +200,8 @@ export interface FooterSomeLinks extends Schema.Component {
 export interface FooterText extends Schema.Component {
   collectionName: 'components_footer_texts';
   info: {
-    icon: 'align-center';
     displayName: 'text';
+    icon: 'align-center';
   };
   attributes: {
     text: Attribute.Text;
@@ -211,62 +211,62 @@ export interface FooterText extends Schema.Component {
 export interface LinksLink extends Schema.Component {
   collectionName: 'components_links_link';
   info: {
-    icon: 'external-link-alt';
     description: '';
     displayName: 'Link';
+    icon: 'external-link-alt';
   };
   attributes: {
     description: Attribute.String;
+    icon: Attribute.Media<'images' | 'files' | 'videos'>;
     url: Attribute.String;
-    icon: Attribute.Media;
   };
 }
 
 export interface NavigationNavigation extends Schema.Component {
   collectionName: 'components_navigation_navigations';
   info: {
-    icon: 'bars';
     description: 'Here you can create the sites navigation';
     displayName: 'Navigation';
+    icon: 'bars';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
     subnavigation: Attribute.Component<'navigation.subnavigation', true>;
+    title: Attribute.String & Attribute.Required;
   };
 }
 
 export interface NavigationSubnavigation extends Schema.Component {
   collectionName: 'components_navigation_subnavigations';
   info: {
-    icon: 'bars';
     description: '';
     displayName: 'subnavigation';
+    icon: 'bars';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
     page: Attribute.Relation<
       'navigation.subnavigation',
       'oneToOne',
       'api::content-page.content-page'
     >;
     subnavigation: Attribute.Component<'navigation.subsubnavigation', true>;
+    title: Attribute.String & Attribute.Required;
   };
 }
 
 export interface NavigationSubsubnavigation extends Schema.Component {
   collectionName: 'components_navigation_subsubnavigations';
   info: {
-    icon: 'bars';
     description: '';
     displayName: 'subsubnavigation';
+    icon: 'bars';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
     page: Attribute.Relation<
       'navigation.subsubnavigation',
       'oneToOne',
       'api::content-page.content-page'
     >;
+    title: Attribute.String & Attribute.Required;
   };
 }
 
@@ -282,8 +282,8 @@ declare module '@strapi/types' {
       'blocks.text-block': BlocksTextBlock;
       'blocks.video-block': BlocksVideoBlock;
       'footer.footer-section': FooterFooterSection;
-      'footer.link-group': FooterLinkGroup;
       'footer.link': FooterLink;
+      'footer.link-group': FooterLinkGroup;
       'footer.some-links': FooterSomeLinks;
       'footer.text': FooterText;
       'links.link': LinksLink;

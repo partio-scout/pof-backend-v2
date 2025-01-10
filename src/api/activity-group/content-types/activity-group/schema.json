@@ -5,11 +5,10 @@
     "singularName": "activity-group",
     "pluralName": "activity-groups",
     "displayName": "Activity-group",
-    "name": "activity-group"
+    "name": "activity-group",
+    "description": ""
   },
   "options": {
-    "increments": true,
-    "timestamps": true,
     "draftAndPublish": true
   },
   "pluginOptions": {
@@ -78,19 +77,19 @@
     },
     "main_image": {
       "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "multiple": false,
-      "required": false
+      ]
     },
     "logo": {
       "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "multiple": false,
-      "required": false
+      ]
     },
     "links": {
       "type": "component",

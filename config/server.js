@@ -10,4 +10,8 @@ module.exports = ({ env }) => ({
     enabled: true,
     tasks: cronTasks,
   },
+  webhooks: {
+    // Add this to not receive populated relations in webhooks
+    populateRelations: false,
+  },
 });
