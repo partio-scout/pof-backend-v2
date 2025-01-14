@@ -10,11 +10,7 @@ module.exports = (config, { strapi }) => {
           for (const key of Object.keys(data)) {
             const newKey = key === '__component' ? 'strapi_component' : key;
             newData[newKey] = changeComponentKey(data[key]);
-
-            if (newKey === 'content') {
-              newData['content'] = { data: newData['content'] ?? '' };
-            }
-  
+            
             if (newKey === 'ingress') {
               newData['ingress'] = { data: newData['ingress'] ?? '' };
             }
