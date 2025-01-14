@@ -14,6 +14,15 @@ module.exports = (config, { strapi }) => {
             // if (newKey === 'content') {
             //   newData['content'] = { data: newData['content'] ?? '' };
             // }
+
+            if (newKey === 'ingress') {
+              newData['ingress'] = { data: newData['ingress'] ?? '' };
+            }
+
+            // if strapi_component === blocks.text-block
+            if (newKey === 'text' && data.__component === 'blocks.text-block') {
+              newData['text'] = { data: newData['text'] };
+            }
           }
           return newData;
         }
