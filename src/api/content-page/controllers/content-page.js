@@ -19,6 +19,7 @@ module.exports = createCoreController('api::content-page.content-page', ({ strap
           ...item.attributes,
           data: '', // map content to data
           main_text: { data: item.attributes.main_text }, // add main_text to data
+          main_text_data: item.attributes.main_text,
         },
       }));
   

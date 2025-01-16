@@ -2028,12 +2028,12 @@ export interface ApiSuggestionSuggestion extends Schema.CollectionType {
       }> &
       Attribute.DefaultTo<0>;
     likes: Attribute.JSON &
-      Attribute.Private &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
-      }>;
+      }> &
+      Attribute.DefaultTo<[]>;
     links: Attribute.Component<'links.link', true> &
       Attribute.SetPluginOptions<{
         i18n: {
