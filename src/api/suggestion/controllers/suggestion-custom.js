@@ -27,11 +27,13 @@ module.exports = {
     data.from_web = true;
 
     entity = await strapi.db.query('api::suggestion.suggestion').create(
-      data,
+      { data },
       files ? { files } : undefined
     );
 
-    return await strapi.entityService.sanitizeOutput(entity, { model: strapi.models.suggestion });
+    const model = strapi.getModel('api::suggestion.suggestion')
+    const sanitizeOutput = await sanitize.contentAPI.output(entity, model);
+    return sanitizeOutput;
   },
   /**
    * Endpoint for liking suggestions.
