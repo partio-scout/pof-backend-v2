@@ -131,7 +131,7 @@ module.exports = {
     data.published_at = null;
     data.suggestion = id;
 
-    await strapi.db.query('api::comment.comment').create(data);
+    await strapi.db.query('api::comment.comment').create({ data });
 
     ctx.response.status = 200;
   },
