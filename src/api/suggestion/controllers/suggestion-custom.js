@@ -1,5 +1,7 @@
 "use strict";
 
+const { sanitize } = require('@strapi/utils');
+
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
@@ -42,23 +44,29 @@ module.exports = {
         where: { id: id },
     });
 
-    console.log('entity', entity);
     if (!entity) {
       ctx.response.status = 404;
       return;
     }
 
-    if (entity.like_count?.includes(user)) {
+    const likes = entity.likes || [];
+    if (likes?.includes(user)) {
       ctx.response.status = 400;
       ctx.response.body = "already liked";
       return;
     }
 
-    entity.like_count = [...(entity.like_count || []), user];
+    const updatedLikes = [...likes, user];
 
-    entity = await strapi.db.query('api::suggestion.suggestion').update({ where: { id: id } }, entity);
+    entity = await strapi.db.query('api::suggestion.suggestion').update({
+      where: { id: id },
+      data: { likes: updatedLikes },
+    });
 
-    return await strapi.entityService.sanitizeOutput(entity, { model: strapi.models.suggestion });
+    const model = strapi.getModel('api::suggestion.suggestion')
+    const sanitizeOutput = await sanitize.contentAPI.output(entity, model)
+
+    return sanitizeOutput
   },
   /**
    * Endpoint for unliking suggestions.
@@ -67,26 +75,34 @@ module.exports = {
     const { id } = ctx.params;
     const { user } = ctx.request.body;
 
-    console.log('strapi', strapi);
-    let entity = await strapi.db.query('api::suggestion.suggestion').findOne({ where: { id: id }, });
+    let entity = await strapi.db.query('api::suggestion.suggestion').findOne({
+      where: { id: id },
+    });
 
     if (!entity) {
       ctx.response.status = 404;
       return;
     }
 
-    const index = entity.like?.findIndex((x) => x === user);
-
+    const index = entity.likes?.findIndex((x) => x === user);
     if (index === undefined || index < 0) {
       ctx.response.status = 400;
       ctx.response.body = "not liked";
       return;
     }
 
-    entity.likes.splice(index, 1);
-    entity = await strapi.db.query('api::suggestion.suggestion').update({ where: { id: id }, }, entity);
+    const updatedLikes = entity.likes || [];
+    updatedLikes.splice(index, 1);
 
-    return await strapi.entityService.sanitizeOutput(entity, { model: strapi.models.suggestion });
+    entity = await strapi.db.query('api::suggestion.suggestion').update({
+      where: { id: id },
+      data: { likes: updatedLikes },
+    });
+
+    const model = strapi.getModel('api::suggestion.suggestion')
+    const sanitizeOutput = await sanitize.contentAPI.output(entity, model)
+
+    return sanitizeOutput
   },
   /**
    * Endpoint for creating new comments. This saves the comments in draft state,

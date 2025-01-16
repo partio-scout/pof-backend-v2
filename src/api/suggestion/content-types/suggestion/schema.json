@@ -102,7 +102,7 @@
         }
       },
       "type": "json",
-      "private": true
+      "default": []
     },
     "like_count": {
       "pluginOptions": {
