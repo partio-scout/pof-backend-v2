@@ -3,10 +3,9 @@ name: Deploy testing from staging
 on:
   push:
     branches: [staging]
-  workflow_dispatch:
 
 env:
-  NODE_VERSION: "14.x"
+  NODE_VERSION: "18.x"
 
 concurrency: testing-environment
 

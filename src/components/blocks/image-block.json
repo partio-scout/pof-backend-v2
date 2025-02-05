@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_content_image_blocks",
+  "info": {
+    "icon": "file-image",
+    "displayName": "Image Block"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "allowedTypes": [
+        "images"
+      ],
+      "multiple": false,
+      "required": false
+    },
+    "block_width": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::block-width.block-width"
+    }
+  }
+}

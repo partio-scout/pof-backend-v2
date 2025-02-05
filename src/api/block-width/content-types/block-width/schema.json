@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "block_widths",
+  "info": {
+    "singularName": "block-width",
+    "pluralName": "block-widths",
+    "displayName": "Block-width",
+    "name": "block-width"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

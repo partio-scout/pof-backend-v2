@@ -16,16 +16,14 @@ const getAgeGroupIdFromActivityGroup = async (id) => {
   if (typeof id === "number") {
     // We have an id
     _activityGroup = await strapi
-      .query("activity-group")
-      .findOne({ id: id });
+      .query("api::activity-group.activity-group")
+      .findOne({ where: { id: id }, populate: true });
   } else {
-    throw new Error(
-      "Bad argument `activityGroup`, must be a number"
-    );
+    throw new Error("Bad argument `activityGroup`, must be a number");
   }
 
   if (_activityGroup.age_group) {
-    if (typeof _activityGroup.age_group === 'number'){
+    if (typeof _activityGroup.age_group === "number") {
       return _activityGroup.age_group;
     } else {
       return _activityGroup.age_group.id;
@@ -60,7 +58,9 @@ const getAgeGroupIdForActivity = async (id) => {
   let _activity;
   if (typeof id === "number") {
     // We have an id
-    _activity = await strapi.query("activity").findOne({ id });
+    _activity = await strapi
+      .query("api::activity.activity")
+      .findOne({ where: { id: id }, populate: true });
   } else {
     throw new Error("Bad argument `activity`, must be a number");
   }
@@ -77,7 +77,8 @@ const getAgeGroupIdForActivity = async (id) => {
  * @returns Settings object
  */
 const getSettings = async () => {
-  return await strapi.services.settings.find();
+  const settings = await strapi.db.query('api::setting.setting').findMany();
+  return settings;
 };
 
 module.exports = {

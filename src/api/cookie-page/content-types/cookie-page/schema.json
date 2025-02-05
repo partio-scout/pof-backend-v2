@@ -1,0 +1,39 @@
+{
+  "kind": "singleType",
+  "collectionName": "cookie_pages",
+  "info": {
+    "singularName": "cookie-page",
+    "pluralName": "cookie-pages",
+    "displayName": "Cookie-page",
+    "name": "cookie-page"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "ingress": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text",
+      "unique": true
+    }
+  }
+}

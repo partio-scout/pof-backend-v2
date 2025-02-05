@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_navigation_navigations",
+  "info": {
+    "icon": "bars",
+    "description": "Here you can create the sites navigation",
+    "displayName": "Navigation"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subnavigation": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.subnavigation"
+    }
+  }
+}

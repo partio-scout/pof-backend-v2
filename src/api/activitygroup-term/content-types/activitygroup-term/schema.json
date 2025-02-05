@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "activitygroup_terms",
+  "info": {
+    "singularName": "activitygroup-term",
+    "pluralName": "activitygroup-terms",
+    "displayName": "Activitygroup-term",
+    "name": "activitygroup-term"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "singular": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "plural": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    }
+  }
+}
