@@ -27,7 +27,7 @@ describe("Suggestions controller", () => {
   describe("/suggestions/new", () => {
     it("should create new suggestion with `from_web` true and `published_at` null, and return it", async () => {
       const data = await request(strapi.server.httpServer)
-        .post("/api/suggestions/new")
+        .post("/suggestions/new")
         .set("Content-Type", "application/json")
         .send({
           title: "title",
@@ -40,13 +40,11 @@ describe("Suggestions controller", () => {
         expect(entry.title).toEqual("title");
         expect(entry.content).toEqual("content");
         expect(entry.author).toEqual("author");
-        expect(entry.published_at).toBeNull();
+        expect(entry.publishedAt).toBeNull();
         expect(entry.from_web).toEqual(true);
       };
 
-      const entry = await strapi
-        .query("suggestion")
-        .findOne({ id: data.body.id });
+      const entry = await strapi.db.query("api::suggestion.suggestion").findOne({ where: { id: data.body.id }, });
 
       // verify from database
       verifyEntry(entry);
