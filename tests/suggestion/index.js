@@ -128,7 +128,7 @@ describe("Suggestions controller", () => {
     it("should return 404 when liking nonexistent suggestion", async () => {
       // Create a comment to that suggesion
       await request(strapi.server.httpServer)
-        .post(`/suggestions/99/like`)
+        .post(`/suggestions/9999999/like`)
         .set("Content-Type", "application/json")
         .send({
           user: "test",
