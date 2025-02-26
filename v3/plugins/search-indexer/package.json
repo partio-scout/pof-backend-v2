@@ -16,7 +16,7 @@
   ],
   "dependencies": {},
   "engines": {
-    "node": ">=10.16.0 <=16.x.x",
+    "node": ">=18.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"

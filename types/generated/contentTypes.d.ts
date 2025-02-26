@@ -1475,7 +1475,7 @@ export interface ApiEquipmentEquipment extends Schema.CollectionType {
   };
 }
 
-export interface ApiFrontPageFrontPage extends Schema.SingleType {
+export interface ApiFrontPageFrontPage extends Schema.CollectionType {
   collectionName: 'front_pages';
   info: {
     displayName: 'Front-page';
