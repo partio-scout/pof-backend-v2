@@ -20,7 +20,9 @@ describe("Authentication", () => {
     /** Creates a new user and save it to the database */
     const randomNumber = Math.random();
     const uniqueUser = createUniqueUser(randomNumber);
-    await strapi.plugins["users-permissions"].services.user.add(uniqueUser);
+    await strapi.entityService.create("plugin::users-permissions.user", {
+      data: uniqueUser,
+    });
 
     await request(strapi.server.httpServer) // app server is an instance of Class: http.Server
       .post("/api/auth/local")
@@ -28,7 +30,7 @@ describe("Authentication", () => {
       .set("Content-Type", "application/json")
       .send({
         identifier: uniqueUser.email,
-        password: mockUserData.password,
+        password: uniqueUser.password,
       })
       .expect("Content-Type", /json/)
       .expect(200)
@@ -43,7 +45,7 @@ describe("Authentication", () => {
     const defaultRole = await strapi.entityService.findMany(
       "plugin::users-permissions.role",
       {
-        filters: { type: "public" },
+        filters: { type: "authenticated" },
         limit: 1,
       }
     );
@@ -52,12 +54,14 @@ describe("Authentication", () => {
     const randomNumber = Math.random();
     const uniqueUser = createUniqueUser(randomNumber);
     /** Creates a new user an push to database */
-    const user = await strapi.plugins["users-permissions"].services.user.add({
-      ...uniqueUser,
-      role,
+    const user = await strapi.entityService.create("plugin::users-permissions.user", {
+      data: {
+        ...uniqueUser,
+        role
+      },
     });
 
-    const jwt = strapi.plugins["users-permissions"].services.jwt.issue({
+    const jwt = await strapi.service("plugin::users-permissions.jwt").issue({
       id: user.id,
     });
 
