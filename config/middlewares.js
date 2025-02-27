@@ -27,6 +27,7 @@ module.exports = [
             "strapi.io",
             "s3.amazonaws.com",
             "cdn.jsdelivr.net",
+            "*.windows.net",
           ],
           "style-src": [
             "'self'",
