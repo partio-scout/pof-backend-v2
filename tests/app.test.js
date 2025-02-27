@@ -20,6 +20,11 @@ afterAll(() => {
 });
 
 describe("Strapi", () => {
+  console.log("DATABASE_V4_HOST", process.env.DATABASE_V4_HOST)
+  console.log("DATABASE_V4_PORT", process.env.DATABASE_V4_PORT)
+  console.log("DATABASE_V4_DATABASE", process.env.DATABASE_V4_DATABASE)
+  console.log("DATABASE_V4_SSL", process.env.DATABASE_V4_SSL)
+
   it("is defined", () => {
     expect(strapi).toBeDefined();
   });
