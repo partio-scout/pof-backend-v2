@@ -22,12 +22,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - name: Debug secrets
+        run: |
+          echo "DATABASE_V4_DATABASE is set: $DATABASE_V4_DATABASE"
+        env:
+          DATABASE_V4_DATABASE: ${{ secrets.DATABASE_V4_DATABASE }}
+
       - uses: c-hive/gha-yarn-cache@v1
       - run: yarn install --silent
-
-      - name: Debug environment variables
-        run: |
-          env | grep DATABASE_V4_DATABASE
 
       - run: yarn test
         env:
