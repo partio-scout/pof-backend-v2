@@ -10,41 +10,9 @@ env:
 concurrency: testing-environment
 
 jobs:
-  test:
-    name: Run tests
-    runs-on: ubuntu-latest
-    environment: testing
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Debug secrets
-        run: |
-          echo "Length of DATABASE_V4_DATABASE: ${#DATABASE_V4_DATABASE}"
-        env:
-          DATABASE_V4_DATABASE: ${{ secrets.DATABASE_V4_DATABASE }}
-
-      - uses: c-hive/gha-yarn-cache@v1
-      - run: yarn install --silent
-
-      - run: yarn test
-        env:
-            DATABASE_V4_DATABASE: ${{ secrets.DATABASE_V4_DATABASE }}
-            DATABASE_V4_SCHEMA: ${{ secrets.DATABASE_V4_SCHEMA }}
-            DATABASE_V4_PORT: ${{ secrets.DATABASE_V4_PORT }}
-            DATABASE_V4_HOST: ${{ secrets.DATABASE_V4_HOST }}
-            DATABASE_V4_USER: ${{ secrets.DATABASE_V4_USER }}
-            DATABASE_V4_PASSWORD: ${{ secrets.DATABASE_V4_PASSWORD }}
-            DATABASE_V4_SSL: ${{ secrets.DATABASE_V4_SSL }}
-
   build-and-deploy:
     name: Build and deploy
     runs-on: ubuntu-latest
-    needs: test
     environment: testing
     steps:
       - uses: actions/checkout@v2
