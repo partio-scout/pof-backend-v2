@@ -33,7 +33,7 @@ jobs:
       - run: yarn install --silent
 
       - name: Debug env variable
-        run: echo "DATABASE_V4_DATABASE=$DATABASE_V4_DATABASE"
+        run: echo "DATABASE_V4_DATABASE=${{ secrets.DATABASE_V4_DATABASE }}"
 
       - run: yarn test
 
