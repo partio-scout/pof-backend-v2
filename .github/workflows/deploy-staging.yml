@@ -24,7 +24,7 @@ jobs:
 
       - name: Debug secrets
         run: |
-          echo "DATABASE_V4_DATABASE is set: $DATABASE_V4_DATABASE"
+          echo "Length of DATABASE_V4_DATABASE: ${#DATABASE_V4_DATABASE}"
         env:
           DATABASE_V4_DATABASE: ${{ secrets.DATABASE_V4_DATABASE }}
 
