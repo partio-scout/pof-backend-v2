@@ -22,7 +22,7 @@ Pallon värit:
 - sininen = versio on olemassa mutta ei ole julkaistu
 - vihreä = versio on julkaistu
 
-![](/images/sisältökohde.png)
+![](/images/sisaltokohde.png)
 
 ## Partio-ohjelma -sivuston navigaatio
 
