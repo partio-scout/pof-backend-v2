@@ -39,72 +39,84 @@ module.exports = {
    * Endpoint for liking suggestions.
    */
   async like(ctx) {
-    const { id } = ctx.params;
-    const { user } = ctx.request.body;
+    try {
+      const { id } = ctx.params;
+      const { user } = ctx.request.body;
 
-    let entity = await strapi.db.query('api::suggestion.suggestion').findOne({
+      let entity = await strapi.db.query('api::suggestion.suggestion').findOne({
+          where: { id: id },
+      });
+
+      if (!entity) {
+        ctx.response.status = 404;
+        return;
+      }
+
+      const likes = entity.likes || [];
+      if (likes?.includes(user)) {
+        ctx.response.status = 400;
+        ctx.response.body = "already liked";
+        return;
+      }
+
+      const updatedLikes = [...likes, user];
+
+      entity = await strapi.db.query('api::suggestion.suggestion').update({
         where: { id: id },
-    });
+        data: { likes: updatedLikes },
+      });
 
-    if (!entity) {
-      ctx.response.status = 404;
-      return;
+      const model = strapi.getModel('api::suggestion.suggestion')
+      const sanitizeOutput = await sanitize.contentAPI.output(entity, model)
+
+      return sanitizeOutput
+    } catch (error) {
+      console.error(error);
+      ctx.response.status = 500;
+      ctx.response.body = { error: "Internal Server Error", details: error.message };
     }
-
-    const likes = entity.likes || [];
-    if (likes?.includes(user)) {
-      ctx.response.status = 400;
-      ctx.response.body = "already liked";
-      return;
-    }
-
-    const updatedLikes = [...likes, user];
-
-    entity = await strapi.db.query('api::suggestion.suggestion').update({
-      where: { id: id },
-      data: { likes: updatedLikes },
-    });
-
-    const model = strapi.getModel('api::suggestion.suggestion')
-    const sanitizeOutput = await sanitize.contentAPI.output(entity, model)
-
-    return sanitizeOutput
   },
   /**
    * Endpoint for unliking suggestions.
    */
   async unlike(ctx) {
-    const { id } = ctx.params;
-    const { user } = ctx.request.body;
+    try {
+      const { id } = ctx.params;
+      const { user } = ctx.request.body;
 
-    let entity = await strapi.db.query('api::suggestion.suggestion').findOne({
-      where: { id: id },
-    });
+      let entity = await strapi.db.query('api::suggestion.suggestion').findOne({
+        where: { id: id },
+      });
 
-    if (!entity) {
-      ctx.response.status = 404;
-      return;
+      if (!entity) {
+        ctx.response.status = 404;
+        return;
+      }
+
+      const index = entity.likes?.findIndex((x) => x === user);
+      if (index === undefined || index < 0) {
+        ctx.response.status = 400;
+        ctx.response.body = "not liked";
+        return;
+      }
+
+      const updatedLikes = entity.likes || [];
+      updatedLikes.splice(index, 1);
+
+      entity = await strapi.db.query('api::suggestion.suggestion').update({
+        where: { id: id },
+        data: { likes: updatedLikes },
+      });
+
+      const model = strapi.getModel('api::suggestion.suggestion')
+      const sanitizeOutput = await sanitize.contentAPI.output(entity, model)
+
+      return sanitizeOutput
+    } catch (error) {
+      console.error(error);
+      ctx.response.status = 500;
+      ctx.response.body = { error: "Internal Server Error", details: error.message };
     }
-
-    const index = entity.likes?.findIndex((x) => x === user);
-    if (index === undefined || index < 0) {
-      ctx.response.status = 400;
-      ctx.response.body = "not liked";
-      return;
-    }
-
-    const updatedLikes = entity.likes || [];
-    updatedLikes.splice(index, 1);
-
-    entity = await strapi.db.query('api::suggestion.suggestion').update({
-      where: { id: id },
-      data: { likes: updatedLikes },
-    });
-
-    const model = strapi.getModel('api::suggestion.suggestion')
-    const sanitizeOutput = await sanitize.contentAPI.output(entity, model)
-
-    return sanitizeOutput
   },
   /**
    * Endpoint for creating new comments. This saves the comments in draft state,
