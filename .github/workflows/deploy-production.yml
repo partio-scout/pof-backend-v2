@@ -1,12 +1,9 @@
 name: Deploy production from main
-
 on:
   push:
     branches: [main]
-
 env:
   NODE_VERSION: "18.x"
-
 concurrency: production-environment
 
 jobs:
@@ -15,18 +12,21 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: yarn build
+          cache: 'yarn'  # <-- NEW: Enable Yarn caching automatically
+
+      - name: Install dependencies and build
         env:
-          # The license needs to present when building, so that the admin-ui is built as enterprise version
           STRAPI_LICENSE: ${{ secrets.STRAPI_LICENSE }}
         run: |
           yarn install --silent
           yarn build
+
       - name: Deploy to Azure webApp
         uses: azure/webapps-deploy@v3
         with:
