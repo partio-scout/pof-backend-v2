@@ -27,8 +27,13 @@ jobs:
           yarn install --silent
           yarn build
 
+      - name: Archive build output
+        run: zip -r dist.zip dist
+
       - name: Deploy to Azure webApp
         uses: azure/webapps-deploy@v3
         with:
           app-name: pof-backend-production
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./dist.zip
+          clean: true
