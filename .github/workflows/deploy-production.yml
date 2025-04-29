@@ -28,7 +28,7 @@ jobs:
           yarn build
 
       - name: Archive build output
-        run: zip -r dist.zip dist
+        run: zip -r dist.zip build
 
       - name: Deploy to Azure webApp
         uses: azure/webapps-deploy@v3
