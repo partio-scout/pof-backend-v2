@@ -31,7 +31,7 @@ jobs:
         run: yarn build
 
       - name: Zip build folder
-        run: zip -r release.zip build
+        run: zip -r release.zip . -x "node_modules/*"
 
       - name: Deploy to Azure Web App (run from zip)
         uses: azure/webapps-deploy@v3
