@@ -30,8 +30,8 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Zip build folder
-        run: zip -r release.zip . -x "node_modules/*"
+      - name: Zip project (excluding node_modules and dotfiles)
+        run: zip -r release.zip . -x "node_modules/*" ".git/*" ".github/*"
 
       - name: Deploy to Azure Web App (run from zip)
         uses: azure/webapps-deploy@v3
