@@ -11,30 +11,33 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     environment: production
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out code
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'  # <-- NEW: Enable Yarn caching automatically
+          cache: 'yarn'
 
-      - name: Install dependencies and build
+      - name: Install dependencies
         env:
           STRAPI_LICENSE: ${{ secrets.STRAPI_LICENSE }}
-        run: |
-          yarn install --silent
-          yarn build
+        run: yarn install --silent
 
-      - name: Archive build output (exclude node_modules)
-        run: zip -r dist.zip build -x "**/node_modules/*"
+      - name: Build project
+        run: yarn build
 
-      - name: Deploy to Azure webApp
+      - name: Zip build folder
+        run: zip -r release.zip build
+
+      - name: Deploy to Azure Web App (run from zip)
         uses: azure/webapps-deploy@v3
         with:
           app-name: pof-backend-production
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ./dist.zip
+          package: release.zip
           type: zip
           clean: true
