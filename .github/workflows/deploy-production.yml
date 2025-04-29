@@ -27,8 +27,8 @@ jobs:
           yarn install --silent
           yarn build
 
-      - name: Archive build output
-        run: zip -r dist.zip build
+      - name: Archive build output (exclude node_modules)
+        run: zip -r dist.zip build -x "**/node_modules/*"
 
       - name: Deploy to Azure webApp
         uses: azure/webapps-deploy@v3
