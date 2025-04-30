@@ -16,19 +16,18 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ env.NODE_VERSION }}
+      - name: Use Node.js v18
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: 18.x
           cache: 'yarn'
 
-      - name: Install dependencies
+      - name: Install dependencies and build
         env:
           STRAPI_LICENSE: ${{ secrets.STRAPI_LICENSE }}
-        run: yarn install --silent
-
-      - name: Build project
-        run: yarn build
+        run: |
+          yarn install --silent
+          yarn build
 
       - name: Deploy to Azure Web App (run from zip)
         uses: azure/webapps-deploy@v3
