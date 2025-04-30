@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
 env:
-  NODE_VERSION: "18.x"
+  NODE_VERSION: "20.x"
 concurrency: production-environment
 
 jobs:
@@ -16,10 +16,10 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Use Node.js v18
+      - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
 
       - name: Install dependencies and build
