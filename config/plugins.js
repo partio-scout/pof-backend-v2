@@ -13,6 +13,48 @@ module.exports = ({ env }) => ({
   },
   tinymce: {
     enabled: true,
+    config: {
+      editor: {
+        editorConfig: {
+          language: "fi",
+          menubar: true,
+          extended_valid_elements: "span, img, small",
+          plugins:
+            "advlist autolink lists link image preview anchor \
+                    searchreplace visualblocks fullscreen table nonbreaking \
+                    insertdatetime media table help wordcount",
+          toolbar:
+            "undo redo | styles | bold italic forecolor backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    media table link|\
+                    bullist numlist outdent indent | removeformat",
+          style_formats: [
+            {
+              title: "Headings",
+              items: [
+                { title: "h1", block: "h1" },
+                { title: "h2", block: "h2" },
+                { title: "h3", block: "h3" },
+                { title: "h4", block: "h4" },
+                { title: "h5", block: "h5" },
+                { title: "h6", block: "h6" },
+              ],
+            },
+
+            {
+              title: "Text",
+              items: [
+                { title: "Paragraph", block: "p" },
+                {
+                  title: "Paragraph with small letters",
+                  block: "small",
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
   },
   transformer: {
     enabled: true,
@@ -40,7 +82,7 @@ module.exports = ({ env }) => ({
   },
   'users-permissions': {
     config: {
-    jwtSecret: env('JWT_SECRET')
+      jwtSecret: env('JWT_SECRET')
     }
   },
   upload: {
@@ -54,3 +96,4 @@ module.exports = ({ env }) => ({
     },
   },
 });
+
