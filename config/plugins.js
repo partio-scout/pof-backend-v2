@@ -87,8 +87,20 @@ module.exports = ({ env }) => ({
   },
   upload: {
     config: {
-      sizeLimit: 250 * 1024 * 1024, // Now
-      convert_urls: false,
+      // sizeLimit: 250 * 1024 * 1024, // Now
+      provider: 'strapi-provider-upload-azure-storage',
+      providerOptions: {
+        authType: env("AZURE_STORAGE_AUTH_TYPE", "default"),
+        account: env("AZURE_ACCOUNT_NAME"),
+        accountKey: env("AZURE_ACCOUNT_KEY"),//either account key or sas token is enough to make authentication 
+        sasToken: env("STORAGE_ACCOUNT_SAS_TOKEN"),
+        serviceBaseURL: env("AZURE_STORAGE_URL"), // optional
+        containerName: env("AZURE_CONTAINER_NAME"),
+        defaultPath: "assets",
+        cdnBaseURL: env("AZURE_STORAGE_CDN_URL"), // optional
+        defaultCacheControl: env("AZURE_STORAGE_CACHE_CONTROL"), // optional
+        removeCN: env("AZURE_REMOVE_CONTAINER_NAME"), // optional, if you want to remove container name from the URL 
+      },
     }
   },
   transfer: {

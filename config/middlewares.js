@@ -28,12 +28,16 @@ module.exports = [
             "s3.amazonaws.com",
             "cdn.jsdelivr.net",
             "*.windows.net",
+            `https://${process.env.AZURE_STORAGE_ACCOUNT}.blob.core.windows.net`,
+
           ],
           "style-src": [
             "'self'",
             "'unsafe-inline'",
             "*.tinymce.com",
             "*.tiny.cloud",
+            `https://${process.env.AZURE_STORAGE_ACCOUNT}.blob.core.windows.net`,
+
           ],
           "font-src": ["'self'", "*.tinymce.com", "*.tiny.cloud"],
         },
