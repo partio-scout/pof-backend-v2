@@ -26,7 +26,7 @@ jobs:
         env:
           STRAPI_LICENSE: ${{ secrets.STRAPI_LICENSE }}
         run: |
-          yarn install --silent
+          yarn install --ignore-engines --silent
           yarn build
 
       - name: Deploy to Azure Web App (run from zip)
