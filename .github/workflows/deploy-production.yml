@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
 env:
-  NODE_VERSION: "24.x"
+  NODE_VERSION: "24.22.1"
 concurrency: production-environment
 
 jobs:
